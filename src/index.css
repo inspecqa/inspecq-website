@@ -1,0 +1,60 @@
+/* ------------------------------
+   Load Fonts First
+------------------------------ */
+@import url("https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap");
+
+/* Tailwind Layers */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------
+   Base: global typography
+------------------------------ */
+@layer base {
+  html { font-size: 16px; } /* 1rem baseline */
+
+  body {
+    @apply font-onest text-black-500 antialiased leading-relaxed;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Semantic, responsive headings using named sizes */
+  h1 { @apply font-extrabold text-h2 md:text-h1 lg:text-display tracking-[-0.02em]; }
+  h2 { @apply font-bold text-h3 md:text-h2 tracking-[-0.02em]; }
+  h3 { @apply font-semibold text-h4 md:text-h3 tracking-[-0.02em]; }
+  h4 { @apply font-semibold text-h5 md:text-h4 tracking-[-0.02em]; }
+  h5 { @apply font-semibold text-h6 md:text-h5 tracking-[-0.01em]; }
+  h6 { @apply font-semibold text-h6 tracking-[-0.01em]; }
+
+  p    { @apply text-body text-black-500; }
+  small{ @apply text-caption text-black-400; }
+
+  /* Ensure prose headings inherit Onest + scale */
+  .prose :where(h1,h2,h3,h4,h5,h6) { @apply font-onest; }
+}
+
+/* ------------------------------
+   Components: utility aliases
+------------------------------ */
+@layer components {
+  /* Heading utility classes (for non-semantic wrappers) */
+  .h1 { @apply font-extrabold text-h2 md:text-h1 lg:text-display tracking-[-0.02em]; }
+  .h2 { @apply font-bold text-h3 md:text-h2 tracking-[-0.02em]; }
+  .h3 { @apply font-semibold text-h4 md:text-h3 tracking-[-0.02em]; }
+  .h4 { @apply font-semibold text-h5 md:text-h4 tracking-[-0.02em]; }
+  .h5 { @apply font-semibold text-h6 md:text-h5 tracking-[-0.01em]; }
+  .h6 { @apply font-semibold text-h6 tracking-[-0.01em]; }
+
+  /* Body variants */
+  .body-lg      { @apply text-body-lg; }
+  .body-regular { @apply text-body; }
+  .body-md      { @apply text-body font-medium; }
+  .body-semi    { @apply text-body font-semibold; }
+  .xs-regular   { @apply text-caption; }
+
+  /* Navigation + Buttons */
+  .nav-text { @apply text-caption md:text-body font-medium; }
+  .btn-text { @apply text-body font-medium leading-none; }
+}
