@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import consultationIllustration from "../assets/consultation-illustration.svg";
+import consultationIllustration from "../../assets/consultation-illustration.svg";
 import consultationBg from "../assets/consultation-bg.svg";
 import {
   ArrowRight,

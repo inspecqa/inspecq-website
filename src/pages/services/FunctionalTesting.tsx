@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import SmoothScrollLink from "../../components/SmoothScrollLink";
-import consultationIllustration from "../assets/consultation-illustration.svg";
+import consultationIllustration from "../../assets/consultation-illustration.svg";
 import consultationBg from "../assets/consultation-bg.svg";
 import {
   CheckCircle,

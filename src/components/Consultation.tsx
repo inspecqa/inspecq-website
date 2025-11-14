@@ -1,4 +1,4 @@
-import consultationIllustration from "../assets/consultation-illustration.svg";
+import consultationIllustration from "../../assets/consultation-illustration.svg";
 import consultationBg from "../assets/consultation-bg.svg";
 declare global {
   interface Window {
