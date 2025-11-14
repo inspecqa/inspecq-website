@@ -3,6 +3,8 @@ import SmoothScrollLink from "../../components/SmoothScrollLink";
 import { SiBlazemeter,SiK6,SiApachejmeter} from "react-icons/si";
 import { FaLocust } from "react-icons/fa6";
 import type { ComponentType } from "react";
+import consultationIllustration from "../assets/consultation-illustration.svg";
+import consultationBg from "../assets/consultation-bg.svg";
 import {
   BarChart3,
   CheckCircle,
@@ -702,7 +704,7 @@ const steps = [
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative overflow-hidden rounded-[28px]">
             <img
-              src="/src/assets/consultation-bg.svg"
+              src={consultationBg}
               alt=""
               className="absolute inset-0 w-full h-full object-cover"
             />
@@ -732,7 +734,7 @@ const steps = [
               {/* Right illustration */}
               <div className="relative">
                 <img
-                  src="/src/assets/consultation-illustration.svg"
+                  src={consultationIllustration}
                   alt="Consultation illustration"
                   className="w-full h-auto object-contain"
                 />

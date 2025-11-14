@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ChevronDown, X } from "lucide-react";
+import headerLogo from "../assets/header-logo.svg";
 
 type Props = {
   open: boolean;
@@ -78,11 +79,7 @@ export default function MobileNavDrawer({
           {/* Header row */}
           <div className="flex items-center justify-between">
             <Link to="/" className="shrink-0">
-              <img
-                src="./assets/header-logo.svg"
-                alt="InspecQ"
-                className="h-8 w-8"
-              />
+              <img src={headerLogo} alt="InspecQ" className="h-8 w-8" />
             </Link>
             <button
               onClick={onClose}

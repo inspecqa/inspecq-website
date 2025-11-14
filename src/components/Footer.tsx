@@ -3,6 +3,7 @@ import { MapPin, Phone, Clock, Mail } from "lucide-react";
 import { FaFacebook } from "react-icons/fa";
 import { RiTwitterXLine } from "react-icons/ri";
 import { FaLinkedin } from "react-icons/fa6";
+import footerLogo from "../assets/footer-logo.svg"; 
 
 const Footer = () => {
   const services = [
@@ -43,11 +44,7 @@ const Footer = () => {
           {/* Left: brand */}
           <div>
             <Link to="/" className="inline-flex items-center space-x-3">
-              <img
-                src="/src/assets/footer-logo.svg"
-                alt="InspecQ"
-                className="h-9 w-auto"
-              />
+              <img src={footerLogo} alt="InspecQ" className="h-9 w-auto" />
             </Link>
 
             <p className="mt-4 body-regular text-white max-w-md leading-relaxed">

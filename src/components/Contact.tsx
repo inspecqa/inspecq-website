@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Mail, Phone, Send } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
 import { useFormSubmission } from "../hooks/useFormSubmission";
+import contactUsBg from "../assets/contact-us-bg.svg"
 
 declare global {
   interface Window {
@@ -75,7 +76,7 @@ const Contact = () => {
       {/* Background */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/src/assets/contact-us-bg.svg"
+          src={contactUsBg}
           alt="background"
           className="w-full h-full object-cover"
         />

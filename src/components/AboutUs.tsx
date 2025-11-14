@@ -1,4 +1,6 @@
 import { CheckCircle, Users, Award, Target, Clock } from "lucide-react";
+import aboutUsBg from "../assets/about-us-bg.svg";
+import globeBg from "../assets/globe-bg.svg";
 
 const AboutUs = () => {
   const stats = [
@@ -33,7 +35,7 @@ const AboutUs = () => {
       {/* Section background (your SVG) + soft upward fade */}
       <div className="absolute inset-0 -z-10">
         <img
-          src={"/src/assets/about-us-bg.svg"}
+          src={aboutUsBg}
           alt=""
           className="absolute inset-x-0 bottom-0 w-full h-full object-cover opacity-90 pointer-events-none"
         />
@@ -62,7 +64,7 @@ const AboutUs = () => {
           <div className="relative h-56 md:h-72 lg:h-[420px]">
             {/* swap this path to your globe artwork */}
             <img
-              src="/images/globe-hero.png"
+              src={globeBg}
               alt=""
               className="absolute left-1/2 -translate-x-1/2 bottom-0 max-h-full object-contain opacity-95 select-none pointer-events-none"
             />

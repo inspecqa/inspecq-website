@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import MobileNavDrawer from "../components/MobileNavDrawer.tsx";
-
+import headerLogo from "../assets/header-logo.svg";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -94,7 +94,7 @@ const Header = () => {
             {/* Logo */}
             <Link to="/" className="flex items-center gap-3">
               <img
-                src="/src/assets/header-logo.svg"
+                src={headerLogo}
                 alt="InspecQ"
                 className="h-8 w-auto ml-4 mt-2"
               />

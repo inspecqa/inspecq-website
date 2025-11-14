@@ -220,6 +220,13 @@ const FreeTrial = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (!supabase) {
+      console.error("Supabase client not initialized. Form data not saved.");
+      // optional: show toast/alert to user
+      return;
+    }
+
+
     const errs = validate();
     if (Object.keys(errs).length) {
       setErrors(errs);

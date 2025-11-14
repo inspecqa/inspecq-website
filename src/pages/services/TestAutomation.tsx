@@ -6,6 +6,8 @@ import { TbBrandCypress } from "react-icons/tb";
 import { SiAppium } from "react-icons/si";
 import type { ComponentType } from "react";
 import { CheckCircle } from "lucide-react";
+import consultationIllustration from "../assets/consultation-illustration.svg";
+import consultationBg from "../assets/consultation-bg.svg";
 
 import {
   ArrowRight,
@@ -274,7 +276,8 @@ function AutomationTesting() {
             <img
               src="/src/assets/service/service-illustration.svg"
               alt=""
-              className="absolute top-1/2 right-[-54%] -translate-y-1/2 w-[748px] md:w-[920px] lg:w-[1040px] max-w-none object-contain pointer-events-none select-none drop-shadow-[0_24px_48px_rgba(2,6,23,0.10)]" />
+              className="absolute top-1/2 right-[-54%] -translate-y-1/2 w-[748px] md:w-[920px] lg:w-[1040px] max-w-none object-contain pointer-events-none select-none drop-shadow-[0_24px_48px_rgba(2,6,23,0.10)]"
+            />
           </div>
         </div>
       </section>
@@ -283,7 +286,8 @@ function AutomationTesting() {
       <section className="relative py-20 overflow-hidden">
         <BackgroundImage
           src="/src/assets/service/service-bg-2.svg"
-          overlay="opacity-40" />
+          overlay="opacity-40"
+        />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -315,7 +319,8 @@ function AutomationTesting() {
           <img
             src="/src/assets/service/service-bg-2.svg"
             alt="background"
-            className="w-full h-full object-cover opacity-90" />
+            className="w-full h-full object-cover opacity-90"
+          />
           <div className="absolute inset-0 bg-white/40 backdrop-blur-sm" />
         </div>
 
@@ -334,21 +339,27 @@ function AutomationTesting() {
             {PROCESS_STEPS.map((step, index) => (
               <div
                 key={index}
-                className={`relative rounded-2xl p-8 shadow-sm transition-all duration-300 ${index === 0
+                className={`relative rounded-2xl p-8 shadow-sm transition-all duration-300 ${
+                  index === 0
                     ? "bg-teal-700 text-white"
-                    : "bg-white text-gray-900 border border-gray-200"}`}
+                    : "bg-white text-gray-900 border border-gray-200"
+                }`}
               >
                 <div
-                  className={`absolute top-6 right-6 w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold ${index === 0
+                  className={`absolute top-6 right-6 w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold ${
+                    index === 0
                       ? "bg-white/20 text-white"
-                      : "bg-teal-700 text-white"}`}
+                      : "bg-teal-700 text-white"
+                  }`}
                 >
                   {String(index + 1).padStart(2, "0")}
                 </div>
 
                 <div className="flex items-center mb-4">
                   <div
-                    className={`w-10 h-10 rounded-lg flex items-center justify-center mr-4 ${index === 0 ? "bg-white/20" : "bg-emerald-100"}`}
+                    className={`w-10 h-10 rounded-lg flex items-center justify-center mr-4 ${
+                      index === 0 ? "bg-white/20" : "bg-emerald-100"
+                    }`}
                   >
                     <step.icon className="w-5 h-5" />
                   </div>
@@ -356,7 +367,9 @@ function AutomationTesting() {
 
                 {/* Divider line */}
                 <div
-                  className={`h-px mb-4 ${index === 0 ? "bg-white/30" : "bg-gray-200"}`}
+                  className={`h-px mb-4 ${
+                    index === 0 ? "bg-white/30" : "bg-gray-200"
+                  }`}
                 ></div>
 
                 <h6
@@ -366,7 +379,9 @@ function AutomationTesting() {
                 </h6>
 
                 <p
-                  className={`mt-2 ${index === 0 ? "text-emerald-50" : "text-gray-600"} leading-relaxed`}
+                  className={`mt-2 ${
+                    index === 0 ? "text-emerald-50" : "text-gray-600"
+                  } leading-relaxed`}
                 >
                   {step.description}
                 </p>
@@ -420,9 +435,10 @@ function AutomationTesting() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative overflow-hidden rounded-[28px]">
             <img
-              src="/src/assets/consultation-bg.svg"
+              src={consultationBg}
               alt=""
-              className="absolute inset-0 w-full h-full object-cover" />
+              className="absolute inset-0 w-full h-full object-cover"
+            />
 
             <div className="absolute inset-0 mix-blend-multiply" />
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center px-6 sm:px-10 lg:px-14 py-12 lg:py-16">
@@ -449,9 +465,10 @@ function AutomationTesting() {
               {/* Right illustration */}
               <div className="relative">
                 <img
-                  src="/src/assets/consultation-illustration.svg"
+                  src={consultationIllustration}
                   alt="Consultation illustration"
-                  className="w-full h-auto object-contain" />
+                  className="w-full h-auto object-contain"
+                />
               </div>
             </div>
           </div>

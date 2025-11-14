@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import consultationIllustration from "../assets/consultation-illustration.svg";
+import consultationBg from "../assets/consultation-bg.svg";
 import {
   Award,
   Clock,
@@ -221,7 +221,7 @@ const About = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative overflow-hidden rounded-[28px]">
             <img
-              src="/src/assets/consultation-bg.svg"
+              src={consultationBg}
               alt=""
               className="absolute inset-0 w-full h-full object-cover"
             />
@@ -254,7 +254,7 @@ const About = () => {
               {/* Right illustration */}
               <div className="relative">
                 <img
-                  src="/src/assets/consultation-illustration.svg"
+                  src={consultationIllustration}
                   alt="Consultation illustration"
                   className="w-full h-auto object-contain"
                 />
