@@ -7,7 +7,7 @@ import { SiAppium } from "react-icons/si";
 import type { ComponentType } from "react";
 import { CheckCircle } from "lucide-react";
 import consultationIllustration from "../../assets/consultation-illustration.svg";
-import consultationBg from "../assets/consultation-bg.svg";
+import consultationBg from "../../assets/consultation-bg.svg";
 
 import {
   ArrowRight,

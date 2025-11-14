@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import SmoothScrollLink from "../../components/SmoothScrollLink";
 import type { ComponentType } from "react";
 import consultationIllustration from "../../assets/consultation-illustration.svg";
-import consultationBg from "../assets/consultation-bg.svg";
+import consultationBg from "../../assets/consultation-bg.svg";
 import {
   Shield,
   CheckCircle,

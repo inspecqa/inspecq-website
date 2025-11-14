@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { bestPractices, practiceCategories } from "../data/best-practices.ts";
-import consultationIllustration from "../../assets/consultation-illustration.svg";
+import consultationIllustration from "../assets/consultation-illustration.svg";
 import consultationBg from "../assets/consultation-bg.svg";
 import {
   Search as SearchIcon,

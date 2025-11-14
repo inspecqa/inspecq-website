@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import consultationIllustration from "../../assets/consultation-illustration.svg";
+import consultationIllustration from "../assets/consultation-illustration.svg";
 import consultationBg from "../assets/consultation-bg.svg";
 import {
   Building2,
