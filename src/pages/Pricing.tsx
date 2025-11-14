@@ -1,6 +1,8 @@
 import React, { useMemo, useState } from "react";
 import consultationIllustration from "../assets/consultation-illustration.svg";
 import consultationBg from "../assets/consultation-bg.svg";
+import pricingHeaderBg from "../assets/pricing-header-bg.svg";
+import pricingIllus from "../assets/pricing-illustration.svg";
 import {
   ArrowRight,
   CheckCircle,
@@ -222,7 +224,7 @@ const PricingPage: React.FC = () => {
       {/* ======================= HERO ======================= */}
       <section className="relative py-20 overflow-visible">
         <img
-          src="src/assets/pricing-header-bg.svg"
+          src={pricingHeaderBg}
           alt=""
           className="absolute inset-x-0 bottom-0 w-full max-w-none pointer-events-none z-0 opacity-90 object-contain"
         />
@@ -269,7 +271,7 @@ const PricingPage: React.FC = () => {
             {/* Right: illustration */}
             <div className="relative md:justify-self-end">
               <img
-                src="src/assets/pricing-illustration.svg"
+                src={pricingIllus}
                 alt="Pricing illustration"
                 className="w-full max-w-lg md:max-w-xl mx-auto opacity-95"
               />

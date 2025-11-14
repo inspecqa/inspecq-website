@@ -8,6 +8,10 @@ import {
   MessageCircle,
   Send,
 } from "lucide-react";
+import sftBg3 from "../assets/sft-bg-3.svg";
+import cuheaderBg from "../assets/cu-header-bg.svg";
+import sftBg4 from "../assets/sft-bg-4.svg";
+import contactUsIllus from "../assets/contact-us-illustration.svg";
 
 // 🔹 Supabase client import
 import { supabase } from "../lib/supabaseClient"; // adjust path if needed
@@ -88,6 +92,13 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
+      // Ensure supabase client is available (protect against null)
+      if (!supabase) {
+        console.error("Supabase client not initialized");
+        alert("Service temporarily unavailable. Please try again later.");
+        return;
+      }
+
       // 🔹 Insert into Supabase: contact_submissions
       const { error } = await supabase.from("contact_submissions").insert([
         {
@@ -157,7 +168,7 @@ const Contact = () => {
       {/* Hero Section */}
       <section className="relative py-20 overflow-visible">
         <img
-          src="src/assets/cu-header-bg.svg"
+          src={cuheaderBg}
           alt=""
           className="absolute inset-x-0 bottom-0 w-full max-w-none pointer-events-none z-0 opacity-90 object-contain"
         />
@@ -205,7 +216,7 @@ const Contact = () => {
             {/* Right: illustration */}
             <div className="relative md:justify-self-end">
               <img
-                src="src/assets/contact-us-illustration.svg"
+                src={contactUsIllus}
                 alt=""
                 aria-hidden="true"
                 className="w-full max-w-lg md:max-w-xl mx-auto md:mx-0 opacity-95"
@@ -218,7 +229,7 @@ const Contact = () => {
       {/* Contact Methods */}
       <section className="relative py-16 overflow-hidden">
         <img
-          src="src/assets/sft-bg-3.svg"
+          src={sftBg3}
           alt=""
           className="absolute inset-x-0 bottom-0 w-full max-w-none pointer-events-none z-0 opacity-90 object-contain"
         />
@@ -269,7 +280,7 @@ const Contact = () => {
         {/* Background */}
         <div className="absolute inset-0 z-0">
           <img
-            src="/src/assets/sft-bg-4.svg"
+            src={sftBg4}
             alt="background"
             className="w-full h-full object-cover"
           />

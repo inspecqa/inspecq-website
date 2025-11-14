@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import consultationIllustration from "../assets/consultation-illustration.svg";
 import consultationBg from "../assets/consultation-bg.svg";
+import solutionIllustration from "../assets/solution-illustration.svg"
 import {
   Building2,
   Smartphone,
@@ -214,7 +215,7 @@ const Solutions = () => {
             {/* Right Illustration */}
             <div className="flex justify-center md:justify-end">
               <img
-                src="/src/assets/solution-illustration.svg"
+                src={solutionIllustration}
                 alt="Industry Testing Illustration"
                 className="w-full max-w-md md:max-w-lg h-auto object-contain"
               />

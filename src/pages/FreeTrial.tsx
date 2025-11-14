@@ -13,6 +13,9 @@ import {
 } from "lucide-react";
 
 import { supabase } from "../lib/supabaseClient";
+import sftBg3 from "../assets/sft-bg-3.svg";
+import sftHeroBg from "../assets/sft-hero-bg.svg";
+import sftFormBg from "../assets/sft-form-bg.svg";
 
 /** ---------- Modal Component ---------- **/
 const Modal = ({
@@ -349,7 +352,7 @@ const FreeTrial = () => {
 
       <section className="relative py-20 overflow-visible">
         <img
-          src="src/assets/sft-hero-bg.svg"
+          src={sftHeroBg}
           alt=""
           className="absolute inset-x-0 bottom-0 w-full max-w-none pointer-events-none z-0 opacity-90 object-contain"
         />
@@ -394,7 +397,7 @@ const FreeTrial = () => {
       {/* Features */}
       <section className="relative py-16 overflow-hidden">
         <img
-          src="src/assets/sft-bg-3.svg"
+          src={sftBg3}
           alt=""
           className="absolute inset-x-0 bottom-0 w-full max-w-none pointer-events-none z-0 opacity-90 object-contain"
         />
@@ -434,7 +437,7 @@ const FreeTrial = () => {
         aria-labelledby="how-it-works-heading"
       >
         <img
-          src="src/assets/sft-bg-3.svg"
+          src={sftBg3}
           alt=""
           className="absolute inset-x-0 bottom-0 w-full max-w-none pointer-events-none z-0 opacity-90 object-contain"
         />
@@ -500,7 +503,7 @@ const FreeTrial = () => {
         aria-labelledby="trial-heading"
       >
         <img
-          src="src/assets/sft-form-bg.svg"
+          src={sftFormBg}
           alt=""
           className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0 opacity-90"
         />

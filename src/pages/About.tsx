@@ -12,6 +12,9 @@ import {
   Cpu,
   Users,
 } from "lucide-react";
+import aboutValuseBg from "../assets/about-values-bg.svg";
+import aboutUsIllus from "../assets/about-us-illustration.svg";
+import aboutHeroBg from "../assets/about-hero-bg.svg"
 
 const About = () => {
   const teamMembers = [
@@ -107,7 +110,7 @@ const About = () => {
       >
         {/* Background grid texture */}
         <img
-          src="/src/assets/about-hero-bg.svg"
+          src={aboutHeroBg}
           alt=""
           aria-hidden="true"
           loading="lazy"
@@ -118,7 +121,7 @@ const About = () => {
 
         {/* Right-side illustration (decorative) */}
         <img
-          src="/src/assets/about-us-illustration.svg"
+          src={aboutUsIllus}
           alt=""
           aria-hidden="true"
           loading="lazy"
@@ -179,7 +182,7 @@ const About = () => {
       >
         {/* Background grid */}
         <img
-          src="/src/assets/about-values-bg.svg"
+          src={aboutValuseBg}
           alt=""
           aria-hidden="true"
           className="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none"
