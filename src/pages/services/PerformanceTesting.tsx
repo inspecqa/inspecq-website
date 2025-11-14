@@ -3,7 +3,7 @@ import SmoothScrollLink from "../../components/SmoothScrollLink";
 import { SiBlazemeter,SiK6,SiApachejmeter} from "react-icons/si";
 import { FaLocust } from "react-icons/fa6";
 import type { ComponentType } from "react";
-import consultationIllustration from "../assets/consultation-illustration.svg";
+import consultationIllustration from "../../assets/consultation-illustration.svg";
 import consultationBg from "../assets/consultation-bg.svg";
 import {
   BarChart3,
