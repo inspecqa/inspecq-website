@@ -288,7 +288,6 @@ welcome@inspecq.com
               <tr>
                 <td style="padding:0 28px 20px 28px; color:#475569; font-size:13px; line-height:1.6;">
                   <p style="margin:0;">
-                    No credit card or payment method is required. The trial does not auto-upgrade into a paid plan.
                     Your 7-day trial is completely free, and you may cancel anytime during the trial with no obligations.
                   </p>
                 </td>

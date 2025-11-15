@@ -330,12 +330,12 @@ const FreeTrial = () => {
           instructions and a link to book your quick kickoff call.
         </p>
         <div className="mt-6 flex items-center gap-3">
-          <a
+          {/* <a
             href="mailto:"
             className="inline-flex items-center justify-center rounded-lg px-4 py-2 bg-teal-600 text-white hover:bg-teal-700"
           >
             Go to Inbox
-          </a>
+          </a> */}
 
           <button
             onClick={() => setShowSuccess(false)}
