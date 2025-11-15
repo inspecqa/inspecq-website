@@ -45,9 +45,10 @@ const FreeTrialTerms = () => {
               <h2 className="text-xl font-semibold text-gray-900">
                 2. No Payment Required
               </h2>
-              <p className="mt-1">
-                No credit card or payment method is needed. The trial does{" "}
-                <strong>not</strong> auto-upgrade into a paid plan.
+              <p className="mt-2">
+                7-day trial is completely free. No credit card is required, it
+                will not <strong> auto-upgrade </strong>into a paid plan, and
+                you may cancel at any time during the trial with no obligations.
               </p>
             </div>
 
@@ -72,9 +73,10 @@ const FreeTrialTerms = () => {
               </ul>
 
               <p className="mt-2">
-                <strong>The exact scope will be confirmed during the kickoff call.</strong>
+                <strong>
+                  The exact scope will be confirmed during the kickoff call.
+                </strong>
               </p>
-
             </div>
 
             <div className="h-px bg-gradient-to-r from-transparent via-teal-200 to-transparent" />
