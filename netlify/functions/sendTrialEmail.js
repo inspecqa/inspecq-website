@@ -42,38 +42,62 @@ exports.handler = async (event) => {
     const mailOptions = {
       from: `"${displayName}" <${fromEmail}>`,
       to: email,
-      subject: "Welcome to your InspecQ 7-Day QA Trial 🎉",
-      text: `Hi ${name || ""},
+      subject: "Your InspecQ Trial Is Activated — Next Steps Inside",
 
-Thanks for requesting a 7-day free trial with InspecQ.
+      // ⭐ TEXT VERSION E
+      text: `
+Hello ${name || ""},
 
-Here’s what happens next:
-1. Book your quick kickoff call: ${kickoffLink}
-2. We’ll review your product and agree on the scope.
-3. Our team will start testing and share findings during/after the trial.
+Thank you for choosing InspecQ. Your 7-day trial has been activated, and our team is ready to begin supporting your QA needs.
 
-Kickoff Call:
+To get started, please follow the steps below:
+
+1) Book your kickoff session so we can understand your product, workflow, and quality expectations:
 ${kickoffLink}
 
-If you have any questions before the call, just reply to this email.
+2) We will review your inputs and set up your testing environment, priorities, and scope.
 
-Best,
-InspecQ Team
+3) Our QA team will begin testing and provide detailed defect reports, performance observations, and recommendations.
+
+If you require assistance at any stage, simply reply to this email and our team will respond promptly.
+
+We look forward to contributing to your product’s success.
+
+Regards,
+InspecQ QA Team
 welcome@inspecq.com
 `,
+
+      // ⭐ HTML VERSION E
       html: `
-        <p>Hi ${name || ""},</p>
-        <p>Thanks for requesting a <strong>7-day free trial</strong> with <strong>InspecQ</strong>. We're excited to help you ship with more confidence.</p>
-        <p>Here’s what happens next:</p>
+        <p>Hello ${name || ""},</p>
+
+        <p>Thank you for choosing <strong>InspecQ</strong>. Your 7-day trial has been activated, and our team is ready to begin supporting your QA needs.</p>
+
+        <p>To get started, please follow the steps below:</p>
+
         <ol>
-          <li>Book a quick <strong>kickoff call</strong> so we can understand your product and priorities.</li>
-          <li>We’ll confirm the scope and environments we’ll test.</li>
-          <li>Our QA team will start testing and share clear findings, risks, and recommendations.</li>
+          <li><strong>Book Your Kickoff Session</strong><br>
+            This 15–20 minute call helps us understand your product, workflow, and quality expectations.<br>
+            <a href="${kickoffLink}" target="_blank" rel="noreferrer">Book your kickoff session</a>
+          </li>
+
+          <li><strong>We Configure Your Trial</strong><br>
+            Our team reviews your inputs and sets up your testing environment, scope, and priorities.
+          </li>
+
+          <li><strong>Testing Begins</strong><br>
+            You will receive structured reports that include defects, performance observations, and improvement recommendations.
+          </li>
         </ol>
-        <p><strong>Kickoff Call:</strong></p>
-        <p><a href="${kickoffLink}" target="_blank" rel="noreferrer">Book your kickoff call</a></p>
-        <p>If you have any questions before the call, just hit reply and we’ll be happy to help.</p>
-        <p>Best,<br/>InspecQ Team<br/><a href="mailto:welcome@inspecq.com">welcome@inspecq.com</a></p>
+
+        <p>If you require assistance at any stage, simply reply to this message and our team will respond promptly.</p>
+
+        <p>We look forward to contributing to your product’s success.</p>
+
+        <p>Regards,<br/>
+        <strong>InspecQ QA Team</strong><br/>
+        <a href="mailto:welcome@inspecq.com">welcome@inspecq.com</a></p>
       `,
     };
 
