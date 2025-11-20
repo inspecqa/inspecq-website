@@ -58,7 +58,6 @@ const Hero = () => {
                   </span>
                   <Calendar className="h-5 w-5" />
                 </a>
-                
               </div>
             </div>
           </div>

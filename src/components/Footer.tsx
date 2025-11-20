@@ -13,6 +13,7 @@ const Footer = () => {
     { name: "Mobile Testing", path: "/services/mobile-testing" },
     // { name: "Security Testing", path: "/services/security-testing" },
     { name: "API Testing", path: "/services/api-testing" },
+    { name: "QA Consulting & Audits", path: "/services/qa-consulting-audits" },
   ];
 
   const company = [
@@ -33,8 +34,9 @@ const Footer = () => {
   // ];
 
   const quicklinks = [
-    { name: "Terms & Conditions", path: "/terms-condition" },
-    { name: "Privacy Policy", path: "/privacy-policy" },];
+    { name: "Terms & Conditions", path: "/legal/terms-and-service" },
+    { name: "Privacy Policy", path: "/legal/privacy-policy" },
+  ];
 
   return (
     <footer className="bg-[#0F1A24] text-slate-200">

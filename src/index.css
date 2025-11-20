@@ -12,7 +12,8 @@
    Base: global typography
 ------------------------------ */
 @layer base {
-  html { font-size: 16px; } /* 1rem baseline */
+  html { font-size: 16px; /* 1rem baseline */
+  scroll-behavior: smooth; } 
 
   body {
     @apply font-onest text-black-500 antialiased leading-relaxed;

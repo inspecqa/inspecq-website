@@ -87,7 +87,7 @@ export const useFormSubmission = () => {
     // For demo purposes, we'll simulate the email sending
     
     const emailData: EmailNotification = {
-      to: 'helloinspecq@gmail.com',
+      to: 'contact@inspecq.com',
       subject: `New ${submission.type} - ${submission.name}`,
       body: generateEmailBody(submission),
       type: submission.type

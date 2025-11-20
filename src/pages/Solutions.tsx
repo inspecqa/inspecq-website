@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import consultationIllustration from "../assets/consultation-illustration.svg";
 import consultationBg from "../assets/consultation-bg.svg";
-import solutionIllustration from "../assets/solution-illustration.svg"
+import solutionBg from "../assets/solution-bg.svg";
+import solBg2 from "../assets/sol-bg-2.svg";
+import solBg3 from "../assets/sol-bg-3.svg";
+
 import {
   Building2,
   Smartphone,
@@ -13,6 +16,8 @@ import {
   ArrowRight,
   Users,
   Clock,
+  Sparkles,
+  Grid,
   Target,
 } from "lucide-react";
 
@@ -22,7 +27,7 @@ const Solutions = () => {
       icon: ShoppingCart,
       title: "E-commerce & Retail",
       description:
-        "Ensure seamless shopping experiences with comprehensive testing for online stores, payment systems, and inventory management.",
+        "Deliver fast, secure, and high converting shopping experiences with QA that covers checkout flows, payment gateways, mobile performance, and inventory accuracy.",
       challenges: [
         "High traffic volumes",
         "Payment security",
@@ -41,7 +46,7 @@ const Solutions = () => {
       icon: Heart,
       title: "Healthcare & Life Sciences",
       description:
-        "HIPAA-compliant testing solutions for healthcare applications, ensuring patient data security and regulatory compliance.",
+        "Ensure patient-safe, compliant, and reliable healthcare systems with QA focused on HIPAA readiness, secure data handling, clinical workflow validation, and seamless integrations.",
       challenges: [
         "HIPAA compliance",
         "Patient data security",
@@ -60,7 +65,7 @@ const Solutions = () => {
       icon: DollarSign,
       title: "Financial Services",
       description:
-        "Rigorous testing for banking, fintech, and trading platforms with focus on security, accuracy, and performance.",
+        "Build trust with accurate, secure, and high-performance financial platforms through QA that validates transactions, APIs, compliance workflows, and real-time processing.",
       challenges: [
         "Transaction accuracy",
         "Real-time processing",
@@ -79,7 +84,7 @@ const Solutions = () => {
       icon: Building2,
       title: "Enterprise Software",
       description:
-        "Scalable testing solutions for large enterprise applications, ERP systems, and business-critical software.",
+        "Improve stability and scalability across complex ERP, CRM, and business-critical systems with QA that validates integrations, data flows, role-based access, and performance.",
       challenges: [
         "Complex integrations",
         "Scalability requirements",
@@ -98,7 +103,7 @@ const Solutions = () => {
       icon: Smartphone,
       title: "Mobile & Gaming",
       description:
-        "Specialized testing for mobile apps, games, and entertainment platforms across all devices and platforms.",
+        "Deliver smooth, crash-free mobile and gaming experiences with QA that covers device fragmentation, performance profiling, gameplay interactions, and store compliance.",
       challenges: [
         "Device fragmentation",
         "Performance optimization",
@@ -117,7 +122,7 @@ const Solutions = () => {
       icon: Globe,
       title: "SaaS & Cloud",
       description:
-        "Cloud-native testing approaches for SaaS applications, ensuring reliability, scalability, and multi-tenancy.",
+        "Increase reliability and uptime for cloud-native apps with QA that validates multi-tenancy, scalability, API stability, and real-world performance under dynamic workloads.",
       challenges: [
         "Multi-tenancy",
         "Auto-scaling",
@@ -130,7 +135,7 @@ const Solutions = () => {
         "Security testing",
         "Monitoring setup",
       ],
-      color: "bg-teal-500",
+      color: "bg-teal-900",
     },
   ];
 
@@ -138,35 +143,36 @@ const Solutions = () => {
     {
       title: "Startups",
       description:
-        "Fast, flexible testing solutions that grow with your business",
+        "Fast, flexible QA designed to help early-stage teams ship quickly and confidently.",
       features: [
-        "Quick setup",
-        "Cost-effective",
-        "Scalable approach",
-        "Agile methodology",
+        "Rapid onboarding",
+        "Budget-friendly testing plans",
+        "Scalable processes as you grow",
+        "Agile and sprint-aligned execution",
       ],
       icon: Target,
     },
     {
       title: "Mid-Market",
-      description: "Comprehensive testing strategies for growing companies",
+      description:
+        "Structured, end-to-end testing strategies that support expanding teams and products.",
       features: [
-        "Process optimization",
-        "Team training",
-        "Tool integration",
-        "Quality metrics",
+        "Process and workflow optimization",
+        "Team enablement and training",
+        "Test automation & tool integration",
+        "Quality metrics and reporting dashboards",
       ],
       icon: Users,
     },
     {
       title: "Enterprise",
       description:
-        "Enterprise-grade testing solutions for complex environments",
+        "Enterprise-grade QA programs built for large, complex, and regulated environments.",
       features: [
-        "Custom frameworks",
-        "Dedicated teams",
-        "Compliance support",
-        "24/7 support",
+        "Custom test frameworks and architecture",
+        "Dedicated, long-term QA teams",
+        "Governance, compliance, and audit support",
+        "24/7 testing coverage and support",
       ],
       icon: Building2,
     },
@@ -175,211 +181,186 @@ const Solutions = () => {
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section
-        className="py-24 rom-slate-50 to-white relative overflow-visible"
-        style={{
-          backgroundImage: "url('/src/assets/solution-bg.svg')",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 items-center gap-12">
-            {/* Left Content */}
-            <div className="text-center md:text-left">
-              <div className="inline-flex items-center bg-teal-100 text-teal-800 px-4 py-2 rounded-full text-sm font-medium mb-6">
-                <CheckCircle className="h-4 w-4 mr-2" />
-                Built to Inspect. Powered by Quality.
-              </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+      <section className="relative py-20 overflow-visible">
+        {/* Background image */}
+        <img
+          src={solutionBg}
+          alt=""
+          className="absolute inset-x-0 bottom-0 w-full max-w-none pointer-events-none z-0 opacity-90 object-contain"
+        />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Center wrapper */}
+          <div className="flex flex-col items-center justify-center text-center gap-12 sm:gap-8">
+            {/* Text block */}
+            <div className="max-w-3xl text-center mt-8 mt-8">
+              <p className="h1 text-teal-900">
                 Tailored Testing Solutions for Every Industry
-              </h1>
-              <p className="text-lg text-gray-600 max-w-2xl md:max-w-md mx-auto md:mx-0 mb-10">
+              </p>
+
+              <p className="body-regular text-gray-600 mt-4">
                 We understand that every industry has unique challenges. Our
                 specialized testing solutions are designed to meet the specific
                 needs of your sector.
               </p>
-
-              <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                <Link
-                  to="/contact"
-                  className="bg-teal-600 text-white px-8 py-4 rounded-md font-semibold text-lg hover:bg-teal-700 transition-colors duration-200 flex items-center justify-center space-x-2"
-                >
-                  <span>Get Custom Solution</span>
-                  <ArrowRight className="h-5 w-5" />
-                </Link>
-              </div>
             </div>
 
-            {/* Right Illustration */}
-            <div className="flex justify-center md:justify-end">
-              <img
-                src={solutionIllustration}
-                alt="Industry Testing Illustration"
-                className="w-full max-w-md md:max-w-lg h-auto object-contain"
-              />
+            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+              <Link
+                to="/contact?scroll=form"
+                className="bg-teal-600 text-white px-8 py-4 rounded-md font-semibold text-lg hover:bg-teal-700 transition-colors duration-200 flex items-center justify-center space-x-2"
+              >
+                <span>Get Custom Solution</span>
+                <ArrowRight className="h-5 w-5" />
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
       {/* Industry Solutions */}
-      <section
-        className="py-24 relative overflow-hidden"
-        style={{
-          backgroundImage: "url('/src/assets/sol-bg-2.svg')",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-12 overflow-hidden">
+        <img
+          src={solBg2}
+          alt=""
+          className="absolute inset-x-0 bottom-0 w-full max-w-none pointer-events-none z-0 opacity-90 object-contain"
+        />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Heading */}
-          <div className="grid md:grid-cols-2 gap-6 mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-              Industry-Specific Expertise
-            </h2>
-            <p className="text-lg md:text-base text-gray-600">
-              Deep domain knowledge and specialized testing approaches for your
-              industry's unique requirements.
-            </p>
+          <div className="mb-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-8 md:gap-x-28 items-start">
+              <div>
+                <div className="inline-flex items-center bg-teal-100 text-gray-800 px-4 py-2 rounded-full text-sm font-medium mb-6">
+                  <Grid className="h-4 w-4 mr-2 text-gray-600" />
+                  Industry-Focused QA Solutions
+                </div>
+
+                <p className="h2">Expert Testing Tailored to Your Industry</p>
+              </div>
+
+              <div className="md:self-start pt-12">
+                <p className="body-md text-gray-600 max-w-md">
+                  We align our QA strategy with your industry’s workflows,
+                  risks, and user expectations to deliver reliable, scalable,
+                  and high-performing software across every touchpoint.
+                </p>
+              </div>
+            </div>
           </div>
 
           {/* Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {industries.map((industry, index) => (
               <div
                 key={index}
-                className="rounded-2xl p-6 md:p-8 bg-gradient-to-br from-teal-50/50 to-white border border-teal-100/40 shadow-[0_1px_0_0_rgba(16,24,40,.04),0_1px_2px_0_rgba(16,24,40,.06)]"
+                className="group relative flex flex-col h-full rounded-2xl bg-white/95 border border-teal-50 shadow-sm 
+                         hover:shadow-xl hover:border-teal-200 transition-all duration-300 hover:-translate-y-1"
               >
-                {/* Icon + Title */}
-                <div className="mb-4 md:mb-6">
-                  <div
-                    className={`${
-                      industry.color ?? "bg-teal-600"
-                    }/90 text-white rounded-xl p-3 w-fit mb-4`}
-                  >
-                    <industry.icon className="h-6 w-6" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-gray-900">
-                    {industry.title}
-                  </h3>
-                </div>
-
-                {/* Description */}
-                <p className="text-gray-600 leading-relaxed mb-6">
-                  {industry.description}
-                </p>
-
-                {/* Inner white info panels */}
-                <div className="grid md:grid-cols-2 gap-4 md:gap-5">
-                  {/* Key Challenges */}
-                  <div className="bg-white rounded-xl border border-gray-100 p-4">
-                    <h4 className="font-semibold text-gray-900 mb-3 text-sm">
-                      Key Challenges:
-                    </h4>
-                    <ul className="space-y-2">
-                      {industry.challenges.map((item, i) => (
-                        <li
-                          key={i}
-                          className="flex items-start text-gray-600 text-sm"
-                        >
-                          <span className="mt-1 mr-2 inline-block h-2 w-2 rounded-full bg-gray-300" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
+                <div className="p-6 md:p-7 flex flex-col h-full">
+                  {/* Icon + Title */}
+                  <div className="mb-4 md:mb-5">
+                    <div
+                      className={`inline-flex items-center justify-center rounded-xl p-3 mb-4 ${
+                        industry.color ?? "bg-teal-200"
+                      } text-white`}
+                    >
+                      <industry.icon className="h-5 w-5" />
+                    </div>
+                    <h3 className="text-lg md:text-xl font-semibold text-gray-900">
+                      {industry.title}
+                    </h3>
                   </div>
 
-                  {/* Our Solutions */}
-                  <div className="bg-white rounded-xl border border-gray-100 p-4">
-                    <h4 className="font-semibold text-gray-900 mb-3 text-sm">
-                      Our Solutions:
-                    </h4>
-                    <ul className="space-y-2">
-                      {industry.solutions.map((item, i) => (
-                        <li
-                          key={i}
-                          className="flex items-start text-gray-600 text-sm"
-                        >
-                          <CheckCircle className="h-4 w-4 text-teal-600 mt-0.5 mr-2" />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
+                  {/* Description */}
+                  <p className="text-sm md:text-[15px] text-gray-600 leading-relaxed mb-6">
+                    {industry.description}
+                  </p>
 
-                {/* Learn More */}
-                <div className="mt-6">
-                  <Link
-                    to="/contact"
-                    className="inline-flex items-center px-4 py-2 rounded-full bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300 transition"
-                  >
-                    Learn More <ArrowRight className="h-4 w-4 ml-1" />
-                  </Link>
+                  {/* Spacer to push CTA down */}
+                  <div className="flex-1" />
+
+                  {/* CTA */}
+                  <div className="pt-2">
+                    <Link
+                      to="/services"
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-full 
+                               bg-teal-700 px-4 py-2.5 text-sm font-semibold text-white 
+                               shadow-sm hover:bg-teal-800 focus-visible:outline-none 
+                               focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2
+                               focus-visible:ring-offset-white transition-colors"
+                      aria-label={`Explore QA solutions for ${industry.title}`}
+                    >
+                      <span>Explore Solutions</span>
+                      <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
 
           {/* Bottom CTA */}
-          <div className="mt-10 flex justify-center">
+          <div className="mt-12 flex justify-center">
             <Link
               to="/services"
-              className="inline-flex items-center px-5 py-3 rounded-full bg-teal-700 text-white font-medium hover:bg-teal-800 transition"
+              className="inline-flex items-center gap-2 rounded-full bg-teal-800 px-6 py-3 
+                       text-sm md:text-base font-semibold text-white shadow-sm
+                       hover:bg-teal-900 focus-visible:outline-none 
+                       focus-visible:ring-2 focus-visible:ring-teal-600 focus-visible:ring-offset-2
+                       focus-visible:ring-offset-white transition-colors"
             >
-              Explore Solutions <ArrowRight className="h-5 w-5 ml-2" />
+              <span>See All QA Services</span>
+              <ArrowRight className="h-5 w-5" />
             </Link>
           </div>
         </div>
       </section>
 
       {/* Company Size Solutions */}
-      <section
-        className="py-24 relative overflow-hidden"
-        style={{
-          backgroundImage: "url('/src/assets/sol-bg-3.svg')",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-24 relative overflow-hidden">
+        <img
+          src={solBg3}
+          alt=""
+          className="absolute inset-x-0 bottom-0 w-full max-w-none pointer-events-none z-0 opacity-90 object-contain"
+        />
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Heading */}
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <p className="h2 text-gray-900 mb-4">
               Solutions for Every Company Size
-            </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Whether you're a startup or an enterprise, we have the right
-              testing approach for your scale and budget.
+            </p>
+            <p className="body-regular text-gray-600 max-w-3xl mx-auto">
+              Whether you're a startup, mid-market business, or enterprise, our
+              QA solutions scale with your product, team, and budget.
             </p>
           </div>
 
           {/* Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 items-stretch">
             {companySize.map((size, index) => (
               <div
                 key={index}
-                className="rounded-2xl bg-gradient-to-br from-teal-50/40 to-white border border-teal-100/50 p-8 hover:shadow-xl transition-all duration-300 text-left relative"
+                className="flex flex-col h-full rounded-2xl bg-gradient-to-br from-teal-50/40 to-white 
+                     border border-teal-100/50 p-8 text-left relative 
+                     hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
               >
                 {/* Icon */}
-                <div className="bg-white/70 backdrop-blur-sm w-14 h-14 rounded-xl flex items-center justify-center mb-6">
-                  <size.icon className="h-6 w-6 text-teal-700" />
+                <div className="bg-teal-600 backdrop-blur-sm w-14 h-14 rounded-xl flex items-center justify-center mb-6">
+                  <size.icon className="h-5 w-5 text-white" />
                 </div>
 
                 {/* Title */}
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                  {size.title}
-                </h3>
+                <p className="h5 text-gray-900 mb-2">{size.title}</p>
 
                 {/* Description */}
-                <p className="text-gray-600 mb-6">{size.description}</p>
+                <p className="text-gray-600 text-sm md:text-[15px] mb-6">
+                  {size.description}
+                </p>
 
-                {/* Feature List */}
-                <div className="bg-white rounded-xl border border-gray-100 p-4 mb-8">
+                {/* Feature List – equalized height via flex-1 */}
+                <div className="bg-white rounded-xl border border-gray-100 p-5 md:p-6 mb-6 md:mb-8 flex-1">
                   <ul className="space-y-3">
                     {size.features.map((feature, featureIndex) => (
                       <li
@@ -393,24 +374,30 @@ const Solutions = () => {
                   </ul>
                 </div>
 
-                {/* CTA */}
-                <Link
-                  to="/contact"
-                  className={`inline-flex items-center px-6 py-2 rounded-full font-medium text-white bg-teal-700 hover:bg-teal-800 transition-colors duration-200 ${
-                    size.title === "Enterprise"
-                      ? "bg-teal-800 hover:bg-teal-900"
-                      : ""
-                  }`}
-                >
-                  Get Started
-                  <ArrowRight className="h-4 w-4 ml-2" />
-                </Link>
+                {/* CTA – aligned at bottom, mobile-friendly width */}
+                <div className="mt-auto pt-1">
+                  <Link
+                    to="/contact"
+                    className={[
+                      "inline-flex w-full md:w-auto items-center justify-center md:justify-start",
+                      "px-6 py-2.5 rounded-full font-medium text-white shadow-sm",
+                      "transition-colors duration-200",
+                      size.title === "Enterprise"
+                        ? "bg-teal-800 hover:bg-teal-900"
+                        : "bg-teal-700 hover:bg-teal-800",
+                    ].join(" ")}
+                  >
+                    Get Started
+                    <ArrowRight className="h-4 w-4 ml-2" />
+                  </Link>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
+{/* CTA SECTION */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative overflow-hidden rounded-[28px]">

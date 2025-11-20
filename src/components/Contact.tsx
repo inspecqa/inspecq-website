@@ -116,9 +116,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <p className="body-semi text-black-300">Email Us</p>
-                  <p className="body-md text-black-500">
-                    helloinspecq@gmail.com
-                  </p>
+                  <p className="body-md text-black-500">contact@inspecq.com</p>
                 </div>
               </div>
             </div>
@@ -178,7 +176,9 @@ const Contact = () => {
                   <option value="">Select a Service</option>
                   <option value="functional-testing">Functional Testing</option>
                   <option value="automation-testing">Test Automation</option>
-                  <option value="performance-testing">Performance Testing</option>
+                  <option value="performance-testing">
+                    Performance Testing
+                  </option>
                   <option value="mobile-testing">Mobile Testing</option>
                   {/* <option value="security-testing">Security Testing</option> */}
                   <option value="consulting-audits">

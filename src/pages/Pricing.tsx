@@ -1,8 +1,8 @@
 import React, { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import consultationIllustration from "../assets/consultation-illustration.svg";
 import consultationBg from "../assets/consultation-bg.svg";
 import pricingHeaderBg from "../assets/pricing-header-bg.svg";
-import pricingIllus from "../assets/pricing-illustration.svg";
 import {
   ArrowRight,
   CheckCircle,
@@ -222,7 +222,11 @@ const PricingPage: React.FC = () => {
   return (
     <div id="pricing-page" className="pt-16">
       {/* ======================= HERO ======================= */}
-      <section className="relative py-20 overflow-visible">
+      <section
+        aria-label="Pricing Hero Section"
+        className="relative py-20 overflow-visible"
+      >
+        {/* Background image */}
         <img
           src={pricingHeaderBg}
           alt=""
@@ -230,51 +234,36 @@ const PricingPage: React.FC = () => {
         />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid items-center gap-12 md:grid-cols-2">
-            {/* Left: content */}
-            <div>
-              <div className="inline-flex items-center bg-teal-100 text-teal-800 px-4 py-2 rounded-full text-sm font-medium mb-6">
-                Built to Inspect. Powered by Quality.
-              </div>
-
-              <h1 className="text-teal-900">
+          {/* Center wrapper */}
+          <div className="flex flex-col items-center justify-center text-center gap-12 sm:gap-8">
+            {/* Text block */}
+            <div className="max-w-3xl text-center mt-8">
+              <p className="h1 text-teal-900">
                 Flexible Pricing Designed for Every Growth Stage.
-              </h1>
-              <p className="body-regular text-black-700 mt-4 max-w-xl mx-auto md:mx-0">
+              </p>
+
+              <p className="body-regular text-gray-600 mt-6">
                 Get the expertise of a senior QA team at rates that fit your
                 stage and budget, without the overhead of big agencies.
               </p>
-
-              <div className="flex flex-col sm:flex-row gap-4 mt-10">
-                <button
-                  onClick={() =>
-                    document
-                      .getElementById("trial-form")
-                      ?.scrollIntoView({ behavior: "smooth" })
-                  }
-                  className="bg-teal-600 hover:bg-teal-700 text-white px-8 py-4 rounded-xl font-medium flex items-center justify-center gap-2 shadow-md"
-                >
-                  <span>Get Custom Quote</span>
-                  <ArrowRight className="h-5 w-5" />
-                </button>
-
-                <a
-                  href="#contact"
-                  className="px-8 py-4 rounded-xl font-medium border border-slate-300 text-slate-700 bg-white hover:bg-slate-50 transition flex items-center justify-center gap-2"
-                >
-                  <MessageCircle className="h-5 w-5" />
-                  <span>Schedule Consultation</span>
-                </a>
-              </div>
             </div>
 
-            {/* Right: illustration */}
-            <div className="relative md:justify-self-end">
-              <img
-                src={pricingIllus}
-                alt="Pricing illustration"
-                className="w-full max-w-lg md:max-w-xl mx-auto opacity-95"
-              />
+            <div className="flex flex-col sm:flex-row gap-4 mt-6">
+              <Link
+                to="/contact?scroll=form"
+                className="bg-teal-600 text-white px-8 py-4 rounded-md font-semibold text-lg hover:bg-teal-700 transition-colors duration-200 flex items-center justify-center space-x-2"
+              >
+                <span>Get Custom Quote</span>
+                <ArrowRight className="h-5 w-5" />
+              </Link>
+
+              <a
+                href="https://calendly.com/mail-inspecq/30min"
+                className="px-8 py-4 rounded-xl font-medium border border-slate-300 text-slate-700 bg-white hover:bg-slate-50 transition flex items-center justify-center gap-2"
+              >
+                <MessageCircle className="h-5 w-5" />
+                <span>Schedule Consultation</span>
+              </a>
             </div>
           </div>
         </div>

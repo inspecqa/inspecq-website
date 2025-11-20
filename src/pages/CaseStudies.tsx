@@ -1,4 +1,3 @@
-import React from "react";
 import { ArrowRight, FileDown } from "lucide-react";
 
 const caseStudies = [

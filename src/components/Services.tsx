@@ -108,8 +108,8 @@ const Services = () => {
     },
   ];
 
-  // first card open by default to mirror the screenshot
-  const [openIndex, setOpenIndex] = useState(0);
+  // // first card open by default to mirror the screenshot
+  // const [openIndex, setOpenIndex] = useState(0);
 
   return (
     <section

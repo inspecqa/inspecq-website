@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import SmoothScrollLink from "../../components/SmoothScrollLink";
 import consultationIllustration from "../../assets/consultation-illustration.svg";
 import consultationBg from "../../assets/consultation-bg.svg";
+import serviceBg from "../../assets/service/service-hero-bg.svg";
 import {
   CheckCircle,
   ArrowRight,
@@ -167,19 +168,20 @@ const FunctionalTesting = () => {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative py-28 md:py-36 overflow-visible">
-        <BackgroundImage src="/src/assets/service/service-hero-bg.svg" />
+        <BackgroundImage src={serviceBg} />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16 mt-16">
-            <h1 className="text-teal-900 mb-6">
+            <p className="h1 text-teal-900 mb-6">
               Functional Testing that Scales with You
-            </h1>
+            </p>
             <p className="body-regular text-black-700 max-w-3xl mx-auto mb-8">
               We test every feature and flow to ensure your product runs
               smoothly and delivers a flawless experience.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                to="/contact?service=functional-testing#contact-form"
+                
+                to="/contact?service=functional-testing&scroll=form"
                 className="btn-text bg-teal-500 text-white w-[244px] h-[56px] rounded-[48px] flex items-center justify-center gap-2 hover:bg-teal-600 transition-all duration-200"
               >
                 <span>Get Started</span>

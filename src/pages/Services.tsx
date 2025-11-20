@@ -1,5 +1,7 @@
-import React from "react";
 import { Link } from "react-router-dom";
+import pricingHeaderBg from "../assets/pricing-header-bg.svg";
+import consultationBg from "../assets/consultation-bg.svg";
+import consultationIllustration from "../assets/consultation-illustration.svg"
 import {
   Bug,
   Gauge,
@@ -17,11 +19,11 @@ const Services = () => {
       icon: Bug,
       title: "Manual Testing",
       description:
-        "Our expert QA engineers perform comprehensive manual testing to catch edge cases and usability issues that automated tests might miss.",
+        "Our QA engineers perform thorough manual testing to uncover usability issues, edge cases, and functional defects that automated tests may overlook.",
       features: [
-        "Manual Testing",
+        "Functional & Exploratory Testing",
         "UI/UX Validation",
-        "Exploratory Testing",
+        "Cross-Browser Testing",
         "User Acceptance Testing",
       ],
       color: "bg-blue-500",
@@ -31,12 +33,12 @@ const Services = () => {
       icon: Code2,
       title: "Test Automation",
       description:
-        "Build robust, scalable test automation frameworks that integrate seamlessly with your CI/CD pipeline for faster releases.",
+        "We build reliable, scalable automation frameworks that accelerate release cycles and seamlessly integrate with your CI/CD pipeline.",
       features: [
-        "Automated Testing",
-        "Regression Testing",
-        "CI/CD Integration",
-        "Custom Frameworks",
+        "UI & API Automation",
+        "Regression Suite Automation",
+        "CI/CD Pipeline Integration",
+        "Custom Framework Development",
       ],
       color: "bg-teal-500",
       path: "/services/test-automation",
@@ -45,12 +47,12 @@ const Services = () => {
       icon: Radio,
       title: "API Testing",
       description:
-        "Comprehensive API testing to ensure your backend services are reliable, secure, and performant across all endpoints.",
+        "End-to-end API testing to ensure your backend services are accurate, resilient, secure, and optimized for performance.",
       features: [
-        "REST API Testing",
-        "GraphQL Testing",
+        "REST & GraphQL Testing",
         "Integration Testing",
         "Contract Validation",
+        "Authentication & Authorization Checks",
       ],
       color: "bg-teal-500",
       path: "/services/api-testing",
@@ -59,12 +61,12 @@ const Services = () => {
       icon: Gauge,
       title: "Performance Testing",
       description:
-        "Identify bottlenecks and ensure your application can handle peak traffic without compromising user experience.",
+        "Identify performance bottlenecks and validate that your application can handle peak load without affecting stability or user experience.",
       features: [
-        "Load Testing",
-        "Stress Testing",
-        "Volume Testing",
-        "Scalability Analysis",
+        "Load & Stress Testing",
+        "Spike & Volume Testing",
+        "Scalability Benchmarking",
+        "Performance Monitoring Insights",
       ],
       color: "bg-purple-500",
       path: "/services/performance-testing",
@@ -73,12 +75,12 @@ const Services = () => {
       icon: Smartphone,
       title: "Mobile Testing",
       description:
-        "End-to-end testing for iOS and Android apps across real devices and simulators to ensure flawless mobile experiences.",
+        "Comprehensive testing for iOS and Android apps across real devices and simulators to ensure smooth, high-quality mobile experiences.",
       features: [
-        "Cross-Platform Testing",
-        "Device Compatibility",
-        "App Store Optimization",
-        "Mobile Performance",
+        "Cross-Platform Functional Testing",
+        "Device & OS Compatibility",
+        "Mobile Performance Checks",
+        "Real Device Cloud Testing",
       ],
       color: "bg-orange-500",
       path: "/services/mobile-testing",
@@ -87,41 +89,49 @@ const Services = () => {
       icon: Users,
       title: "QA Consulting & Audits",
       description:
-        "Get expert guidance on your QA strategy, processes, and tooling. We audit your current setup and provide actionable recommendations.",
+        "We evaluate your QA processes, tools, and workflows to identify gaps and deliver actionable recommendations for improving quality and efficiency.",
       features: [
-        "QA Strategy Consulting",
-        "Process Audit & Review",
-        "Tool Selection & Setup",
+        "QA Strategy Development",
+        "Process Audit & Gap Analysis",
+        "Tooling Recommendation",
         "Team Training & Mentoring",
         "Best Practices Implementation",
       ],
       color: "bg-red-500",
-      path: "/services/security-testing",
+      path: "/services/qa-consulting-audits",
     },
   ];
+
 
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-slate-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-20 overflow-visible">
+        <img
+          src={pricingHeaderBg}
+          alt=""
+          className="absolute inset-x-0 bottom-0 w-full max-w-none pointer-events-none z-0 opacity-90 object-contain"
+        />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <div className="inline-flex items-center bg-teal-100 text-teal-800 px-4 py-2 rounded-full text-sm font-medium mb-6">
               <CheckCircle className="h-4 w-4 mr-2" />
               Built to Inspect. Powered by Quality.
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <p className="h1 text-teal-900">
               Comprehensive QA Testing Services
-            </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-              From manual exploratory testing to advanced automation and
-              performance testing, we provide end-to-end quality assurance for
-              modern software teams.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <p className="body-regular text-gray-600 mt-6">
+              From manual exploratory testing to automation and performance
+              testing, we deliver complete QA coverage that helps your product
+              ship faster, break less, and deliver a consistently high-quality
+              user experience.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 mt-6 justify-center">
               <Link
-                to="/free-trial"
-                className="bg-teal-600 text-white px-8 py-4 rounded-md font-semibold text-lg hover:bg-teal-700 transition-colors duration-200 flex items-center justify-center space-x-2"
+                to="/contact?scroll=form"
+                className="bg-teal-600 text-white px-8 py-4 rounded-md button-txt hover:bg-teal-700 transition-colors duration-200 flex items-center justify-center space-x-2"
               >
                 <span>Request a Quote</span>
                 <ArrowRight className="h-5 w-5" />
@@ -132,19 +142,29 @@ const Services = () => {
       </section>
 
       {/* Services Grid */}
-      <section className="py-20 bg-white">
+      <section
+        className="py-20 bg-gradient-to-br from-white via-teal-50 to-teal-100"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <p className="h2 text-gray-900">Our QA Services</p>
+            <p className="body-regular text-gray-600 max-w-3xl mx-auto mt-4">
+              Explore the solutions we offer to help you deliver faster, reduce
+              defects, and maintain a high-quality user experience.
+            </p>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
               <div
                 key={index}
-                className="bg-gray-50 rounded-xl p-8 hover:bg-white hover:shadow-lg transition-all duration-300 border border-gray-100 group"
+                className="bg-gray-50 rounded-xl p-8 hover:bg-white hover:shadow-lg transition-all duration-300 border border-gray-100 group flex flex-col"
               >
                 <div className="mb-6">
                   <div
                     className={`${service.color} p-3 rounded-lg w-fit mb-4 group-hover:scale-110 transition-transform duration-300`}
                   >
-                    <service.icon className="h-8 w-8 text-white" />
+                    <service.icon className="h-5 w-5 text-white" />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900">
                     {service.title}
@@ -155,7 +175,7 @@ const Services = () => {
                   {service.description}
                 </p>
 
-                <ul className="space-y-3 mb-6">
+                <ul className="space-y-3 mb-6 bg-teal-50 rounded-xl p-2">
                   {service.features.map((feature, featureIndex) => (
                     <li
                       key={featureIndex}
@@ -167,7 +187,8 @@ const Services = () => {
                   ))}
                 </ul>
 
-                <div className="mt-6 pt-6 border-t border-gray-200">
+                {/* Push "Learn More" to the bottom */}
+                <div className="mt-auto pt-6 border-t border-gray-200">
                   <Link
                     to={service.path}
                     className="text-teal-600 font-medium hover:text-teal-700 transition-colors duration-200 flex items-center"
@@ -182,36 +203,54 @@ const Services = () => {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-20 bg-slate-50">
+      <section className="py-20 bg-gradient-to-br from-white via-teal-50 to-teal-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center mb-12">
-            <h2 className="text-3xl md:text-4xl text-slate-900 mb-4">
-              Why Choose InspecQ?
-            </h2>
-            <p className="text-lg text-slate-600">
-              We're not just testers—we're your quality partners
+            <p className="h2 text-slate-900 mb-4">
+              Why Choose{" "}
+              <span className="relative inline-block px-1">
+                <span className="absolute inset-0 bg-white rounded-md blur-sm"></span>
+                <span className="relative text-teal-700 font-semibold tracking-tight">
+                  InspecQ
+                </span>
+              </span>
+            </p>
+            <p className="body-regular text-slate-600">
+              We're not just testers , we're your dedicated quality partners.
             </p>
           </div>
+
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="text-4xl text-teal-600 mb-2">10+</div>
-              <h3 className="text-slate-900 mb-2">Years Experience</h3>
-              <p className="text-slate-600 text-sm">
-                Battle-tested expertise across industries
+              <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-700 flex items-center justify-center shadow-lg shadow-teal-200/40">
+                <span className="text-2xl font-bold text-white">10+</span>
+              </div>
+              <p className="h4 text-slate-900 mb-2">Years of QA Expertise</p>
+              <p className="text-slate-600 xs-regular">
+                Hands-on experience across SaaS, fintech, and enterprise etc.
+                systems.
               </p>
             </div>
+
             <div className="text-center">
-              <div className="text-4xl text-teal-600 mb-2">500+</div>
-              <h3 className="text-slate-900 mb-2">Projects Delivered</h3>
-              <p className="text-slate-600 text-sm">
-                From startups to Fortune 500 companies
+              <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-700 flex items-center justify-center shadow-lg shadow-teal-200/40">
+                <span className="text-2xl font-bold text-white">50+</span>
+              </div>
+
+              <p className="h4 text-slate-900 mb-2">Projects Supported</p>
+              <p className="text-slate-600 xs-regular">
+                Trusted for manual, automation, API, and performance testing.
               </p>
             </div>
+
             <div className="text-center">
-              <div className="text-4xl text-teal-600 mb-2">99.9%</div>
-              <h3 className="text-slate-900 mb-2">Bug Detection</h3>
-              <p className="text-slate-600 text-sm">
-                Industry-leading quality standards
+              <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-700 flex items-center justify-center shadow-lg shadow-teal-200/40">
+                <span className="text-2xl font-bold text-white">High</span>
+              </div>
+
+              <p className="h4 text-slate-900 mb-2">Defect Detection Rate</p>
+              <p className="text-slate-600 xs-regular">
+                A structured approach that uncovers critical issues early.
               </p>
             </div>
           </div>
@@ -219,28 +258,49 @@ const Services = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-teal-600 to-teal-600">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Ready to Transform Your Testing Process?
-          </h2>
-          <p className="text-xl text-teal-100 mb-8 max-w-2xl mx-auto">
-            Let our experts help you choose the right testing strategy for your
-            needs.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              to="/contact"
-              className="bg-white text-teal-600 px-8 py-3 rounded-md font-semibold hover:bg-gray-100 transition-colors duration-200"
-            >
-              Get Expert Consultation
-            </Link>
-            <Link
-              to="/case-studies"
-              className="border-2 border-white text-white px-8 py-3 rounded-md font-semibold hover:bg-white hover:text-teal-600 transition-colors duration-200"
-            >
-              View Case Studies
-            </Link>
+      <section className="py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative overflow-hidden rounded-[28px]">
+            <img
+              src={consultationBg}
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+
+            <div className="absolute inset-0 mix-blend-multiply" />
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center px-6 sm:px-10 lg:px-14 py-12 lg:py-16">
+              {/* Left copy */}
+              <div className="text-white">
+                <h1>
+                  30 Minute Free QA
+                  <br /> Consultation to clear
+                  <br /> your doubts.
+                </h1>
+
+                <p className="body-regular mt-6 text-white/90 text-lg max-w-2xl">
+                  Book a 30-minute consultation to discuss your testing needs
+                  and get expert recommendations.
+                </p>
+
+                <a
+                  href="https://calendly.com/mail-inspecq/30min"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-text mt-10 inline-flex items-center rounded-full bg-white border border-buttonBorder text-slate-900 px-6 sm:px-8 py-3 sm:py-4 text-base font-medium shadow-md hover:shadow-lg transition"
+                >
+                  Schedule Consultation
+                </a>
+              </div>
+
+              {/* Right illustration */}
+              <div className="relative">
+                <img
+                  src={consultationIllustration}
+                  alt="Consultation illustration"
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </section>

@@ -316,7 +316,7 @@ const steps = [
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                to="/contact?service=performance-testing#contact-form"
+                to="/contact?service=performance-testing&scroll=form"
                 className="btn-text bg-teal-500 text-white w-[244px] h-[56px] rounded-[48px] flex items-center justify-center gap-2 hover:bg-teal-600 transition-all duration-200"
               >
                 <span>Start Testing</span>

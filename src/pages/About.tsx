@@ -1,103 +1,59 @@
 import consultationIllustration from "../assets/consultation-illustration.svg";
 import consultationBg from "../assets/consultation-bg.svg";
-import {
-  Award,
-  Clock,
-  Target,
-  CheckCircle,
-  Linkedin,
-  Twitter,
-  ArrowRight,
-  ShieldCheck,
-  Cpu,
-  Users,
-} from "lucide-react";
+import { useEffect, useState } from "react";
+import { Target, CheckCircle, ShieldCheck, Cpu, Users } from "lucide-react";
 import aboutValuseBg from "../assets/about-values-bg.svg";
+import aboutHeroBg from "../assets/about-hero-bg.svg";
 import aboutUsIllus from "../assets/about-us-illustration.svg";
-import aboutHeroBg from "../assets/about-hero-bg.svg"
 
 const About = () => {
-  const teamMembers = [
-    {
-      name: "Sadia Islam",
-      role: "Chief Technology Officer",
-      experience: "12+ years",
-      specialties: ["Test Strategy", "Quality Leadership", "DevOps"],
-      image:
-        "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400",
-      certifications: ["ISTQB Expert", "AWS Solutions Architect"],
-      linkedin: "#",
-      twitter: "#",
-    },
-    {
-      name: "Rifat Ara Nawshin",
-      role: "Head of Automation",
-      experience: "10+ years",
-      specialties: ["Test Automation", "Framework Design", "CI/CD"],
-      image:
-        "https://images.pexels.com/photos/3763188/pexels-photo-3763188.jpeg?auto=compress&cs=tinysrgb&w=400",
-      certifications: ["Selenium Expert", "Docker Certified"],
-      linkedin: "#",
-      twitter: "#",
-    },
-    {
-      name: "Humayra Himi",
-      role: "Security Testing Lead",
-      experience: "8+ years",
-      specialties: ["Security Testing", "Penetration Testing", "Compliance"],
-      image:
-        "https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=400",
-      certifications: ["CISSP", "CEH", "OSCP"],
-      linkedin: "#",
-      twitter: "#",
-    },
-  ];
+  const useCountUp = (endValue: number, duration = 1200) => {
+    const [value, setValue] = useState(0);
 
-  const stats = [
-    {
-      icon: Users,
-      value: "20+",
-      label: "Testing Experts",
-      color: "bg-teal-500",
-    },
-    {
-      icon: Award,
-      value: "10+",
-      label: "Years Experience",
-      color: "bg-blue-500",
-    },
-    {
-      icon: Clock,
-      value: "24/7",
-      label: "Global Support",
-      color: "bg-purple-500",
-    },
-    {
-      icon: Target,
-      value: "99%",
-      label: "Client Satisfaction",
-      color: "bg-orange-500",
-    },
-  ];
+    useEffect(() => {
+      let start = 0;
+      const increment = endValue / (duration / 16);
+
+      const counter = setInterval(() => {
+        start += increment;
+        if (start >= endValue) {
+          setValue(endValue);
+          clearInterval(counter);
+        } else {
+          setValue(Math.floor(start));
+        }
+      }, 16);
+
+      return () => clearInterval(counter);
+    }, [endValue, duration]);
+
+    return value;
+  };
 
   const values = [
     {
       title: "Quality First",
       description:
-        "We never compromise on quality. Every test, every process, every deliverable meets our highest standards.",
+        "Every test, scenario, and report is designed to protect your users and product reputation.",
       icon: ShieldCheck,
     },
     {
       title: "Innovation Driven",
       description:
-        "We stay ahead of the curve with cutting-edge testing tools and methodologies.",
+        "We use modern QA tools, automation frameworks, and performance testing to keep you ahead.",
       icon: Cpu,
     },
     {
       title: "Client Success",
       description:
-        "Your success is our success. We partner with you to achieve your quality goals.",
+        "We plug into your team, align with your roadmap, and focus on outcomes, not just bug counts.",
       icon: Users,
+    },
+    {
+      title: "Integrity & Transparency",
+      description:
+        "Clear communication, honest reporting, and full visibility into what we test and why.",
+      icon: CheckCircle,
     },
   ];
 
@@ -106,68 +62,185 @@ const About = () => {
       {/* Hero Section */}
       <section
         aria-label="Our Story section"
-        className="relative isolate overflow-hidden py-20 md:py-28 bg-gradient-to-br from-slate-50 to-white z-0"
+        className="relative overflow-visible py-16 sm:py-20 lg:py-24"
       >
-        {/* Background grid texture */}
+        {/* Background image */}
         <img
           src={aboutHeroBg}
           alt=""
-          aria-hidden="true"
-          loading="lazy"
-          decoding="async"
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-30
-               [mask-image:radial-gradient(70%_70%_at_50%_50%,#000_60%,transparent_100%)] z-0"
+          className="absolute inset-x-0 bottom-0 w-full max-w-none pointer-events-none z-0 opacity-90 object-contain"
         />
 
-        {/* Right-side illustration (decorative) */}
-        <img
-          src={aboutUsIllus}
-          alt=""
-          aria-hidden="true"
-          loading="lazy"
-          decoding="async"
-          className="pointer-events-none select-none absolute -right-8 bottom-0 h-[36vh] max-h-[520px] w-auto opacity-95
-               sm:h-[42vh] md:-right-6 md:h-[48vh] lg:-right-2 lg:h-[56vh] z-0"
-        />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Center wrapper */}
+          <div className="flex flex-col items-center justify-center text-center gap-12 sm:gap-8">
+            {/* Text block */}
+            <div className="max-w-3xl text-center mt-8">
+              <p className="h1 text-teal-900">
+                Built to Inspect. Powered by Quality.
+              </p>
 
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-16 max-w-3xl text-center md:text-left">
-            <div className="mb-6 inline-flex items-center rounded-full bg-teal-100 px-4 py-2 text-sm font-medium text-teal-800">
-              <CheckCircle className="mr-2 h-4 w-4" />
-              Our Story
+              <p className="body-regular text-gray-600 mt-4">
+                InspecQ is a modern QA agency helping SaaS, fintech, and digital
+                products ship reliable, high-performing releases. We blend
+                manual testing, automation, API testing, and performance checks
+                so your team can launch faster—with fewer bugs and more
+                confidence.
+              </p>
             </div>
 
-            <h1 className="mb-6 text-[clamp(2rem,5vw,3.25rem)] font-bold leading-tight text-gray-900">
-              Built to Inspect. Powered by Quality.
-            </h1>
+            {/* Stats strip */}
+            <div className="w-full max-w-5xl mt-4">
+              <div
+                className="grid grid-cols-2 md:grid-cols-4 gap-6 rounded-3xl border border-teal-200
+                bg-white/85 p-6 md:p-8 shadow-sm backdrop-blur-sm md:divide-x md:divide-gray-200"
+              >
+                {[
+                  { stat: "10+", label: "Skilled QA Experts" },
+                  { stat: "10+", label: "Years in QA & Testing" },
+                  { stat: "24/7", label: "Support Across Time Zones" },
+                  { stat: "99%", label: "Client Satisfaction" },
+                ].map((item, i) => {
+                  const hasPlus = item.stat.includes("+");
+                  const hasPercent = item.stat.includes("%");
+                  const hasSlash = item.stat.includes("/7");
 
-            <p className="body-regular text-gray-600">
-              Founded by experienced QA professionals from leading tech
-              companies, we’re launching InspecQ to bring enterprise-level
-              testing expertise to startups and growing businesses.
+                  const numeric = parseInt(item.stat.split(/[^0-9]/)[0], 10);
+                  const count = useCountUp(numeric, 1200);
+
+                  return (
+                    <div
+                      key={i}
+                      className="flex flex-col items-center text-center md:px-6 lg:px-8"
+                    >
+                      <div className="text-2xl md:text-3xl font-extrabold tracking-tight">
+                        <span className="text-gray-900">{count}</span>
+                        {hasPlus && <span className="text-teal-600">+</span>}
+                        {hasPercent && <span className="text-teal-600">%</span>}
+                        {hasSlash && <span className="text-teal-600">/7</span>}
+                      </div>
+
+                      <div className="mt-2 text-sm text-gray-600">
+                        {item.label}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Who We Are */}
+      <section className="py-16 md:py-20 bg-white-50">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid gap-10 lg:grid-cols-2 items-center">
+          {/* Text side */}
+          <div className="space-y-4">
+            <p className="h2 text-teal-900">Who we are</p>
+            <p className="body-regular text-gray-600 md:text-base mb-3">
+              We’re a dedicated QA team that treats your product like our own.
+              Our engineers bring deep expertise across every layer of your
+              product’s quality lifecycle, ensuring every release is stable,
+              fast, and user-friendly.
+            </p>
+            <p className="text-gray-600 body-regular md:text-base">
+              We integrate seamlessly into your workflow and deliver sharp,
+              actionable insights that improve quality without slowing down your
+              delivery.
             </p>
           </div>
 
-          {/* Stats strip */}
-          <div className="mx-auto max-w-5xl pt-8">
-            <div
-              className="grid grid-cols-2 md:grid-cols-4 gap-6 rounded-2xl border border-gray-200
-                   bg-white/85 p-6 md:p-8 shadow-sm backdrop-blur-sm md:divide-x md:divide-gray-200"
-            >
-              {[
-                { stat: "20+", label: "Testing Experts" },
-                { stat: "10+", label: "Years Experience" },
-                { stat: "24/7", label: "Global Support" },
-                { stat: "99%", label: "Client Satisfaction" },
-              ].map((item, i) => (
-                <div
-                  key={i}
-                  className="flex flex-col items-center text-center md:items-start md:text-left md:px-6 lg:px-8"
-                >
-                  <div className="text-3xl font-extrabold tracking-tight text-teal-700">
-                    {item.stat}
+          {/* Image side */}
+          <div className="relative">
+            <div className="overflow-hidden rounded-3xl bg-teal-50">
+              <img
+                src={aboutUsIllus}
+                alt="QA discussion"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="absolute -bottom-10 left-6 right-6 md:right-auto md:w-72 rounded-2xl bg-white shadow-lg p-4">
+              <p className="text-xs uppercase tracking-[0.15em] text-teal-600 mb-1">
+                Our Perspective
+              </p>
+              <p className="text-sm text-gray-700">
+                “Products evolve with features, but they succeed with reliable
+                releases.”
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why We Started */}
+      <section className="py-16 md:py-20 bg-teal-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="h2 text-black-900 mb-6">
+            Why we started{" "}
+            <span className="relative inline-block px-1">
+              <span className="absolute inset-0 bg-teal-500/20 rounded-md blur-sm"></span>
+              <span className="relative text-teal-700 font-semibold tracking-tight">
+                InspecQ
+              </span>
+            </span>
+          </p>
+          <p className="body-regular leading-relaxed">
+            Too many great products struggle because testing happens late, under
+            pressure, or without the right strategy. We built{" "}
+            <strong>InspecQ</strong> to fix that by bringing structured QA
+            processes, automation discipline, and deep product understanding to
+            teams that need reliable testing support.
+          </p>
+        </div>
+      </section>
+
+      {/* Values Section */}
+      <section className="relative isolate overflow-hidden py-20 md:py-28">
+        <img
+          src={aboutValuseBg}
+          className="absolute inset-0 w-full h-full object-cover opacity-30"
+        />
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-16 items-start">
+          {/* Left */}
+          <div>
+            <p className="h2 text-gray-900 mb-4">Our Core Values</p>
+            <p className="body-regular text-gray-600 max-w-md">
+              Four principles guide everything we do — how we work, communicate,
+              and collaborate.
+            </p>
+          </div>
+
+          {/* Right vertical timeline */}
+          <div className="relative pl-8">
+            <div className="space-y-16">
+              {values.map((value, i) => (
+                <div key={i} className="relative">
+                  {/* Vertical dotted line - only show for items except the last */}
+                  {i < values.length - 1 && (
+                    <div
+                      className="absolute left-5 top-5 border-l-2 border-dashed border-teal-300"
+                      style={{ height: "calc(100% + 4rem)" }}
+                    />
+                  )}
+
+                  {/* Icon centered on the line */}
+                  <div
+                    className="absolute left-5 top-0 flex h-10 w-10 items-center justify-center 
+                     rounded-full bg-teal-700 text-white shadow-lg"
+                    style={{ transform: "translateX(-50%)" }}
+                  >
+                    <value.icon className="h-5 w-5" />
                   </div>
-                  <div className="mt-1 text-sm text-gray-600">{item.label}</div>
+
+                  {/* Text block */}
+                  <div className="ml-16">
+                    <p className="h6 text-gray-900">{value.title}</p>
+                    <p className="mt-2 text-sm md:text-base text-gray-600">
+                      {value.description}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -175,49 +248,57 @@ const About = () => {
         </div>
       </section>
 
-      {/* Values Section */}
-      <section
-        aria-label="Our Core Values section"
-        className="relative isolate overflow-hidden py-20 md:py-28 bg-gradient-to-r from-teal-50 to-white"
-      >
-        {/* Background grid */}
-        <img
-          src={aboutValuseBg}
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none"
-        />
-
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-16 items-center">
-          {/* Left text block */}
-          <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Our Core Values
-            </h2>
-            <p className="text-lg md:text-xl text-gray-600 max-w-md">
-              The principles that guide everything we do and drive our
-              commitment to excellence.
+      {/* Mission & Vision */}
+      <section className="py-16 md:py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-10">
+            <p className="h2 text-gray-900">
+              Purpose-driven testing, every time
+            </p>
+            <p className="body-regular mt-3 text-gray-600 md:text-base">
+              Our mission, vision, and approach are all centered around one
+              thing: <strong> Helping you ship better software, faster.</strong>
             </p>
           </div>
 
-          {/* Right vertical timeline */}
-          <div className="relative border-l-2 border-dashed border-teal-300 pl-8 space-y-10">
-            {values.map((value, i) => (
-              <div key={i} className="relative flex items-start gap-6">
-                <div className="absolute -left-[2.1rem] flex items-center justify-center bg-teal-600 text-white rounded-lg h-10 w-10">
-                  <value.icon className="h-5 w-5" />
-                </div>
-                <div>
-                  <h3 className="text-gray-900 ml-4">{value.title}</h3>
-                  <p className="text-gray-600 mt-2">{value.description}</p>
-                </div>
+          <div className="grid gap-6 md:grid-cols-3">
+            <div className="rounded-3xl border border-white bg-teal-100 p-6 flex flex-col gap-3">
+              <div className="h-10 w-10 rounded-2xl bg-white flex items-center justify-center">
+                <Users className="h-5 w-5 text-teal-700" />
               </div>
-            ))}
+              <p className="h6 text-gray-900">Our Mission</p>
+              <p className="xs-regular text-gray-700">
+                To help businesses ship faster and with confidence by delivering
+                consistent, reliable, and high-quality releases—backed by modern
+                QA practices and smart testing.
+              </p>
+            </div>
+
+            <div className="rounded-3xl border border-white bg-teal-100 p-6 flex flex-col gap-3">
+              <div className="h-10 w-10 rounded-2xl bg-white flex items-center justify-center">
+                <Target className="h-5 w-5 text-teal-700" />
+              </div>
+              <p className="h6 text-gray-900">Our Vision</p>
+              <p className="xs-regular text-gray-700">
+                To be the QA partner product teams trust for stability, uptime,
+                and exceptional user experience across every release.
+              </p>
+            </div>
+
+            <div className="rounded-3xl border border-white bg-teal-100 p-6 flex flex-col gap-3">
+              <div className="h-10 w-10 rounded-2xl bg-white flex items-center justify-center">
+                <ShieldCheck className="h-5 w-5 text-teal-700" />
+              </div>
+              <p className="h6 text-gray-900">How We Support You</p>
+              <p className="xs-regular text-gray-700">
+                We become your QA team inside your existing process—providing
+                fast feedback and dependable coverage while saving you the cost
+                and complexity of hiring internally.
+              </p>
+            </div>
           </div>
         </div>
       </section>
-
-      {/* Team Section */}
 
       {/* CTA Section */}
       <section className="py-16">
@@ -231,17 +312,17 @@ const About = () => {
 
             <div className="absolute inset-0 mix-blend-multiply" />
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center px-6 sm:px-10 lg:px-14 py-12 lg:py-16">
-              {/* Left copy */}
               <div className="text-white">
                 <h1>
-                  30 Minute Free QA
-                  <br /> Consultation to clear
-                  <br /> your doubts.
+                  30-Minute Free QA
+                  <br />
+                  Consultation for your product.
                 </h1>
 
                 <p className="body-regular mt-6 text-white/90 text-lg max-w-2xl">
-                  Book a 30-minute consultation to discuss your testing needs
-                  and get expert recommendations.
+                  Share your product, stack, and release goals. We’ll review
+                  your current QA approach and outline a practical testing plan
+                  you can start using immediately.
                 </p>
 
                 <a
@@ -254,7 +335,6 @@ const About = () => {
                 </a>
               </div>
 
-              {/* Right illustration */}
               <div className="relative">
                 <img
                   src={consultationIllustration}

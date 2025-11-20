@@ -4,33 +4,33 @@ const FreeTrialTerms = () => {
       {/* Decorative background pattern */}
       <div className="absolute inset-0 bg-[url('/src/assets/pattern-light.svg')] opacity-[0.12] pointer-events-none" />
 
-      <div className="relative z-10 max-w-4xl mx-auto pt-28 pb-24 px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-4xl mx-auto pt-24 sm:pt-28 pb-16 sm:pb-24 px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-14 mt-8">
-          <div className="inline-flex items-center bg-teal-100 text-teal-700 px-4 py-2 rounded-full text-sm font-medium mb-4 shadow-sm">
-            7-Day Trial's Terms & Conditions
+        <div className="text-center mb-10 sm:mb-14 mt-6 sm:mt-8">
+          <div className="inline-flex items-center bg-teal-100 text-teal-700 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium mb-4 shadow-sm">
+            7-Day Trial&apos;s Terms &amp; Conditions
           </div>
 
-          <p className="h1 font-bold text-teal-900 mb-4 mt-2">
+          <p className="h1 font-bold text-teal-900 mb-3 sm:mb-4 mt-1 sm:mt-2 text-2xl sm:text-3xl lg:text-4xl">
             InspecQ Free Trial Terms
           </p>
 
-          <p className="body-md text-gray-600 max-w-2xl mx-auto">
+          <p className="body-md text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
             Please review these terms to understand what’s included in your
             complimentary InspecQ trial and how we operate with full
             transparency.
           </p>
         </div>
 
-        {/* Premium Content Card */}
-        <div className="bg-white/90 backdrop-blur-md rounded-3xl shadow-xl border border-gray-100 p-8 sm:p-10 md:p-12">
-          <section className="space-y-10 text-gray-700 leading-relaxed">
+        {/* Content Card */}
+        <div className="bg-white/90 backdrop-blur-md rounded-3xl shadow-xl border border-gray-100 p-5 sm:p-8 md:p-10 lg:p-12">
+          <section className="space-y-8 sm:space-y-10 text-gray-700 leading-relaxed text-sm sm:text-base">
             {/* 1 */}
             <div>
-              <h2 className="text-xl font-semibold text-gray-900">
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
                 1. Trial Duration
               </h2>
-              <p className="mt-1">
+              <p className="mt-1.5">
                 Your InspecQ Free Trial lasts for{" "}
                 <strong>7 calendar days</strong> from the moment your request is
                 confirmed.
@@ -42,13 +42,13 @@ const FreeTrialTerms = () => {
 
             {/* 2 */}
             <div>
-              <h2 className="text-xl font-semibold text-gray-900">
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
                 2. No Payment Required
               </h2>
               <p className="mt-2">
                 7-day trial is completely free. No credit card is required, it
-                will not <strong> auto-upgrade </strong>into a paid plan, and
-                you may cancel at any time during the trial with no obligations.
+                will not <strong>auto-upgrade</strong> into a paid plan, and you
+                may cancel at any time during the trial with no obligations.
               </p>
             </div>
 
@@ -56,20 +56,20 @@ const FreeTrialTerms = () => {
 
             {/* 3 */}
             <div>
-              <h2 className="text-xl font-semibold text-gray-900">
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
                 3. What’s Included
               </h2>
-              <p className="mt-1">
+              <p className="mt-1.5">
                 During the trial period, InspecQ provides a{" "}
                 <strong>lightweight, evaluation-focused QA review</strong>. This
                 may include:
               </p>
-              <ul className="list-disc ml-6 mt-2 space-y-1">
-                <li>Smoke & basic functional testing</li>
+              <ul className="list-disc ml-5 sm:ml-6 mt-2 space-y-1.5">
+                <li>Smoke &amp; basic functional testing</li>
                 <li>API or mobile sanity checks (if applicable)</li>
                 <li>Bug reporting with evidence</li>
                 <li>High-level quality insights</li>
-                <li>Process & tooling recommendations</li>
+                <li>Process &amp; tooling recommendations</li>
               </ul>
 
               <p className="mt-2">
@@ -83,10 +83,10 @@ const FreeTrialTerms = () => {
 
             {/* 4 */}
             <div>
-              <h2 className="text-xl font-semibold text-gray-900">
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
                 4. Limited Scope — Fair Use
               </h2>
-              <p className="mt-1">
+              <p className="mt-1.5">
                 The free trial is designed for evaluation only. InspecQ reserves
                 the right to reasonably limit the scope if the requested work
                 exceeds what is feasible within the complimentary trial period.
@@ -97,10 +97,10 @@ const FreeTrialTerms = () => {
 
             {/* 5 */}
             <div>
-              <h2 className="text-xl font-semibold text-gray-900">
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
                 5. No SLAs or Guarantees
               </h2>
-              <p className="mt-1">
+              <p className="mt-1.5">
                 The free trial does not include SLAs, guaranteed coverage, or
                 comprehensive multi-platform testing. All work is performed on a
                 best-effort basis.
@@ -111,10 +111,10 @@ const FreeTrialTerms = () => {
 
             {/* 6 */}
             <div>
-              <h2 className="text-xl font-semibold text-gray-900">
-                6. Confidentiality & Security
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
+                6. Confidentiality &amp; Security
               </h2>
-              <p className="mt-1">
+              <p className="mt-1.5">
                 Any information you share during the trial remains confidential.
                 We do not disclose or resell your data.
               </p>
@@ -124,14 +124,14 @@ const FreeTrialTerms = () => {
 
             {/* 7 */}
             <div>
-              <h2 className="text-xl font-semibold text-gray-900">
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
                 7. System Access Requirements
               </h2>
-              <p className="mt-1">
+              <p className="mt-1.5">
                 You may need to provide temporary access (non-production) to
                 staging environments for the trial. Access must:
               </p>
-              <ul className="list-disc ml-6 mt-2 space-y-1">
+              <ul className="list-disc ml-5 sm:ml-6 mt-2 space-y-1.5">
                 <li>avoid production databases or sensitive data</li>
                 <li>follow least-permission / QA-only access best practices</li>
                 <li>be removed after the trial upon your request</li>
@@ -142,11 +142,11 @@ const FreeTrialTerms = () => {
 
             {/* 8 */}
             <div>
-              <h2 className="text-xl font-semibold text-gray-900">
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
                 8. Deliverables at Trial Completion
               </h2>
-              <p className="mt-1">You will receive:</p>
-              <ul className="list-disc ml-6 mt-2 space-y-1">
+              <p className="mt-1.5">You will receive:</p>
+              <ul className="list-disc ml-5 sm:ml-6 mt-2 space-y-1.5">
                 <li>A summary of findings</li>
                 <li>Any detected bugs</li>
                 <li>Key quality recommendations</li>
@@ -158,13 +158,13 @@ const FreeTrialTerms = () => {
 
             {/* 9 */}
             <div>
-              <h2 className="text-xl font-semibold text-gray-900">
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
                 9. Right to Refuse or Discontinue
               </h2>
-              <p className="mt-1">
+              <p className="mt-1.5">
                 InspecQ may decline or stop a trial if the request involves:
               </p>
-              <ul className="list-disc ml-6 mt-2 space-y-1">
+              <ul className="list-disc ml-5 sm:ml-6 mt-2 space-y-1.5">
                 <li>unsafe access requirements</li>
                 <li>misuse of services</li>
                 <li>unrealistic expectations outside of trial limitations</li>
@@ -172,13 +172,13 @@ const FreeTrialTerms = () => {
             </div>
           </section>
 
-          <p className="mt-12 text-gray-600 text-center">
-            For questions about these terms, contact{" "}
+          <p className="mt-10 sm:mt-12 text-gray-600 text-center text-xs sm:text-sm">
+            For any questions about these terms, please contact us at{" "}
             <a
-              href="mailto:hello@inspecq.com"
+              href="mailto:contact@inspecq.com"
               className="text-teal-600 font-semibold hover:underline"
             >
-              hello@inspecq.com
+              contact@inspecq.com
             </a>
             .
           </p>

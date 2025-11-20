@@ -19,11 +19,15 @@ import Careers from './pages/Careers';
 import Blog from './pages/Blog';
 import Resources from './pages/Resources';
 import Pricing from './pages/Pricing';
+import QAConsultingAudits from "./pages/services/QAConsultingAudits";
 import { BestPracticesPage } from "./pages/BestPracticesPage";
 import { BestPracticeDetailPage } from "./pages/BestPracticeDetailPage";
 import { useParams, useNavigate } from "react-router-dom";
 import BackToTop from './components/BackToTop';
 import FreeTrialTerms from "./pages/legal/FreeTrialTerms";
+import TermsAndService from "./pages/legal/TermsAndService";
+import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
+
 
 
 // Admin imports
@@ -89,11 +93,13 @@ function App() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/pricing" element={<Pricing />} />
-          <Route path="/best-practices" element={<BestPracticesWrapper />} />
           <Route
-            path="/best-practices/:slug"
-            element={<BestPracticeDetailWrapper />}
+            path="/services/qa-consulting-audits"
+            element={<QAConsultingAudits />}
           />
+          <Route path="/legal/terms-and-service" element={<TermsAndService />} />
+          <Route path="/legal/privacy-policy" element={<PrivacyPolicy />} />
+
           {/* Admin Routes */}
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route

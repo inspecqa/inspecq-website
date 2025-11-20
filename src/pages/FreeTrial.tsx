@@ -1,5 +1,6 @@
-import { Link } from "react-router-dom";
 import React, { useMemo, useRef, useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useSmoothScroll } from "../hooks/useSmoothScroll";
 import {
   CheckCircle,
   ArrowRight,
@@ -37,15 +38,27 @@ const Modal = ({
       className="fixed inset-0 z-[999] flex items-center justify-center"
     >
       <div
-        className="absolute inset-0 bg-black/40"
+        className="absolute inset-0 bg-black/40 backdrop-blur-sm"
         onClick={onClose}
         aria-hidden="true"
       />
-      <div className="relative bg-white rounded-2xl shadow-xl max-w-lg w-full mx-4 p-6">
+      <div className="relative bg-white rounded-2xl shadow-xl max-w-lg w-full mx-4 p-6 sm:p-7">
         <div className="flex items-start justify-between">
-          <h3 className="text-xl font-semibold text-gray-900">{title}</h3>
+          <h3 className="text-lg sm:text-xl font-semibold text-gray-900">
+            {title}
+          </h3>
         </div>
-        <div className="mt-4 text-gray-700">{children}</div>
+        <div className="mt-4 text-sm sm:text-base text-gray-700">
+          {children}
+        </div>
+        <div className="mt-6 flex flex-col sm:flex-row items-center gap-3">
+          <button
+            onClick={onClose}
+            className="inline-flex items-center justify-center rounded-lg px-4 py-2 border border-gray-300 text-gray-700 hover:bg-gray-50 w-full sm:w-auto"
+          >
+            Close
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -72,6 +85,9 @@ const FreeTrial = () => {
   const [agreeToTerms, setAgreeToTerms] = useState(false);
   const [termsError, setTermsError] = useState<string | null>(null);
   const termsRef = useRef<HTMLInputElement | null>(null);
+
+  const navigate = useNavigate();
+  const scrollTo = useSmoothScroll(120); // adjust offset if your header height differs
 
   useEffect(() => {
     if (showSuccess) {
@@ -117,7 +133,7 @@ const FreeTrial = () => {
       {
         icon: HandCoins,
         title: "No Cost Required",
-        description: "Start instantly - no payment, no contract, just value.",
+        description: "Start instantly – no payment, no contract, just value.",
       },
       {
         icon: Zap,
@@ -140,25 +156,25 @@ const FreeTrial = () => {
       {
         step: "01",
         title: "Get in Touch",
-        description: "Fill out a short form to request your free 7-day trial",
+        description: "Fill out a short form to request your free 7-day trial.",
       },
       {
         step: "02",
         title: "Kickoff Call",
         description:
-          "We’ll schedule a quick session to understand your testing needs",
+          "We’ll schedule a quick session to understand your testing needs.",
       },
       {
         step: "03",
         title: "Hands-On Support",
         description:
-          "Our experts will work with your team to apply tailored QA strategies",
+          "Our experts will work with your team to apply tailored QA strategies.",
       },
       {
         step: "04",
         title: "See the Results",
         description:
-          "Get bug reports, quality insights, and process recommendations",
+          "Get bug reports, quality insights, and process recommendations.",
       },
     ],
     []
@@ -171,7 +187,6 @@ const FreeTrial = () => {
     if (!data.email.trim()) next.email = "Please enter your work email.";
     else if (!emailOk(data.email)) next.email = "Enter a valid email address.";
     if (!data.company.trim()) next.company = "Please enter your company name.";
-
     if (!data.testingFocus) next.testingFocus = "Select a testing focus.";
 
     return next;
@@ -225,10 +240,8 @@ const FreeTrial = () => {
 
     if (!supabase) {
       console.error("Supabase client not initialized. Form data not saved.");
-      // optional: show toast/alert to user
       return;
     }
-
 
     const errs = validate();
     if (Object.keys(errs).length) {
@@ -253,14 +266,13 @@ const FreeTrial = () => {
         ) as HTMLInputElement | null
       )?.value || "";
     if (honeypot) {
-      // treated as spam – don't submit anywhere
       return;
     }
 
     setIsSubmitting(true);
 
     try {
-      // Optional: send welcome email via Netlify function (keep existing behavior)
+      // Optional: send welcome email via Netlify function
       try {
         await fetch("/.netlify/functions/sendTrialEmail", {
           method: "POST",
@@ -274,7 +286,6 @@ const FreeTrial = () => {
         });
       } catch (err) {
         console.error("Error sending welcome email:", err);
-        // continue even if email fails
       }
 
       // 🔹 Insert into Supabase (trial_requests table)
@@ -329,27 +340,9 @@ const FreeTrial = () => {
           <span className="font-semibold">welcome email</span> with setup
           instructions and a link to book your quick kickoff call.
         </p>
-        <div className="mt-6 flex items-center gap-3">
-          {/* <a
-            href="mailto:"
-            className="inline-flex items-center justify-center rounded-lg px-4 py-2 bg-teal-600 text-white hover:bg-teal-700"
-          >
-            Go to Inbox
-          </a> */}
-
-          <button
-            onClick={() => setShowSuccess(false)}
-            className="inline-flex items-center justify-center rounded-lg px-4 py-2 border border-gray-300 text-gray-700 hover:bg-gray-50"
-          >
-            Close
-          </button>
-        </div>
       </Modal>
 
       {/* Hero */}
-      {/* ... rest of your JSX stays exactly the same ... */}
-      {/* I’m keeping everything below unchanged except the form submit logic */}
-
       <section className="relative py-20 overflow-visible">
         <img
           src={sftHeroBg}
@@ -357,37 +350,37 @@ const FreeTrial = () => {
           className="absolute inset-x-0 bottom-0 w-full max-w-none pointer-events-none z-0 opacity-90 object-contain"
         />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-center justify-center text-center gap-8">
-            <div className="max-w-xl mt-4">
+          <div className="flex flex-col items-center justify-center text-center gap-6 sm:gap-8">
+            <div className="max-w-xl mt-2 sm:mt-4">
               <p className="h1 text-teal-900">
                 Start Your 7-Day Free Trial Today
               </p>
-              <p className="body-regular text-black-700 mt-4">
+              <p className="body-regular text-gray-600 mt-4">
                 Kickstart your QA journey with InspecQ. Enjoy a 7-day free trial
                 with no payment details needed. Discover the quality difference
                 before you commit.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8 w-full">
                 <button
-                  onClick={() =>
-                    document
-                      .getElementById("trial-form")
-                      ?.scrollIntoView({ behavior: "smooth" })
-                  }
+                  onClick={() => scrollTo("#trial-form")}
                   aria-label="Open the trial request form"
-                  className="bg-teal-500 text-white px-8 py-4 rounded-xl btn-text flex items-center justify-center space-x-2"
+                  className="bg-teal-500 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl btn-text flex items-center justify-center space-x-2 w-full sm:w-auto"
                 >
                   <span>Get Started Free</span>
                   <ArrowRight className="h-5 w-5" />
                 </button>
-                <Link
-                  to="/contact?#contact-form"
-                  className="px-8 py-4 rounded-xl btn-text border border-buttonBorder text-black-500 bg-white transition-colors duration-200 flex items-center justify-center space-x-2"
+
+                <button
+                  onClick={() => {
+                    navigate("/contact");
+                    setTimeout(() => scrollTo("#contact-form"), 200);
+                  }}
+                  className="px-6 sm:px-8 py-3 sm:py-4 rounded-xl btn-text border border-buttonBorder text-black-500 bg-white transition-colors duration-200 flex items-center justify-center space-x-2 w-full sm:w-auto"
                   aria-label="Send your query"
                 >
                   <span>Send Your Query</span>
                   <MessageCircle className="h-5 w-5" />
-                </Link>
+                </button>
               </div>
             </div>
           </div>
@@ -395,36 +388,41 @@ const FreeTrial = () => {
       </section>
 
       {/* Features */}
-      <section className="relative py-16 overflow-hidden">
+      <section className="relative py-12 sm:py-16 overflow-hidden">
         <img
           src={sftBg3}
           alt=""
           className="absolute inset-x-0 bottom-0 w-full max-w-none pointer-events-none z-0 opacity-90 object-contain"
         />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <p className="h2" id="free-trial-includes-heading">
+          <div className="text-center mb-10 sm:mb-16">
+            <p
+              className="h2 text-2xl sm:text-3xl lg:text-4xl"
+              id="free-trial-includes-heading"
+            >
               What’s Included in Your Free Trial
             </p>
-            <p className="body-regular max-w-3xl mx-auto mt-4 text-lightGray">
+            <p className="body-regular max-w-3xl mx-auto mt-4 text-lightGray text-sm sm:text-base">
               Experience the full power of InspecQ, every feature unlocked, no
               restrictions for 7 days.
             </p>
           </div>
           <div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
             aria-label="Free trial features"
           >
             {features.map((f, i) => (
               <div
                 key={i}
-                className="relative text-center p-8 bg-white rounded-2xl border border-gray-100 hover:border-teal-200 hover:shadow-xl transition-all duration-300 group"
+                className="relative text-center p-6 sm:p-8 bg-white rounded-2xl border border-gray-100 hover:border-teal-200 hover:shadow-xl transition-all duration-300 group"
               >
-                <div className="bg-teal-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                <div className="bg-teal-500 w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto mb-5 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
                   <f.icon className="h-5 w-5 text-white" />
                 </div>
-                <h3 className="body-lg">{f.title}</h3>
-                <p className="xs-regular mt-2">{f.description}</p>
+                <h3 className="body-lg text-base sm:text-lg">{f.title}</h3>
+                <p className="xs-regular mt-2 text-sm text-gray-600">
+                  {f.description}
+                </p>
               </div>
             ))}
           </div>
@@ -433,7 +431,7 @@ const FreeTrial = () => {
 
       {/* How It Works */}
       <section
-        className="relative py-24 overflow-hidden"
+        className="relative py-16 sm:py-20 lg:py-24 overflow-hidden"
         aria-labelledby="how-it-works-heading"
       >
         <img
@@ -442,26 +440,31 @@ const FreeTrial = () => {
           className="absolute inset-x-0 bottom-0 w-full max-w-none pointer-events-none z-0 opacity-90 object-contain"
         />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-[1fr_826px] items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
             <div>
-              <h2 id="how-it-works-heading">How It Works</h2>
-              <p className="body-regular text-black-300 max-w-md mt-2">
+              <h2
+                id="how-it-works-heading"
+                className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900"
+              >
+                How It Works
+              </h2>
+              <p className="body-regular text-black-300 max-w-md mt-3 text-sm sm:text-base">
                 Get started with InspecQ in just a few simple steps.
               </p>
             </div>
-            <div className="grid grid-cols-2 gap-[49px] w-[826px] ml-20">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8">
               {steps.map((s, i) => {
                 const isHighlight = i === 0;
                 return (
                   <div
                     key={s.step}
-                    className={`w-full max-w-[388.5px] min-h-[223px] p-6 rounded-[16px] border transition-all duration-300 ${
+                    className={`w-full p-5 sm:p-6 rounded-2xl border transition-all duration-300 ${
                       isHighlight
                         ? "bg-teal-500 text-white border-transparent"
-                        : "bg-white body-regular text-gray-900 border-gray-100 hover:shadow-md"
+                        : "bg-white text-gray-900 border-gray-100 hover:shadow-md"
                     }`}
                   >
-                    <div className="flex flex-col gap-8">
+                    <div className="flex flex-col gap-5 sm:gap-6">
                       <div
                         className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ${
                           isHighlight
@@ -473,14 +476,14 @@ const FreeTrial = () => {
                       </div>
                       <div>
                         <h6
-                          className={`text-lg font-semibold mb-2 ${
+                          className={`text-base sm:text-lg font-semibold mb-2 ${
                             isHighlight ? "text-white" : "text-gray-900"
                           }`}
                         >
                           {s.title}
                         </h6>
                         <p
-                          className={`leading-relaxed ${
+                          className={`text-sm leading-relaxed ${
                             isHighlight ? "text-teal-50" : "text-gray-600"
                           }`}
                         >
@@ -499,7 +502,7 @@ const FreeTrial = () => {
       {/* Trial Form */}
       <section
         id="trial-form"
-        className="relative py-20 overflow-visible"
+        className="relative py-16 sm:py-20 lg:py-24 overflow-visible"
         aria-labelledby="trial-heading"
       >
         <img
@@ -508,15 +511,18 @@ const FreeTrial = () => {
           className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0 opacity-90"
         />
         <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center bg-teal-200 text-teal-800 px-4 py-2 rounded-full xs-regular mb-6">
-              <Sparkle className="h-5 w-5 text-teal-500 mr-2" />
+          <div className="text-center mb-10 sm:mb-12">
+            <div className="inline-flex items-center bg-teal-200 text-teal-800 px-4 py-2 rounded-full xs-regular mb-4 sm:mb-6 text-sm">
+              <Sparkle className="h-4 w-4 sm:h-5 sm:w-5 text-teal-500 mr-2" />
               Trial Request
             </div>
-            <p id="trial-heading" className="h2 text-black-500">
+            <p
+              id="trial-heading"
+              className="h2 text-black-500 text-2xl sm:text-3xl lg:text-4xl"
+            >
               Get Started Today
             </p>
-            <p className="body-regular mt-2 md:text-lg text-black-300 max-w-2xl mx-auto">
+            <p className="body-regular mt-2 md:text-lg text-black-300 max-w-2xl mx-auto text-sm sm:text-base">
               Ready to elevate your software quality? Request your 7-day trial
               and experience expert-led QA in action.
             </p>
@@ -533,22 +539,12 @@ const FreeTrial = () => {
                 autoComplete="off"
               />
 
-              {/* form fields remain same as your version */}
-              {/* ... all inputs/selects exactly as before ... */}
-
-              {/* (I kept your full JSX; only handler logic changed) */}
-              {/* Name & Email row */}
-              {/* Company & Team Size row */}
-              {/* Testing Focus select */}
-              {/* What happens next box */}
-              {/* Agree to terms & submit button */}
-
               {/* Name & Email */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label
                     htmlFor="name"
-                    className="block body-text-mreg text-black-500 mb-2"
+                    className="block body-text-mreg text-black-500 mb-2 text-sm sm:text-base"
                   >
                     Full Name{" "}
                     <span aria-hidden="true" className="text-rose-500">
@@ -567,13 +563,16 @@ const FreeTrial = () => {
                     aria-describedby={errors.name ? "err-name" : undefined}
                     autoComplete="name"
                     placeholder="Your Name"
-                    className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors ${
+                    className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors text-sm sm:text-base ${
                       errors.name ? "border-rose-400" : "border-gray"
                     }`}
                     required
                   />
                   {errors.name && (
-                    <p id="err-name" className="mt-1 text-sm text-rose-600">
+                    <p
+                      id="err-name"
+                      className="mt-1 text-xs sm:text-sm text-rose-600"
+                    >
                       {errors.name}
                     </p>
                   )}
@@ -582,7 +581,7 @@ const FreeTrial = () => {
                 <div>
                   <label
                     htmlFor="email"
-                    className="block body-text-mreg text-black-500 mb-2"
+                    className="block body-text-mreg text-black-500 mb-2 text-sm sm:text-base"
                   >
                     Work Email{" "}
                     <span aria-hidden="true" className="text-rose-500">
@@ -601,13 +600,16 @@ const FreeTrial = () => {
                     aria-describedby={errors.email ? "err-email" : undefined}
                     autoComplete="email"
                     placeholder="mail@company.com"
-                    className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors ${
+                    className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors text-sm sm:text-base ${
                       errors.email ? "border-rose-400" : "border-gray"
                     }`}
                     required
                   />
                   {errors.email && (
-                    <p id="err-email" className="mt-1 text-sm text-rose-600">
+                    <p
+                      id="err-email"
+                      className="mt-1 text-xs sm:text-sm text-rose-600"
+                    >
                       {errors.email}
                     </p>
                   )}
@@ -619,7 +621,7 @@ const FreeTrial = () => {
                 <div className="mt-2">
                   <label
                     htmlFor="company"
-                    className="block body-text-mreg text-black-500 mb-2"
+                    className="block body-text-mreg text-black-500 mb-2 text-sm sm:text-base"
                   >
                     Company Name{" "}
                     <span aria-hidden="true" className="text-rose-500">
@@ -640,13 +642,16 @@ const FreeTrial = () => {
                     }
                     autoComplete="organization"
                     placeholder="Your company"
-                    className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors ${
+                    className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors text-sm sm:text-base ${
                       errors.company ? "border-rose-400" : "border-gray"
                     }`}
                     required
                   />
                   {errors.company && (
-                    <p id="err-company" className="mt-1 text-sm text-rose-600">
+                    <p
+                      id="err-company"
+                      className="mt-1 text-xs sm:text-sm text-rose-600"
+                    >
                       {errors.company}
                     </p>
                   )}
@@ -655,7 +660,7 @@ const FreeTrial = () => {
                 <div className="mt-2">
                   <label
                     htmlFor="teamSize"
-                    className="block body-text-mreg text-black-500 mb-2"
+                    className="block body-text-mreg text-black-500 mb-2 text-sm sm:text-base"
                   >
                     Team Size
                   </label>
@@ -670,7 +675,7 @@ const FreeTrial = () => {
                     aria-describedby={
                       errors.teamSize ? "err-teamSize" : undefined
                     }
-                    className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors ${
+                    className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors text-sm sm:text-base ${
                       errors.teamSize ? "border-rose-400" : "border-gray"
                     }`}
                   >
@@ -682,7 +687,10 @@ const FreeTrial = () => {
                     <option value="200+">200+ people</option>
                   </select>
                   {errors.teamSize && (
-                    <p id="err-teamSize" className="mt-1 text-sm text-rose-600">
+                    <p
+                      id="err-teamSize"
+                      className="mt-1 text-xs sm:text-sm text-rose-600"
+                    >
                       {errors.teamSize}
                     </p>
                   )}
@@ -693,7 +701,7 @@ const FreeTrial = () => {
               <div>
                 <label
                   htmlFor="testingFocus"
-                  className="block body-text-mreg text-black-500 mb-2 mt-2"
+                  className="block body-text-mreg text-black-500 mb-2 mt-2 text-sm sm:text-base"
                 >
                   Testing Focus
                 </label>
@@ -708,7 +716,7 @@ const FreeTrial = () => {
                   aria-describedby={
                     errors.testingFocus ? "err-testingFocus" : undefined
                   }
-                  className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors ${
+                  className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors text-sm sm:text-base ${
                     errors.testingFocus ? "border-rose-400" : "border-gray"
                   }`}
                 >
@@ -716,33 +724,38 @@ const FreeTrial = () => {
                   <option value="web-testing">Web Application Testing</option>
                   <option value="mobile-testing">Mobile App Testing</option>
                   <option value="api-testing">API Testing</option>
-                  <option value="automation">Test Automation</option>
-                  <option value="performance">Performance Testing</option>
+                  <option value="test-automation">Test Automation</option>
+                  <option value="performance-testing">Performance Testing</option>
+                  <option value="qa-consulting-audits">
+                    QA Consulting & Audits
+                  </option>
                   <option value="other">Other</option>
                 </select>
                 {errors.testingFocus && (
                   <p
                     id="err-testingFocus"
-                    className="mt-1 text-sm text-rose-600"
+                    className="mt-1 text-xs sm:text-sm text-rose-600"
                   >
                     {errors.testingFocus}
                   </p>
                 )}
               </div>
 
-              <div className="bg-teal-50/80 p-6 rounded-xl">
-                <p className="h5 text-gray-900 mb-3">What happens next?</p>
-                <ul className="space-y-4 text-gray-700">
-                  <li className="flex items-start body-regular">
+              <div className="bg-teal-50/80 p-4 sm:p-6 rounded-xl">
+                <p className="h5 text-gray-900 mb-3 text-base sm:text-lg">
+                  What happens next?
+                </p>
+                <ul className="space-y-3 sm:space-y-4 text-gray-700">
+                  <li className="flex items-start body-regular text-sm sm:text-base">
                     <span className="mt-2 mr-3 inline-block w-2 h-2 bg-teal-600" />
                     You’ll receive a welcome email with your onboarding details.
                   </li>
-                  <li className="flex items-start body-regular">
+                  <li className="flex items-start body-regular text-sm sm:text-base">
                     <span className="mt-2 mr-3 inline-block w-2 h-2 bg-teal-600" />
                     You’ll schedule a short discovery call to walk us through
                     your product and priorities.
                   </li>
-                  <li className="flex items-start body-regular">
+                  <li className="flex items-start body-regular text-sm sm:text-base">
                     <span className="mt-2 mr-3 inline-block w-2 h-2 bg-teal-600" />
                     Our team will start preparing a tailored testing plan for
                     your product.
@@ -752,7 +765,7 @@ const FreeTrial = () => {
 
               {/* Agree to terms */}
               <div className="pt-2">
-                <div className="flex justify-center gap-2">
+                <div className="flex justify-center gap-2 items-start">
                   <input
                     ref={termsRef}
                     id="agreeToTerms"
@@ -766,7 +779,7 @@ const FreeTrial = () => {
                   />
                   <label
                     htmlFor="agreeToTerms"
-                    className="text-sm text-gray-700"
+                    className="text-sm text-gray-700 text-left"
                   >
                     I have read and agree to the{" "}
                     <Link
@@ -781,7 +794,9 @@ const FreeTrial = () => {
                   </label>
                 </div>
                 {termsError && (
-                  <p className="mt-1 text-sm text-rose-600">{termsError}</p>
+                  <p className="mt-1 text-xs sm:text-sm text-rose-600">
+                    {termsError}
+                  </p>
                 )}
               </div>
 
@@ -789,12 +804,11 @@ const FreeTrial = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting || !agreeToTerms}
-                  className={`w-full px-8 py-4 rounded-full font-semibold text-lg flex items-center justify-center gap-2 transition-colors duration-200
-    ${
-      isSubmitting || !agreeToTerms
-        ? "bg-teal-600/60 text-white cursor-not-allowed"
-        : "bg-teal-600 text-white hover:bg-teal-700"
-    }`}
+                  className={`w-full px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-base flex items-center justify-center gap-2 transition-colors duration-200 ${
+                    isSubmitting || !agreeToTerms
+                      ? "bg-teal-600/60 text-white cursor-not-allowed"
+                      : "bg-teal-600 text-white hover:bg-teal-700"
+                  }`}
                 >
                   <span>
                     {isSubmitting ? "Submitting..." : "Submit Trial Request"}
@@ -802,7 +816,7 @@ const FreeTrial = () => {
                 </button>
               </div>
 
-              <p className="xs-regular text-gray-500 text-center">
+              <p className="xs-regular text-gray-500 text-center text-xs sm:text-sm">
                 No credit card required • 7-day free trial • Cancel anytime
               </p>
             </form>
