@@ -114,27 +114,43 @@ const Modal: React.FC<{
     <div
       aria-modal="true"
       role="dialog"
-      className="fixed inset-0 z-[999] flex items-center justify-center"
+      className="fixed inset-0 z-[999] flex items-center justify-center px-4 sm:px-6"
     >
+      {/* Backdrop */}
       <div
         className="absolute inset-0 bg-black/40 backdrop-blur-sm"
         onClick={onClose}
         aria-hidden="true"
       />
-      <div className="relative bg-white rounded-2xl shadow-xl max-w-lg w-full mx-4 p-6 sm:p-7">
-        <div className="flex items-start justify-between">
-          <h3 className="text-lg sm:text-xl font-semibold text-gray-900">
+
+      {/* Dialog */}
+      <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-md sm:max-w-lg p-5 sm:p-7 max-h-[90vh] overflow-y-auto">
+        {/* Header */}
+        <div className="flex items-start justify-between gap-4">
+          <h3 className="text-base sm:text-xl font-semibold text-gray-900">
             {title}
           </h3>
-        </div>
-        <div className="mt-4 text-sm sm:text-base text-gray-700">
-          {children}
-        </div>
-        <div className="mt-6 flex flex-col sm:flex-row items-center gap-3">
           <button
             type="button"
             onClick={onClose}
-            className="inline-flex items-center justify-center rounded-lg px-4 py-2 border border-gray-300 text-gray-700 hover:bg-gray-50 w-full sm:w-auto"
+            className="ml-2 rounded-full p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-500"
+            aria-label="Close"
+          >
+            <span className="block h-4 w-4 text-lg leading-none">×</span>
+          </button>
+        </div>
+
+        {/* Body */}
+        <div className="mt-3 sm:mt-4 text-sm sm:text-base text-gray-700">
+          {children}
+        </div>
+
+        {/* Footer */}
+        <div className="mt-4 sm:mt-6 flex justify-end">
+          <button
+            type="button"
+            onClick={onClose}
+            className="inline-flex items-center justify-center rounded-full px-4 py-2 text-sm sm:text-base border border-gray-300 text-gray-700 hover:bg-gray-50"
           >
             Close
           </button>
@@ -168,19 +184,45 @@ const FreeTrial: React.FC = () => {
   const navigate = useNavigate();
   const scrollTo = useSmoothScroll(120); // offset for header
 
-  // lock scroll when modal open
+  // lock scroll when modal open (mobile-safe)
   useEffect(() => {
     if (showSuccess) {
-      const previousOverflow = document.body.style.overflow;
-      document.body.style.overflow = "hidden";
+      const scrollY = window.scrollY;
+
+      const original = {
+        position: document.body.style.position,
+        top: document.body.style.top,
+        width: document.body.style.width,
+        overflowY: document.body.style.overflowY,
+      };
+
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = "100%";
+      document.body.style.overflowY = "hidden";
+
       return () => {
-        document.body.style.overflow = previousOverflow;
+        document.body.style.position = original.position;
+        document.body.style.top = original.top;
+        document.body.style.width = original.width;
+        document.body.style.overflowY = original.overflowY;
+
+        // restore scroll position
+        window.scrollTo(0, scrollY);
       };
     }
 
-    document.body.style.overflow = "auto";
+    // when modal not open, ensure normal scroll
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.width = "";
+    document.body.style.overflowY = "";
+
     return () => {
-      document.body.style.overflow = "auto";
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      document.body.style.overflowY = "";
     };
   }, [showSuccess]);
 

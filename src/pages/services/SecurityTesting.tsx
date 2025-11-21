@@ -204,73 +204,72 @@ const SecurityTesting = () => {
     },
   ];
 
-    const BackgroundImage = ({
-      src,
-      overlay = "bg-white/40",
-    }: {
-      src: string;
-      overlay?: string;
-    }) => (
-      <div className="absolute inset-0 z-0">
-        <img src={src} alt="" className="w-full h-full object-cover opacity-90" />
-        <div className={`absolute inset-0 ${overlay} backdrop-blur-sm`} />
+  const BackgroundImage = ({
+    src,
+    overlay = "bg-white/40",
+  }: {
+    src: string;
+    overlay?: string;
+  }) => (
+    <div className="absolute inset-0 z-0">
+      <img src={src} alt="" className="w-full h-full object-cover opacity-90" />
+      <div className={`absolute inset-0 ${overlay} backdrop-blur-sm`} />
+    </div>
+  );
+
+  const BenefitCard = ({
+    icon: Icon,
+    title,
+    description,
+  }: {
+    icon: ComponentType<any>;
+    title: string;
+    description: string;
+  }) => (
+    <li className="flex items-start">
+      <div className="bg-teal-600 w-10 h-10 rounded-lg flex items-center justify-center mr-4 shrink-0">
+        <Icon className="h-5 w-5 text-white" />
       </div>
-    );
-  
-    const BenefitCard = ({
-      icon: Icon,
-      title,
-      description,
-    }: {
-      icon: ComponentType<any>;
-      title: string;
-      description: string;
-    }) => (
-      <li className="flex items-start">
-        <div className="bg-teal-600 w-10 h-10 rounded-lg flex items-center justify-center mr-4 shrink-0">
+      <div>
+        <h3 className="body-regular font-bold text-gray-900 mb-1">{title}</h3>
+        <p className="text-gray-600 body-regular leading-relaxed">
+          {description}
+        </p>
+      </div>
+    </li>
+  );
+
+  const TestingServiceCard = ({
+    icon: Icon,
+    title,
+    description,
+    features,
+  }: {
+    icon: ComponentType<any>;
+    title: string;
+    description: string;
+    features: string[];
+  }) => (
+    <div className="bg-white border border-slate-100 rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all duration-300">
+      <div className="flex items-center mb-4">
+        <div className="bg-teal-600 w-10 h-10 rounded-lg flex items-center justify-center mr-4">
           <Icon className="h-5 w-5 text-white" />
         </div>
-        <div>
-          <h3 className="body-regular font-bold text-gray-900 mb-1">{title}</h3>
-          <p className="text-gray-600 body-regular leading-relaxed">
-            {description}
-          </p>
-        </div>
-      </li>
-    );
-  
-    const TestingServiceCard = ({
-      icon: Icon,
-      title,
-      description,
-      features,
-    }: {
-      icon: ComponentType<any>;
-      title: string;
-      description: string;
-      features: string[];
-    }) => (
-      <div className="bg-white border border-slate-100 rounded-2xl p-8 shadow-sm hover:shadow-lg transition-all duration-300">
-        <div className="flex items-center mb-4">
-          <div className="bg-teal-600 w-10 h-10 rounded-lg flex items-center justify-center mr-4">
-            <Icon className="h-5 w-5 text-white" />
-          </div>
-          <h5 className="text-gray-900">{title}</h5>
-        </div>
-        <p className="body-regular text-gray-600 mb-6">{description}</p>
-        <div className="bg-gray-50 rounded-xl border border-gray-100 p-4">
-          <ul className="space-y-3">
-            {features.map((feature, index) => (
-              <li key={index} className="flex items-center text-black-700">
-                <CheckCircle className="h-4 w-4 text-teal-600 mr-3" />
-                {feature}
-              </li>
-            ))}
-          </ul>
-        </div>
+        <h5 className="text-gray-900">{title}</h5>
       </div>
-    );
-    
+      <p className="body-regular text-gray-600 mb-6">{description}</p>
+      <div className="bg-gray-50 rounded-xl border border-gray-100 p-4">
+        <ul className="space-y-3">
+          {features.map((feature, index) => (
+            <li key={index} className="flex items-center text-black-700">
+              <CheckCircle className="h-4 w-4 text-teal-600 mr-3" />
+              {feature}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
 
   return (
     <div className="pt-16">

@@ -1,17 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { MapPin, Phone, Clock, Mail } from "lucide-react";
+import { CalendarCheck, Mail, CheckCircle2, AlertCircle } from "lucide-react";
 import { FaFacebook } from "react-icons/fa";
 import { RiTwitterXLine } from "react-icons/ri";
 import { FaLinkedin } from "react-icons/fa6";
 import footerLogo from "../assets/footer-logo.svg";
+import { supabase } from "../lib/supabaseClient";
 
 const services = [
   { name: "Functional Testing", path: "/services/functional-testing" },
   { name: "Test Automation", path: "/services/test-automation" },
   { name: "Performance Testing", path: "/services/performance-testing" },
   { name: "Mobile Testing", path: "/services/mobile-testing" },
-  // { name: "Security Testing", path: "/services/security-testing" },
   { name: "API Testing", path: "/services/api-testing" },
   { name: "QA Consulting & Audits", path: "/services/qa-consulting-audits" },
 ];
@@ -19,11 +19,7 @@ const services = [
 const company = [
   { name: "About", path: "/about" },
   { name: "Solutions", path: "/solutions" },
-  // { name: "Case Studies", path: "/case-studies" },
   { name: "Pricing", path: "/pricing" },
-  // { name: "Blog", path: "/blog" },
-  // { name: "Careers", path: "/careers" },
-  // { name: "Resources", path: "/resources" },
 ];
 
 const quicklinks = [
@@ -35,8 +31,21 @@ const Footer = () => {
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [newsletterError, setNewsletterError] = useState("");
   const [newsletterSuccess, setNewsletterSuccess] = useState("");
+  const [newsletterLoading, setNewsletterLoading] = useState(false);
 
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
+  // Auto-clear success/error messages after 5 seconds
+  useEffect(() => {
+    if (!newsletterSuccess && !newsletterError) return;
+
+    const timeout = setTimeout(() => {
+      setNewsletterSuccess("");
+      setNewsletterError("");
+    }, 5000);
+
+    return () => clearTimeout(timeout);
+  }, [newsletterSuccess, newsletterError]);
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setNewsletterError("");
     setNewsletterSuccess("");
@@ -55,13 +64,66 @@ const Footer = () => {
       return;
     }
 
-    // TODO: hook into newsletter backend here
-    setNewsletterSuccess("You're subscribed! We'll keep you updated.");
-    setNewsletterEmail("");
+    if (!supabase) {
+      setNewsletterError(
+        "Newsletter subscription is temporarily unavailable. Please try again later."
+      );
+      return;
+    }
+
+    try {
+      setNewsletterLoading(true);
+
+      // Insert subscriber into Supabase
+      const { error } = await supabase.from("newsletter_subscribers").insert({
+        email: email.toLowerCase(),
+        source: "footer",
+      });
+
+      if (error) {
+        if ((error as any).code === "23505") {
+          // duplicate email
+          setNewsletterSuccess(
+            "You’re already subscribed. Thanks for staying connected."
+          );
+        } else {
+          console.error("[Newsletter] Supabase insert error:", error);
+          setNewsletterError(
+            "Something went wrong while subscribing. Please try again."
+          );
+        }
+        return;
+      }
+
+      // Call Netlify function to send welcome email (JS function)
+      try {
+        await fetch("/.netlify/functions/sendNewsletterWelcome", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email: email.toLowerCase() }),
+        });
+      } catch (fnError) {
+        console.error("[Newsletter] Welcome email function error:", fnError);
+        // no need to show user-facing error here; subscription itself succeeded
+      }
+
+      setNewsletterSuccess(
+        "You're subscribed! We’ll send you helpful QA insights and InspecQ updates soon."
+      );
+      setNewsletterEmail("");
+    } catch (err) {
+      console.error("[Newsletter] Unexpected error:", err);
+      setNewsletterError(
+        "Unexpected error occurred. Please try again in a moment."
+      );
+    } finally {
+      setNewsletterLoading(false);
+    }
   };
 
   const handleNavClick = () => {
-    // Smooth scroll to top when navigating from footer links
     window.scrollTo({
       top: 0,
       behavior: "smooth",
@@ -81,23 +143,12 @@ const Footer = () => {
               onClick={handleNavClick}
             >
               <img src={footerLogo} alt="InspecQ" className="h-9 w-auto mb-2" />
-              {/* <div className="flex flex-col items-start">
-                <img
-                  src={footerLogo}
-                  alt="InspecQ"
-                  className="h-9 w-auto mb-2"
-                />
-
-                <p className="body-regular text-white leading-relaxed">
-                  Built to Inspect. Powered by Quality.
-                </p>
-              </div> */}
             </Link>
 
             <p className="mt-4 body-regular text-white max-w-md leading-relaxed">
-              Built to Inspect. Powered by Quality. <br></br>We&apos;re a QA
-              agency bringing industry expertise to deliver exceptional software
-              testing services.
+              Built to Inspect. Powered by Quality. <br />
+              We&apos;re a QA agency bringing industry expertise to deliver
+              exceptional software testing services.
             </p>
 
             <div className="mt-6 flex items-center gap-4">
@@ -112,7 +163,7 @@ const Footer = () => {
               </a>
 
               <a
-                href="https://www.linkedin.com/company/inspecq/"
+                href="https://www.linkedin.com/company/inspecqa/"
                 aria-label="LinkedIn"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -136,6 +187,11 @@ const Footer = () => {
           {/* Right: newsletter */}
           <div className="lg:justify-self-end w-full max-w-xl">
             <h5>Subscribe to our newsletter</h5>
+            <p className="mt-2 text-sm text-slate-300">
+              Get QA insights, playbooks, and InspecQ updates straight to your
+              inbox. No spam.
+            </p>
+
             <form
               onSubmit={handleNewsletterSubmit}
               className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mt-4"
@@ -159,20 +215,27 @@ const Footer = () => {
               </div>
               <button
                 type="submit"
-                className="btn-text rounded-full bg-teal-500 hover:bg-teal-700 text-white px-6 py-3 transition w-full sm:w-auto text-center"
+                disabled={newsletterLoading}
+                className="btn-text rounded-full bg-teal-500 hover:bg-teal-700 text-white px-6 py-3 transition w-full sm:w-auto text-center disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                Subscribe
+                {newsletterLoading ? "Subscribing..." : "Subscribe"}
               </button>
             </form>
 
-            {(newsletterError || newsletterSuccess) && (
-              <p
-                className={`mt-2 text-sm ${
-                  newsletterError ? "text-red-400" : "text-emerald-400"
-                }`}
-              >
-                {newsletterError || newsletterSuccess}
-              </p>
+            {/* Success Message */}
+            {newsletterSuccess && (
+              <div className="mt-4 flex items-start gap-2 bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-sm px-4 py-3 rounded-lg">
+                <CheckCircle2 className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                <span>{newsletterSuccess}</span>
+              </div>
+            )}
+
+            {/* Error Message */}
+            {newsletterError && (
+              <div className="mt-4 flex items-start gap-2 bg-red-500/10 border border-red-500/20 text-red-300 text-sm px-4 py-3 rounded-lg">
+                <AlertCircle className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                <span>{newsletterError}</span>
+              </div>
             )}
           </div>
         </div>
@@ -241,16 +304,25 @@ const Footer = () => {
             <h5>Contact</h5>
             <ul className="space-y-4 text-slate-300 mt-4">
               <li className="flex items-start gap-3">
-                <MapPin className="h-5 w-5 text-slate-400 mt-0.5" />
-                <span className="body-regular">Remote Operations</span>
+                <Mail className="h-5 w-5 text-slate-400 mt-0.5" />
+                <a
+                  href="mailto:contact@inspecq.com"
+                  className="body-regular hover:text-white transition-colors"
+                >
+                  contact@inspecq.com
+                </a>
               </li>
+
               <li className="flex items-start gap-3">
-                <Clock className="h-5 w-5 text-slate-400 mt-0.5" />
-                <div className="body-regular text-left">
-                  <div>Mon–Fri : 9 AM – 11 PM EST</div>
-                  <div>Sat : 10 AM – 2 PM EST</div>
-                  <div>Sun : By Appointment Only</div>
-                </div>
+                <CalendarCheck className="h-5 w-5 text-slate-400 mt-0.5" />
+                <a
+                  href="https://calendly.com/mail-inspecq/30min"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="body-regular hover:text-white transition-colors"
+                >
+                  Book a Call
+                </a>
               </li>
             </ul>
           </div>

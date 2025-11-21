@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import pricingHeaderBg from "../assets/pricing-header-bg.svg";
 import consultationBg from "../assets/consultation-bg.svg";
-import consultationIllustration from "../assets/consultation-illustration.svg"
+import consultationIllustration from "../assets/consultation-illustration.svg";
 import {
   Bug,
   Gauge,
@@ -102,7 +102,6 @@ const Services = () => {
     },
   ];
 
-
   return (
     <div className="pt-16">
       {/* Hero Section */}
@@ -142,9 +141,7 @@ const Services = () => {
       </section>
 
       {/* Services Grid */}
-      <section
-        className="py-20 bg-gradient-to-br from-white via-teal-50 to-teal-100"
-      >
+      <section className="py-20 bg-gradient-to-br from-white via-teal-50 to-teal-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <p className="h2 text-gray-900">Our QA Services</p>

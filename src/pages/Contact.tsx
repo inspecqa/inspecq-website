@@ -7,7 +7,7 @@ import {
   Send,
   Sparkle,
 } from "lucide-react";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useSmoothScroll } from "../hooks/useSmoothScroll";
 import { supabase } from "../lib/supabaseClient";
 
@@ -17,6 +17,10 @@ import sftBg4 from "../assets/sft-bg-4.svg";
 
 /* -------------------------
    Modal
+-------------------------- */
+
+/* -------------------------
+   Modal (shared style)
 -------------------------- */
 
 const Modal: React.FC<{
@@ -31,21 +35,46 @@ const Modal: React.FC<{
     <div
       aria-modal="true"
       role="dialog"
-      className="fixed inset-0 z-[999] flex items-center justify-center"
+      className="fixed inset-0 z-[999] flex items-center justify-center px-4 sm:px-6"
     >
+      {/* Backdrop */}
       <div
         className="absolute inset-0 bg-black/40 backdrop-blur-sm"
         onClick={onClose}
         aria-hidden="true"
       />
-      <div className="relative bg-white rounded-2xl shadow-xl max-w-lg w-full mx-4 p-6 sm:p-7">
-        <div className="flex items-start justify-between">
-          <h3 className="text-lg sm:text-xl font-semibold text-gray-900">
+
+      {/* Dialog */}
+      <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-md sm:max-w-lg p-5 sm:p-7 max-h-[90vh] overflow-y-auto">
+        {/* Header */}
+        <div className="flex items-start justify-between gap-4">
+          <h3 className="text-base sm:text-xl font-semibold text-gray-900">
             {title}
           </h3>
+          <button
+            type="button"
+            onClick={onClose}
+            className="ml-2 rounded-full p-1 text-gray-400 hover:text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-500"
+            aria-label="Close"
+          >
+            <span className="block h-4 w-4 text-lg leading-none">×</span>
+          </button>
         </div>
-        <div className="mt-4 text-sm sm:text-base text-gray-700">
+
+        {/* Body */}
+        <div className="mt-3 sm:mt-4 text-sm sm:text-base text-gray-700">
           {children}
+        </div>
+
+        {/* Footer */}
+        <div className="mt-5 sm:mt-6 flex justify-end">
+          <button
+            type="button"
+            onClick={onClose}
+            className="inline-flex items-center px-4 py-2 text-sm sm:text-base rounded-full bg-teal-500 text-white hover:bg-teal-600"
+          >
+            Close
+          </button>
         </div>
       </div>
     </div>
