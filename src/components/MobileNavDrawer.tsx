@@ -178,13 +178,9 @@ export default function MobileNavDrawer({
 
           {/* Footer */}
           <div className="mt-1 flex flex-col items-center justify-center gap-4 px-1 py-8 text-sm text-white/80 pb-2">
-            <button
-              type="button"
-              onClick={() => handleNav("/legal/free-trial-terms")}
-              className="hover:text-white"
-            >
+            <p className="xs-regular text-white">
               © 2025 InspecQ. All rights reserved.
-            </button>
+            </p>
 
             <div className="flex items-center justify-center gap-6">
               <button
