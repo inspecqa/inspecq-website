@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState } from "react";
+import { supabase } from "../lib/supabaseClient";
 
 interface FormSubmission {
   id: string;
@@ -30,16 +31,20 @@ interface EmailNotification {
 export const useFormSubmission = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const submitForm = async (formData: Partial<FormSubmission>, formType: string, sourcePage: string) => {
+  const submitForm = async (
+    formData: Partial<FormSubmission>,
+    formType: string,
+    sourcePage: string
+  ) => {
     setIsSubmitting(true);
-    
+
     try {
-      // Create submission object
+      // Build a normalized submission object
       const submission: FormSubmission = {
         id: Date.now().toString(),
         type: formType,
-        name: formData.name || '',
-        email: formData.email || '',
+        name: formData.name || "",
+        email: formData.email || "",
         company: formData.company,
         message: formData.message,
         service: formData.service,
@@ -51,56 +56,82 @@ export const useFormSubmission = () => {
         experience: formData.experience,
         resume: formData.resume,
         submitted: new Date().toLocaleString(),
-        status: 'New',
-        source: sourcePage
+        status: "New",
+        source: sourcePage,
       };
 
-      // Store in localStorage (in production, this would be sent to a backend)
-      const existingSubmissions = JSON.parse(localStorage.getItem('formSubmissions') || '[]');
-      existingSubmissions.unshift(submission);
-      localStorage.setItem('formSubmissions', JSON.stringify(existingSubmissions));
+      // 1) Write to Supabase (primary storage)
+      if (!supabase) {
+        throw new Error("Supabase client not initialized");
+      }
 
-      // Send email notification
+      const { error } = await supabase.from("contact_submissions").insert([
+        {
+          full_name: submission.name.trim(),
+          email: submission.email.trim(),
+          company_name: submission.company?.trim() || null,
+          message: submission.message?.trim() || null,
+          service_interest: submission.service || null,
+          source_page: submission.source,
+        },
+      ]);
+
+      if (error) {
+        console.error("Supabase insert error:", error);
+        throw error;
+      }
+
+      // 2) Optional: cache locally for quick admin view
+      try {
+        const existingSubmissions = JSON.parse(
+          localStorage.getItem("formSubmissions") || "[]"
+        );
+        existingSubmissions.unshift(submission);
+        localStorage.setItem(
+          "formSubmissions",
+          JSON.stringify(existingSubmissions)
+        );
+      } catch (lsError) {
+        console.warn("LocalStorage write failed:", lsError);
+      }
+
+      // 3) Send "email" notification (simulated)
       await sendEmailNotification(submission);
 
-      // Show browser notification if permission granted
-      if (Notification.permission === 'granted') {
-        new Notification('New Form Submission', {
+      // 4) Browser notification (if permission granted)
+      if (
+        typeof window !== "undefined" &&
+        "Notification" in window &&
+        Notification.permission === "granted"
+      ) {
+        new Notification("New Form Submission", {
           body: `${formType} from ${submission.name}`,
-          icon: '/favicon.ico'
+          icon: "/favicon.ico",
         });
       }
 
       return { success: true, submission };
     } catch (error) {
-      console.error('Form submission error:', error);
-      if(error instanceof Error){
+      console.error("Form submission error:", error);
+      if (error instanceof Error) {
         return { success: false, error: error.message };
       }
+      return { success: false, error: "Unknown error" };
     } finally {
       setIsSubmitting(false);
     }
   };
 
   const sendEmailNotification = async (submission: FormSubmission) => {
-    // In a real application, this would call your backend API
-    // For demo purposes, we'll simulate the email sending
-    
     const emailData: EmailNotification = {
-      to: 'contact@inspecq.com',
+      to: "contact@inspecq.com",
       subject: `New ${submission.type} - ${submission.name}`,
       body: generateEmailBody(submission),
-      type: submission.type
+      type: submission.type,
     };
 
-    // Simulate API call
-    console.log('Email notification sent:', emailData);
-    
-    // In production, you would use a service like:
-    // - EmailJS for client-side email sending
-    // - SendGrid, Mailgun, or similar for server-side
-    // - Your own backend API endpoint
-    
+    console.log("Email notification sent (simulated):", emailData);
+
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve(emailData);
@@ -115,7 +146,7 @@ New ${submission.type} Received
 Contact Information:
 - Name: ${submission.name}
 - Email: ${submission.email}
-- Company: ${submission.company || 'Not provided'}
+- Company: ${submission.company || "Not provided"}
 - Submitted: ${submission.submitted}
 - Source: ${submission.source}
 
@@ -159,7 +190,11 @@ Contact Information:
   };
 
   const requestNotificationPermission = () => {
-    if ('Notification' in window && Notification.permission === 'default') {
+    if (
+      typeof window !== "undefined" &&
+      "Notification" in window &&
+      Notification.permission === "default"
+    ) {
       Notification.requestPermission();
     }
   };
@@ -167,6 +202,6 @@ Contact Information:
   return {
     submitForm,
     isSubmitting,
-    requestNotificationPermission
+    requestNotificationPermission,
   };
 };

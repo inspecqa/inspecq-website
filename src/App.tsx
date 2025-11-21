@@ -24,7 +24,7 @@ import { BestPracticesPage } from "./pages/BestPracticesPage";
 import { BestPracticeDetailPage } from "./pages/BestPracticeDetailPage";
 import BackToTop from "./components/BackToTop";
 import FreeTrialTerms from "./pages/legal/FreeTrialTerms";
-import TermsAndService from "./pages/legal/TermsAndService";
+import TermsAndCondition from "./pages/legal/TermsAndCondition";
 import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
 import NotFound404 from "./pages/errors/NotFound404";
 import ServerError500 from "./pages/errors/ServerError500";
@@ -119,7 +119,7 @@ function App() {
           <Route path="/legal/free-trial-terms" element={<FreeTrialTerms />} />
           <Route
             path="/legal/terms-and-service"
-            element={<TermsAndService />}
+            element={<TermsAndCondition />}
           />
           <Route path="/legal/privacy-policy" element={<PrivacyPolicy />} />
 

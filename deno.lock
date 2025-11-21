@@ -28,6 +28,7 @@
         "npm:nodemailer@^7.0.10",
         "npm:postcss@^8.4.35",
         "npm:react-dom@^18.3.1",
+        "npm:react-helmet-async@^2.0.5",
         "npm:react-icons@^5.5.0",
         "npm:react-markdown@^10.1.0",
         "npm:react-router-dom@^7.6.3",
