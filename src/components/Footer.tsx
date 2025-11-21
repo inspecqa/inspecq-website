@@ -80,11 +80,15 @@ const Footer = () => {
               className="inline-flex items-center space-x-3"
               onClick={handleNavClick}
             >
-              <img src={footerLogo} alt="InspecQ" className="h-9 w-auto" />
+              <img src={footerLogo} alt="InspecQ" className="h-9 w-auto" />{" "}
+              <div>
+                <p className="body-regular text-white max-w-md leading-relaxed">
+                  Built to Inspect. Powered by Quality.
+                </p>
+              </div>
             </Link>
 
             <p className="mt-4 body-regular text-white max-w-md leading-relaxed">
-              Built to Inspect. Powered by Quality. <br />
               We&apos;re a QA agency bringing industry expertise to deliver
               exceptional software testing services.
             </p>
