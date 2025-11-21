@@ -1,65 +1,100 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { MapPin, Phone, Clock, Mail } from "lucide-react";
 import { FaFacebook } from "react-icons/fa";
 import { RiTwitterXLine } from "react-icons/ri";
 import { FaLinkedin } from "react-icons/fa6";
-import footerLogo from "../assets/footer-logo.svg"; 
+import footerLogo from "../assets/footer-logo.svg";
+
+const services = [
+  { name: "Functional Testing", path: "/services/functional-testing" },
+  { name: "Test Automation", path: "/services/test-automation" },
+  { name: "Performance Testing", path: "/services/performance-testing" },
+  { name: "Mobile Testing", path: "/services/mobile-testing" },
+  // { name: "Security Testing", path: "/services/security-testing" },
+  { name: "API Testing", path: "/services/api-testing" },
+  { name: "QA Consulting & Audits", path: "/services/qa-consulting-audits" },
+];
+
+const company = [
+  { name: "About", path: "/about" },
+  { name: "Solutions", path: "/solutions" },
+  // { name: "Case Studies", path: "/case-studies" },
+  { name: "Pricing", path: "/pricing" },
+  { name: "Blog", path: "/blog" },
+  // { name: "Careers", path: "/careers" },
+  // { name: "Resources", path: "/resources" },
+];
+
+const quicklinks = [
+  { name: "Terms & Conditions", path: "/legal/terms-and-service" },
+  { name: "Privacy Policy", path: "/legal/privacy-policy" },
+];
 
 const Footer = () => {
-  const services = [
-    { name: "Functional Testing", path: "/services/functional-testing" },
-    { name: "Test Automation", path: "/services/test-automation" },
-    { name: "Performance Testing", path: "/services/performance-testing" },
-    { name: "Mobile Testing", path: "/services/mobile-testing" },
-    // { name: "Security Testing", path: "/services/security-testing" },
-    { name: "API Testing", path: "/services/api-testing" },
-    { name: "QA Consulting & Audits", path: "/services/qa-consulting-audits" },
-  ];
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterError, setNewsletterError] = useState("");
+  const [newsletterSuccess, setNewsletterSuccess] = useState("");
 
-  const company = [
-    { name: "About", path: "/about" },
-    { name: "Solutions", path: "/solutions" },
-    // { name: "Case Studies", path: "/case-studies" },
-    { name: "Pricing", path: "/pricing" },
-    { name: "Blog", path: "/blog" },
-    // { name: "Careers", path: "/careers" },
-    // { name: "Resources", path: "/resources" },
-  ];
+  const handleNewsletterSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setNewsletterError("");
+    setNewsletterSuccess("");
 
-  // const resources = [
-  //   // { name: "Help Center", path: "/help" },
-  //   { name: "Best Practices", path: "/best-practices" },
-  //   // { name: "Webinars", path: "/webinars" },
-  //   // { name: "Community", path: "/community" },
-  // ];
+    const email = newsletterEmail.trim();
 
-  const quicklinks = [
-    { name: "Terms & Conditions", path: "/legal/terms-and-service" },
-    { name: "Privacy Policy", path: "/legal/privacy-policy" },
-  ];
+    if (!email) {
+      setNewsletterError("Email address is required.");
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email)) {
+      setNewsletterError("Please enter a valid email address.");
+      return;
+    }
+
+    // TODO: hook into newsletter backend here
+    setNewsletterSuccess("You're subscribed! We'll keep you updated.");
+    setNewsletterEmail("");
+  };
+
+  const handleNavClick = () => {
+    // Smooth scroll to top when navigating from footer links
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <footer className="bg-[#0F1A24] text-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        {/* Top row: left logo/desc + right subscribe */}
+        {/* Top row: brand + newsletter */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-          {/* Left: brand */}
+          {/* Left: brand & socials */}
           <div>
-            <Link to="/" className="inline-flex items-center space-x-3">
+            <Link
+              to="/"
+              className="inline-flex items-center space-x-3"
+              onClick={handleNavClick}
+            >
               <img src={footerLogo} alt="InspecQ" className="h-9 w-auto" />
             </Link>
 
             <p className="mt-4 body-regular text-white max-w-md leading-relaxed">
               Built to Inspect. Powered by Quality. <br />
-              We're a QA agency bringing industry expertise to deliver
+              We&apos;re a QA agency bringing industry expertise to deliver
               exceptional software testing services.
             </p>
 
             <div className="mt-6 flex items-center gap-4">
-              {/* Socials: round buttons like screenshot */}
               <a
                 href="https://www.facebook.com/helloinspecqa"
                 aria-label="Facebook"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="h-10 w-10 rounded-full bg-teal-600/80 hover:bg-teal-600 grid place-items-center transition"
               >
                 <FaFacebook className="h-5 w-5 text-slate-100" />
@@ -68,6 +103,8 @@ const Footer = () => {
               <a
                 href="https://www.linkedin.com/company/inspecq/"
                 aria-label="LinkedIn"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="h-10 w-10 rounded-full bg-teal-600/80 hover:bg-teal-600 grid place-items-center transition"
               >
                 <FaLinkedin className="h-5 w-5 text-white" />
@@ -76,6 +113,8 @@ const Footer = () => {
               <a
                 href="https://x.com/inspecq"
                 aria-label="X (Twitter)"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="h-10 w-10 rounded-full bg-teal-600/80 hover:bg-teal-600 grid place-items-center transition"
               >
                 <RiTwitterXLine className="h-5 w-5 text-white" />
@@ -83,12 +122,12 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Right: subscribe */}
+          {/* Right: newsletter */}
           <div className="lg:justify-self-end w-full max-w-xl">
             <h5>Subscribe to our newsletter</h5>
             <form
-              onSubmit={(e) => e.preventDefault()}
-              className="flex items-center gap-3 mt-4"
+              onSubmit={handleNewsletterSubmit}
+              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mt-4"
             >
               <div className="flex-1">
                 <div className="flex items-center bg-white rounded-full shadow-sm">
@@ -96,6 +135,12 @@ const Footer = () => {
                   <input
                     type="email"
                     placeholder="Email Address"
+                    value={newsletterEmail}
+                    onChange={(e) => {
+                      setNewsletterEmail(e.target.value);
+                      if (newsletterError) setNewsletterError("");
+                      if (newsletterSuccess) setNewsletterSuccess("");
+                    }}
                     className="w-full bg-transparent px-3 py-3 text-slate-800 placeholder-slate-400 focus:outline-none"
                     required
                   />
@@ -103,18 +148,28 @@ const Footer = () => {
               </div>
               <button
                 type="submit"
-                className="btn-text rounded-full bg-teal-500 hover:bg-teal-700 text-white px-6 py-3 transition"
+                className="btn-text rounded-full bg-teal-500 hover:bg-teal-700 text-white px-6 py-3 transition w-full sm:w-auto text-center"
               >
                 Subscribe
               </button>
             </form>
+
+            {(newsletterError || newsletterSuccess) && (
+              <p
+                className={`mt-2 text-sm ${
+                  newsletterError ? "text-red-400" : "text-emerald-400"
+                }`}
+              >
+                {newsletterError || newsletterSuccess}
+              </p>
+            )}
           </div>
         </div>
 
         {/* Divider */}
         <hr className="mt-10 md:mt-12 border-slate-800" />
 
-        {/* Lower grid: 4 columns */}
+        {/* Lower grid: Services / Company / Quick Links / Contact */}
         <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 justify-center justify-items-center md:justify-items-start text-center md:text-left">
           {/* Services */}
           <div>
@@ -124,6 +179,7 @@ const Footer = () => {
                 <li key={s.name}>
                   <Link
                     to={s.path}
+                    onClick={handleNavClick}
                     className="body-regular text-slate-400 hover:text-slate-200 transition"
                   >
                     {s.name}
@@ -141,7 +197,8 @@ const Footer = () => {
                 <li key={c.name}>
                   <Link
                     to={c.path}
-                    className="body-regular text-slate-400 hover:text-slate-2 00 transition"
+                    onClick={handleNavClick}
+                    className="body-regular text-slate-400 hover:text-slate-200 transition"
                   >
                     {c.name}
                   </Link>
@@ -150,34 +207,18 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Resources */}
-          {/* <div>
-            <h5>Resources </h5>
-            <ul className="space-y-3 mt-4">
-              {resources.map((r) => (
-                <li key={r.name}>
-                  <Link
-                    to={r.path}
-                    className="body-regular text-slate-400 hover:text-slate-200 transition"
-                  >
-                    {r.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div> */}
-
           {/* Quick Links */}
           <div>
-            <h5>Quick Links </h5>
+            <h5>Quick Links</h5>
             <ul className="space-y-3 mt-4">
-              {quicklinks.map((r) => (
-                <li key={r.name}>
+              {quicklinks.map((q) => (
+                <li key={q.name}>
                   <Link
-                    to={r.path}
+                    to={q.path}
+                    onClick={handleNavClick}
                     className="body-regular text-slate-400 hover:text-slate-200 transition"
                   >
-                    {r.name}
+                    {q.name}
                   </Link>
                 </li>
               ))}
@@ -193,14 +234,10 @@ const Footer = () => {
                 <span className="body-regular">Remote Operations</span>
               </li>
               <li className="flex items-start gap-3">
-                <Phone className="h-5 w-5 text-slate-400 mt-0.5" />
-                <span className="body-regular">+1 (555) 123-4567</span>
-              </li>
-              <li className="flex items-start gap-3">
                 <Clock className="h-5 w-5 text-slate-400 mt-0.5" />
-                <div className="body-regular">
+                <div className="body-regular text-left">
                   <div>Mon–Fri : 9 AM – 11 PM EST</div>
-                  <div>Sat : 10 AM – 2 PM EST </div>
+                  <div>Sat : 10 AM – 2 PM EST</div>
                   <div>Sun : By Appointment Only</div>
                 </div>
               </li>
@@ -214,14 +251,6 @@ const Footer = () => {
           <p className="xs-regular text-slate-200">
             © 2025 InspecQ | All Rights Reserved
           </p>
-          {/* <div className="flex items-center gap-6 mt-3 md:mt-0">
-            <a href="#" className="xs-regular hover:text-slate-200 transition">
-              Terms & Privacy
-            </a>
-            <a href="#" className="xs-regular hover:text-slate-200 transition">
-              Security
-            </a>
-          </div> */}
         </div>
       </div>
     </footer>

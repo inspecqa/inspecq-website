@@ -1,17 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Mail, Phone, Send } from "lucide-react";
+import { Mail, Send } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
 import { useFormSubmission } from "../hooks/useFormSubmission";
-import contactUsBg from "../assets/contact-us-bg.svg"
-
-declare global {
-  interface Window {
-    Calendly: {
-      initPopupWidget: (options: { url: string }) => void;
-      closePopupWidget?: () => void;
-    };
-  }
-}
+import contactUsBg from "../assets/contact-us-bg.svg";
 
 const Contact = () => {
   const [searchParams] = useSearchParams();
@@ -25,25 +16,43 @@ const Contact = () => {
     service: "",
   });
 
-  // ✅ Auto-select service if URL contains "?service=functional-testing"
+  const [errors, setErrors] = useState({
+    name: "",
+    email: "",
+  });
+
+  // Auto-select service from ?service=
   useEffect(() => {
     const selectedService = searchParams.get("service");
     if (selectedService && !formData.service) {
-      setFormData((prev) => ({
-        ...prev,
-        service: selectedService,
-      }));
+      setFormData((prev) => ({ ...prev, service: selectedService }));
     }
   }, [searchParams, formData.service]);
 
+  const validate = () => {
+    let newErrors: any = {};
+
+    if (!formData.name.trim()) newErrors.name = "Full name is required.";
+    if (!formData.email.trim()) newErrors.email = "Email is required.";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
+      newErrors.email = "Enter a valid email address.";
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!validate()) return;
+
     try {
       const result = await submitForm(formData, "Contact Form", "Contact Page");
+
       if (result?.success) {
-        alert(
-          "Thank you for your message! We'll get back to you within 24 hours."
-        );
+        alert("Thank you! We’ll get back to you within 24 hours.");
+
         setFormData({
           name: "",
           email: "",
@@ -51,6 +60,8 @@ const Contact = () => {
           message: "",
           service: "",
         });
+
+        setErrors({ name: "", email: "" });
       } else {
         alert("There was an error submitting your form. Please try again.");
       }
@@ -65,10 +76,13 @@ const Contact = () => {
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >
   ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    if (errors[name as keyof typeof errors]) {
+      setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
   };
 
   return (
@@ -86,43 +100,33 @@ const Contact = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           {/* LEFT SIDE */}
-          <div>
-            <div className="body-semi inline-flex items-center bg-white/80 text-teal-800 px-4 py-2 rounded-full mb-6 shadow-sm backdrop-blur">
-              + Contact Us
-            </div>
-
+          <div className="flex flex-col h-full">
             <p className="h2">Get Started Today</p>
+
             <p className="body-regular max-w-md mb-10 mt-4">
               Ready to elevate your software quality? Let’s discuss your testing
               needs and craft a tailored QA solution for your business.
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-60">
-              {/* Call Card */}
-              <div className="bg-white p-8 rounded-3xl border border-gray-100 flex flex-col items-start space-y-4">
-                <div className="p-2 rounded-full bg-black-50">
-                  <Phone className="h-5 w-5 text-gray-900" />
-                </div>
-                <div>
-                  <p className="body-semi text-black-300">Call Us</p>
-                  <p className="body-md text-black-500">+1 (555) 123-4567</p>
-                </div>
-              </div>
-
-              {/* Email Card */}
+            {/* Email Card (aligned with form bottom) */}
+            <div className="mt-auto max-w-sm">
               <div className="bg-white p-8 rounded-3xl border border-gray-100 flex flex-col items-start space-y-4">
                 <div className="p-2 rounded-full bg-black-50">
                   <Mail className="h-5 w-5 text-gray-900" />
                 </div>
+
                 <div>
                   <p className="body-semi text-black-300">Email Us</p>
-                  <p className="body-md text-black-500">contact@inspecq.com</p>
+
+                  <p className="body-md text-black-500 break-all">
+                    contact@inspecq.com
+                  </p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* RIGHT FORM */}
+          {/* RIGHT: FORM */}
           <div className="bg-white/90 p-8 rounded-3xl shadow-[0_8px_30px_rgba(0,0,0,0.05)] backdrop-blur">
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name + Email */}
@@ -135,9 +139,17 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Enter your full name"
-                    className="mt-2 w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                    className={`mt-2 w-full px-4 py-3 border rounded-lg focus:ring-2 ${
+                      errors.name
+                        ? "border-red-500 focus:ring-red-500"
+                        : "border-gray-200 focus:ring-teal-500"
+                    }`}
                   />
+                  {errors.name && (
+                    <p className="text-red-600 text-sm mt-1">{errors.name}</p>
+                  )}
                 </div>
+
                 <div>
                   <label className="body-md">Email Address</label>
                   <input
@@ -146,8 +158,15 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="you@company.com"
-                    className="mt-2 w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                    className={`mt-2 w-full px-4 py-3 border rounded-lg focus:ring-2 ${
+                      errors.email
+                        ? "border-red-500 focus:ring-red-500"
+                        : "border-gray-200 focus:ring-teal-500"
+                    }`}
                   />
+                  {errors.email && (
+                    <p className="text-red-600 text-sm mt-1">{errors.email}</p>
+                  )}
                 </div>
               </div>
 
@@ -160,7 +179,7 @@ const Contact = () => {
                   value={formData.company}
                   onChange={handleChange}
                   placeholder="Your Company"
-                  className="mt-2 w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                  className="mt-2 w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500"
                 />
               </div>
 
@@ -171,7 +190,7 @@ const Contact = () => {
                   name="service"
                   value={formData.service}
                   onChange={handleChange}
-                  className="mt-2 w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                  className="mt-2 w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500"
                 >
                   <option value="">Select a Service</option>
                   <option value="functional-testing">Functional Testing</option>
@@ -180,7 +199,6 @@ const Contact = () => {
                     Performance Testing
                   </option>
                   <option value="mobile-testing">Mobile Testing</option>
-                  {/* <option value="security-testing">Security Testing</option> */}
                   <option value="consulting-audits">
                     QA Consulting & Audits
                   </option>
@@ -197,10 +215,11 @@ const Contact = () => {
                   onChange={handleChange}
                   rows={4}
                   placeholder="Tell us about your project..."
-                  className="mt-2 w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                  className="mt-2 w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500"
                 />
               </div>
 
+              {/* Submit Button */}
               <button
                 type="submit"
                 disabled={isSubmitting}

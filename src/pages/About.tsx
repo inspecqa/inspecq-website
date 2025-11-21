@@ -1,62 +1,98 @@
-import consultationIllustration from "../assets/consultation-illustration.svg";
-import consultationBg from "../assets/consultation-bg.svg";
 import { useEffect, useState } from "react";
 import { Target, CheckCircle, ShieldCheck, Cpu, Users } from "lucide-react";
-import aboutValuseBg from "../assets/about-values-bg.svg";
+
+import consultationIllustration from "../assets/consultation-illustration.svg";
+import consultationBg from "../assets/consultation-bg.svg";
+import aboutValuesBg from "../assets/about-values-bg.svg";
 import aboutHeroBg from "../assets/about-hero-bg.svg";
 import aboutUsIllus from "../assets/about-us-illustration.svg";
 
-const About = () => {
-  const useCountUp = (endValue: number, duration = 1200) => {
-    const [value, setValue] = useState(0);
+/* -------------------------
+   Hook: Count up animation
+-------------------------- */
+const useCountUp = (endValue: number, duration = 1200) => {
+  const [value, setValue] = useState(0);
 
-    useEffect(() => {
-      let start = 0;
-      const increment = endValue / (duration / 16);
+  useEffect(() => {
+    let current = 0;
+    const step = endValue / (duration / 16);
 
-      const counter = setInterval(() => {
-        start += increment;
-        if (start >= endValue) {
-          setValue(endValue);
-          clearInterval(counter);
-        } else {
-          setValue(Math.floor(start));
-        }
-      }, 16);
+    const counter = setInterval(() => {
+      current += step;
+      if (current >= endValue) {
+        setValue(endValue);
+        clearInterval(counter);
+      } else {
+        setValue(Math.floor(current));
+      }
+    }, 16);
 
-      return () => clearInterval(counter);
-    }, [endValue, duration]);
+    return () => clearInterval(counter);
+  }, [endValue, duration]);
 
-    return value;
-  };
+  return value;
+};
 
-  const values = [
-    {
-      title: "Quality First",
-      description:
-        "Every test, scenario, and report is designed to protect your users and product reputation.",
-      icon: ShieldCheck,
-    },
-    {
-      title: "Innovation Driven",
-      description:
-        "We use modern QA tools, automation frameworks, and performance testing to keep you ahead.",
-      icon: Cpu,
-    },
-    {
-      title: "Client Success",
-      description:
-        "We plug into your team, align with your roadmap, and focus on outcomes, not just bug counts.",
-      icon: Users,
-    },
-    {
-      title: "Integrity & Transparency",
-      description:
-        "Clear communication, honest reporting, and full visibility into what we test and why.",
-      icon: CheckCircle,
-    },
-  ];
+/* -------------------------
+   Stat item component
+-------------------------- */
+type StatItemProps = {
+  stat: string;
+  label: string;
+};
 
+const StatItem: React.FC<StatItemProps> = ({ stat, label }) => {
+  const hasPlus = stat.includes("+");
+  const hasPercent = stat.includes("%");
+  const hasSlash = stat.includes("/7");
+
+  const numeric = parseInt(stat.split(/[^0-9]/)[0] || "0", 10);
+  const count = useCountUp(numeric, 1200);
+
+  return (
+    <div className="flex flex-col items-center text-center md:px-6 lg:px-8">
+      <div className="text-2xl md:text-3xl font-extrabold tracking-tight">
+        <span className="text-gray-900">{count}</span>
+        {hasPlus && <span className="text-teal-600">+</span>}
+        {hasPercent && <span className="text-teal-600">%</span>}
+        {hasSlash && <span className="text-teal-600">/7</span>}
+      </div>
+      <div className="mt-2 text-sm text-gray-600">{label}</div>
+    </div>
+  );
+};
+
+/* -------------------------
+   Values data
+-------------------------- */
+const values = [
+  {
+    title: "Quality First",
+    description:
+      "Every test, scenario, and report is designed to protect your users and product reputation.",
+    icon: ShieldCheck,
+  },
+  {
+    title: "Innovation Driven",
+    description:
+      "We use modern QA tools, automation frameworks, and performance testing to keep you ahead.",
+    icon: Cpu,
+  },
+  {
+    title: "Client Success",
+    description:
+      "We plug into your team, align with your roadmap, and focus on outcomes, not just bug counts.",
+    icon: Users,
+  },
+  {
+    title: "Integrity & Transparency",
+    description:
+      "Clear communication, honest reporting, and full visibility into what we test and why.",
+    icon: CheckCircle,
+  },
+];
+
+const About: React.FC = () => {
   return (
     <div className="pt-16">
       {/* Hero Section */}
@@ -64,7 +100,6 @@ const About = () => {
         aria-label="Our Story section"
         className="relative overflow-visible py-16 sm:py-20 lg:py-24"
       >
-        {/* Background image */}
         <img
           src={aboutHeroBg}
           alt=""
@@ -72,10 +107,9 @@ const About = () => {
         />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Center wrapper */}
-          <div className="flex flex-col items-center justify-center text-center gap-12 sm:gap-8">
+          <div className="flex flex-col items-center justify-center text-center gap-10 sm:gap-8">
             {/* Text block */}
-            <div className="max-w-3xl text-center mt-8">
+            <div className="max-w-3xl mt-8">
               <p className="h1 text-teal-900">
                 Built to Inspect. Powered by Quality.
               </p>
@@ -91,41 +125,19 @@ const About = () => {
 
             {/* Stats strip */}
             <div className="w-full max-w-5xl mt-4">
-              <div
-                className="grid grid-cols-2 md:grid-cols-4 gap-6 rounded-3xl border border-teal-200
-                bg-white/85 p-6 md:p-8 shadow-sm backdrop-blur-sm md:divide-x md:divide-gray-200"
-              >
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 rounded-3xl border border-teal-200 bg-white/85 p-6 md:p-8 shadow-sm backdrop-blur-sm md:divide-x md:divide-gray-200">
                 {[
                   { stat: "10+", label: "Skilled QA Experts" },
                   { stat: "10+", label: "Years in QA & Testing" },
                   { stat: "24/7", label: "Support Across Time Zones" },
                   { stat: "99%", label: "Client Satisfaction" },
-                ].map((item, i) => {
-                  const hasPlus = item.stat.includes("+");
-                  const hasPercent = item.stat.includes("%");
-                  const hasSlash = item.stat.includes("/7");
-
-                  const numeric = parseInt(item.stat.split(/[^0-9]/)[0], 10);
-                  const count = useCountUp(numeric, 1200);
-
-                  return (
-                    <div
-                      key={i}
-                      className="flex flex-col items-center text-center md:px-6 lg:px-8"
-                    >
-                      <div className="text-2xl md:text-3xl font-extrabold tracking-tight">
-                        <span className="text-gray-900">{count}</span>
-                        {hasPlus && <span className="text-teal-600">+</span>}
-                        {hasPercent && <span className="text-teal-600">%</span>}
-                        {hasSlash && <span className="text-teal-600">/7</span>}
-                      </div>
-
-                      <div className="mt-2 text-sm text-gray-600">
-                        {item.label}
-                      </div>
-                    </div>
-                  );
-                })}
+                ].map((item) => (
+                  <StatItem
+                    key={item.label}
+                    stat={item.stat}
+                    label={item.label}
+                  />
+                ))}
               </div>
             </div>
           </div>
@@ -133,8 +145,8 @@ const About = () => {
       </section>
 
       {/* Who We Are */}
-      <section className="py-16 md:py-20 bg-white-50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid gap-10 lg:grid-cols-2 items-center">
+      <section className="py-16 md:py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid gap-12 lg:grid-cols-2 items-center">
           {/* Text side */}
           <div className="space-y-4">
             <p className="h2 text-teal-900">Who we are</p>
@@ -144,7 +156,7 @@ const About = () => {
               product’s quality lifecycle, ensuring every release is stable,
               fast, and user-friendly.
             </p>
-            <p className="text-gray-600 body-regular md:text-base">
+            <p className="body-regular text-gray-600 md:text-base">
               We integrate seamlessly into your workflow and deliver sharp,
               actionable insights that improve quality without slowing down your
               delivery.
@@ -152,7 +164,7 @@ const About = () => {
           </div>
 
           {/* Image side */}
-          <div className="relative">
+          <div className="relative mt-6 lg:mt-0">
             <div className="overflow-hidden rounded-3xl bg-teal-50">
               <img
                 src={aboutUsIllus}
@@ -179,13 +191,13 @@ const About = () => {
           <p className="h2 text-black-900 mb-6">
             Why we started{" "}
             <span className="relative inline-block px-1">
-              <span className="absolute inset-0 bg-teal-500/20 rounded-md blur-sm"></span>
+              <span className="absolute inset-0 bg-teal-500/20 rounded-md blur-sm" />
               <span className="relative text-teal-700 font-semibold tracking-tight">
                 InspecQ
               </span>
             </span>
           </p>
-          <p className="body-regular leading-relaxed">
+          <p className="body-regular leading-relaxed text-gray-700">
             Too many great products struggle because testing happens late, under
             pressure, or without the right strategy. We built{" "}
             <strong>InspecQ</strong> to fix that by bringing structured QA
@@ -198,7 +210,8 @@ const About = () => {
       {/* Values Section */}
       <section className="relative isolate overflow-hidden py-20 md:py-28">
         <img
-          src={aboutValuseBg}
+          src={aboutValuesBg}
+          alt=""
           className="absolute inset-0 w-full h-full object-cover opacity-30"
         />
 
@@ -216,8 +229,8 @@ const About = () => {
           <div className="relative pl-8">
             <div className="space-y-16">
               {values.map((value, i) => (
-                <div key={i} className="relative">
-                  {/* Vertical dotted line - only show for items except the last */}
+                <div key={value.title} className="relative">
+                  {/* Vertical dotted line for all except last */}
                   {i < values.length - 1 && (
                     <div
                       className="absolute left-5 top-5 border-l-2 border-dashed border-teal-300"
@@ -225,7 +238,7 @@ const About = () => {
                     />
                   )}
 
-                  {/* Icon centered on the line */}
+                  {/* Icon on the line */}
                   <div
                     className="absolute left-5 top-0 flex h-10 w-10 items-center justify-center 
                      rounded-full bg-teal-700 text-white shadow-lg"
@@ -257,7 +270,7 @@ const About = () => {
             </p>
             <p className="body-regular mt-3 text-gray-600 md:text-base">
               Our mission, vision, and approach are all centered around one
-              thing: <strong> Helping you ship better software, faster.</strong>
+              thing: <strong>Helping you ship better software, faster.</strong>
             </p>
           </div>
 
@@ -312,14 +325,15 @@ const About = () => {
 
             <div className="absolute inset-0 mix-blend-multiply" />
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center px-6 sm:px-10 lg:px-14 py-12 lg:py-16">
+              {/* Left copy */}
               <div className="text-white">
-                <h1>
+                <h1 className="text-3xl md:text-4xl font-semibold leading-tight">
                   30-Minute Free QA
                   <br />
                   Consultation for your product.
                 </h1>
 
-                <p className="body-regular mt-6 text-white/90 text-lg max-w-2xl">
+                <p className="body-regular mt-6 text-white/90 text-base sm:text-lg max-w-2xl">
                   Share your product, stack, and release goals. We’ll review
                   your current QA approach and outline a practical testing plan
                   you can start using immediately.
@@ -335,6 +349,7 @@ const About = () => {
                 </a>
               </div>
 
+              {/* Right illustration */}
               <div className="relative">
                 <img
                   src={consultationIllustration}

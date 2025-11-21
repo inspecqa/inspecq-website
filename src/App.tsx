@@ -1,42 +1,44 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Home from './pages/Home';
-import Services from './pages/Services';
-import Solutions from './pages/Solutions';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import FunctionalTesting from './pages/services/FunctionalTesting';
-import TestAutomation from './pages/services/TestAutomation';
-import PerformanceTesting from './pages/services/PerformanceTesting';
-import MobileTesting from './pages/services/MobileTesting';
-// import SecurityTesting from './pages/services/SecurityTesting';
-import ApiTesting from './pages/services/ApiTesting';
-// import Demo from './pages/Demo';
-import FreeTrial from './pages/FreeTrial';
-import CaseStudies from './pages/CaseStudies';
-import Careers from './pages/Careers';
-import Blog from './pages/Blog';
-import Resources from './pages/Resources';
-import Pricing from './pages/Pricing';
+import { Routes, Route, useParams, useNavigate } from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import Services from "./pages/Services";
+import Solutions from "./pages/Solutions";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import FunctionalTesting from "./pages/services/FunctionalTesting";
+import TestAutomation from "./pages/services/TestAutomation";
+import PerformanceTesting from "./pages/services/PerformanceTesting";
+import MobileTesting from "./pages/services/MobileTesting";
+// import SecurityTesting from "./pages/services/SecurityTesting";
+import ApiTesting from "./pages/services/ApiTesting";
+// import Demo from "./pages/Demo";
+import FreeTrial from "./pages/FreeTrial";
+import CaseStudies from "./pages/CaseStudies";
+import Careers from "./pages/Careers";
+import Blog from "./pages/Blog";
+import Resources from "./pages/Resources";
+import Pricing from "./pages/Pricing";
 import QAConsultingAudits from "./pages/services/QAConsultingAudits";
 import { BestPracticesPage } from "./pages/BestPracticesPage";
 import { BestPracticeDetailPage } from "./pages/BestPracticeDetailPage";
-import { useParams, useNavigate } from "react-router-dom";
-import BackToTop from './components/BackToTop';
+import BackToTop from "./components/BackToTop";
 import FreeTrialTerms from "./pages/legal/FreeTrialTerms";
 import TermsAndService from "./pages/legal/TermsAndService";
 import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
+import NotFound404 from "./pages/errors/NotFound404";
+import ServerError500 from "./pages/errors/ServerError500";
+import Maintenance from "./pages/errors/Maintenance";
 
-
+import { SITE_CONFIG } from "./config/siteConfig";
 
 // Admin imports
-import AdminLogin from './pages/admin/Login';
-import AdminDashboard from './pages/admin/Dashboard';
-import AdminCareers from './pages/admin/Careers';
-import AdminNewsletter from './pages/admin/Newsletter';
-import AdminForms from './pages/admin/Forms';
-import ProtectedRoute from './components/admin/ProtectedRoute';
+import AdminLogin from "./pages/admin/Login";
+import AdminDashboard from "./pages/admin/Dashboard";
+import AdminCareers from "./pages/admin/Careers";
+import AdminNewsletter from "./pages/admin/Newsletter";
+import AdminForms from "./pages/admin/Forms";
+import ProtectedRoute from "./components/admin/ProtectedRoute";
 
 function BestPracticeDetailWrapper() {
   const { slug } = useParams<{ slug: string }>();
@@ -56,12 +58,20 @@ function BestPracticesWrapper() {
 }
 
 function App() {
+  // Full-site maintenance mode
+  if (SITE_CONFIG.MAINTENANCE_MODE) {
+    return <Maintenance />;
+  }
+
   return (
-    <Router>
-      <div className="min-h-screen">
-        <Header />
+    <div className="min-h-screen flex flex-col">
+      <Header />
+
+      <main className="flex-1">
         <Routes>
           <Route path="/" element={<Home />} />
+
+          {/* Services */}
           <Route path="/services" element={<Services />} />
           <Route
             path="/services/functional-testing"
@@ -81,24 +91,41 @@ function App() {
             element={<SecurityTesting />}
           /> */}
           <Route path="/services/api-testing" element={<ApiTesting />} />
-          <Route path="/best-practices" element={<BestPracticesWrapper />} />
+          <Route
+            path="/services/qa-consulting-audits"
+            element={<QAConsultingAudits />}
+          />
+
+          {/* Other main pages */}
           <Route path="/solutions" element={<Solutions />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           {/* <Route path="/demo" element={<Demo />} /> */}
           <Route path="/free-trial" element={<FreeTrial />} />
-          <Route path="/legal/free-trial-terms" element={<FreeTrialTerms />} />;
           <Route path="/case-studies" element={<CaseStudies />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/pricing" element={<Pricing />} />
+
+          {/* Best Practices */}
+          <Route path="/best-practices" element={<BestPracticesWrapper />} />
           <Route
-            path="/services/qa-consulting-audits"
-            element={<QAConsultingAudits />}
+            path="/best-practices/:slug"
+            element={<BestPracticeDetailWrapper />}
           />
-          <Route path="/legal/terms-and-service" element={<TermsAndService />} />
+
+          {/* Legal */}
+          <Route path="/legal/free-trial-terms" element={<FreeTrialTerms />} />
+          <Route
+            path="/legal/terms-and-service"
+            element={<TermsAndService />}
+          />
           <Route path="/legal/privacy-policy" element={<PrivacyPolicy />} />
+
+          {/* Error routes for testing / manual redirects */}
+          <Route path="/500" element={<ServerError500 />} />
+          <Route path="/maintenance" element={<Maintenance />} />
 
           {/* Admin Routes */}
           <Route path="/admin/login" element={<AdminLogin />} />
@@ -134,11 +161,15 @@ function App() {
               </ProtectedRoute>
             }
           />
+
+          {/* Catch-all 404 (keeps working even after admin routes in v6) */}
+          <Route path="*" element={<NotFound404 />} />
         </Routes>
-        <Footer />
-      </div>
+      </main>
+
+      <Footer />
       <BackToTop />
-    </Router>
+    </div>
   );
 }
 

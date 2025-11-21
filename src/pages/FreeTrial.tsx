@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSmoothScroll } from "../hooks/useSmoothScroll";
 import {
@@ -18,19 +18,98 @@ import sftBg3 from "../assets/sft-bg-3.svg";
 import sftHeroBg from "../assets/sft-hero-bg.svg";
 import sftFormBg from "../assets/sft-form-bg.svg";
 
-/** ---------- Modal Component ---------- **/
-const Modal = ({
-  open,
-  onClose,
-  title,
-  children,
-}: {
+/* -------------------------
+   Types & helpers
+-------------------------- */
+
+type FormData = {
+  name: string;
+  email: string;
+  company: string;
+  teamSize: string;
+  testingFocus: string;
+};
+
+type FormErrors = Partial<Record<keyof FormData, string>>;
+
+const emailOk = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+
+const FEATURES = [
+  {
+    icon: CheckCircle,
+    title: "Expert-Led QA Guidance",
+    description:
+      "Get hands on guidance from our experts to assess and elevate your testing process.",
+  },
+  {
+    icon: Users,
+    title: "Team Collaboration Support",
+    description:
+      "Involve up to 5 teammates to collaborate, align, and share actionable feedback.",
+  },
+  {
+    icon: Clock,
+    title: "7 Day Trial Period",
+    description:
+      "Explore how InspecQ transforms your QA workflow, with no feature limits for 7 days.",
+  },
+  {
+    icon: HandCoins,
+    title: "No Cost Required",
+    description: "Start instantly – no payment, no contract, just value.",
+  },
+  {
+    icon: Zap,
+    title: "Quick Kickoff",
+    description:
+      "Get onboarded in minutes with a setup customized to your testing goals.",
+  },
+  {
+    icon: Star,
+    title: "Dedicated QA Support",
+    description:
+      "Enjoy personalized assistance from our QA specialists throughout your trial.",
+  },
+] as const;
+
+const STEPS = [
+  {
+    step: "01",
+    title: "Get in Touch",
+    description: "Fill out a short form to request your free 7-day trial.",
+  },
+  {
+    step: "02",
+    title: "Kickoff Call",
+    description:
+      "We’ll schedule a quick session to understand your testing needs.",
+  },
+  {
+    step: "03",
+    title: "Hands-On Support",
+    description:
+      "Our experts will work with your team to apply tailored QA strategies.",
+  },
+  {
+    step: "04",
+    title: "See the Results",
+    description:
+      "Get bug reports, quality insights, and process recommendations.",
+  },
+] as const;
+
+/* -------------------------
+   Modal Component
+-------------------------- */
+
+const Modal: React.FC<{
   open: boolean;
   onClose: () => void;
   title: string;
   children: React.ReactNode;
-}) => {
+}> = ({ open, onClose, title, children }) => {
   if (!open) return null;
+
   return (
     <div
       aria-modal="true"
@@ -53,6 +132,7 @@ const Modal = ({
         </div>
         <div className="mt-6 flex flex-col sm:flex-row items-center gap-3">
           <button
+            type="button"
             onClick={onClose}
             className="inline-flex items-center justify-center rounded-lg px-4 py-2 border border-gray-300 text-gray-700 hover:bg-gray-50 w-full sm:w-auto"
           >
@@ -64,12 +144,12 @@ const Modal = ({
   );
 };
 
-/** ---------- Email validator ---------- **/
-const emailOk = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+/* -------------------------
+   Page Component
+-------------------------- */
 
-/** ---------- Page ---------- **/
-const FreeTrial = () => {
-  const [formData, setFormData] = useState({
+const FreeTrial: React.FC = () => {
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     company: "",
@@ -77,123 +157,64 @@ const FreeTrial = () => {
     testingFocus: "",
   });
 
-  const [errors, setErrors] = useState<
-    Partial<Record<keyof typeof formData, string>>
-  >({});
+  const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [agreeToTerms, setAgreeToTerms] = useState(false);
   const [termsError, setTermsError] = useState<string | null>(null);
+
   const termsRef = useRef<HTMLInputElement | null>(null);
 
   const navigate = useNavigate();
-  const scrollTo = useSmoothScroll(120); // adjust offset if your header height differs
+  const scrollTo = useSmoothScroll(120); // offset for header
 
+  // lock scroll when modal open
   useEffect(() => {
     if (showSuccess) {
+      const previousOverflow = document.body.style.overflow;
       document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
+      return () => {
+        document.body.style.overflow = previousOverflow;
+      };
     }
 
+    document.body.style.overflow = "auto";
     return () => {
       document.body.style.overflow = "auto";
     };
   }, [showSuccess]);
 
-  // for focusing first invalid field
-  const refs = {
-    name: useRef<HTMLInputElement | null>(null),
-    email: useRef<HTMLInputElement | null>(null),
-    company: useRef<HTMLInputElement | null>(null),
-    teamSize: useRef<HTMLSelectElement | null>(null),
-    testingFocus: useRef<HTMLSelectElement | null>(null),
+  // Refs for focusing invalid fields
+  const refs: {
+    [K in keyof FormData]: React.RefObject<
+      HTMLInputElement | HTMLSelectElement
+    >;
+  } = {
+    name: useRef(null),
+    email: useRef(null),
+    company: useRef(null),
+    teamSize: useRef(null),
+    testingFocus: useRef(null),
   };
 
-  const features = useMemo(
-    () => [
-      {
-        icon: CheckCircle,
-        title: "Expert-Led QA Guidance",
-        description:
-          "Get hands on guidance from our experts to assess and elevate your testing process.",
-      },
-      {
-        icon: Users,
-        title: "Team Collaboration Support",
-        description:
-          "Involve up to 5 teammates to collaborate, align, and share actionable feedback.",
-      },
-      {
-        icon: Clock,
-        title: "7 Day Trial Period",
-        description:
-          "Explore how InspecQ transforms your QA workflow, with no feature limits for 7 days.",
-      },
-      {
-        icon: HandCoins,
-        title: "No Cost Required",
-        description: "Start instantly – no payment, no contract, just value.",
-      },
-      {
-        icon: Zap,
-        title: "Quick Kickoff",
-        description:
-          "Get onboarded in minutes with a setup customized to your testing goals.",
-      },
-      {
-        icon: Star,
-        title: "Dedicated QA Support",
-        description:
-          "Enjoy personalized assistance from our QA specialists throughout your trial.",
-      },
-    ],
-    []
-  );
+  /* ---------- Validation ---------- */
 
-  const steps = useMemo(
-    () => [
-      {
-        step: "01",
-        title: "Get in Touch",
-        description: "Fill out a short form to request your free 7-day trial.",
-      },
-      {
-        step: "02",
-        title: "Kickoff Call",
-        description:
-          "We’ll schedule a quick session to understand your testing needs.",
-      },
-      {
-        step: "03",
-        title: "Hands-On Support",
-        description:
-          "Our experts will work with your team to apply tailored QA strategies.",
-      },
-      {
-        step: "04",
-        title: "See the Results",
-        description:
-          "Get bug reports, quality insights, and process recommendations.",
-      },
-    ],
-    []
-  );
+  const validate = (data: FormData = formData): FormErrors => {
+    const next: FormErrors = {};
 
-  /** ---------- Validation ---------- **/
-  const validate = (data = formData) => {
-    const next: typeof errors = {};
     if (!data.name.trim()) next.name = "Please enter your full name.";
     if (!data.email.trim()) next.email = "Please enter your work email.";
     else if (!emailOk(data.email)) next.email = "Enter a valid email address.";
+
     if (!data.company.trim()) next.company = "Please enter your company name.";
+
     if (!data.testingFocus) next.testingFocus = "Select a testing focus.";
 
     return next;
   };
 
-  const focusFirstError = (errs: typeof errors) => {
-    const order: (keyof typeof formData)[] = [
+  const focusFirstError = (errs: FormErrors) => {
+    const order: (keyof FormData)[] = [
       "name",
       "email",
       "company",
@@ -208,14 +229,16 @@ const FreeTrial = () => {
     }
   };
 
-  /** ---------- Handlers ---------- **/
+  /* ---------- Handlers ---------- */
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
+
     setFormData((prev) => ({ ...prev, [name]: value }));
 
-    if (errors[name as keyof typeof errors]) {
+    if (errors[name as keyof FormErrors]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
   };
@@ -225,10 +248,10 @@ const FreeTrial = () => {
   ) => {
     const { name } = e.target;
     const single = validate({ ...formData });
-    if (single[name as keyof typeof single]) {
+    if (single[name as keyof FormErrors]) {
       setErrors((prev) => ({
         ...prev,
-        [name]: single[name as keyof typeof single],
+        [name]: single[name as keyof FormErrors],
       }));
     } else {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
@@ -254,9 +277,8 @@ const FreeTrial = () => {
       setTermsError("Please agree to the Free Trial Terms before submitting.");
       termsRef.current?.focus();
       return;
-    } else {
-      setTermsError(null);
     }
+    setTermsError(null);
 
     // Honeypot (spam guard): if filled, silently abort
     const honeypot =
@@ -288,7 +310,7 @@ const FreeTrial = () => {
         console.error("Error sending welcome email:", err);
       }
 
-      // 🔹 Insert into Supabase (trial_requests table)
+      // Insert into Supabase
       const { error } = await supabase.from("trial_requests").insert([
         {
           full_name: formData.name.trim(),
@@ -308,7 +330,6 @@ const FreeTrial = () => {
         return;
       }
 
-      // Success UI
       setShowSuccess(true);
       setFormData({
         name: "",
@@ -327,6 +348,8 @@ const FreeTrial = () => {
     }
   };
 
+  /* ---------- Render ---------- */
+
   return (
     <div className="pt-16">
       {/* Success Modal */}
@@ -343,7 +366,7 @@ const FreeTrial = () => {
       </Modal>
 
       {/* Hero */}
-      <section className="relative py-20 overflow-visible">
+      <section className="relative py-16 sm:py-20 overflow-visible">
         <img
           src={sftHeroBg}
           alt=""
@@ -355,13 +378,14 @@ const FreeTrial = () => {
               <p className="h1 text-teal-900">
                 Start Your 7-Day Free Trial Today
               </p>
-              <p className="body-regular text-gray-600 mt-4">
+              <p className="body-regular text-gray-600 mt-4 text-sm sm:text-base">
                 Kickstart your QA journey with InspecQ. Enjoy a 7-day free trial
                 with no payment details needed. Discover the quality difference
                 before you commit.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8 w-full">
                 <button
+                  type="button"
                   onClick={() => scrollTo("#trial-form")}
                   aria-label="Open the trial request form"
                   className="bg-teal-500 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl btn-text flex items-center justify-center space-x-2 w-full sm:w-auto"
@@ -371,6 +395,7 @@ const FreeTrial = () => {
                 </button>
 
                 <button
+                  type="button"
                   onClick={() => {
                     navigate("/contact");
                     setTimeout(() => scrollTo("#contact-form"), 200);
@@ -411,9 +436,9 @@ const FreeTrial = () => {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
             aria-label="Free trial features"
           >
-            {features.map((f, i) => (
+            {FEATURES.map((f) => (
               <div
-                key={i}
+                key={f.title}
                 className="relative text-center p-6 sm:p-8 bg-white rounded-2xl border border-gray-100 hover:border-teal-200 hover:shadow-xl transition-all duration-300 group"
               >
                 <div className="bg-teal-500 w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto mb-5 sm:mb-6 group-hover:scale-110 transition-transform duration-300">
@@ -453,7 +478,7 @@ const FreeTrial = () => {
               </p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8">
-              {steps.map((s, i) => {
+              {STEPS.map((s, i) => {
                 const isHighlight = i === 0;
                 return (
                   <div
@@ -552,7 +577,7 @@ const FreeTrial = () => {
                     </span>
                   </label>
                   <input
-                    ref={refs.name}
+                    ref={refs.name as React.RefObject<HTMLInputElement>}
                     type="text"
                     id="name"
                     name="name"
@@ -564,7 +589,7 @@ const FreeTrial = () => {
                     autoComplete="name"
                     placeholder="Your Name"
                     className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors text-sm sm:text-base ${
-                      errors.name ? "border-rose-400" : "border-gray"
+                      errors.name ? "border-rose-400" : "border-gray-200"
                     }`}
                     required
                   />
@@ -589,7 +614,7 @@ const FreeTrial = () => {
                     </span>
                   </label>
                   <input
-                    ref={refs.email}
+                    ref={refs.email as React.RefObject<HTMLInputElement>}
                     type="email"
                     id="email"
                     name="email"
@@ -601,7 +626,7 @@ const FreeTrial = () => {
                     autoComplete="email"
                     placeholder="mail@company.com"
                     className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors text-sm sm:text-base ${
-                      errors.email ? "border-rose-400" : "border-gray"
+                      errors.email ? "border-rose-400" : "border-gray-200"
                     }`}
                     required
                   />
@@ -629,7 +654,7 @@ const FreeTrial = () => {
                     </span>
                   </label>
                   <input
-                    ref={refs.company}
+                    ref={refs.company as React.RefObject<HTMLInputElement>}
                     type="text"
                     id="company"
                     name="company"
@@ -643,7 +668,7 @@ const FreeTrial = () => {
                     autoComplete="organization"
                     placeholder="Your company"
                     className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors text-sm sm:text-base ${
-                      errors.company ? "border-rose-400" : "border-gray"
+                      errors.company ? "border-rose-400" : "border-gray-200"
                     }`}
                     required
                   />
@@ -665,7 +690,7 @@ const FreeTrial = () => {
                     Team Size
                   </label>
                   <select
-                    ref={refs.teamSize}
+                    ref={refs.teamSize as React.RefObject<HTMLSelectElement>}
                     id="teamSize"
                     name="teamSize"
                     value={formData.teamSize}
@@ -676,7 +701,7 @@ const FreeTrial = () => {
                       errors.teamSize ? "err-teamSize" : undefined
                     }
                     className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors text-sm sm:text-base ${
-                      errors.teamSize ? "border-rose-400" : "border-gray"
+                      errors.teamSize ? "border-rose-400" : "border-gray-200"
                     }`}
                   >
                     <option value="">Select team size</option>
@@ -706,7 +731,7 @@ const FreeTrial = () => {
                   Testing Focus
                 </label>
                 <select
-                  ref={refs.testingFocus}
+                  ref={refs.testingFocus as React.RefObject<HTMLSelectElement>}
                   id="testingFocus"
                   name="testingFocus"
                   value={formData.testingFocus}
@@ -717,7 +742,7 @@ const FreeTrial = () => {
                     errors.testingFocus ? "err-testingFocus" : undefined
                   }
                   className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors text-sm sm:text-base ${
-                    errors.testingFocus ? "border-rose-400" : "border-gray"
+                    errors.testingFocus ? "border-rose-400" : "border-gray-200"
                   }`}
                 >
                   <option value="">Select Testing Focus</option>
@@ -725,7 +750,9 @@ const FreeTrial = () => {
                   <option value="mobile-testing">Mobile App Testing</option>
                   <option value="api-testing">API Testing</option>
                   <option value="test-automation">Test Automation</option>
-                  <option value="performance-testing">Performance Testing</option>
+                  <option value="performance-testing">
+                    Performance Testing
+                  </option>
                   <option value="qa-consulting-audits">
                     QA Consulting & Audits
                   </option>
@@ -741,6 +768,7 @@ const FreeTrial = () => {
                 )}
               </div>
 
+              {/* What happens next */}
               <div className="bg-teal-50/80 p-4 sm:p-6 rounded-xl">
                 <p className="h5 text-gray-900 mb-3 text-base sm:text-lg">
                   What happens next?
@@ -800,6 +828,7 @@ const FreeTrial = () => {
                 )}
               </div>
 
+              {/* Submit */}
               <div aria-live="polite">
                 <button
                   type="submit"

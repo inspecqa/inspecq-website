@@ -1,17 +1,5 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  Bug,
-  Zap,
-  BarChart3,
-  Smartphone,
-  Shield,
-  Cog,
-  CheckCircle,
-  Sparkles,
-  ChevronDown,
-  ChevronUp,
-} from "lucide-react";
+import { Bug, Zap, Cog, Shield, Sparkles } from "lucide-react";
 
 const Services = () => {
   const services = [
@@ -20,12 +8,6 @@ const Services = () => {
       title: "Functional Testing",
       description:
         "Comprehensive manual and automated testing to ensure your application works exactly as intended.",
-      features: [
-        "Manual Testing",
-        "UI/UX Validation",
-        "Exploratory Testing",
-        "User Acceptance Testing",
-      ],
       color: "bg-teal-600",
     },
     {
@@ -33,12 +15,6 @@ const Services = () => {
       title: "Test Automation",
       description:
         "Accelerate your development cycle with intelligent automation frameworks and CI/CD integration.",
-      features: [
-        "Automated Testing",
-        "Regression Testing",
-        "CI/CD Integration",
-        "Custom Frameworks",
-      ],
       color: "bg-teal-600",
     },
     {
@@ -46,70 +22,16 @@ const Services = () => {
       title: "API Testing",
       description:
         "Validate API functionality, performance, and security to ensure seamless integrations.",
-      features: [
-        "REST API Testing",
-        "GraphQL Testing",
-        "Integration Testing",
-        "Contract Validation",
-      ],
       color: "bg-teal-600",
     },
-    // {
-    //   icon: BarChart3,
-    //   title: "Performance Testing",
-    //   description:
-    //     "Optimize your application performance and ensure it scales under real-world conditions.",
-    //   features: [
-    //     "Load Testing",
-    //     "Stress Testing",
-    //     "Volume Testing",
-    //     "Scalability Analysis",
-    //   ],
-    //   color: "bg-teal-600",
-    // },
-    // {
-    //   icon: Smartphone,
-    //   title: "Mobile Testing",
-    //   description:
-    //     "Ensure flawless mobile experiences across all devices, platforms, and operating systems.",
-    //   features: [
-    //     "Cross-Platform Testing",
-    //     "Device Compatibility",
-    //     "App Store Optimization",
-    //     "Mobile Performance",
-    //   ],
-    //   color: "bg-teal-600",
-    // },
-    // {
-    //   icon: Shield,
-    //   title: "Security Testing",
-    //   description:
-    //     "Safeguard your applications with comprehensive security testing and vulnerability assessments.",
-    //   features: [
-    //     "Penetration Testing",
-    //     "Vulnerability Scanning",
-    //     "Security Audits",
-    //     "Compliance Validation",
-    //   ],
-    //   color: "bg-teal-600",
-    // },
     {
       icon: Shield,
       title: "QA Consulting & Audits",
       description:
         "Get expert guidance on your QA strategy, processes, and tooling.",
-      features: [
-        "Penetration Testing",
-        "Vulnerability Scanning",
-        "Security Audits",
-        "Compliance Validation",
-      ],
       color: "bg-teal-600",
     },
   ];
-
-  // // first card open by default to mirror the screenshot
-  // const [openIndex, setOpenIndex] = useState(0);
 
   return (
     <section
@@ -120,6 +42,7 @@ const Services = () => {
         {/* Header */}
         <div className="mb-16">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-y-8 md:gap-x-28 items-start">
+            {/* Left Title */}
             <div>
               <div className="inline-flex items-center bg-teal-100 text-gray-800 px-4 py-2 rounded-full text-sm font-medium mb-6">
                 <Sparkles className="h-4 w-4 mr-2 text-gray-600" />
@@ -129,11 +52,12 @@ const Services = () => {
               <p className="h2">Everything You Need for Quality Assurance</p>
             </div>
 
-            <div className="md:self-start pt-12">
-              <p className="body-md text-gray-600 max-w-md">
-                From manual to mobile testing, we provide comprehensive QA
-                solutions that accelerate delivery, improve reliability, and
-                ensure every release meets your quality goals.
+            {/* Right Description */}
+            <div className="md:self-start pt-2">
+              <p className="body-md text-gray-600 max-w-md leading-relaxed">
+                From manual to API testing, we deliver QA solutions that
+                accelerate delivery, improve reliability, and ensure every
+                release meets your quality goals.
               </p>
             </div>
           </div>
@@ -160,14 +84,14 @@ const Services = () => {
               </div>
 
               {/* Description */}
-              <p className="mb-0 leading-relaxed text-gray-600">
+              <p className="leading-relaxed text-gray-600">
                 {service.description}
               </p>
             </div>
           ))}
         </div>
 
-        {/* View All Services Button */}
+        {/* CTA */}
         <div className="text-center mt-12">
           <Link
             to="/services"
@@ -176,7 +100,6 @@ const Services = () => {
             View All Services
           </Link>
         </div>
-        
       </div>
     </section>
   );

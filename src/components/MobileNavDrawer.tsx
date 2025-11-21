@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ChevronDown, X } from "lucide-react";
 import headerLogo from "../assets/header-logo.svg";
@@ -15,8 +15,8 @@ const services = [
   { name: "Test Automation", path: "/services/test-automation" },
   { name: "Performance Testing", path: "/services/performance-testing" },
   { name: "Mobile Testing", path: "/services/mobile-testing" },
-  { name: "Security Testing", path: "/services/security-testing" },
   { name: "API Testing", path: "/services/api-testing" },
+  { name: "QA Consulting & Audits", path: "/services/qa-consulting-audits" },
 ];
 
 export default function MobileNavDrawer({
@@ -27,13 +27,22 @@ export default function MobileNavDrawer({
 }: Props) {
   const location = useLocation();
 
-  // Close on route change
+  const isActive = (path: string) => location.pathname === path;
+
+  // On route change → scroll top + close drawer (if open)
   useEffect(() => {
+    if (!open) return;
+
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
     onClose();
+    setServicesOpen(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
 
-  // Lock page scroll
+  // Lock page scroll when drawer open
   useEffect(() => {
     if (!open) return;
     const prev = document.body.style.overflow;
@@ -46,7 +55,9 @@ export default function MobileNavDrawer({
   // ESC to close
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [open, onClose]);
@@ -75,11 +86,11 @@ export default function MobileNavDrawer({
         transition-transform duration-300 will-change-transform
         ${open ? "translate-x-0" : "-translate-x-full"}`}
       >
-        <div className="px-5">
+        <div className="px-5 flex-1 flex flex-col">
           {/* Header row */}
           <div className="flex items-center justify-between">
             <Link to="/" className="shrink-0">
-              <img src={headerLogo} alt="InspecQ" className="h-8 w-8" />
+              <img src={headerLogo} alt="InspecQ" className="h-20 w-20" />
             </Link>
             <button
               onClick={onClose}
@@ -91,10 +102,12 @@ export default function MobileNavDrawer({
           </div>
 
           {/* Nav */}
-          <nav className="mt-6 text-left space-y-1">
+          <nav className="mt-6 text-left space-y-1 flex-1 overflow-y-auto">
             <Link
               to="/"
-              className="block text-body-md px-3 py-3 rounded-lg hover:bg-white/10"
+              className={`block text-body-md px-3 py-3 rounded-lg hover:bg-white/10 ${
+                isActive("/") ? "bg-white/10" : ""
+              }`}
             >
               Home
             </Link>
@@ -102,8 +115,11 @@ export default function MobileNavDrawer({
             {/* Services accordion */}
             <div className="rounded-lg">
               <button
+                type="button"
                 onClick={() => setServicesOpen(!servicesOpen)}
-                className="w-full flex items-center justify-between px-3 py-3 rounded-lg hover:bg-white/10"
+                className={`w-full flex items-center justify-between px-3 py-3 rounded-lg hover:bg-white/10 ${
+                  location.pathname.startsWith("/services") ? "bg-white/10" : ""
+                }`}
                 aria-expanded={servicesOpen}
                 aria-controls="mobile-services"
               >
@@ -126,7 +142,9 @@ export default function MobileNavDrawer({
                     <Link
                       key={s.path}
                       to={s.path}
-                      className="block px-3 py-2 rounded-md text-white/90 hover:bg-white/10"
+                      className={`block px-3 py-2 rounded-md text-white/90 hover:bg:white/10 ${
+                        isActive(s.path) ? "bg-white/10" : ""
+                      }`}
                     >
                       {s.name}
                     </Link>
@@ -137,57 +155,63 @@ export default function MobileNavDrawer({
 
             <Link
               to="/solutions"
-              className="block px-3 py-3 rounded-lg hover:bg-white/10"
+              className={`block px-3 py-3 rounded-lg hover:bg-white/10 ${
+                isActive("/solutions") ? "bg-white/10" : ""
+              }`}
             >
               Solution
             </Link>
             <Link
               to="/about"
-              className="block px-3 py-3 rounded-lg hover:bg-white/10"
+              className={`block px-3 py-3 rounded-lg hover:bg-white/10 ${
+                isActive("/about") ? "bg:white/10" : ""
+              }`}
             >
               About Us
             </Link>
             <Link
               to="/pricing"
-              className="block px-3 py-3 rounded-lg hover:bg-white/10"
+              className={`block px-3 py-3 rounded-lg hover:bg-white/10 ${
+                isActive("/pricing") ? "bg-white/10" : ""
+              }`}
             >
               Pricing
             </Link>
             <Link
               to="/contact"
-              className="block px-3 py-3 rounded-lg hover:bg-white/10"
+              className={`block px-3 py-3 rounded-lg hover:bg-white/10 ${
+                isActive("/contact") ? "bg-white/10" : ""
+              }`}
             >
               Contact
             </Link>
 
             {/* CTA */}
-            <div>
+            <div className="mt-6 mb-5">
               <Link
                 to="/free-trial"
-                className="mt-16 block text-center rounded bg-white text-black-500 btn-text hover:bg-white/90 px-5 py-3 font-medium"
+                className="block text-center rounded bg-white text-black-500 btn-text hover:bg-white/90 px-5 py-3 font-medium"
               >
                 Start Free Trial
               </Link>
             </div>
 
-            {/* Divider */}
-            <div className="mt-20 my-5 h-px bg-white/15" />
-          </nav>
+            {/* Footer inside drawer */}
+            <div className="mt-1 flex flex-col items-center justify-center gap-2 px-1 text-sm text-white/80 pb-2">
+              <Link to="/legal" className="hover:text-white">
+                © 2025 InspecQ. All rights reserved.
+              </Link>
 
-          {/* Footer */}
-          <div className="flex items-center justify-between px-1 text-sm text-white/80">
-            <Link to="/legal" className="hover:text-white">
-              © 2025 InspecQ. All rights reserved.
-            </Link>
-            <div className="flex gap-6">
-              <Link to="/terms" className="hover:text-white">
-                Terms & Privacy
-              </Link>
-              <Link to="/security" className="hover:text-white">
-                Security
-              </Link>
+              <div className="flex items-center justify-center gap-6">
+                <Link to="/terms" className="hover:text-white">
+                  Terms &amp; Privacy
+                </Link>
+                <Link to="/security" className="hover:text-white">
+                  Security
+                </Link>
+              </div>
             </div>
-          </div>
+          </nav>
         </div>
       </aside>
     </>

@@ -1,15 +1,9 @@
 import consultationIllustration from "../assets/consultation-illustration.svg";
 import consultationBg from "../assets/consultation-bg.svg";
-declare global {
-  interface Window {
-    Calendly: {
-      initPopupWidget: (options: { url: string }) => void;
-      closePopupWidget?: () => void;
-    };
-  }
-}
 
 const ConsultationCta = () => {
+  const calendlyUrl = "https://calendly.com/mail-inspecq/30min";
+
   return (
     <section className="py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -21,10 +15,11 @@ const ConsultationCta = () => {
           />
 
           <div className="absolute inset-0 mix-blend-multiply" />
+
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center px-6 sm:px-10 lg:px-14 py-12 lg:py-16">
             {/* Left copy */}
             <div className="text-white">
-              <h1>
+              <h1 className="text-3xl md:text-4xl font-semibold leading-tight">
                 30 Minute Free QA
                 <br /> Consultation to clear
                 <br /> your doubts.
@@ -36,7 +31,7 @@ const ConsultationCta = () => {
               </p>
 
               <a
-                href="https://calendly.com/mail-inspecq/30min"
+                href={calendlyUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-text mt-10 inline-flex items-center rounded-full bg-white border border-buttonBorder text-slate-900 px-6 sm:px-8 py-3 sm:py-4 text-base font-medium shadow-md hover:shadow-lg transition"
@@ -51,6 +46,7 @@ const ConsultationCta = () => {
                 src={consultationIllustration}
                 alt="Consultation illustration"
                 className="w-full h-auto object-contain"
+                loading="lazy"
               />
             </div>
           </div>
