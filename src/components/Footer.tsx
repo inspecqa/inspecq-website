@@ -21,7 +21,7 @@ const company = [
   { name: "Solutions", path: "/solutions" },
   // { name: "Case Studies", path: "/case-studies" },
   { name: "Pricing", path: "/pricing" },
-  { name: "Blog", path: "/blog" },
+  // { name: "Blog", path: "/blog" },
   // { name: "Careers", path: "/careers" },
   // { name: "Resources", path: "/resources" },
 ];
