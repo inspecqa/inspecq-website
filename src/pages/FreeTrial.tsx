@@ -337,20 +337,21 @@ const FreeTrial: React.FC = () => {
 
     try {
       // Optional: send welcome email via Netlify function
-      try {
-        await fetch("/.netlify/functions/sendTrialEmail", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name: formData.name,
-            email: formData.email,
-            calendlyLink:
-              "https://calendly.com/mail-inspecq/inspecq-free-trial-kickoff-call",
-          }),
-        });
-      } catch (err) {
-        console.error("Error sending welcome email:", err);
-      }
+     try {
+       await fetch("/api/sendTrialEmail", {
+         method: "POST",
+         headers: { "Content-Type": "application/json" },
+         body: JSON.stringify({
+           name: formData.name,
+           email: formData.email,
+           calendlyLink:
+             "https://calendly.com/mail-inspecq/inspecq-free-trial-kickoff-call",
+         }),
+       });
+     } catch (err) {
+       console.error("Error sending trial email:", err);
+     }
+
 
       // Insert into Supabase
       const { error } = await supabase.from("trial_requests").insert([

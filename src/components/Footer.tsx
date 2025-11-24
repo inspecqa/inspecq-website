@@ -97,17 +97,15 @@ const Footer = () => {
 
       // Call Netlify function to send welcome email (JS function)
       try {
-        await fetch("/.netlify/functions/sendNewsletterWelcome", {
+        await fetch("/api/sendNewsletterWelcome", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email: email.toLowerCase() }),
         });
-      } catch (fnError) {
-        console.error("[Newsletter] Welcome email function error:", fnError);
-        // no need to show user-facing error here; subscription itself succeeded
+      } catch (err) {
+        console.error("Newsletter function error:", err);
       }
+
 
       setNewsletterSuccess(
         "You're subscribed! We’ll send you helpful QA insights and InspecQ updates soon."
