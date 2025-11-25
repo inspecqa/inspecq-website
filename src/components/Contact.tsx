@@ -33,7 +33,7 @@ const Modal: React.FC<{
       <div className="relative bg-white rounded-2xl shadow-xl w-full max-w-md sm:max-w-lg p-5 sm:p-7 max-h-[90vh] overflow-y-auto">
         {/* Header */}
         <div className="flex items-start justify-between gap-4">
-          <h3 className="text-base sm:text-xl font-semibold text-gray-900">
+          <h3 className="text-base sm:text-xl font-semibold text-teal-900">
             {title}
           </h3>
           <button
@@ -203,7 +203,7 @@ const Contact: React.FC = () => {
         title="We’ve got your message!"
       >
         <p className="text-gray-700">
-          Thank you for reaching out to InspecQ.{" "}
+          Thank you for reaching out to <strong>InspecQ</strong>.{" "}
           <span className="font-semibold">
             We’ve received your message and will get back to you within 24
             hours.
@@ -235,7 +235,7 @@ const Contact: React.FC = () => {
             {/* Email Card (aligned with form bottom) */}
             <div className="mt-auto max-w-sm">
               <div className="bg-white p-8 rounded-3xl border border-gray-100 flex flex-col items-start space-y-4">
-                <div className="p-2 rounded-full bg-black-50">
+                <div className="p-2 rounded-full bg-teal-100">
                   <Mail className="h-5 w-5 text-gray-900" />
                 </div>
 
