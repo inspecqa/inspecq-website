@@ -95,7 +95,7 @@ const Footer = () => {
         return;
       }
 
-      // Call Netlify function to send welcome email (JS function)
+      
       try {
         await fetch("/api/sendNewsletterWelcome", {
           method: "POST",
