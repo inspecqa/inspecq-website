@@ -319,7 +319,7 @@ const Footer = () => {
                   rel="noreferrer"
                   className="body-regular hover:text-white transition-colors"
                 >
-                  Book a Call
+                  Schedule a Call
                 </a>
               </li>
             </ul>
