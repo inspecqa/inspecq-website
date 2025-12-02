@@ -151,7 +151,7 @@ const Footer = () => {
 
             <div className="mt-6 flex items-center gap-4">
               <a
-                href="https://www.facebook.com/helloinspecqa"
+                href="https://www.facebook.com/qainspec"
                 aria-label="Facebook"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -161,7 +161,7 @@ const Footer = () => {
               </a>
 
               <a
-                href="https://www.linkedin.com/company/inspecqa/"
+                href="https://www.linkedin.com/company/qainspec/"
                 aria-label="LinkedIn"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -171,7 +171,7 @@ const Footer = () => {
               </a>
 
               <a
-                href="https://x.com/inspecq"
+                href="https://x.com/qainspec"
                 aria-label="X (Twitter)"
                 target="_blank"
                 rel="noopener noreferrer"
