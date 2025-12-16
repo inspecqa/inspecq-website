@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import {
   ArrowRight,
   CheckCircle,
-  Shield,
   Zap,
   Sparkles,
   Building2,
@@ -11,11 +10,11 @@ import {
   GaugeCircle,
   Lock,
   Rocket,
-  MessageSquare,
   ChevronDown,
   X,
   MessageCircle,
   HelpCircle,
+  Clock, // Added Clock icon for Hourly
 } from "lucide-react";
 
 import consultationIllustration from "../assets/consultation-illustration.svg";
@@ -27,20 +26,24 @@ type PlanId = "starter" | "professional" | "enterprise";
 type Plan = {
   id: PlanId;
   name: string;
-  monthly: string;
-  yearly: string;
+  monthlyPrice: number;
+  yearlyPrice: number; // The calculated yearly amount (20% off)
+  displayMonthly: string;
+  displayYearlyPerMonth: string;
   periodLabel: string;
   description: string;
   features: { name: string; included: boolean }[];
   popular?: boolean;
   icon: React.ComponentType<any>;
   cta: string;
+  ctaLink: string; // Added explicit link handling
 };
 
-type AddOn = {
+type OnDemandService = {
   name: string;
   price: string;
   description: string;
+  cta: string;
   icon?: React.ComponentType<any>;
 };
 
@@ -48,113 +51,112 @@ const PLANS: Plan[] = [
   {
     id: "starter",
     name: "Starter",
-    monthly: "$49",
-    yearly: "$39",
+    monthlyPrice: 100,
+    yearlyPrice: 960, // 20% discount logic
+    displayMonthly: "$100",
+    displayYearlyPerMonth: "$80",
     periodLabel: "/month",
-    description: "Perfect for small teams getting started.",
+    description: "Manual maintenance for early-stage startups.",
     features: [
-      { name: "Manual Testing", included: true },
-      { name: "Basic Automation", included: true },
-      { name: "Test Planning & Strategy", included: true },
-      { name: "Bug Reporting & Tracking", included: true },
+      { name: "5 QA Hours / Month Included", included: true },
+      { name: "Manual Smoke Testing", included: true },
+      { name: "Basic Bug Reporting", included: true },
       { name: "Email Support", included: true },
-      { name: "Monthly Reports", included: true },
-      { name: "Performance Testing", included: false },
-      { name: "Security Testing", included: false },
-      { name: "Dedicated QA Manager", included: false },
-      { name: "24/7 Support", included: false },
+      { name: "Monthly Status Report", included: true },
+      { name: "Automation Maintenance", included: false },
+      { name: "Priority Support", included: false },
     ],
     icon: Sparkles,
-    cta: "Start Free Trial",
+    cta: "Start 7-Day Trial",
+    ctaLink: "/free-trial",
   },
   {
     id: "professional",
     name: "Professional",
-    monthly: "$149",
-    yearly: "$119",
+    monthlyPrice: 200,
+    yearlyPrice: 1920, // 20% discount logic
+    displayMonthly: "$200",
+    displayYearlyPerMonth: "$160",
     periodLabel: "/month",
-    description: "Built for fast-growing teams with hands-on QA.",
+    description: "Regular testing for active development cycles.",
     features: [
-      { name: "Manual Testing", included: true },
-      { name: "Advanced Automation", included: true },
-      { name: "Test Planning & Strategy", included: true },
-      { name: "Bug Reporting & Tracking", included: true },
-      { name: "Priority Support", included: true },
-      { name: "Weekly Reports", included: true },
-      { name: "Performance Testing", included: true },
-      { name: "Basic Security Testing", included: true },
-      { name: "Dedicated QA Manager", included: true },
-      { name: "24/7 Support", included: false },
+      { name: "10 QA Hours / Month Included", included: true },
+      { name: "Manual Feature Testing", included: true },
+      { name: "Detailed Bug Tracking", included: true },
+      { name: "Priority Email Support", included: true },
+      { name: "Bi-Weekly Reports", included: true },
+      { name: "Basic Automation Runs", included: true },
+      { name: "Jira/Slack Integration", included: true },
     ],
     popular: true,
     icon: Zap,
-    cta: "Choose Professional",
+    cta: "Start 7-Day Trial",
+    ctaLink: "/free-trial",
   },
   {
     id: "enterprise",
     name: "Enterprise",
-    monthly: "Custom",
-    yearly: "Custom",
+    monthlyPrice: 0,
+    yearlyPrice: 0,
+    displayMonthly: "Custom",
+    displayYearlyPerMonth: "Custom",
     periodLabel: "",
-    description: "Tailored QA for complex products at scale.",
+    description: "Full-scale QA operations and dedicated resources.",
     features: [
-      { name: "Manual Testing", included: true },
-      { name: "Full Test Automation Suite", included: true },
+      { name: "Unlimited Scale (Custom Hours)", included: true },
+      { name: "Full Automation Suite", included: true },
       { name: "Custom Test Strategy", included: true },
-      { name: "Advanced Reporting", included: true },
       { name: "Dedicated Support Team", included: true },
-      { name: "Real-time Dashboards", included: true },
-      { name: "Performance Testing (advanced)", included: true },
-      { name: "Full Security Testing", included: true },
+      { name: "Performance & Security", included: true },
       { name: "Senior QA Manager", included: true },
-      { name: "24/7 Premium Support", included: true },
+      { name: "SLA Guarantees", included: true },
     ],
     icon: Building2,
     cta: "Contact Sales",
+    ctaLink: "/contact",
   },
 ];
 
-const ADD_ONS: AddOn[] = [
+const ON_DEMAND_SERVICES: OnDemandService[] = [
   {
     name: "Automation Setup",
-    price: "$2,500 (one-time)",
+    price: "Starting at $1,000",
     description:
-      "Custom framework setup with Selenium, Cypress, or Appium — tailored to your stack.",
+      "We build your custom test framework (Selenium, Cypress, Playwright) tailored to your stack. Handed over with documentation.",
+    cta: "Get a Quote",
     icon: Rocket,
   },
   {
     name: "CI/CD Integration",
-    price: "$1,500 (one-time)",
+    price: "$500 (one-time)",
     description:
-      "Integrate tests into Jenkins, GitHub Actions, or GitLab for continuous quality.",
+      "Seamless integration with GitHub Actions, GitLab, or Jenkins to block bugs before deployment.",
+    cta: "Add Integration",
     icon: GitBranch,
   },
   {
-    name: "Performance Testing",
-    price: "$800 / project",
-    description:
-      "Load, stress, and spike testing with JMeter or k6. Includes actionable reports.",
-    icon: GaugeCircle,
-  },
-  {
     name: "Security Testing",
-    price: "$500 / month",
+    price: "Starting at $850",
     description:
-      "OWASP-aligned security scans and remediation recommendations.",
+      "OWASP-aligned security scans and vulnerability assessment. Includes remediation report.",
+    cta: "Book Scan",
     icon: Lock,
   },
   {
-    name: "Additional QA Hours",
-    price: "$75 / hour",
-    description: "Extend manual or automation coverage as your roadmap grows.",
-    icon: MessageSquare,
+    name: "Performance Testing",
+    price: "Starting at $500",
+    description:
+      "Load and stress testing using JMeter or k6 to ensure stability under traffic.",
+    cta: "Start Testing",
+    icon: GaugeCircle,
   },
   {
-    name: "Dedicated QA Lead",
-    price: "$1,200 / month",
+    name: "Additional QA Hours",
+    price: "$20 / hour",
     description:
-      "A QA lead overseeing strategy, execution, and reporting end-to-end.",
-    icon: Shield,
+      "Need more coverage? Purchase blocks of manual or automation execution hours on demand.",
+    cta: "Buy Hours",
+    icon: Clock,
   },
 ];
 
@@ -183,6 +185,10 @@ const FAQ = [
     a: "No. You can start a 7-day free trial without any payment details.",
   },
   {
+    q: "How does the 'Hours Included' work?",
+    a: "Each plan comes with a set number of execution hours per month (5 for Starter, 10 for Professional). If you need more coverage for a specific release, you can simply purchase Additional QA Hours at $20/hr.",
+  },
+  {
     q: "Can I switch plans later?",
     a: "Absolutely. You can upgrade or downgrade anytime, changes are automatically prorated for the next billing cycle.",
   },
@@ -195,24 +201,20 @@ const FAQ = [
     a: "Yes, for Enterprise and qualified Professional customers. We support vendor onboarding and security reviews.",
   },
   {
-    q: "Can you work with our existing QA or development team?",
-    a: "Yes — we often integrate directly with your in-house teams, adapting to your sprint cadence and tools for a seamless workflow.",
-  },
-  {
     q: "How quickly can you start after sign-up?",
     a: "Typically within 2–3 business days after onboarding. We’ll align on scope, access, and project priorities immediately.",
-  },
-  {
-    q: "What if I need something not listed in your plans?",
-    a: "No problem — we can tailor a plan or create a project-based QA engagement that fits your needs. Just reach out to Contact Sales.",
   },
 ];
 
 const PricingPage: React.FC = () => {
   const [billing, setBilling] = useState<"monthly" | "yearly">("monthly");
 
-  const priceFor = (plan: Plan) =>
-    billing === "monthly" ? plan.monthly : plan.yearly;
+  const getPriceDisplay = (plan: Plan) => {
+    if (plan.id === "enterprise") return "Custom";
+    return billing === "monthly"
+      ? plan.displayMonthly
+      : plan.displayYearlyPerMonth;
+  };
 
   const billingNote =
     billing === "yearly" ? "Billed yearly • Save up to 20%" : "Billed monthly";
@@ -231,14 +233,25 @@ const PricingPage: React.FC = () => {
         />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-center justify-center text-center gap-8 sm:gap-10">
-            <div className="max-w-3xl mt-6 sm:mt-8">
+          <div className="flex flex-col items-center justify-center text-center gap-6 sm:gap-8">
+            {/* Added: 7-Day Trial Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-50 border border-teal-100 shadow-sm">
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-teal-500"></span>
+              </span>
+              <span className="text-sm font-semibold text-teal-800">
+                7-Day Risk-Free Pilot Available
+              </span>
+            </div>
+
+            <div className="max-w-3xl mt-2 sm:mt-4">
               <p className="h1 text-teal-900">
-                Flexible Pricing Designed for Every Growth Stage.
+                Flexible QA Pricing for Every Stage
               </p>
               <p className="body-regular text-gray-600 mt-4 sm:mt-6">
                 Get the expertise of a senior QA team at rates that fit your
-                stage and budget, without the overhead of big agencies.
+                budget. Scale up or down anytime.
               </p>
             </div>
 
@@ -372,22 +385,15 @@ const PricingPage: React.FC = () => {
                     >
                       <div className="mb-5 sm:mb-6">
                         <span className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900">
-                          {priceFor(plan)}
+                          {getPriceDisplay(plan)}
                         </span>
                         <span className="ml-1 text-gray-500 text-base sm:text-lg align-baseline">
                           {plan.periodLabel}
                         </span>
                       </div>
 
-                      <button
-                        type="button"
-                        onClick={() => {
-                          if (plan.id === "enterprise") {
-                            window.location.href = "/contact";
-                          } else {
-                            window.location.href = "/free-trial";
-                          }
-                        }}
+                      <a
+                        href={plan.ctaLink}
                         className={`w-full py-3 px-6 rounded-full font-semibold text-sm sm:text-base transition-colors duration-200 flex items-center justify-center gap-2 ${
                           isPopular
                             ? "bg-teal-500 text-white hover:bg-teal-600"
@@ -395,7 +401,7 @@ const PricingPage: React.FC = () => {
                         }`}
                       >
                         {plan.cta}
-                      </button>
+                      </a>
 
                       <hr className="my-5 sm:my-6 border-t border-gray-200" />
 
@@ -403,9 +409,9 @@ const PricingPage: React.FC = () => {
                         {plan.features.map((f, idx) => (
                           <li key={idx} className="flex items-center">
                             {f.included ? (
-                              <CheckCircle className="w-5 h-5 text-teal-600 mr-3" />
+                              <CheckCircle className="w-5 h-5 text-teal-600 mr-3 flex-shrink-0" />
                             ) : (
-                              <X className="w-5 h-5 text-gray-300 mr-3" />
+                              <X className="w-5 h-5 text-gray-300 mr-3 flex-shrink-0" />
                             )}
                             <span
                               className={
@@ -462,25 +468,25 @@ const PricingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* ===================== ADD-ONS ===================== */}
-      <section id="add-ons" className="py-16 sm:py-20 bg-slate-50">
+      {/* ===================== ON-DEMAND SERVICES ===================== */}
+      <section id="on-demand-services" className="py-16 sm:py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10 sm:mb-14">
             <div className="inline-flex items-center bg-teal-100 text-teal-800 px-4 py-2 rounded-full text-sm font-medium mb-4">
-              + Add-ons
+              + On-Demand Services
             </div>
-            <h2>Optional Add-ons</h2>
+            <h2>Need a Specific Solution?</h2>
             <p className="body-regular text-slate-600 max-w-2xl mx-auto mt-2">
-              Enhance your plan with additional services.
+              Book standalone projects without a monthly subscription.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {ADD_ONS.map((a) => {
-              const Icon = a.icon ?? HelpCircle;
+            {ON_DEMAND_SERVICES.map((service) => {
+              const Icon = service.icon ?? HelpCircle;
               return (
                 <div
-                  key={a.name}
+                  key={service.name}
                   className="p-6 bg-white border border-slate-200 rounded-2xl hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
                 >
                   <div>
@@ -490,17 +496,25 @@ const PricingPage: React.FC = () => {
                           <Icon className="w-5 h-5 text-teal-600" />
                         </span>
                         <h3 className="text-lg sm:text-xl font-semibold text-slate-900">
-                          {a.name}
+                          {service.name}
                         </h3>
                       </div>
-                      <span className="text-teal-600 font-semibold text-sm sm:text-base">
-                        {a.price}
+                    </div>
+                    <div className="mb-4">
+                      <span className="text-teal-600 font-semibold text-base sm:text-lg">
+                        {service.price}
                       </span>
                     </div>
-                    <p className="text-slate-600 text-sm leading-relaxed">
-                      {a.description}
+                    <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                      {service.description}
                     </p>
                   </div>
+                  <Link
+                    to="/contact"
+                    className="mt-auto w-full border border-teal-200 text-teal-700 hover:bg-teal-50 py-2 rounded-lg text-sm font-semibold flex items-center justify-center transition-colors"
+                  >
+                    {service.cta}
+                  </Link>
                 </div>
               );
             })}
@@ -528,12 +542,12 @@ const PricingPage: React.FC = () => {
                 desc: "Clear monthly billing. Cancel anytime. No setup charges.",
               },
               {
-                title: "Expert Support Included",
-                desc: "Hands-on QA specialists in every plan — not just software.",
+                title: "Expert Execution",
+                desc: "We don't just run software; we provide hands-on human insight.",
               },
               {
-                title: "Flexible & Scalable",
-                desc: "Switch plans anytime. Add automation/CI when you need it.",
+                title: "Flexible Scaling",
+                desc: "Start small with maintenance and scale up hours as your roadmap grows.",
               },
               {
                 title: "Outcome-Focused",
@@ -554,87 +568,6 @@ const PricingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* ============== COMPARISON TABLE ============== */}
-      <section id="comparison" className="py-16 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8 sm:mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-              Compare Plans
-            </h2>
-            <p className="text-gray-600 mt-3">
-              A quick look at what each plan includes.
-            </p>
-          </div>
-
-          <div className="overflow-x-auto rounded-2xl border border-gray-200 bg-white">
-            <table className="min-w-[720px] w-full text-sm">
-              <thead>
-                <tr className="text-left">
-                  <th className="p-4 text-gray-500 font-medium">Feature</th>
-                  {PLANS.map((p) => (
-                    <th
-                      key={p.id}
-                      className="p-4 text-gray-900 font-semibold text-sm"
-                    >
-                      {p.name}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  "Manual Testing",
-                  "Automation",
-                  "Test Planning & Strategy",
-                  "Bug Reporting & Tracking",
-                  "Reports",
-                  "Performance Testing",
-                  "Security Testing",
-                  "Dedicated QA Manager",
-                  "24/7 Support",
-                ].map((featureRow) => (
-                  <tr key={featureRow} className="border-t border-gray-100">
-                    <td className="p-4 text-gray-700">{featureRow}</td>
-                    {PLANS.map((p) => {
-                      const match = p.features.find((f) =>
-                        featureRow
-                          .toLowerCase()
-                          .includes(
-                            f.name
-                              .toLowerCase()
-                              .replace("(advanced)", "")
-                              .trim()
-                          )
-                      );
-                      const included = match?.included ?? false;
-                      return (
-                        <td key={p.id} className="p-4">
-                          {included ? (
-                            <CheckCircle className="w-5 h-5 text-teal-600" />
-                          ) : (
-                            <X className="w-5 h-5 text-gray-300" />
-                          )}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      {/* ============== SOCIAL PROOF PLACEHOLDER ============== */}
-      <section id="social-proof" className="py-12 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
-          <p className="text-gray-500 text-sm sm:text-base">
-            Trusted by engineering teams shipping with confidence
-          </p>
-          {/* Add logos row here when ready */}
-        </div>
-      </section>
-
       {/* ======================= FAQ ======================= */}
       <section id="faq" className="py-16 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
@@ -644,12 +577,12 @@ const PricingPage: React.FC = () => {
             </h2>
             <p className="text-gray-600 mt-3">
               If you have other questions,{" "}
-              <a
+              <Link
                 className="text-teal-600 font-medium hover:underline"
-                href="/contact"
+                to="/contact"
               >
                 contact us
-              </a>
+              </Link>
               .
             </p>
           </div>
