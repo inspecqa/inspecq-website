@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Mail, Send } from "lucide-react";
+import { Mail, Send, ChevronDown } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
 import { useFormSubmission } from "../hooks/useFormSubmission";
 import contactUsBg from "../assets/contact-us-bg.svg";
@@ -320,26 +320,47 @@ const Contact: React.FC = () => {
               </div>
 
               {/* Service */}
-              <div>
+              <div className="space-y-2">
                 <label className="body-md">Service Interest</label>
-                <select
-                  name="service"
-                  value={formData.service}
-                  onChange={handleChange}
-                  className="mt-2 w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500"
-                >
-                  <option value="">Select a Service</option>
-                  <option value="functional-testing">Functional Testing</option>
-                  <option value="automation-testing">Test Automation</option>
-                  <option value="performance-testing">
-                    Performance Testing
-                  </option>
-                  <option value="mobile-testing">Mobile Testing</option>
-                  <option value="consulting-audits">
-                    QA Consulting & Audits
-                  </option>
-                  <option value="api-testing">API Testing</option>
-                </select>
+                <div className="relative">
+                  <select
+                    id="service"
+                    name="service"
+                    value={formData.service}
+                    onChange={handleChange}
+                    className="mt-2 w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500"
+                  >
+                    <option value="" disabled className="text-slate-400">
+                      Select a Service
+                    </option>
+
+                    <optgroup
+                      label="Core Testing"
+                      className="font-semibold text-slate-600"
+                    >
+                      <option value="functional-testing">
+                        Functional Testing
+                      </option>
+                      <option value="test-automation">Test Automation</option>
+                      <option value="mobile-testing">Mobile App Testing</option>
+                      <option value="api-testing">API Testing</option>
+                    </optgroup>
+
+                    <optgroup
+                      label="Specialized Services"
+                      className="font-semibold text-slate-600"
+                    >
+                      <option value="security-testing">Security Testing</option>
+                      <option value="performance-testing">
+                        Performance Testing
+                      </option>
+                      <option value="consulting-audits">
+                        QA Consulting & Audits
+                      </option>
+                    </optgroup>
+                    <option value="other">Other Inquiry</option>
+                  </select>
+                </div>
               </div>
 
               {/* Message */}
