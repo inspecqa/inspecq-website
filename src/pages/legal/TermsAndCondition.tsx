@@ -46,6 +46,7 @@ const TermsOfService: React.FC = () => {
                 <li>API Testing</li>
                 <li>Performance Testing</li>
                 <li>Mobile App Testing</li>
+                <li>Security Testing</li>
                 <li>QA Consulting &amp; Audits</li>
               </ul>
               <p className="mt-2">
