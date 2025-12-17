@@ -788,13 +788,17 @@ const FreeTrial: React.FC = () => {
                     errors.testingFocus ? "border-rose-400" : "border-gray-200"
                   }`}
                 >
-                  <option value="">Select Testing Focus</option>
+                  
+                  <option value="" disabled className="text-slate-400">Select Testing Focus</option>
                   <option value="web-testing">Web Application Testing</option>
+                  <option value="test-automation">Test Automation</option>
                   <option value="mobile-testing">Mobile App Testing</option>
                   <option value="api-testing">API Testing</option>
-                  <option value="test-automation">Test Automation</option>
                   <option value="performance-testing">
                     Performance Testing
+                  </option>
+                  <option value="security-testing">
+                    Security / Vulnerability Testing
                   </option>
                   <option value="qa-consulting-audits">
                     QA Consulting & Audits

@@ -541,7 +541,7 @@ const MobileTesting = () => {
               className="absolute inset-0 w-full h-full object-cover"
             />
 
-            <div className="absolute inset-0 mix-blend-multiply" />
+            <div className="absolute inset-0 bg-teal-900/90" />
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center px-6 sm:px-10 lg:px-14 py-12 lg:py-16">
               {/* Left copy */}
               <div className="text-white">

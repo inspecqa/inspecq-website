@@ -256,8 +256,8 @@ function AutomationTesting() {
             </h1>
             <p className="body-regular text-black-700 max-w-3xl mx-auto mb-8 text-sm sm:text-base">
               Tired of manual bottlenecks? Our test automation services help you
-              release faster, boost test coverage, and eliminate repetitive QA
-              work so your team can focus on higher-impact priorities.
+              release faster, boost coverage, and eliminate repetitive QA work
+              so your team can focus on innovation.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center w-full sm:w-auto">
               <Link
@@ -493,7 +493,7 @@ function AutomationTesting() {
               className="absolute inset-0 w-full h-full object-cover"
             />
 
-            <div className="absolute inset-0 mix-blend-multiply" />
+            <div className="absolute inset-0 bg-teal-900/90" />
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center px-6 sm:px-10 lg:px-14 py-12 lg:py-16">
               {/* Left copy */}
               <div className="text-white">

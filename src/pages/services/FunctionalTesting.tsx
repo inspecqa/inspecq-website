@@ -9,9 +9,6 @@ import serviceBg2 from "../../assets/service/service-bg-2.svg";
 import {
   CheckCircle,
   ArrowRight,
-  Code2,
-  Workflow,
-  Layers,
   UserCheck,
   FileSearch,
   ClipboardList,
@@ -22,7 +19,12 @@ import {
   BadgeCheck,
   BrainCircuit,
   LucideIcon,
+  Activity,
+  Puzzle,
+  AppWindow,
+  RotateCcw,
 } from "lucide-react";
+
 
 /* -------------------- Static Config -------------------- */
 
@@ -100,29 +102,36 @@ const TESTING_TYPES: {
   features: string[];
 }[] = [
   {
-    icon: Code2,
-    title: "Unit Testing",
+    icon: Activity,
+    title: "Smoke & Sanity Testing",
     description:
-      "Validate the smallest building blocks to ensure stable foundations.",
+      "Rapid health checks to ensure your application is stable and ready for deep testing",
     features: [
-      "Code coverage analysis",
-      "Automated test execution",
-      "Continuous integration",
+      "Build verification",
+      "Critical path validation",
+      "Fail-fast execution",
     ],
   },
   {
-    icon: Workflow,
+    icon: Puzzle,
     title: "Integration Testing",
     description:
       "We ensure seamless communication between modules, APIs, and services.",
     features: ["API testing", "Database integration", "Third-party services"],
   },
   {
-    icon: Layers,
+    icon: AppWindow,
     title: "System Testing",
     description:
       "Simulate full user journeys to guarantee your app performs as expected in real conditions.",
     features: ["User workflows", "Business scenarios", "Cross-browser testing"],
+  },
+  {
+    icon: RotateCcw,
+    title: "Regression Testing",
+    description:
+      "We re-test existing functionalities to ensure new updates haven't introduced bugs.",
+    features: ["Automated test suites", "Impact analysis", "Version stability"],
   },
   {
     icon: UserCheck,
@@ -225,7 +234,7 @@ const FunctionalTesting = () => {
             </h1>
             <p className="body-regular text-black-700 max-w-3xl mx-auto mb-8 text-sm sm:text-base">
               We test every feature and flow to ensure your product runs
-              smoothly and delivers a flawless experience.
+              smoothly and delivers a flawless user experience.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center w-full sm:w-auto">
               <Link
@@ -395,7 +404,7 @@ const FunctionalTesting = () => {
               className="absolute inset-0 w-full h-full object-cover"
             />
 
-            <div className="absolute inset-0 mix-blend-multiply" />
+            <div className="absolute inset-0 bg-teal-900/90" />
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center px-6 sm:px-10 lg:px-14 py-12 lg:py-16">
               {/* Left copy */}
               <div className="text-white">

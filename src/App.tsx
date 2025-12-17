@@ -10,7 +10,7 @@ import FunctionalTesting from "./pages/services/FunctionalTesting";
 import TestAutomation from "./pages/services/TestAutomation";
 import PerformanceTesting from "./pages/services/PerformanceTesting";
 import MobileTesting from "./pages/services/MobileTesting";
-// import SecurityTesting from "./pages/services/SecurityTesting";
+import SecurityTesting from "./pages/services/SecurityTesting";
 import ApiTesting from "./pages/services/ApiTesting";
 // import Demo from "./pages/Demo";
 import FreeTrial from "./pages/FreeTrial";
@@ -86,10 +86,10 @@ function App() {
             element={<PerformanceTesting />}
           />
           <Route path="/services/mobile-testing" element={<MobileTesting />} />
-          {/* <Route
+          <Route
             path="/services/security-testing"
             element={<SecurityTesting />}
-          /> */}
+          />
           <Route path="/services/api-testing" element={<ApiTesting />} />
           <Route
             path="/services/qa-consulting-audits"
