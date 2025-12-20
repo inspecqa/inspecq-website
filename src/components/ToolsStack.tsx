@@ -121,7 +121,7 @@ const ToolsStack = () => {
           </div>
 
           <div className="md:self-start md:pt-4">
-            <p className="text-sm sm:text-base text-gray-600 max-w-md">
+            <p className="body-md text-gray-600 max-w-md leading-relaxed">
               We select the most effective tools for your product and workflows.
               Whether you&apos;re an early-stage startup or a growing team, we
               plug into your stack seamlessly.

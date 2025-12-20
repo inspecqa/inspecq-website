@@ -4,26 +4,19 @@ import heroBg from "../assets/hero-bg.svg";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-start justify-center pt-24 md:pt-28 lg:pt-32 pb-8 md:pb-10 lg:pb-12 overflow-hidden">
+    <section className="relative min-h-screen flex items-start justify-center pt-24 md:pt-28 lg:pt-32 pb-8 md:pb-10 lg:pb-12">
       {/* Background illustration */}
       <img
         src={heroBg}
         alt=""
-        className="absolute inset-x-0 bottom-0 w-full max-w-none pointer-events-none -z-10 opacity-90 object-contain md:object-cover"
+        className="absolute inset-0 w-full h-full max-w-none pointer-events-none -z-10 opacity-90 object-cover"
       />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="flex flex-col items-center text-center w-full">
-          {/* Badge */}
-          <div className="mb-5">
-            <div className="inline-flex items-center bg-background-50 text-teal-800 px-4 py-2 rounded-full text-sm font-medium shadow-sm">
-              <CheckCircle className="h-4 w-4 mr-2" />
-              QA Agency with Expert Team
-            </div>
-          </div>
-
+        
           {/* Heading */}
-          <h1 className="h1 text-teal-900 max-w-3xl">
+          <h1 className="h1 text-teal-900 max-w-3xl mt-8">
             Ship Better Software Faster, With Expert QA You Can Trust
           </h1>
 

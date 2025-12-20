@@ -55,7 +55,7 @@ const Services = () => {
             {/* Right Description */}
             <div className="md:self-start pt-2">
               <p className="body-md text-gray-600 max-w-md leading-relaxed">
-                From manual to API testing, we deliver QA solutions that
+                From Manual to Security testing, we deliver QA solutions that
                 accelerate delivery, improve reliability, and ensure every
                 release meets your quality goals.
               </p>

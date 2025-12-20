@@ -16,6 +16,7 @@ const services = [
   { name: "Performance Testing", path: "/services/performance-testing" },
   { name: "Mobile Testing", path: "/services/mobile-testing" },
   { name: "API Testing", path: "/services/api-testing" },
+  { name: "Security Testing", path: "/services/security-testing" },
   { name: "QA Consulting & Audits", path: "/services/qa-consulting-audits" },
 ];
 

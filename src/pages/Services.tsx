@@ -11,6 +11,7 @@ import {
   CheckCircle,
   ArrowRight,
   Code2,
+  ShieldCheck,
 } from "lucide-react";
 
 const Services = () => {
@@ -57,6 +58,20 @@ const Services = () => {
       color: "bg-teal-500",
       path: "/services/api-testing",
     },
+    {
+      icon: ShieldCheck,
+      title: "Security Testing",
+      description:
+        "We simulate real-world attacks to uncover vulnerabilities across your web, mobile, API, and cloud environments.",
+      features: [
+        "Penetration Testing",
+        "Security Reviews",
+        "GRC & Compliance Readiness",
+      ],
+      color: "bg-yellow-500",
+      path: "/services/security-testing",
+    },
+
     {
       icon: Gauge,
       title: "Performance Testing",
