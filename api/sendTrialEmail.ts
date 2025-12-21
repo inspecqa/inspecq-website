@@ -66,8 +66,7 @@ We look forward to contributing to your product’s success.
 
 Best Regards,
 The InspecQ Team`,
-      html: `
-      <!DOCTYPE html>
+      html: `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -117,7 +116,7 @@ The InspecQ Team`,
               <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top: -20px;">
                 <tr>
                   <td align="center">
-                    <div style="display: inline-block; background: linear-gradient(135deg, #008080 0%, #20b2aa 100%); color: white; padding: 10px 28px; border-radius: 999px; font-size: 14px; font-weight: 600; box-shadow: 0 4px 12px rgba(0, 128, 128, 0.3);">
+                    <div style="display: inline-block; background: linear-gradient(135deg, #008080 0%, #20b2aa 100%); color: white; padding: 8px 24px; border-radius: 999px; font-size: 14px; font-weight: 600; box-shadow: 0 4px 12px rgba(0, 128, 128, 0.3);">
                       🎉 7-Day Trial Active
                     </div>
                   </td>
@@ -130,7 +129,7 @@ The InspecQ Team`,
           <tr>
             <td style="padding: 32px 28px 8px 28px; color: #0f172a; font-size: 16px; line-height: 1.6;">
               <p style="margin: 0 0 20px 0; font-size: 18px; font-weight: 600; color: #1e293b;">
-                Hello [Name],
+                Hello ${safeName},
               </p>
 
               <p style="margin: 0 0 20px 0;">
@@ -164,7 +163,7 @@ The InspecQ Team`,
                                 <tr>
                                   <td align="left" style="background: linear-gradient(135deg, #008080 0%, #20b2aa 100%); border-radius: 999px; box-shadow: 0 4px 12px rgba(0, 128, 128, 0.3);">
                                     <a href="[KICKOFF_LINK]" style="display: inline-block; padding: 12px 28px; font-size: 15px; font-weight: 600; color: #ffffff; text-decoration: none; border-radius: 999px; font-family: 'Onnest', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;">
-                                      📅  Book Your Kickoff Now
+                                      📅 Book Your Kickoff Now
                                     </a>
                                   </td>
                                 </tr>
@@ -178,19 +177,21 @@ The InspecQ Team`,
                     <!-- Step 2 -->
                     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 24px; background: #f8f9fa; border-left: 4px solid #cbd5e1; border-radius: 8px; padding: 20px;">
                       <tr>
-                        <td>
-                          <div style="display: flex; align-items: flex-start;">
-                            <div style="background: #cbd5e1; color: #475569; width: 32px; height: 32px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; flex-shrink: 0; margin-right: 16px;">
-                              2
-                            </div>
-                            <div style="flex: 1;">
-                              <div style="font-weight: 700; color: #0f172a; margin-bottom: 8px; font-size: 16px;">
-                                We Configure Your Environment
-                              </div>
-                              <div style="color: #4b5563; font-size: 15px; line-height: 1.6;">
-                                Once we align, our team will set up the testing scope and priorities so we can focus on the critical paths that matter to you.
-                              </div>
-                            </div>
+                        <td style="width: 40px; vertical-align: top; padding-right: 16px;">
+                          <table cellpadding="0" cellspacing="0" border="0" style="background: #cbd5e1; border-radius: 50%; width: 32px; height: 32px;">
+                            <tr>
+                              <td style="color: #475569; font-weight: 700; font-size: 16px; text-align: center; vertical-align: middle;">
+                                2
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                        <td style="vertical-align: top;">
+                          <div style="font-weight: 700; color: #0f172a; margin-bottom: 8px; font-size: 16px;">
+                            We Configure Your Environment
+                          </div>
+                          <div style="color: #4b5563; font-size: 15px; line-height: 1.6;">
+                            Once we align, our team will set up the testing scope and priorities so we can focus on the critical paths that matter to you.
                           </div>
                         </td>
                       </tr>
@@ -199,19 +200,21 @@ The InspecQ Team`,
                     <!-- Step 3 -->
                     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background: #f8f9fa; border-left: 4px solid #cbd5e1; border-radius: 8px; padding: 20px;">
                       <tr>
-                        <td>
-                          <div style="display: flex; align-items: flex-start;">
-                            <div style="background: #cbd5e1; color: #475569; width: 32px; height: 32px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; flex-shrink: 0; margin-right: 16px;">
-                              3
-                            </div>
-                            <div style="flex: 1;">
-                              <div style="font-weight: 700; color: #0f172a; margin-bottom: 8px; font-size: 16px;">
-                                Testing Begins & Reports Deliver
-                              </div>
-                              <div style="color: #4b5563; font-size: 15px; line-height: 1.6;">
-                                You will start receiving structured reports highlighting defects, key observations, and actionable recommendations.
-                              </div>
-                            </div>
+                        <td style="width: 40px; vertical-align: top; padding-right: 16px;">
+                          <table cellpadding="0" cellspacing="0" border="0" style="background: #cbd5e1; border-radius: 50%; width: 32px; height: 32px;">
+                            <tr>
+                              <td style="color: #475569; font-weight: 700; font-size: 16px; text-align: center; vertical-align: middle;">
+                                3
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                        <td style="vertical-align: top;">
+                          <div style="font-weight: 700; color: #0f172a; margin-bottom: 8px; font-size: 16px;">
+                            Testing Begins & Reports Deliver
+                          </div>
+                          <div style="color: #4b5563; font-size: 15px; line-height: 1.6;">
+                            You will start receiving structured reports highlighting defects, key observations, and actionable recommendations.
                           </div>
                         </td>
                       </tr>
@@ -227,7 +230,7 @@ The InspecQ Team`,
             <td style="padding: 16px 28px 32px 28px; color: #4b5563; font-size: 15px; line-height: 1.6;">
               <div style="background: #fffbeb; border-left: 4px solid #f59e0b; padding: 16px; border-radius: 6px; margin-bottom: 20px;">
                 <p style="margin: 0; color: #92400e;">
-                  💡 <strong>Quick Tip:</strong> Have questions before the call? Simply reply to this email. We're here to help!
+                  💡 <strong>Quick Tip:</strong> Have questions before the call? Simply reply to this email—we're here to help!
                 </p>
               </div>
 
@@ -245,9 +248,9 @@ The InspecQ Team`,
           <!-- Social Links -->
           <tr>
             <td style="padding: 24px 28px; border-top: 1px solid #e5e7eb;">
-              <table cellpadding="0" cellspacing="0" border="0" align="center">
+              <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin-bottom: 12px;">
                 <tr>
-                <td style="padding: 0 10px;">
+                  <td style="padding: 0 10px;">
                     <a href="https://www.inspecq.com" style="color: #008080; text-decoration: none; font-weight: 500; font-size: 14px;">Website</a>
                   </td>
                   <td style="color: #cbd5e1;">|</td>
