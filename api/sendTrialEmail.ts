@@ -111,7 +111,7 @@ The InspecQ Team`,
           </tr>
 
           <!-- Trial Badge -->
-          <tr>
+            <tr>
             <td style="padding: 0 28px;">
               <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top: -20px;">
                 <tr>
@@ -124,6 +124,7 @@ The InspecQ Team`,
               </table>
             </td>
           </tr>
+          
           
           <!-- Main Content -->
           <tr>
@@ -140,7 +141,7 @@ The InspecQ Team`,
                 Here is the plan for your trial:
               </p>
 
-              <!-- Steps -->
+               <!-- Steps -->
               <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin: 24px 0;">
                 <tr>
                   <td>
@@ -174,48 +175,53 @@ The InspecQ Team`,
                       </tr>
                     </table>
 
-                    <!-- Step 2 -->
-                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 24px; background: #f8f9fa; border-left: 4px solid #cbd5e1; border-radius: 8px; padding: 20px;">
+
+                     <!-- Step 2 -->
+                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 24px; background: #f8f9fa; border-left: 4px solid #cbd5e1; border-radius: 8px;">
                       <tr>
-                        <td style="width: 40px; vertical-align: top; padding-right: 16px;">
-                          <table cellpadding="0" cellspacing="0" border="0" style="background: #cbd5e1; border-radius: 50%; width: 32px; height: 32px;">
+                        <td style="padding: 20px;">
+                          <table width="100%" cellpadding="0" cellspacing="0" border="0">
                             <tr>
-                              <td style="color: #475569; font-weight: 700; font-size: 16px; text-align: center; vertical-align: middle;">
-                                2
+                              <td style="width: 48px; vertical-align: top; padding-right: 0;">
+                                <div style="width: 32px; height: 32px; background: #cbd5e1; border-radius: 50%; color: #475569; font-weight: 700; font-size: 16px; text-align: center; line-height: 32px;">
+                                  2
+                                </div>
+                              </td>
+                              <td style="vertical-align: top;">
+                                <div style="font-weight: 700; color: #0f172a; margin-bottom: 8px; font-size: 16px;">
+                                  We Configure Your Environment
+                                </div>
+                                <div style="color: #4b5563; font-size: 15px; line-height: 1.6;">
+                                  Once we align, our team will set up the testing scope and priorities so we can focus on the critical paths that matter to you.
+                                </div>
                               </td>
                             </tr>
                           </table>
-                        </td>
-                        <td style="vertical-align: top;">
-                          <div style="font-weight: 700; color: #0f172a; margin-bottom: 8px; font-size: 16px;">
-                            We Configure Your Environment
-                          </div>
-                          <div style="color: #4b5563; font-size: 15px; line-height: 1.6;">
-                            Once we align, our team will set up the testing scope and priorities so we can focus on the critical paths that matter to you.
-                          </div>
                         </td>
                       </tr>
                     </table>
 
-                    <!-- Step 3 -->
-                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background: #f8f9fa; border-left: 4px solid #cbd5e1; border-radius: 8px; padding: 20px;">
+                  <!-- Step 3 -->
+                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background: #f8f9fa; border-left: 4px solid #cbd5e1; border-radius: 8px;">
                       <tr>
-                        <td style="width: 40px; vertical-align: top; padding-right: 16px;">
-                          <table cellpadding="0" cellspacing="0" border="0" style="background: #cbd5e1; border-radius: 50%; width: 32px; height: 32px;">
+                        <td style="padding: 20px;">
+                          <table width="100%" cellpadding="0" cellspacing="0" border="0">
                             <tr>
-                              <td style="color: #475569; font-weight: 700; font-size: 16px; text-align: center; vertical-align: middle;">
-                                3
+                              <td style="width: 48px; vertical-align: top; padding-right: 0;">
+                                <div style="width: 32px; height: 32px; background: #cbd5e1; border-radius: 50%; color: #475569; font-weight: 700; font-size: 16px; text-align: center; line-height: 32px;">
+                                  3
+                                </div>
+                              </td>
+                              <td style="vertical-align: top;">
+                                <div style="font-weight: 700; color: #0f172a; margin-bottom: 8px; font-size: 16px;">
+                                  Testing Begins & Reports Deliver
+                                </div>
+                                <div style="color: #4b5563; font-size: 15px; line-height: 1.6;">
+                                  You will start receiving structured reports highlighting defects, key observations, and actionable recommendations.
+                                </div>
                               </td>
                             </tr>
                           </table>
-                        </td>
-                        <td style="vertical-align: top;">
-                          <div style="font-weight: 700; color: #0f172a; margin-bottom: 8px; font-size: 16px;">
-                            Testing Begins & Reports Deliver
-                          </div>
-                          <div style="color: #4b5563; font-size: 15px; line-height: 1.6;">
-                            You will start receiving structured reports highlighting defects, key observations, and actionable recommendations.
-                          </div>
                         </td>
                       </tr>
                     </table>
@@ -224,6 +230,7 @@ The InspecQ Team`,
               </table>
             </td>
           </tr>
+
           
           <!-- Closing Message -->
           <tr>
