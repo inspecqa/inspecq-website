@@ -823,7 +823,7 @@ const FreeTrial: React.FC = () => {
                 <ul className="space-y-3 sm:space-y-4 text-gray-700">
                   <li className="flex items-start body-regular text-sm sm:text-base">
                     <span className="mt-2 mr-3 inline-block w-2 h-2 bg-teal-600" />
-                    You’ll receive a welcome email with your onboarding details.
+                    You’ll receive a welcome email withonboarding details.
                   </li>
                   <li className="flex items-start body-regular text-sm sm:text-base">
                     <span className="mt-2 mr-3 inline-block w-2 h-2 bg-teal-600" />
@@ -893,7 +893,7 @@ const FreeTrial: React.FC = () => {
               </div>
 
               <p className="xs-regular text-gray-500 text-center text-xs sm:text-sm">
-                No credit card required • 7-day free trial • Cancel anytime
+                No transaction required • 7-day free trial • Cancel anytime
               </p>
             </form>
           </div>
