@@ -159,7 +159,7 @@ const Footer = () => {
       }
 
       setNewsletterSuccess(
-        "You're subscribed! Check your inbox for a welcome email with helpful QA insights."
+        "You're subscribed! Check your inbox for a welcome email."
       );
       setNewsletterEmail("");
     } catch (err) {
