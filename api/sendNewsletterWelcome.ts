@@ -19,30 +19,41 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     // Initialize Supabase client
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
-    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_KEY;
+    const supabaseUrl = process.env.VITE_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL || '';
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_KEY || '';
     
-    if (!supabaseUrl || !supabaseKey) {
-      console.error('[sendNewsLetterWelcome] Missing Supabase credentials');
-      return res.status(500).json({ error: 'Server configuration error' });
-    }
-
-    const supabase = createClient(supabaseUrl, supabaseKey);
-
+    console.log('[sendNewsLetterWelcome] Supabase config check:', {
+      hasUrl: !!supabaseUrl,
+      hasKey: !!supabaseKey,
+      urlPrefix: supabaseUrl?.substring(0, 20)
+    });
+    
     // Get subscriber's unsubscribe token
-    const { data: subscriber, error: fetchError } = await supabase
-      .from('newsletter_subscribers')
-      .select('unsubscribe_token')
-      .eq('email', email.toLowerCase())
-      .single();
+    let unsubscribeToken = '';
+    
+    if (supabaseUrl && supabaseKey) {
+      try {
+        const supabase = createClient(supabaseUrl, supabaseKey);
+        
+        const { data: subscriber, error: fetchError } = await supabase
+          .from('newsletter_subscribers')
+          .select('unsubscribe_token')
+          .eq('email', email.toLowerCase())
+          .single();
 
-    if (fetchError || !subscriber?.unsubscribe_token) {
-      console.error('[sendNewsLetterWelcome] Failed to fetch unsubscribe token:', fetchError);
-      // Continue anyway - don't fail the email send
+        if (fetchError) {
+          console.error('[sendNewsLetterWelcome] Failed to fetch unsubscribe token:', fetchError);
+        } else {
+          unsubscribeToken = subscriber?.unsubscribe_token || '';
+        }
+      } catch (err) {
+        console.error('[sendNewsLetterWelcome] Error fetching token:', err);
+      }
+    } else {
+      console.log('[sendNewsLetterWelcome] Skipping token fetch - missing Supabase credentials');
     }
 
-    const unsubscribeToken = subscriber?.unsubscribe_token || '';
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || process.env.BASE_URL || 'https://www.inspecq.com';
+    const baseUrl = process.env.BASE_URL || process.env.NEXT_PUBLIC_BASE_URL || 'https://www.inspecq.com';
     const unsubscribeUrl = unsubscribeToken 
       ? `${baseUrl}/api/unsubscribe/${unsubscribeToken}`
       : '#';
