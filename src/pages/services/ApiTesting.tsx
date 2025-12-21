@@ -234,7 +234,7 @@ const ApiTesting = () => {
           <div className="text-center mb-12 sm:mb-16 mt-10 sm:mt-16">
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-4">
               Scalable API Testing{" "}
-              <span className="block text-teal-700">
+              <span className="block text-teal-700 mt-2">
                 Built for Evolving Systems.
               </span>
             </h1>
@@ -255,7 +255,7 @@ const ApiTesting = () => {
               <SmoothScrollLink
                 to="#api-process"
                 offset={110}
-                className="btn-text bg-white text-black-500 w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-full border flex items-center justify-center gap-2 hover:bg-slate-100 transition-all duration-200 text-sm sm:text-base"
+                className="btn-text bg-white text-black-500 w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-full border border-teal-500 flex items-center justify-center gap-2 hover:bg-slate-100 transition-all duration-200 text-sm sm:text-base"
               >
                 See How It Works
               </SmoothScrollLink>

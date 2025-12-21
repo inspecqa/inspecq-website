@@ -18,9 +18,9 @@ const Services = () => {
   const services = [
     {
       icon: Bug,
-      title: "Manual Testing",
+      title: "Functional Testing",
       description:
-        "Our QA engineers perform thorough manual testing to uncover usability issues, edge cases, and functional defects that automated tests may overlook.",
+        "Our QA engineers simulate real-world usage to uncover usability issues, rare edge cases, and functional defects that automated scripts often miss.",
       features: [
         "Functional & Exploratory Testing",
         "UI/UX Validation",

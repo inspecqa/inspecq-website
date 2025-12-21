@@ -9,6 +9,7 @@ import SmoothScrollLink from "../../components/SmoothScrollLink";
 import consultationIllustration from "../../assets/consultation-illustration.svg";
 import consultationBg from "../../assets/consultation-bg.svg";
 import serviceHBg from "../../assets/service/service-hero-bg.svg";
+import serviceIllustration from "../../assets/service/service-illustration.svg";
 import serviceBg2 from "../../assets/service/service-bg-2.svg";
 
 import {
@@ -304,11 +305,11 @@ function AutomationTesting() {
           </div>
 
           {/* Right illustration */}
-          <div className="relative h-72 sm:h-96 lg:h-[560px]">
+          <div className="relative max-w-xl w-full mx-auto">
             <img
-              src="/src/assets/service/service-illustration.svg"
-              alt="Automation testing illustration"
-              className="absolute top-1/2 right-[-40%] sm:right-[-30%] lg:right-[-54%] -translate-y-1/2 w-[520px] sm:w-[720px] lg:w-[1040px] max-w-none object-contain pointer-events-none select-none drop-shadow-[0_24px_48px_rgba(2,6,23,0.10)]"
+              src={serviceIllustration}
+              alt="Functional testing illustration"
+              className="w-full h-auto object-contain pointer-events-none select-none drop-shadow-[0_24px_48px_rgba(2,6,23,0.10)]"
             />
           </div>
         </div>

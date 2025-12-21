@@ -175,7 +175,6 @@ The InspecQ Team`,
                       </tr>
                     </table>
 
-
                      <!-- Step 2 -->
                     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 24px; background: #f8f9fa; border-left: 4px solid #cbd5e1; border-radius: 8px;">
                       <tr>

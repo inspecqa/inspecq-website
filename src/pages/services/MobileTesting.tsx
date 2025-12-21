@@ -288,7 +288,7 @@ const MobileTesting = () => {
           <div className="text-center mb-12 sm:mb-16 mt-10 sm:mt-16">
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-4">
               Optimize Your App’s Performance{" "}
-              <span className="block text-teal-700">
+              <span className="block text-teal-700 mt-2">
                 {" "}
                 and Reliability Across Every Device
               </span>

@@ -14,16 +14,15 @@ const Hero = () => {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="flex flex-col items-center text-center w-full">
-        
           {/* Heading */}
           <h1 className="h1 text-teal-900 max-w-3xl mt-8">
-            Ship Better Software Faster, With Expert QA You Can Trust
+            Ship Better Software Faster With Trusted QA Experts
           </h1>
 
           {/* Subheading */}
           <p className="body-regular mt-3 max-w-2xl text-gray-700">
-            From startups to enterprises, we ensure flawless software delivery
-            through end-to-end testing, automation, and expert QA support.
+            From startups to enterprises, we ensure flawless delivery through
+            end-to-end testing, automation, and security compliance.
           </p>
 
           {/* CTAs */}

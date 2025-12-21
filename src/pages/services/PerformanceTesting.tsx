@@ -351,7 +351,7 @@ const PerformanceTesting = () => {
           <div className="text-center mb-12 sm:mb-16 mt-10 sm:mt-16">
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-4">
               Optimize Your Application’s{" "}
-              <span className="block text-teal-700">Speed and Stability</span>
+              <span className="block text-teal-700 mt-2">Speed and Stability</span>
             </h1>
             <p className="body-regular text-black-700 max-w-3xl mx-auto mb-8 text-sm sm:text-base">
               Deliver fast, reliable, and scalable digital experiences. Our

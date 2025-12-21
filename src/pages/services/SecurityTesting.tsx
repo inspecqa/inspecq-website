@@ -4,6 +4,7 @@ import type { ComponentType } from "react";
 import consultationIllustration from "../../assets/consultation-illustration.svg";
 import consultationBg from "../../assets/consultation-bg.svg";
 import serviceHBg from "../../assets/service/service-hero-bg.svg";
+import serviceIllustration from "../../assets/service/service-illustration.svg";
 import {
   ShieldAlert,
   CheckCircle,
@@ -204,12 +205,16 @@ const SecurityTesting = () => {
         <BackgroundImage src={serviceHBg} />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16 mt-10 sm:mt-16">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-teal-900 mb-4">
-              Application Security Services You Can Trust
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-4">
+              Fortify Your Software{" "}
+              <span className="block text-teal-700 mt-2">
+                {" "}
+                Against Cyber Threats
+              </span>
             </h1>
             <p className="body-regular text-black-700 max-w-3xl mx-auto mb-8 text-sm sm:text-base">
-              From specialized penetration testing to SOC 2 compliance—we secure
-              your web, mobile, and API architecture against modern threats.
+              From rigorous penetration testing to compliance audits, we shield
+              your web, mobile, and API infrastructure from vulnerabilities.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
@@ -222,9 +227,9 @@ const SecurityTesting = () => {
               <SmoothScrollLink
                 to="#st-services"
                 offset={110}
-                className="border-1 border-teal-500 bg-white btn-text text-black px-8 py-3 rounded-[48px] hover:bg-white hover:text-teal-600 transition-colors duration-200"
+                className="border border-teal-500 bg-white btn-text text-black px-8 py-3 rounded-[48px] hover:bg-white hover:text-teal-600 transition-colors duration-200"
               >
-                View Service Map
+                View Services
               </SmoothScrollLink>
             </div>
           </div>
@@ -249,18 +254,16 @@ const SecurityTesting = () => {
               ))}
             </ul>
           </div>
-          {/* Right illustration */}
-          <div className="relative h-[420px] md:h-[520px] lg:h-[560px]">
-            {/* Note: Ideally, use an image related to Security/Shields here 
-
-[Image of Network Security Diagram]
- */}
+          
+          {/* Illustration */}
+          <div className="relative max-w-xl w-full mx-auto">
             <img
-              src="/src/assets/service/service-illustration.svg"
-              alt=""
-              className="absolute top-1/2 right-[-54%] -translate-y-1/2 w-[748px] md:w-[920px] lg:w-[1040px] max-w-none object-contain pointer-events-none select-none drop-shadow-[0_24px_48px_rgba(2,6,23,0.10)]"
+              src={serviceIllustration}
+              alt="Performance testing illustration"
+              className="w-full h-auto object-contain pointer-events-none select-none drop-shadow-[0_24px_48px_rgba(2,6,23,0.10)]"
             />
           </div>
+
         </div>
       </section>
 

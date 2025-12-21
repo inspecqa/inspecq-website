@@ -211,7 +211,7 @@ const QAConsultingAudits = () => {
           <div className="text-center mb-12 sm:mb-16 mt-10 sm:mt-16">
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-4">
               QA Consulting & Audits{" "}
-              <span className="block text-teal-700">
+              <span className="block text-teal-700 mt-2">
                 that scale with your team.
               </span>
             </h1>
@@ -235,7 +235,7 @@ const QAConsultingAudits = () => {
 
               <Link
                 to="/services"
-                className="inline-flex items-center justify-center w-full sm:w-auto rounded-full border border-slate-200 bg-white px-5 sm:px-6 py-3 sm:py-4 text-sm sm:text-base font-medium text-slate-800 hover:border-teal-500 hover:text-teal-700 transition-colors"
+                className="inline-flex items-center justify-center w-full sm:w-auto rounded-full border border-teal-500 bg-white px-5 sm:px-6 py-3 sm:py-4 text-sm sm:text-base font-medium text-slate-800 hover:border-teal-500 hover:text-teal-700 transition-colors"
               >
                 View All QA Services
               </Link>

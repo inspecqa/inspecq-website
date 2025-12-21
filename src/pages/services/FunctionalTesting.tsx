@@ -230,7 +230,7 @@ const FunctionalTesting = () => {
           <div className="text-center mb-12 sm:mb-16 mt-10 sm:mt-16">
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-4">
               Functional Testing{" "}
-              <span className="block text-teal-700">that Scales with You</span>
+              <span className="block text-teal-700 mt-2">that Scales with You</span>
             </h1>
             <p className="body-regular text-black-700 max-w-3xl mx-auto mb-8 text-sm sm:text-base">
               We test every feature and flow to ensure your product runs
@@ -248,7 +248,7 @@ const FunctionalTesting = () => {
               <SmoothScrollLink
                 to="#ft-process"
                 offset={110}
-                className="btn-text bg-white text-black-500 w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-full border flex items-center justify-center gap-2 hover:bg-slate-100 transition-all duration-200 text-sm sm:text-base"
+                className="btn-text bg-white text-black-500 w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-full border border-teal-500 flex items-center justify-center gap-2 hover:bg-slate-100 transition-all duration-200 text-sm sm:text-base"
               >
                 See How It Works
               </SmoothScrollLink>
