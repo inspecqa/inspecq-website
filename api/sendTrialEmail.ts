@@ -47,126 +47,244 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       from: `"InspecQ" <${from}>`,
       to: email,
       replyTo: from,
-      subject: 'Your InspecQ Trial Is Activated',
+      subject: 'Welcome to InspecQ: Your trial is active',
       text: `Hello ${safeName},
 
-Thank you for choosing InspecQ. Your 7-day trial has been activated, and our team is ready to begin supporting your QA needs.
+Thank you for trusting InspecQ. Your 7-day trial is officially active, and we are ready to start supporting your QA needs.
 
-To get started, please follow the steps below:
+Here is the plan for your trial:
 
-1. Schedule Your Kickoff Session
-This 15–20 minute call helps us understand your product, workflow, and quality expectations.
+1. Schedule Your Kickoff Session (30 mins) We need a quick sync to understand your product, workflow, and quality expectations. ${kickoffLink}
 
-2. We Configure Your Trial
-Our team reviews your inputs and sets up your testing environment, scope, and priorities so we can focus on what matters most to you.
+2. We Configure Your Environment Once we align, our team will set up the testing scope and priorities so we can focus on the critical paths that matter to you.
 
-3. Testing Begins
-You will receive structured reports that highlight defects, key observations, and improvement recommendations, based on the priorities we lock in together during our meeting.
+3. Testing Begins & Reports Deliver You will start receiving structured reports highlighting defects, key observations, and actionable recommendations.
 
-Schedule your kickoff call here: 
-
-${kickoffLink}
-
-If you require assistance at any stage, simply reply to this email and our team will respond promptly.
+If you have any questions before the call, simply reply to this email.
 
 We look forward to contributing to your product’s success.
 
 Best Regards,
-InspecQ Team`,
+The InspecQ Team`,
       html: `
-      <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f4f5fb; padding:24px 0">
-        <tbody><tr>
-          <td align="center">
-            
-            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;background-color:#ffffff;border-radius:12px;overflow:hidden">
-              
-              <tbody><tr>
-                <td style="background-color:#008080;padding:20px 28px">
-                  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                    <tbody><tr>
-                      <td align="center">
-                        <div style="color:#ecfeff;font-size:20px;font-weight:700;letter-spacing:0.03em">
-                          <span class="il">InspecQ</span>
-                        </div>
-                        <div style="color:#ccfbf1;font-size:12px;margin-top:4px">
-                          Built to Inspect. Powered by Quality.
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody></table>
-                </td>
-              </tr>
-              <tr>
-                <td style="padding:24px 28px 8px 28px;color:#0f172a;font-size:16px;line-height:1.6"><span class="im">
-                  <p style="margin:0 0 16px 0">Hello ${safeName},</p>
+      <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.cdnfonts.com/css/onnest" rel="stylesheet">
+  <title>Welcome to InspecQ - Trial Started</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Onnest', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f4f5fb;">
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #f4f5fb; padding: 24px 0;">
+    <tr>
+      <td align="center">
+        <!-- Main Container -->
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width: 600px; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);">
+          
+          <!-- Header with Gradient -->
+          <tr>
+            <td style="background: linear-gradient(135deg, #e5fff4 0%, #008081 100%); padding: 32px 28px; text-align: center;">
+              <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td align="center">
+                    <table cellpadding="0" cellspacing="0" border="0" style="display: inline-block;">
+                      <tr>
+                        <td style="vertical-align: middle; padding-right: 16px;">
+                          <!-- Logo -->
+                          <img src="https://tzmp2b268dae69si.public.blob.vercel-storage.com/Logo%40300x.png" alt="InspecQ" style="width: 60px; height: 60px; display: block;">
+                        </td>
+                        <td style="vertical-align: middle; text-align: left;">
+                          <!-- Company Name & Tagline -->
+                          <div style="color: #ffffff; font-size: 24px; font-weight: 700; letter-spacing: 0.03em; margin-bottom: 4px;">
+                            InspecQ
+                          </div>
+                          <div style="color: rgba(255, 255, 255, 0.9); font-size: 13px; font-weight: 500;">
+                            Built to Inspect. Powered by Quality.
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
 
-                  <p style="margin:0 0 16px 0">
-                    Thank you for choosing <strong><span class="il">InspecQ</span></strong>. Your <strong>7-day trial</strong> has been activated, and our team is ready to begin supporting your QA needs.
-                  </p>
+          <!-- Trial Badge -->
+          <tr>
+            <td style="padding: 0 28px;">
+              <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top: -20px;">
+                <tr>
+                  <td align="center">
+                    <div style="display: inline-block; background: linear-gradient(135deg, #008080 0%, #20b2aa 100%); color: white; padding: 10px 28px; border-radius: 999px; font-size: 14px; font-weight: 600; box-shadow: 0 4px 12px rgba(0, 128, 128, 0.3);">
+                      🎉 7-Day Trial Active
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          
+          <!-- Main Content -->
+          <tr>
+            <td style="padding: 32px 28px 8px 28px; color: #0f172a; font-size: 16px; line-height: 1.6;">
+              <p style="margin: 0 0 20px 0; font-size: 18px; font-weight: 600; color: #1e293b;">
+                Hello [Name],
+              </p>
 
-                  <p style="margin:0 0 16px 0">
-                    To get started, please follow the steps below:
-                  </p>
+              <p style="margin: 0 0 20px 0;">
+                Thank you for trusting <strong style="color: #008080;">InspecQ</strong>. Your <strong>7-day trial</strong> is officially active, and we are ready to start supporting your QA needs.
+              </p>
 
-                  </span><ol style="margin:0 0 16px 20px;padding:0;color:#0f172a"><span class="im">
-                    <li style="margin-bottom:12px">
-                      <strong>Schedule Your Kickoff Session</strong><br>
-                      This 15–20 minute call helps us understand your product, workflow, and quality expectations.<br>
-                    </li>
-                    <li style="margin-bottom:12px">
-                      <strong>We Configure Your Trial</strong><br>
-                      Our team reviews your inputs and sets up your testing environment, scope, and priorities so we can focus on what matters most to you.
-                    </li>
-                    <li style="margin-bottom:4px">
-                      <strong>Testing Begins</strong><br>
-                      You will receive structured reports that highlight defects, key observations, and improvement recommendations, based on the priorities we lock in together during our meeting.
-                    </li>
-                  </span></ol>
-                </td>
-              </tr>
-              
-              <tr>
-                <td style="padding:0 28px 8px 28px">
-                  <table cellpadding="0" cellspacing="0" border="0" align="left" style="margin:8px 0 24px 0">
-                    <tbody><tr>
-                      <td align="center" bgcolor="#0f766e" style="border-radius:999px">
-                        <a href="https://calendly.com/mail-inspecq/inspecq-free-trial-kickoff-call" rel="noreferrer" style="display:inline-block;padding:12px 24px;font-size:15px;font-weight:600;color:#ffffff;text-decoration:none;border-radius:999px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://calendly.com/mail-inspecq/inspecq-free-trial-kickoff-call&amp;source=gmail&amp;ust=1764379168984000&amp;usg=AOvVaw32W6n_Fs-clumZ4S_uD0I9">
-                          Schedule Your Kickoff Call
-                        </a>
-                      </td>
-                    </tr>
-                  </tbody></table>
-                </td>
-              </tr>
+              <p style="margin: 0 0 16px 0; font-weight: 600; color: #1e293b;">
+                Here is the plan for your trial:
+              </p>
 
-              
-              <tr>
-                <td style="padding:0 28px 24px 28px;color:#4b5563;font-size:14px;line-height:1.6">
-                  <p style="margin:0 0 12px 0">
-                    If you require assistance at any stage, simply reply to this email and our team will respond promptly.
-                  </p>
+              <!-- Steps -->
+              <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin: 24px 0;">
+                <tr>
+                  <td>
+                    <!-- Step 1 -->
+                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 24px; background: linear-gradient(to right, #f8f9fa 0%, #e8f5f5 100%); border-left: 4px solid #008080; border-radius: 8px; padding: 20px;">
+                      <tr>
+                        <td>
+                          <div style="display: flex; align-items: flex-start;">
+                            <div style="background: #008080; color: white; width: 32px; height: 32px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; flex-shrink: 0; margin-right: 16px;">
+                              1
+                            </div>
+                            <div style="flex: 1;">
+                              <div style="font-weight: 700; color: #0f172a; margin-bottom: 8px; font-size: 16px;">
+                                Schedule Your Kickoff Session (15 mins)
+                              </div>
+                              <div style="color: #4b5563; font-size: 15px; line-height: 1.6; margin-bottom: 16px;">
+                                We need a quick sync to understand your product, workflow, and quality expectations.
+                              </div>
+                              <table cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                  <td align="left" style="background: linear-gradient(135deg, #008080 0%, #20b2aa 100%); border-radius: 999px; box-shadow: 0 4px 12px rgba(0, 128, 128, 0.3);">
+                                    <a href="[KICKOFF_LINK]" style="display: inline-block; padding: 12px 28px; font-size: 15px; font-weight: 600; color: #ffffff; text-decoration: none; border-radius: 999px; font-family: 'Onnest', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;">
+                                      📅  Book Your Kickoff Now
+                                    </a>
+                                  </td>
+                                </tr>
+                              </table>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
 
-                  <p style="margin:0 0 4px 0">
-                    We look forward to contributing to your product’s success.
-                  </p>
+                    <!-- Step 2 -->
+                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 24px; background: #f8f9fa; border-left: 4px solid #cbd5e1; border-radius: 8px; padding: 20px;">
+                      <tr>
+                        <td>
+                          <div style="display: flex; align-items: flex-start;">
+                            <div style="background: #cbd5e1; color: #475569; width: 32px; height: 32px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; flex-shrink: 0; margin-right: 16px;">
+                              2
+                            </div>
+                            <div style="flex: 1;">
+                              <div style="font-weight: 700; color: #0f172a; margin-bottom: 8px; font-size: 16px;">
+                                We Configure Your Environment
+                              </div>
+                              <div style="color: #4b5563; font-size: 15px; line-height: 1.6;">
+                                Once we align, our team will set up the testing scope and priorities so we can focus on the critical paths that matter to you.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
 
-                  <p style="margin:8px 0 0 0">
-                    Best Regards,<br>
-                    <strong><span class="il">InspecQ</span> Team</strong><br>
-                  </p>
-                </td>
-              </tr>
+                    <!-- Step 3 -->
+                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background: #f8f9fa; border-left: 4px solid #cbd5e1; border-radius: 8px; padding: 20px;">
+                      <tr>
+                        <td>
+                          <div style="display: flex; align-items: flex-start;">
+                            <div style="background: #cbd5e1; color: #475569; width: 32px; height: 32px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; flex-shrink: 0; margin-right: 16px;">
+                              3
+                            </div>
+                            <div style="flex: 1;">
+                              <div style="font-weight: 700; color: #0f172a; margin-bottom: 8px; font-size: 16px;">
+                                Testing Begins & Reports Deliver
+                              </div>
+                              <div style="color: #4b5563; font-size: 15px; line-height: 1.6;">
+                                You will start receiving structured reports highlighting defects, key observations, and actionable recommendations.
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          
+          <!-- Closing Message -->
+          <tr>
+            <td style="padding: 16px 28px 32px 28px; color: #4b5563; font-size: 15px; line-height: 1.6;">
+              <div style="background: #fffbeb; border-left: 4px solid #f59e0b; padding: 16px; border-radius: 6px; margin-bottom: 20px;">
+                <p style="margin: 0; color: #92400e;">
+                  💡 <strong>Quick Tip:</strong> Have questions before the call? Simply reply to this email. We're here to help!
+                </p>
+              </div>
 
-              
-              <tr>
-                <td style="background-color:#f1f5f9;padding:12px 28px;color:#9ca3af;font-size:11px;text-align:center">
-                  You are receiving this email because you requested a 7-day QA trial with <span class="il">InspecQ</span>.
-                </td>
-              </tr>
-            </tbody></table>
-          </td>
-        </tr>
-      </tbody></table>
+              <p style="margin: 0 0 12px 0;">
+                We look forward to contributing to your product's success.
+              </p>
+
+              <p style="margin: 16px 0 0 0;">
+                <strong style="color: #1e293b;">Best Regards,</strong><br>
+                <span style="color: #008080; font-weight: 600;">The InspecQ Team</span>
+              </p>
+            </td>
+          </tr>
+
+          <!-- Social Links -->
+          <tr>
+            <td style="padding: 24px 28px; border-top: 1px solid #e5e7eb;">
+              <table cellpadding="0" cellspacing="0" border="0" align="center">
+                <tr>
+                <td style="padding: 0 10px;">
+                    <a href="https://www.inspecq.com" style="color: #008080; text-decoration: none; font-weight: 500; font-size: 14px;">Website</a>
+                  </td>
+                  <td style="color: #cbd5e1;">|</td>
+                  <td style="padding: 0 10px;">
+                    <a href="https://www.linkedin.com/company/qainspec/" style="color: #008080; text-decoration: none; font-weight: 500; font-size: 14px;">LinkedIn</a>
+                  </td>
+                  <td style="color: #cbd5e1;">|</td>
+                  <td style="padding: 0 10px;">
+                    <a href="https://www.facebook.com/qainspec" style="color: #008080; text-decoration: none; font-weight: 500; font-size: 14px;">Facebook</a>
+                  </td>
+                  <td style="color: #cbd5e1;">|</td>
+                  <td style="padding: 0 10px;">
+                    <a href="https://x.com/qainspec" style="color: #008080; text-decoration: none; font-weight: 500; font-size: 14px;">Twitter</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          
+          <!-- Footer -->
+          <tr>
+            <td style="background-color: #f1f5f9; padding: 20px 28px; text-align: center;">
+              <p style="margin: 0 0 8px 0; color: #64748b; font-size: 12px; line-height: 1.5;">
+                You are receiving this email because you requested a 7-day QA trial with <strong style="color: #008080;">InspecQ</strong>.
+              </p>
+              <p style="margin: 0; color: #94a3b8; font-size: 11px;">
+                © 2025 InspecQ. All rights reserved.
+              </p>
+            </td>
+          </tr>
+          
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
       `,
     };
 

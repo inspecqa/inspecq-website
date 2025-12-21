@@ -223,6 +223,10 @@ To unsubscribe: ${unsubscribeUrl}`,
               <table cellpadding="0" cellspacing="0" border="0" align="center" style="margin-bottom: 20px;">
                 <tr>
                   <td style="padding: 0 10px;">
+                    <a href="https://www.inspecq.com" style="color: #008080; text-decoration: none; font-weight: 500; font-size: 14px;">Website</a>
+                  </td>
+                  <td style="color: #cbd5e1;">|</td>
+                  <td style="padding: 0 10px;">
                     <a href="https://www.linkedin.com/company/qainspec/" style="color: #008080; text-decoration: none; font-weight: 500; font-size: 14px;">LinkedIn</a>
                   </td>
                   <td style="color: #777;">|</td>
