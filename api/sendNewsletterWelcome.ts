@@ -54,8 +54,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     const baseUrl = process.env.BASE_URL || process.env.NEXT_PUBLIC_BASE_URL || 'https://www.inspecq.com';
-    const unsubscribeUrl = unsubscribeToken 
-      ? `${baseUrl}/api/unsubscribe/${unsubscribeToken}`
+     const unsubscribeUrl = unsubscribeToken 
+      ? `${baseUrl}/api/newsletterUnsubscribe?token=${unsubscribeToken}`
       : '#';
 
     const host = process.env.SMTP_HOST;

@@ -1,11 +1,6 @@
-//api/unsubscribe.ts
+// api/newsletterUnsubscribe.ts
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { createClient } from '@supabase/supabase-js';
-
-const supabaseUrl = process.env.VITE_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
-
-const supabase = createClient(supabaseUrl, supabaseKey);
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   const { token } = req.query;
@@ -13,6 +8,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (!token || typeof token !== 'string') {
     return res.status(400).send(getErrorPage('Invalid or missing unsubscribe token'));
   }
+
+  const supabaseUrl = process.env.VITE_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+
+  if (!supabaseUrl || !supabaseKey) {
+    return res.status(500).send(getErrorPage('Server configuration error. Please contact support.'));
+  }
+
+  const supabase = createClient(supabaseUrl, supabaseKey);
   
   try {
     if (req.method === 'GET') {
@@ -180,7 +184,7 @@ function getConfirmationPage(email: string, token: string) {
       You'll no longer receive our weekly QA insights, testing best practices, and actionable strategies.
     </div>
     
-    <form method="POST" action="/api/unsubscribe/${token}">
+    <form method="POST" action="/api/newsletterUnsubscribe?token=${token}">
       <button type="submit" class="btn-unsubscribe">Yes, Unsubscribe Me</button>
       <button type="button" class="btn-cancel" onclick="window.location.href='https://www.inspecq.com'">
         Keep Me Subscribed
