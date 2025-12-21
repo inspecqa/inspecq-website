@@ -46,6 +46,8 @@ const Footer = () => {
     return () => clearTimeout(timeout);
   }, [newsletterSuccess, newsletterError]);
 
+  // Updated handleNewsletterSubmit function with unsubscribe token generation
+
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setNewsletterError("");
@@ -75,18 +77,66 @@ const Footer = () => {
     try {
       setNewsletterLoading(true);
 
-      // Insert subscriber into Supabase
+      // Generate unsubscribe token (client-side generation using crypto API)
+      const tokenArray = new Uint8Array(32);
+      crypto.getRandomValues(tokenArray);
+      const unsubscribeToken = Array.from(tokenArray)
+        .map((b) => b.toString(16).padStart(2, "0"))
+        .join("");
+
+      // Insert subscriber into Supabase with unsubscribe token
       const { error } = await supabase.from("newsletter_subscribers").insert({
         email: email.toLowerCase(),
         source: "footer",
+        unsubscribe_token: unsubscribeToken,
+        subscribed: true,
       });
 
       if (error) {
         if ((error as any).code === "23505") {
-          // duplicate email
-          setNewsletterSuccess(
-            "You’re already subscribed. Thanks for staying connected."
-          );
+          // Duplicate email - check if they're unsubscribed
+          const { data: existing } = await supabase
+            .from("newsletter_subscribers")
+            .select("subscribed")
+            .eq("email", email.toLowerCase())
+            .single();
+
+          if (existing && !existing.subscribed) {
+            // Resubscribe them
+            const { error: updateError } = await supabase
+              .from("newsletter_subscribers")
+              .update({
+                subscribed: true,
+                unsubscribed_at: null,
+              })
+              .eq("email", email.toLowerCase());
+
+            if (updateError) {
+              console.error("[Newsletter] Resubscribe error:", updateError);
+              setNewsletterError("Something went wrong. Please try again.");
+              return;
+            }
+
+            // Send welcome email for resubscribed user
+            try {
+              await fetch("/api/sendNewsletterWelcome", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email: email.toLowerCase() }),
+              });
+            } catch (err) {
+              console.error("Newsletter welcome email error:", err);
+            }
+
+            setNewsletterSuccess(
+              "Welcome back! You've been resubscribed to our newsletter."
+            );
+          } else {
+            // Already subscribed and active
+            setNewsletterSuccess(
+              "You're already subscribed. Thanks for staying connected."
+            );
+          }
         } else {
           console.error("[Newsletter] Supabase insert error:", error);
           setNewsletterError(
@@ -96,7 +146,7 @@ const Footer = () => {
         return;
       }
 
-      
+      // Send welcome email to new subscriber
       try {
         await fetch("/api/sendNewsletterWelcome", {
           method: "POST",
@@ -105,11 +155,11 @@ const Footer = () => {
         });
       } catch (err) {
         console.error("Newsletter function error:", err);
+        // Don't fail the subscription if email fails
       }
 
-
       setNewsletterSuccess(
-        "You're subscribed! We’ll send you helpful QA insights and InspecQ updates soon."
+        "You're subscribed! Check your inbox for a welcome email with helpful QA insights."
       );
       setNewsletterEmail("");
     } catch (err) {
