@@ -1,4 +1,11 @@
-import { Routes, Route, useParams, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import {
+  Routes,
+  Route,
+  useParams,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -31,6 +38,7 @@ import ServerError500 from "./pages/errors/ServerError500";
 import Maintenance from "./pages/errors/Maintenance";
 
 import { SITE_CONFIG } from "./config/siteConfig";
+import ReactGA from "react-ga4";
 
 // Admin imports
 import AdminLogin from "./pages/admin/Login";
@@ -39,6 +47,8 @@ import AdminCareers from "./pages/admin/Careers";
 import AdminNewsletter from "./pages/admin/Newsletter";
 import AdminForms from "./pages/admin/Forms";
 import ProtectedRoute from "./components/admin/ProtectedRoute";
+
+ReactGA.initialize("G-9TZBKJLD0P");
 
 function BestPracticeDetailWrapper() {
   const { slug } = useParams<{ slug: string }>();
@@ -58,10 +68,20 @@ function BestPracticesWrapper() {
 }
 
 function App() {
+  const location = useLocation();
+
   // Full-site maintenance mode
   if (SITE_CONFIG.MAINTENANCE_MODE) {
     return <Maintenance />;
   }
+
+  //useEffect আপডেট
+  useEffect(() => {
+    ReactGA.send({
+      hitType: "pageview",
+      page: location.pathname + location.search,
+    });
+  }, [location]);
 
   return (
     <div className="min-h-screen flex flex-col">
