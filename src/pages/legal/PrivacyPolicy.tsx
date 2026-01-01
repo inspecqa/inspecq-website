@@ -18,7 +18,8 @@ const PrivacyPolicy: React.FC = () => {
           </p>
 
           <p className="text-xs sm:text-sm text-gray-500 mb-3 sm:mb-4">
-            Last updated: November 2025
+            {/* তারিখ আপডেট করা হয়েছে */}
+            Last updated: January 2026
           </p>
 
           <p className="body-md text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
@@ -174,16 +175,63 @@ const PrivacyPolicy: React.FC = () => {
 
             <div className="h-px bg-gradient-to-r from-transparent via-teal-200 to-transparent" />
 
-            {/* 6. Cookies & Analytics */}
+            {/* 6. Cookies & Tracking Technologies (MAJOR UPDATE HERE) */}
             <div>
               <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
-                6. Cookies &amp; Analytics
+                6. Cookies &amp; Tracking Technologies
               </h2>
               <p className="mt-1.5">
-                Our website may use cookies and analytics tools to understand
-                how visitors use the site and to improve user experience. You
-                can adjust your browser settings to refuse cookies, but some
-                features of the site may not function properly without them.
+                We use cookies and similar tracking technologies to track the
+                activity on Our Service and store certain information. Tracking
+                technologies used are beacons, tags, and scripts to collect and
+                track information and to improve and analyze Our Service.
+              </p>
+
+              <div className="mt-4 space-y-4">
+                <div>
+                  <h3 className="text-sm sm:text-base font-semibold text-gray-800">
+                    Necessary / Essential Cookies
+                  </h3>
+                  <p className="mt-1">
+                    These Cookies are essential to provide You with services
+                    available through the Website and to enable You to use some
+                    of its features. They help to authenticate users and prevent
+                    fraudulent use of user accounts.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="text-sm sm:text-base font-semibold text-gray-800">
+                    Cookie Policy / Notice Acceptance Cookies
+                  </h3>
+                  <p className="mt-1">
+                    These Cookies identify if users have accepted the use of
+                    cookies on the Website.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="text-sm sm:text-base font-semibold text-gray-800">
+                    Analytics Cookies (Google Analytics)
+                  </h3>
+                  <p className="mt-1">
+                    We use Google Analytics to monitor and analyze the use of
+                    our Service. Google Analytics is a web analytics service
+                    offered by Google that tracks and reports website traffic.
+                    Google uses the data collected to track and monitor the use
+                    of our Service. This data is shared with other Google
+                    services. Google may use the collected data to contextualize
+                    and personalize the ads of its own advertising network.
+                  </p>
+                </div>
+              </div>
+
+              <p className="mt-4 bg-teal-50 p-4 rounded-lg border border-teal-100 text-sm">
+                <strong>Your Choice:</strong> You can opt-out of having made
+                your activity on the Service available to Google Analytics by
+                installing the Google Analytics opt-out browser add-on or by
+                declining cookies through our{" "}
+                <span className="font-semibold">Cookie Consent Banner</span>.
               </p>
             </div>
 
