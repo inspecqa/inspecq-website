@@ -39,6 +39,7 @@ import Maintenance from "./pages/errors/Maintenance";
 
 import { SITE_CONFIG } from "./config/siteConfig";
 import ReactGA from "react-ga4";
+import CookieConsent from "./components/CookieConsent";
 
 // Admin imports
 import AdminLogin from "./pages/admin/Login";
@@ -189,6 +190,8 @@ function App() {
 
       <Footer />
       <BackToTop />
+      {/* এখানে কুকি ব্যানারটি যোগ করুন */}
+      <CookieConsent />
     </div>
   );
 }
