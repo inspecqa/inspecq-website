@@ -20,9 +20,8 @@ const ConsultationCta = () => {
             {/* Left copy */}
             <div className="text-white">
               <h1 className="text-3xl md:text-4xl font-semibold leading-tight">
-                30 Minute Free QA
-                <br /> Consultation to clear
-                <br /> your doubts.
+                Book a 30-minute
+                <br /> consultation to build your testing strategy.
               </h1>
 
               <p className="body-regular mt-6 text-white/90 text-lg max-w-2xl">

@@ -10,18 +10,10 @@ import {
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useSmoothScroll } from "../hooks/useSmoothScroll";
 import { supabase } from "../lib/supabaseClient";
-
 import sftBg3 from "../assets/sft-bg-3.svg";
 import cuheaderBg from "../assets/cu-header-bg.svg";
 import sftBg4 from "../assets/sft-bg-4.svg";
 
-/* -------------------------
-   Modal
--------------------------- */
-
-/* -------------------------
-   Modal (shared style)
--------------------------- */
 
 const Modal: React.FC<{
   open: boolean;
@@ -154,16 +146,27 @@ const Contact: React.FC = () => {
 
     // 2. Scroll behavior based on query param
     const scrollParam = searchParams.get("scroll");
+
     if (scrollParam === "form") {
-      const el = document.getElementById("contact-form");
-      if (el) {
-        setTimeout(
-          () => el.scrollIntoView({ behavior: "smooth", block: "start" }),
-          200
-        );
-      }
+      // Use double RAF for guaranteed smooth paint
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          const el = document.getElementById("contact-form");
+          if (el) {
+            const headerOffset = 100;
+            const elementPosition = el.getBoundingClientRect().top;
+            const offsetPosition =
+              elementPosition + window.scrollY - headerOffset;
+
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: "smooth",
+            });
+          }
+        });
+      });
     } else {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo({ top: 0 });
     }
 
     // 3. Focus first input
@@ -305,7 +308,7 @@ const Contact: React.FC = () => {
   ] as const;
 
   return (
-    <div className="pt-16">
+    <>
       {/* Success Modal */}
       <Modal
         open={showSuccess}
@@ -321,11 +324,11 @@ const Contact: React.FC = () => {
       </Modal>
 
       {/* Hero Section */}
-      <section className="relative py-16 sm:py-20 lg:py-24 overflow-visible">
+      <section className="relative overflow-hidden pt-24 pb-16 sm:pt-28 sm:pb-20 lg:pt-32 lg:pb-24">
         <img
           src={cuheaderBg}
           alt=""
-          className="pointer-events-none absolute inset-x-0 bottom-0 w-full max-w-none z-0 opacity-90 object-contain"
+          className="absolute inset-0 w-full h-full max-w-none pointer-events-none z-0 opacity-90 object-cover"
         />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -628,7 +631,7 @@ const Contact: React.FC = () => {
           </div>
         </div>
       </section>
-    </div>
+    </>
   );
 };
 

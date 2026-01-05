@@ -177,32 +177,32 @@ const COMPANY_SIZE = [
 
 const Solutions = () => {
   return (
-    <div className="pt-16">
+    <>
       {/* Hero Section */}
-      <section className="relative py-16 sm:py-20 lg:py-24 overflow-visible">
+      <section className="relative overflow-hidden pt-24 pb-16 sm:pt-28 sm:pb-20 lg:pt-32 lg:pb-24">
         <img
           src={solutionBg}
           alt=""
-          className="absolute inset-x-0 bottom-0 w-full max-w-none pointer-events-none z-0 opacity-90 object-contain"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0 opacity-90"
         />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-center justify-center text-center gap-8 sm:gap-10">
-            <div className="max-w-3xl mt-8">
-              <p className="h1 text-teal-900">
+          <div className="flex flex-col items-center justify-center text-center gap-8">
+            <div className="max-w-3xl">
+              <p className="h1 text-teal-900 mt-4">
                 Tailored Testing Solutions for Every Industry
               </p>
-              <p className="body-regular text-gray-600 mt-4">
+              <p className="body-regular text-gray-600 mt-4 sm:mt-6">
                 We understand that every industry has unique challenges. Our
                 specialized testing solutions are designed to meet the specific
                 needs of your sector.
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center w-full sm:w-auto">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center w-full sm:w-auto mt-2">
               <Link
                 to="/contact?scroll=form"
-                className="bg-teal-600 text-white w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-sm sm:text-base hover:bg-teal-700 transition-colors duration-200 flex items-center justify-center space-x-2"
+                className="bg-teal-600 text-white w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-4 rounded-xl font-semibold text-sm sm:text-base hover:bg-teal-700 transition-colors duration-200 flex items-center justify-center space-x-2"
               >
                 <span>Get Custom Solution</span>
                 <ArrowRight className="h-5 w-5" />
@@ -213,29 +213,31 @@ const Solutions = () => {
       </section>
 
       {/* Industry Solutions */}
-      <section className="relative py-12 sm:py-16 overflow-hidden">
+      <section className="relative py-16 md:py-20 overflow-hidden bg-white">
         <img
           src={solBg2}
           alt=""
-          className="absolute inset-x-0 bottom-0 w-full max-w-none pointer-events-none z-0 opacity-90 object-contain"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0 opacity-40"
         />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Heading */}
-          <div className="mb-12 sm:mb-16">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-y-8 md:gap-x-28 items-start">
+          <div className="mb-12 md:mb-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-start">
               <div>
                 <div className="inline-flex items-center bg-teal-100 text-gray-800 px-4 py-2 rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-6">
                   <Grid className="h-4 w-4 mr-2 text-gray-600" />
                   Industry-Focused QA Solutions
                 </div>
 
-                <p className="h2">Expert Testing Tailored to Your Industry</p>
+                <p className="h2 text-gray-900">
+                  Expert Testing Tailored to Your Industry
+                </p>
               </div>
 
-              <div className="md:self-start pt-4 sm:pt-8">
-                <p className="body-md text-gray-600 max-w-md text-sm sm:text-base">
-                  We align our QA strategy with your industry’s workflows,
+              <div className="md:pt-8">
+                <p className="body-regular text-gray-600 text-sm sm:text-base">
+                  We align our QA strategy with your industry's workflows,
                   risks, and user expectations to deliver reliable, scalable,
                   and high-performing software across every touchpoint.
                 </p>
@@ -248,16 +250,14 @@ const Solutions = () => {
             {INDUSTRIES.map((industry) => (
               <div
                 key={industry.title}
-                className="group relative flex flex-col h-full rounded-2xl bg-white/95 border border-teal-50 shadow-sm 
+                className="group relative flex flex-col h-full rounded-2xl bg-white border border-teal-50 shadow-sm 
                            hover:shadow-xl hover:border-teal-200 transition-all duration-300 hover:-translate-y-1"
               >
                 <div className="p-6 md:p-7 flex flex-col h-full">
                   {/* Icon + Title */}
                   <div className="mb-4 md:mb-5">
                     <div
-                      className={`inline-flex items-center justify-center rounded-xl p-3 mb-4 ${
-                        industry.color ?? "bg-teal-200"
-                      } text-white`}
+                      className={`inline-flex items-center justify-center rounded-xl p-3 mb-4 ${industry.color} text-white`}
                     >
                       <industry.icon className="h-5 w-5" />
                     </div>
@@ -295,7 +295,7 @@ const Solutions = () => {
           </div>
 
           {/* Bottom CTA */}
-          <div className="mt-10 sm:mt-12 flex justify-center">
+          <div className="mt-10 md:mt-12 flex justify-center">
             <Link
               to="/services"
               className="inline-flex items-center gap-2 rounded-full bg-teal-800 px-6 py-3 
@@ -312,57 +312,59 @@ const Solutions = () => {
       </section>
 
       {/* Company Size Solutions */}
-      <section className="py-16 sm:py-20 lg:py-24 relative overflow-hidden">
+      <section className="py-16 md:py-20 lg:py-24 relative overflow-hidden bg-gradient-to-br from-teal-50 via-white to-teal-50">
         <img
           src={solBg3}
           alt=""
-          className="absolute inset-x-0 bottom-0 w-full max-w-none pointer-events-none z-0 opacity-90 object-contain"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0 opacity-30"
         />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Heading */}
-          <div className="text-center mb-12 sm:mb-16">
+          <div className="text-center mb-12 md:mb-16">
             <p className="h2 text-gray-900 mb-4">
               Solutions for Every Company Size
             </p>
             <p className="body-regular text-gray-600 max-w-3xl mx-auto text-sm sm:text-base">
-              Whether you&apos;re a startup, mid-market business, or enterprise,
-              our QA solutions scale with your product, team, and budget.
+              Whether you're a startup, mid-market business, or enterprise, our
+              QA solutions scale with your product, team, and budget.
             </p>
           </div>
 
           {/* Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 items-stretch">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {COMPANY_SIZE.map((size) => (
               <div
                 key={size.title}
-                className="flex flex-col h-full rounded-2xl bg-gradient-to-br from-teal-50/40 to-white 
-                           border border-teal-100/50 p-6 sm:p-8 text-left relative 
+                className="flex flex-col h-full rounded-2xl bg-white 
+                           border border-teal-100 p-6 md:p-8 
                            hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
               >
                 {/* Icon */}
-                <div className="bg-teal-600 backdrop-blur-sm w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center mb-5 sm:mb-6">
-                  <size.icon className="h-5 w-5 text-white" />
+                <div className="bg-teal-600 w-12 h-12 md:w-14 md:h-14 rounded-xl flex items-center justify-center mb-5 md:mb-6">
+                  <size.icon className="h-5 w-5 md:h-6 md:w-6 text-white" />
                 </div>
 
                 {/* Title */}
-                <p className="h5 text-gray-900 mb-2">{size.title}</p>
+                <p className="text-xl md:text-2xl font-bold text-gray-900 mb-2">
+                  {size.title}
+                </p>
 
                 {/* Description */}
-                <p className="text-gray-600 text-sm md:text-[15px] mb-5 sm:mb-6">
+                <p className="text-gray-600 text-sm md:text-[15px] mb-5 md:mb-6 leading-relaxed">
                   {size.description}
                 </p>
 
                 {/* Feature List */}
-                <div className="bg-white rounded-xl border border-gray-100 p-5 md:p-6 mb-5 sm:mb-6 flex-1">
+                <div className="bg-teal-50 rounded-xl p-5 md:p-6 mb-5 md:mb-6 flex-1">
                   <ul className="space-y-3">
                     {size.features.map((feature) => (
                       <li
                         key={feature}
-                        className="flex items-center text-gray-700 text-sm"
+                        className="flex items-start text-gray-700 text-sm"
                       >
-                        <CheckCircle className="h-4 w-4 text-teal-600 mr-2" />
-                        {feature}
+                        <CheckCircle className="h-4 w-4 text-teal-600 mr-2 mt-0.5 flex-shrink-0" />
+                        <span>{feature}</span>
                       </li>
                     ))}
                   </ul>
@@ -372,17 +374,13 @@ const Solutions = () => {
                 <div className="mt-auto pt-1">
                   <Link
                     to="/contact"
-                    className={[
-                      "inline-flex w-full md:w-auto items-center justify-center md:justify-start",
-                      "px-6 py-2.5 rounded-full font-medium text-white shadow-sm text-sm sm:text-base",
-                      "transition-colors duration-200",
-                      size.title === "Enterprise"
-                        ? "bg-teal-800 hover:bg-teal-900"
-                        : "bg-teal-700 hover:bg-teal-800",
-                    ].join(" ")}
+                    className="inline-flex w-full items-center justify-center gap-2
+                              px-6 py-2.5 rounded-full font-medium text-white shadow-sm text-sm sm:text-base
+                              bg-teal-700 hover:bg-teal-800
+                              transition-colors duration-200"
                   >
-                    Get Started
-                    <ArrowRight className="h-4 w-4 ml-2" />
+                    <span>Get Started</span>
+                    <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
               </div>
@@ -406,16 +404,15 @@ const Solutions = () => {
               {/* Left copy */}
               <div className="text-white">
                 <h2 className="text-3xl md:text-4xl font-semibold leading-tight">
-                  30 Minute Free QA
+                  30-Minute Free QA
                   <br />
-                  Consultation to clear
-                  <br />
-                  your doubts.
+                  Consultation for your product.
                 </h2>
 
                 <p className="body-regular mt-6 text-white/90 text-base sm:text-lg max-w-2xl">
-                  Book a 30-minute consultation to discuss your testing needs
-                  and get expert recommendations.
+                  Share your product, stack, and release goals. We'll review
+                  your current QA approach and outline a practical testing plan
+                  you can start using immediately.
                 </p>
 
                 <a
@@ -440,7 +437,7 @@ const Solutions = () => {
           </div>
         </div>
       </section>
-    </div>
+    </>
   );
 };
 

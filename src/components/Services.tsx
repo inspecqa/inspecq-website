@@ -46,10 +46,10 @@ const Services = () => {
             <div>
               <div className="inline-flex items-center bg-teal-100 text-gray-800 px-4 py-2 rounded-full text-sm font-medium mb-6">
                 <Sparkles className="h-4 w-4 mr-2 text-gray-600" />
-                Comprehensive QA Services
+                Comprehensive Services
               </div>
 
-              <p className="h2">Everything You Need for Quality Assurance</p>
+              <p className="h2">End-to-End Testing for Flawless Releases</p>
             </div>
 
             {/* Right Description */}

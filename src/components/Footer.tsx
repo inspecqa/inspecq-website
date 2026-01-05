@@ -24,7 +24,7 @@ const company = [
 ];
 
 const quicklinks = [
-  { name: "Terms & Conditions", path: "/legal/terms-and-service" },
+  { name: "Terms & Conditions", path: "/legal/terms-and-conditions" },
   { name: "Privacy Policy", path: "/legal/privacy-policy" },
 ];
 

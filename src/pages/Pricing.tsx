@@ -227,22 +227,21 @@ const PricingPage: React.FC = () => {
     billing === "yearly" ? "Billed yearly • Save up to 20%" : "Billed monthly";
 
   return (
-    <div id="pricing-page" className="pt-16">
-      {/* ======================= HERO ======================= */}
+    <div id="pricing-page">
       <section
         aria-label="Pricing Hero Section"
-        className="relative py-16 sm:py-20 lg:py-24 overflow-visible"
+        className="relative overflow-hidden pt-24 pb-16 sm:pt-28 sm:pb-20 lg:pt-32 lg:pb-24"
       >
         <img
           src={pricingHeaderBg}
           alt=""
-          className="absolute inset-x-0 bottom-0 w-full max-w-none pointer-events-none z-0 opacity-90 object-contain"
+          className="absolute inset-0 w-full h-full max-w-none pointer-events-none -z-10 opacity-90 object-cover object-bottom"
         />
-
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center justify-center text-center gap-6 sm:gap-8">
+            
             {/* 7-Day Trial Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-50 border border-teal-100 shadow-sm">
+            <div className="inline-flex items-center gap-2 px-4 py-2 mt-4 rounded-full bg-teal-50 border border-teal-100 shadow-sm">
               <span className="relative flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-teal-500"></span>

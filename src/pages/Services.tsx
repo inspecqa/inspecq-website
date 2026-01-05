@@ -71,7 +71,6 @@ const Services = () => {
       color: "bg-yellow-500",
       path: "/services/security-testing",
     },
-
     {
       icon: Gauge,
       title: "Performance Testing",
@@ -118,31 +117,31 @@ const Services = () => {
   ];
 
   return (
-    <div className="pt-16">
+    <>
       {/* Hero Section */}
-      <section className="relative py-20 overflow-visible">
+      <section className="relative pt-24 pb-16 sm:pt-28 sm:pb-20 lg:pt-32 lg:pb-24 overflow-hidden">
         <img
           src={pricingHeaderBg}
           alt=""
-          className="absolute inset-x-0 bottom-0 w-full max-w-none pointer-events-none z-0 opacity-90 object-contain"
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none z-0 opacity-90"
         />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center bg-teal-100 text-teal-800 px-4 py-2 rounded-full text-sm font-medium mb-6">
-              <CheckCircle className="h-4 w-4 mr-2" />
-              Built to Inspect. Powered by Quality.
-            </div>
-            <p className="h1 text-teal-900">
-              Comprehensive QA Testing Services
+          <div className="text-center">
+            <p className="h1 text-teal-900">Comprehensive Testing Services</p>
+            <p className="body-regular text-gray-600 mt-6 max-w-3xl mx-auto">
+              Accelerate releases without compromising quality. From{" "}
+              <span className="text-teal-900 font-medium">
+                Manual functional testing
+              </span>{" "}
+              to{" "}
+              <span className="text-teal-900 font-medium">
+                Automation and Security
+              </span>
+              , we provide the complete coverage you need to ship with
+              confidence.
             </p>
-            <p className="body-regular text-gray-600 mt-6">
-              From manual exploratory testing to automation and performance
-              testing, we deliver complete QA coverage that helps your product
-              ship faster, break less, and deliver a consistently high-quality
-              user experience.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 mt-6 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 mt-8 justify-center">
               <Link
                 to="/contact?scroll=form"
                 className="bg-teal-600 text-white px-8 py-4 rounded-md button-txt hover:bg-teal-700 transition-colors duration-200 flex items-center justify-center space-x-2"
@@ -156,21 +155,21 @@ const Services = () => {
       </section>
 
       {/* Services Grid */}
-      <section className="py-20 bg-gradient-to-br from-white via-teal-50 to-teal-100">
+      <section className="py-16 md:py-20 bg-gradient-to-br from-white via-teal-50 to-teal-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <p className="h2 text-gray-900">Our QA Services</p>
+          <div className="text-center mb-12 md:mb-16">
+            <p className="h2 text-gray-900">Our Services</p>
             <p className="body-regular text-gray-600 max-w-3xl mx-auto mt-4">
               Explore the solutions we offer to help you deliver faster, reduce
               defects, and maintain a high-quality user experience.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {services.map((service, index) => (
               <div
                 key={index}
-                className="bg-gray-50 rounded-xl p-8 hover:bg-white hover:shadow-lg transition-all duration-300 border border-gray-100 group flex flex-col"
+                className="bg-gray-50 rounded-xl p-6 md:p-8 hover:bg-white hover:shadow-lg transition-all duration-300 border border-gray-100 group flex flex-col"
               >
                 <div className="mb-6">
                   <div
@@ -183,18 +182,18 @@ const Services = () => {
                   </h3>
                 </div>
 
-                <p className="text-gray-600 mb-6 leading-relaxed">
+                <p className="text-gray-600 mb-6 leading-relaxed text-sm md:text-base">
                   {service.description}
                 </p>
 
-                <ul className="space-y-3 mb-6 bg-teal-50 rounded-xl p-2">
+                <ul className="space-y-3 mb-6 bg-teal-50 rounded-xl p-4">
                   {service.features.map((feature, featureIndex) => (
                     <li
                       key={featureIndex}
-                      className="flex items-center text-gray-700"
+                      className="flex items-start text-gray-700 text-sm"
                     >
-                      <CheckCircle className="h-4 w-4 text-teal-600 mr-3" />
-                      {feature}
+                      <CheckCircle className="h-4 w-4 text-teal-600 mr-3 mt-0.5 flex-shrink-0" />
+                      <span>{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -203,7 +202,7 @@ const Services = () => {
                 <div className="mt-auto pt-6 border-t border-gray-200">
                   <Link
                     to={service.path}
-                    className="text-teal-600 font-medium hover:text-teal-700 transition-colors duration-200 flex items-center"
+                    className="text-teal-600 font-medium hover:text-teal-700 transition-colors duration-200 flex items-center text-sm md:text-base"
                   >
                     Learn More <ArrowRight className="h-4 w-4 ml-1" />
                   </Link>
@@ -215,31 +214,31 @@ const Services = () => {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-20 bg-gradient-to-br from-white via-teal-50 to-teal-100">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-16 md:py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center mb-12">
             <p className="h2 text-slate-900 mb-4">
               Why Choose{" "}
               <span className="relative inline-block px-1">
-                <span className="absolute inset-0 bg-white rounded-md blur-sm"></span>
+                <span className="absolute inset-0 bg-teal-500/20 rounded-md blur-sm" />
                 <span className="relative text-teal-700 font-semibold tracking-tight">
                   InspecQ
                 </span>
               </span>
             </p>
             <p className="body-regular text-slate-600">
-              We're not just testers , we're your dedicated quality partners.
+              We're not just testers, we're your dedicated quality partners.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
             <div className="text-center">
               <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-700 flex items-center justify-center shadow-lg shadow-teal-200/40">
                 <span className="text-2xl font-bold text-white">10+</span>
               </div>
               <p className="h4 text-slate-900 mb-2">Years of QA Expertise</p>
               <p className="text-slate-600 xs-regular">
-                Hands-on experience across SaaS, fintech, and enterprise etc.
+                Hands-on experience across SaaS, fintech, and enterprise
                 systems.
               </p>
             </div>
@@ -248,7 +247,6 @@ const Services = () => {
               <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-700 flex items-center justify-center shadow-lg shadow-teal-200/40">
                 <span className="text-2xl font-bold text-white">50+</span>
               </div>
-
               <p className="h4 text-slate-900 mb-2">Projects Supported</p>
               <p className="text-slate-600 xs-regular">
                 Trusted for manual, automation, API, and performance testing.
@@ -259,7 +257,6 @@ const Services = () => {
               <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-700 flex items-center justify-center shadow-lg shadow-teal-200/40">
                 <span className="text-2xl font-bold text-white">High</span>
               </div>
-
               <p className="h4 text-slate-900 mb-2">Defect Detection Rate</p>
               <p className="text-slate-600 xs-regular">
                 A structured approach that uncovers critical issues early.
@@ -283,15 +280,16 @@ const Services = () => {
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center px-6 sm:px-10 lg:px-14 py-12 lg:py-16">
               {/* Left copy */}
               <div className="text-white">
-                <h1>
-                  30 Minute Free QA
-                  <br /> Consultation to clear
-                  <br /> your doubts.
+                <h1 className="text-3xl md:text-4xl font-semibold leading-tight">
+                  30-Minute Free QA
+                  <br />
+                  Consultation for your product.
                 </h1>
 
-                <p className="body-regular mt-6 text-white/90 text-lg max-w-2xl">
-                  Book a 30-minute consultation to discuss your testing needs
-                  and get expert recommendations.
+                <p className="body-regular mt-6 text-white/90 text-base sm:text-lg max-w-2xl">
+                  Share your product, stack, and release goals. We'll review
+                  your current QA approach and outline a practical testing plan
+                  you can start using immediately.
                 </p>
 
                 <a
@@ -316,7 +314,7 @@ const Services = () => {
           </div>
         </div>
       </section>
-    </div>
+    </>
   );
 };
 

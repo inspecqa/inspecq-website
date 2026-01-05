@@ -394,7 +394,7 @@ const FreeTrial: React.FC = () => {
   /* ---------- Render ---------- */
 
   return (
-    <div className="pt-16">
+    <>
       {/* Success Modal */}
       <Modal
         open={showSuccess}
@@ -409,12 +409,13 @@ const FreeTrial: React.FC = () => {
       </Modal>
 
       {/* Hero */}
-      <section className="relative py-16 sm:py-20 overflow-visible">
+      <section className="relative overflow-hidden pt-24 pb-16 sm:pt-28 sm:pb-20 lg:pt-32 lg:pb-24">
         <img
           src={sftHeroBg}
           alt=""
-          className="absolute inset-x-0 bottom-0 w-full max-w-none pointer-events-none z-0 opacity-90 object-contain"
+          className="absolute inset-0 w-full h-full max-w-none pointer-events-none z-0 opacity-90 object-cover"
         />
+
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center justify-center text-center gap-6 sm:gap-8">
             <div className="max-w-xl mt-2 sm:mt-4">
@@ -788,8 +789,9 @@ const FreeTrial: React.FC = () => {
                     errors.testingFocus ? "border-rose-400" : "border-gray-200"
                   }`}
                 >
-                  
-                  <option value="" disabled className="text-slate-400">Select Testing Focus</option>
+                  <option value="" disabled className="text-slate-400">
+                    Select Testing Focus
+                  </option>
                   <option value="web-testing">Web Application Testing</option>
                   <option value="test-automation">Test Automation</option>
                   <option value="mobile-testing">Mobile App Testing</option>
@@ -899,7 +901,7 @@ const FreeTrial: React.FC = () => {
           </div>
         </div>
       </section>
-    </div>
+    </>
   );
 };
 

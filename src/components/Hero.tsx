@@ -1,4 +1,4 @@
-import { Calendar, CheckCircle, MoveRight } from "lucide-react";
+import { Calendar, MoveRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import heroBg from "../assets/hero-bg.svg";
 
@@ -15,13 +15,13 @@ const Hero = () => {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="flex flex-col items-center text-center w-full">
           {/* Heading */}
-          <h1 className="h1 text-teal-900 max-w-3xl mt-8">
+          <p className="h1 text-teal-900 max-w-3xl mt-8">
             Ship Better Software Faster With Trusted QA Experts
-          </h1>
+          </p>
 
           {/* Subheading */}
           <p className="body-regular mt-3 max-w-2xl text-gray-700">
-            From startups to enterprises, we ensure flawless delivery through
+            From Startups to Enterprises, we ensure flawless delivery through
             end-to-end testing, automation, and security compliance.
           </p>
 
@@ -29,7 +29,7 @@ const Hero = () => {
           <div className="mt-7 flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto justify-center">
             <Link
               to="/services"
-              className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-teal-500 text-white btn-text no-underline shadow-sm hover:bg-teal-600 transition-colors"
+              className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-teal-900 text-white btn-text no-underline shadow-sm hover:bg-teal-600 transition-colors"
             >
               <span>Explore QA Services</span>
               <MoveRight className="h-5 w-5 ml-2" />

@@ -46,18 +46,27 @@ const StatItem: React.FC<StatItemProps> = ({ stat, label }) => {
   const hasPercent = stat.includes("%");
   const hasSlash = stat.includes("/7");
 
-  const numeric = parseInt(stat.split(/[^0-9]/)[0] || "0", 10);
-  const count = useCountUp(numeric, 1200);
+  // Fix: Comma (,) soriye number ta ber kora hocche
+  // "20,000+" -> "20000" (Number)
+  // "24/7" -> "24" (Number)
+  const numeric = parseInt(
+    stat.replace(/,/g, "").split(/[^0-9]/)[0] || "0",
+    10
+  );
+
+  const count = useCountUp(numeric, 2000); // 2 seconds animation duration
 
   return (
     <div className="flex flex-col items-center text-center md:px-6 lg:px-8">
       <div className="text-2xl md:text-3xl font-extrabold tracking-tight">
-        <span className="text-gray-900">{count}</span>
+        {/* Fix: toLocaleString() use kora hoyeche jate "20,000" sundor vabe dekhay */}
+        <span className="text-gray-900">{count.toLocaleString()}</span>
+
         {hasPlus && <span className="text-teal-600">+</span>}
         {hasPercent && <span className="text-teal-600">%</span>}
         {hasSlash && <span className="text-teal-600">/7</span>}
       </div>
-      <div className="mt-2 text-sm text-gray-600">{label}</div>
+      <div className="mt-2 text-sm text-gray-600 font-medium">{label}</div>
     </div>
   );
 };
@@ -94,27 +103,27 @@ const values = [
 
 const About: React.FC = () => {
   return (
-    <div className="pt-16">
+    <>
       {/* Hero Section */}
       <section
         aria-label="Our Story section"
-        className="relative overflow-visible py-16 sm:py-20 lg:py-24"
+        className="relative overflow-hidden pt-24 pb-16 sm:pt-28 sm:pb-20 lg:pt-32 lg:pb-24"
       >
         <img
           src={aboutHeroBg}
           alt=""
-          className="absolute inset-x-0 bottom-0 w-full max-w-none pointer-events-none z-0 opacity-90 object-contain"
+          className="absolute inset-0 w-full h-full max-w-none pointer-events-none z-0 opacity-90 object-cover"
         />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center justify-center text-center gap-10 sm:gap-8">
             {/* Text block */}
             <div className="max-w-3xl mt-8">
-              <p className="h1 text-teal-900">
+              <p className="h1 text-teal-900 max-w-3xl mt-2">
                 Built to Inspect. Powered by Quality.
               </p>
 
-              <p className="body-regular text-gray-600 mt-4">
+              <p className="body-regular mt-3 max-w-2xl text-gray-700">
                 InspecQ is a modern QA agency helping SaaS, fintech, and digital
                 products ship reliable, high-performing releases. We blend
                 manual testing, automation, API testing, and performance checks
@@ -128,7 +137,7 @@ const About: React.FC = () => {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 rounded-3xl border border-teal-200 bg-white/85 p-6 md:p-8 shadow-sm backdrop-blur-sm md:divide-x md:divide-gray-200">
                 {[
                   { stat: "10+", label: "Skilled QA Experts" },
-                  { stat: "10+", label: "Years in QA & Testing" },
+                  { stat: "20,000+", label: "Hours of Testing" },
                   { stat: "24/7", label: "Support Across Time Zones" },
                   { stat: "99%", label: "Client Satisfaction" },
                 ].map((item) => (
@@ -151,9 +160,9 @@ const About: React.FC = () => {
           <div className="space-y-4">
             <p className="h2 text-teal-900">Who we are</p>
             <p className="body-regular text-gray-600 md:text-base mb-3">
-              We’re a dedicated QA team that treats your product like our own.
+              We're a dedicated QA team that treats your product like our own.
               Our engineers bring deep expertise across every layer of your
-              product’s quality lifecycle, ensuring every release is stable,
+              product's quality lifecycle, ensuring every release is stable,
               fast, and user-friendly.
             </p>
             <p className="body-regular text-gray-600 md:text-base">
@@ -177,8 +186,8 @@ const About: React.FC = () => {
                 Our Perspective
               </p>
               <p className="text-sm text-gray-700">
-                “Products evolve with features, but they succeed with reliable
-                releases.”
+                "Products evolve with features, but they succeed with reliable
+                releases."
               </p>
             </div>
           </div>
@@ -334,7 +343,7 @@ const About: React.FC = () => {
                 </h1>
 
                 <p className="body-regular mt-6 text-white/90 text-base sm:text-lg max-w-2xl">
-                  Share your product, stack, and release goals. We’ll review
+                  Share your product, stack, and release goals. We'll review
                   your current QA approach and outline a practical testing plan
                   you can start using immediately.
                 </p>
@@ -361,7 +370,7 @@ const About: React.FC = () => {
           </div>
         </div>
       </section>
-    </div>
+    </>
   );
 };
 

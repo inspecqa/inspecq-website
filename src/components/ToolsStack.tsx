@@ -116,7 +116,7 @@ const ToolsStack = () => {
               Our Technology Stack
             </div>
             <p className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 leading-snug">
-              Tools & Technologies <br className="hidden sm:block" /> We Master
+              Tools & Technologies <br className="hidden sm:block" /> We Use
             </p>
           </div>
 

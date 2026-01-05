@@ -241,36 +241,37 @@ export default function MobileNavDrawer({
             </button>
 
             {/* CTA */}
-            <div className="mt-6 mb-5">
+            <div>
               <button
                 type="button"
                 onClick={() => handleNav("/free-trial")}
-                className="w-full text-center rounded-xl bg-white text-black-500 btn-text hover:bg-white/90 px-5 py-3 font-medium transition-colors"
+                className=" mt-6 w-full text-center rounded-xl bg-white text-teal-900 btn-text hover:bg-white/90 px-5 py-3 font-medium transition-colors"
               >
                 Start Free Trial
               </button>
+              <div className="mt-10 h-px w-full bg-white/10" />
             </div>
 
             {/* Footer */}
-            <div className="mt-2 flex flex-col items-center justify-center gap-4 px-1 py-8 text-sm text-white/80 pb-2 border-t border-white/10">
+            <div className="flex flex-col items-center justify-center gap-4 px-1 py-8 text-sm text-white/80 pb-2">
               <p className="xs-regular text-white">
-                © 2025 InspecQ. All rights reserved.
+                © 2025 InspecQ | All Rights Reserved
               </p>
 
               <div className="flex items-center justify-center gap-6">
                 <button
                   type="button"
-                  onClick={() => handleNav("/legal/terms-and-service")}
+                  onClick={() => handleNav("/legal/terms-and-conditions")}
                   className="hover:text-white transition-colors"
                 >
-                  Terms &amp; Privacy
+                  Terms &amp; Conditions
                 </button>
                 <button
                   type="button"
                   onClick={() => handleNav("/legal/privacy-policy")}
                   className="hover:text-white transition-colors"
                 >
-                  Security
+                  Privacy Policy
                 </button>
               </div>
             </div>
