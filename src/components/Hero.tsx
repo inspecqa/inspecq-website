@@ -16,7 +16,7 @@ const Hero = () => {
         <div className="flex flex-col items-center text-center w-full">
           {/* Heading */}
           <p className="h1 text-teal-900 max-w-3xl mt-8">
-            Ship Better Software Faster With Trusted QA Experts
+            Ship Bug-Free Software Faster with QA Experts
           </p>
 
           {/* Subheading */}

@@ -235,14 +235,14 @@ const Contact: React.FC = () => {
             {/* Email Card (aligned with form bottom) */}
             <div className="mt-auto max-w-sm">
               <div className="bg-white p-8 rounded-3xl border border-gray-100 flex flex-col items-start space-y-4">
-                <div className="p-2 rounded-full bg-teal-100">
-                  <Mail className="h-5 w-5 text-gray-900" />
+                <div className="p-2 rounded-full bg-teal-900">
+                  <Mail className="h-5 w-5 text-white" />
                 </div>
 
                 <div>
                   <p className="body-semi text-black-300">Email Us</p>
 
-                  <p className="body-md text-black-500 break-all">
+                  <p className="body-md text-teal-900 break-all">
                     contact@inspecq.com
                   </p>
                 </div>
