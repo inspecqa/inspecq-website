@@ -163,7 +163,7 @@ The InspecQ Team`,
                               <table cellpadding="0" cellspacing="0" border="0">
                                 <tr>
                                   <td align="left" style="background: linear-gradient(135deg, #008080 0%, #20b2aa 100%); border-radius: 999px; box-shadow: 0 4px 12px rgba(0, 128, 128, 0.3);">
-                                    <a href="[KICKOFF_LINK]" style="display: inline-block; padding: 12px 28px; font-size: 15px; font-weight: 600; color: #ffffff; text-decoration: none; border-radius: 999px; font-family: 'Onnest', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;">
+                                    <a href="[kickoffLink]" style="display: inline-block; padding: 12px 28px; font-size: 15px; font-weight: 600; color: #ffffff; text-decoration: none; border-radius: 999px; font-family: 'Onnest', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;">
                                       📅 Book Your Kickoff Now
                                     </a>
                                   </td>
