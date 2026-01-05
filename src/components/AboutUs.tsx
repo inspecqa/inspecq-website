@@ -10,8 +10,8 @@ const stats = [
   },
   {
     icon: Award,
-    value: "10+",
-    label: "Years Combined Experience",
+    value: "20,000+",
+    label: "Hours of Testing",
     color: "text-blue-300",
   },
   {
