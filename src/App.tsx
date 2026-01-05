@@ -139,7 +139,7 @@ function App() {
           {/* Legal */}
           <Route path="/legal/free-trial-terms" element={<FreeTrialTerms />} />
           <Route
-            path="/legal/terms-and-service"
+            path="/legal/terms-and-conditions"
             element={<TermsAndCondition />}
           />
           <Route path="/legal/privacy-policy" element={<PrivacyPolicy />} />
