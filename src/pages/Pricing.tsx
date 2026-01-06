@@ -239,7 +239,6 @@ const PricingPage: React.FC = () => {
         />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center justify-center text-center gap-6 sm:gap-8">
-            
             {/* 7-Day Trial Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 mt-4 rounded-full bg-teal-50 border border-teal-100 shadow-sm">
               <span className="relative flex h-3 w-3">
@@ -252,10 +251,10 @@ const PricingPage: React.FC = () => {
             </div>
 
             <div className="max-w-3xl mt-2 sm:mt-4">
-              <h1 className="h1 text-teal-900">
+              <p className="h1 text-teal-900 mt-2 sm:mt-4">
                 Flexible QA Pricing for Every Stage
-              </h1>
-              <p className="body-regular text-gray-600 mt-4 sm:mt-6">
+              </p>
+              <p className="body-regular text-gray-600 mt-2 sm:mt-6">
                 Get the expertise of a senior QA team at rates that fit your
                 budget. Scale up or down anytime.
               </p>
@@ -264,7 +263,7 @@ const PricingPage: React.FC = () => {
             <div className="flex flex-col sm:flex-row gap-4 mt-4 sm:mt-6 w-full sm:w-auto justify-center">
               <Link
                 to="/contact?scroll=form"
-                className="bg-teal-600 text-white w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-base sm:text-lg hover:bg-teal-700 transition-colors duration-200 flex items-center justify-center space-x-2"
+                className="bg-teal-600 text-white w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-4 rounded-xl font-semibold text-sm sm:text-base hover:bg-teal-700 transition-colors duration-200 flex items-center justify-center space-x-2"
               >
                 <span>Get Custom Quote</span>
                 <ArrowRight className="h-5 w-5" />
@@ -274,7 +273,7 @@ const PricingPage: React.FC = () => {
                 href="https://calendly.com/mail-inspecq/30min"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-medium border border-slate-300 text-slate-700 bg-white hover:bg-slate-50 transition flex items-center justify-center gap-2"
+                className="bg-white text-teal-900 w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-4 rounded-xl font-semibold text-sm sm:text-base transition-colors duration-200 flex items-center justify-center space-x-2"
               >
                 <MessageCircle className="h-5 w-5" />
                 <span>Schedule Consultation</span>
@@ -317,7 +316,7 @@ const PricingPage: React.FC = () => {
                 className="relative inline-flex h-9 w-16 items-center rounded-full bg-gray-200 transition focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
               >
                 <span
-                  className={`inline-block h-7 w-7 transform rounded-full bg-white shadow transition ${
+                  className={`inline-block h-7 w-7 transform rounded-full bg-teal-900 shadow transition ${
                     billing === "yearly" ? "translate-x-8" : "translate-x-1"
                   }`}
                 />

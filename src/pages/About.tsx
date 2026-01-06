@@ -123,7 +123,7 @@ const About: React.FC = () => {
                 Built to Inspect. Powered by Quality.
               </p>
 
-              <p className="body-regular mt-3 max-w-2xl text-gray-700">
+              <p className="body-regular text-gray-600 mt-4 sm:mt-6">
                 InspecQ is a modern QA agency helping SaaS, fintech, and digital
                 products ship reliable, high-performing releases. We blend
                 manual testing, automation, API testing, and performance checks
