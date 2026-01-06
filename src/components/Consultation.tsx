@@ -2,7 +2,7 @@ import consultationIllustration from "../assets/consultation-illustration.svg";
 import consultationBg from "../assets/consultation-bg.svg";
 
 const ConsultationCta = () => {
-  const calendlyUrl = "https://calendly.com/mail-inspecq/30min";
+  const calendlyUrl = "https://calendly.com/contact-inspecq/30min";
 
   return (
     <section className="py-16">

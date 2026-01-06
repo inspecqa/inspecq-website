@@ -36,7 +36,7 @@ const Hero = () => {
             </Link>
 
             <a
-              href="https://calendly.com/mail-inspecq/30min"
+              href="https://calendly.com/contact-inspecq/30min"
               className="inline-flex items-center justify-center px-6 py-3 rounded-full border others-buttonBorder bg-white text-gray-700 hover:bg-gray-50 transition-colors btn-text"
             >
               <span className="whitespace-nowrap">Book Free QA Session</span>

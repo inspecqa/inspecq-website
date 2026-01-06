@@ -230,7 +230,9 @@ const FunctionalTesting = () => {
           <div className="text-center mb-12 sm:mb-16 mt-10 sm:mt-16">
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-4">
               Functional Testing{" "}
-              <span className="block text-teal-700 mt-2">that Scales with You</span>
+              <span className="block text-teal-700 mt-2">
+                that Scales with You
+              </span>
             </h1>
             <p className="body-regular text-black-700 max-w-3xl mx-auto mb-8 text-sm sm:text-base">
               We test every feature and flow to ensure your product runs
@@ -418,7 +420,7 @@ const FunctionalTesting = () => {
                 </p>
 
                 <a
-                  href="https://calendly.com/mail-inspecq/30min"
+                  href="https://calendly.com/contact-inspecq/30min"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-text mt-8 sm:mt-10 inline-flex items-center rounded-full bg-white border border-buttonBorder text-slate-900 px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-medium shadow-md hover:shadow-lg transition"
