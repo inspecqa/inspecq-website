@@ -50,6 +50,11 @@ import AdminForms from "./pages/admin/Forms";
 import AdminSettings from "./pages/admin/Settings";
 import AdminJobForm from "./pages/admin/JobForm";
 import AdminNewsletterCompose from "./pages/admin/NewsletterCompose";
+import AdminApplications from "./pages/admin/Applications";
+import AdminTrials from "./pages/admin/Trials";
+import AdminBlogList from "./pages/admin/BlogList";
+import AdminBlogEditor from "./pages/admin/BlogEditor";
+import AdminActivityLog from "./pages/admin/ActivityLog";
 import ProtectedRoute from "./components/admin/ProtectedRoute";
 
 ReactGA.initialize("G-9TZBKJLD0P");
@@ -160,6 +165,30 @@ function App() {
               <AdminSettings />
             </ProtectedRoute>
           }
+        />
+        <Route
+          path="/admin/applications"
+          element={<ProtectedRoute><AdminApplications /></ProtectedRoute>}
+        />
+        <Route
+          path="/admin/trials"
+          element={<ProtectedRoute><AdminTrials /></ProtectedRoute>}
+        />
+        <Route
+          path="/admin/blog"
+          element={<ProtectedRoute><AdminBlogList /></ProtectedRoute>}
+        />
+        <Route
+          path="/admin/blog/new"
+          element={<ProtectedRoute><AdminBlogEditor /></ProtectedRoute>}
+        />
+        <Route
+          path="/admin/blog/:id/edit"
+          element={<ProtectedRoute><AdminBlogEditor /></ProtectedRoute>}
+        />
+        <Route
+          path="/admin/activity"
+          element={<ProtectedRoute><AdminActivityLog /></ProtectedRoute>}
         />
         <Route path="/admin/*" element={<AdminLogin />} />
       </Routes>

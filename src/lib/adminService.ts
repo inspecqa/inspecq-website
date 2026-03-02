@@ -7,7 +7,7 @@
 import { supabase } from "./supabaseClient";
 
 // ──────────────────────────────────────────────
-// Types
+// Core Types
 // ──────────────────────────────────────────────
 export interface ContactSubmission {
     id: string;
@@ -67,11 +67,74 @@ export interface SiteSetting {
     value: string;
 }
 
+export interface JobApplication {
+    id: string;
+    job_id: string;
+    full_name: string;
+    email: string;
+    phone?: string;
+    cover_letter?: string;
+    resume_url?: string;
+    linkedin_url?: string;
+    status: string;
+    notes?: string;
+    created_at: string;
+    job_postings?: { title: string; department: string };
+}
+
+export interface BlogPost {
+    id: string;
+    title: string;
+    slug: string;
+    excerpt?: string;
+    body: string;
+    cover_image?: string;
+    tags?: string[];
+    status: string;
+    author: string;
+    published_at?: string;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface ActivityLogEntry {
+    id: string;
+    action: string;
+    entity_type: string;
+    entity_id?: string;
+    details?: string;
+    user_email?: string;
+    created_at: string;
+}
+
+export interface AdminRole {
+    id: string;
+    user_id: string;
+    role: string;
+    created_at: string;
+}
+
+export interface TrialRequest {
+    id: string;
+    full_name?: string;
+    name?: string;
+    email: string;
+    company_name?: string;
+    company?: string;
+    phone?: string;
+    message?: string;
+    status: string;
+    source_page?: string;
+    created_at: string;
+}
+
 export interface DashboardStats {
     jobPostings: number;
     formSubmissions: number;
     newsletterSubscribers: number;
     openPositions: number;
+    trialRequests: number;
+    blogPosts: number;
     recentActivity: RecentActivity[];
 }
 
@@ -79,7 +142,49 @@ export interface RecentActivity {
     action: string;
     details: string;
     time: string;
-    type: "form" | "application" | "newsletter" | "job";
+    type: "form" | "application" | "newsletter" | "job" | "trial" | "blog";
+}
+
+export interface ChartPoint {
+    date: string;
+    count: number;
+}
+
+// ──────────────────────────────────────────────
+// Utility
+// ──────────────────────────────────────────────
+export function formatTimeAgo(isoString: string): string {
+    const diff = Date.now() - new Date(isoString).getTime();
+    const mins = Math.floor(diff / 60000);
+    if (mins < 60) return `${mins} minute${mins !== 1 ? "s" : ""} ago`;
+    const hrs = Math.floor(mins / 60);
+    if (hrs < 24) return `${hrs} hour${hrs !== 1 ? "s" : ""} ago`;
+    const days = Math.floor(hrs / 24);
+    return `${days} day${days !== 1 ? "s" : ""} ago`;
+}
+
+export function downloadCSV(rows: Record<string, unknown>[], filename: string) {
+    if (!rows.length) return;
+    const headers = Object.keys(rows[0]);
+    const csv = [
+        headers.join(","),
+        ...rows.map((row) =>
+            headers
+                .map((h) => {
+                    const val = row[h] ?? "";
+                    const str = String(val).replace(/"/g, '""');
+                    return `"${str}"`;
+                })
+                .join(",")
+        ),
+    ].join("\n");
+    const blob = new Blob([csv], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(url);
 }
 
 // ──────────────────────────────────────────────
@@ -88,159 +193,170 @@ export interface RecentActivity {
 export async function getDashboardStats(): Promise<DashboardStats> {
     if (!supabase) throw new Error("Supabase not configured");
 
-    const [jobsRes, formsRes, subsRes, recentFormsRes, recentSubsRes] =
+    const [jobsRes, formsRes, subsRes, trialsRes, blogRes, recentFormsRes, recentSubsRes] =
         await Promise.all([
-            supabase
-                .from("job_postings")
-                .select("*", { count: "exact", head: true }),
-            supabase
-                .from("contact_submissions")
-                .select("*", { count: "exact", head: true }),
-            supabase
-                .from("newsletter_subscribers")
-                .select("*", { count: "exact", head: true })
-                .eq("status", "Active"),
-            supabase
-                .from("contact_submissions")
-                .select("full_name, email, source_page, type, created_at")
-                .order("created_at", { ascending: false })
-                .limit(3),
-            supabase
-                .from("newsletter_subscribers")
-                .select("email, created_at")
-                .order("created_at", { ascending: false })
-                .limit(2),
+            supabase.from("job_postings").select("*", { count: "exact", head: true }),
+            supabase.from("contact_submissions").select("*", { count: "exact", head: true }),
+            supabase.from("newsletter_subscribers").select("*", { count: "exact", head: true }).eq("status", "Active"),
+            supabase.from("trial_requests").select("*", { count: "exact", head: true }),
+            supabase.from("blog_posts").select("*", { count: "exact", head: true }).eq("status", "Published"),
+            supabase.from("contact_submissions").select("full_name, email, source_page, type, created_at").order("created_at", { ascending: false }).limit(3),
+            supabase.from("newsletter_subscribers").select("email, created_at").order("created_at", { ascending: false }).limit(2),
         ]);
 
-    const openPositions =
-        (
-            await supabase
-                .from("job_postings")
-                .select("*", { count: "exact", head: true })
-                .eq("status", "Active")
-        ).count ?? 0;
+    const openPositions = (await supabase.from("job_postings").select("*", { count: "exact", head: true }).eq("status", "Active")).count ?? 0;
 
-    // Build recent activity feed
     const activity: RecentActivity[] = [];
-
     (recentFormsRes.data ?? []).forEach((r) => {
-        activity.push({
-            action: `New ${r.type ?? "form"} submission received`,
-            details: `${r.source_page ?? "Website"} — ${r.email}`,
-            time: formatTimeAgo(r.created_at),
-            type: "form",
-        });
+        activity.push({ action: `New ${r.type ?? "form"} submission`, details: `${r.source_page ?? "Website"} — ${r.email}`, time: formatTimeAgo(r.created_at), type: "form" });
     });
-
     (recentSubsRes.data ?? []).forEach((r) => {
-        activity.push({
-            action: "Newsletter subscriber added",
-            details: r.email,
-            time: formatTimeAgo(r.created_at),
-            type: "newsletter",
-        });
+        activity.push({ action: "Newsletter subscriber added", details: r.email, time: formatTimeAgo(r.created_at), type: "newsletter" });
     });
-
-    activity.sort((a, b) => 0); // already chronological from DB
 
     return {
         jobPostings: jobsRes.count ?? 0,
         formSubmissions: formsRes.count ?? 0,
         newsletterSubscribers: subsRes.count ?? 0,
+        trialRequests: trialsRes.count ?? 0,
+        blogPosts: blogRes.count ?? 0,
         openPositions,
         recentActivity: activity.slice(0, 5),
     };
 }
 
 // ──────────────────────────────────────────────
+// Analytics Charts
+// ──────────────────────────────────────────────
+async function getDailyCount(table: string, days = 30): Promise<ChartPoint[]> {
+    if (!supabase) return [];
+    const from = new Date();
+    from.setDate(from.getDate() - days);
+    const { data } = await supabase.from(table).select("created_at").gte("created_at", from.toISOString());
+    if (!data) return [];
+    const counts: Record<string, number> = {};
+    for (let i = days; i >= 0; i--) {
+        const d = new Date();
+        d.setDate(d.getDate() - i);
+        counts[d.toISOString().split("T")[0]] = 0;
+    }
+    data.forEach((row) => {
+        const day = row.created_at.split("T")[0];
+        counts[day] = (counts[day] ?? 0) + 1;
+    });
+    return Object.entries(counts).map(([date, count]) => ({ date, count }));
+}
+
+export async function getFormSubmissionsChart(): Promise<ChartPoint[]> { return getDailyCount("contact_submissions", 30); }
+export async function getSubscriberGrowthChart(): Promise<ChartPoint[]> { return getDailyCount("newsletter_subscribers", 30); }
+export async function getApplicationsChart(): Promise<ChartPoint[]> { return getDailyCount("job_applications", 30); }
+
+// ──────────────────────────────────────────────
 // Contact Submissions (Forms page)
 // ──────────────────────────────────────────────
 export async function getSubmissions(): Promise<ContactSubmission[]> {
     if (!supabase) throw new Error("Supabase not configured");
-    const { data, error } = await supabase
-        .from("contact_submissions")
-        .select("*")
-        .order("created_at", { ascending: false });
+    const { data, error } = await supabase.from("contact_submissions").select("*").order("created_at", { ascending: false });
     if (error) throw error;
     return data ?? [];
 }
 
-export async function updateSubmissionStatus(
-    id: string,
-    status: string
-): Promise<void> {
+export async function updateSubmissionStatus(id: string, status: string): Promise<void> {
     if (!supabase) throw new Error("Supabase not configured");
-    const { error } = await supabase
-        .from("contact_submissions")
-        .update({ status })
-        .eq("id", id);
+    const { error } = await supabase.from("contact_submissions").update({ status }).eq("id", id);
     if (error) throw error;
 }
 
 export async function deleteSubmission(id: string): Promise<void> {
     if (!supabase) throw new Error("Supabase not configured");
-    const { error } = await supabase
-        .from("contact_submissions")
-        .delete()
-        .eq("id", id);
+    const { error } = await supabase.from("contact_submissions").delete().eq("id", id);
+    if (error) throw error;
+}
+
+export async function bulkDeleteSubmissions(ids: string[]): Promise<void> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { error } = await supabase.from("contact_submissions").delete().in("id", ids);
+    if (error) throw error;
+}
+
+export async function bulkUpdateSubmissionStatus(ids: string[], status: string): Promise<void> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { error } = await supabase.from("contact_submissions").update({ status }).in("id", ids);
     if (error) throw error;
 }
 
 // ──────────────────────────────────────────────
-// Job Postings (Careers page)
+// Job Postings
 // ──────────────────────────────────────────────
-export async function getJobPostings(): Promise<JobPosting[]> {
+export async function getJobPostings(activeOnly = false): Promise<JobPosting[]> {
     if (!supabase) throw new Error("Supabase not configured");
-    const { data, error } = await supabase
-        .from("job_postings")
-        .select("*")
-        .order("posted_at", { ascending: false });
+    let q = supabase.from("job_postings").select("*").order("posted_at", { ascending: false });
+    if (activeOnly) q = q.eq("status", "Active");
+    const { data, error } = await q;
     if (error) throw error;
     return data ?? [];
 }
 
 export async function getJobPosting(id: string): Promise<JobPosting | null> {
     if (!supabase) throw new Error("Supabase not configured");
-    const { data, error } = await supabase
-        .from("job_postings")
-        .select("*")
-        .eq("id", id)
-        .single();
+    const { data, error } = await supabase.from("job_postings").select("*").eq("id", id).single();
     if (error) throw error;
     return data;
 }
 
-export async function createJobPosting(
-    job: Omit<JobPosting, "id" | "applications" | "posted_at" | "updated_at">
-): Promise<JobPosting> {
+export async function createJobPosting(job: Omit<JobPosting, "id" | "applications" | "posted_at" | "updated_at">): Promise<JobPosting> {
     if (!supabase) throw new Error("Supabase not configured");
-    const { data, error } = await supabase
-        .from("job_postings")
-        .insert([job])
-        .select()
-        .single();
+    const { data, error } = await supabase.from("job_postings").insert([job]).select().single();
     if (error) throw error;
     return data;
 }
 
-export async function updateJobPosting(
-    id: string,
-    updates: Partial<JobPosting>
-): Promise<void> {
+export async function updateJobPosting(id: string, updates: Partial<JobPosting>): Promise<void> {
     if (!supabase) throw new Error("Supabase not configured");
-    const { error } = await supabase
-        .from("job_postings")
-        .update(updates)
-        .eq("id", id);
+    const { error } = await supabase.from("job_postings").update(updates).eq("id", id);
     if (error) throw error;
 }
 
 export async function deleteJobPosting(id: string): Promise<void> {
     if (!supabase) throw new Error("Supabase not configured");
-    const { error } = await supabase
-        .from("job_postings")
-        .delete()
-        .eq("id", id);
+    const { error } = await supabase.from("job_postings").delete().eq("id", id);
+    if (error) throw error;
+}
+
+// ──────────────────────────────────────────────
+// Job Applications
+// ──────────────────────────────────────────────
+export async function getApplications(jobId?: string): Promise<JobApplication[]> {
+    if (!supabase) throw new Error("Supabase not configured");
+    let q = supabase.from("job_applications").select("*, job_postings(title, department)").order("created_at", { ascending: false });
+    if (jobId) q = q.eq("job_id", jobId);
+    const { data, error } = await q;
+    if (error) throw error;
+    return data ?? [];
+}
+
+export async function createApplication(app: Omit<JobApplication, "id" | "created_at" | "job_postings">): Promise<JobApplication> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { data, error } = await supabase.from("job_applications").insert([app]).select().single();
+    if (error) throw error;
+    return data;
+}
+
+export async function updateApplicationStatus(id: string, status: string): Promise<void> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { error } = await supabase.from("job_applications").update({ status }).eq("id", id);
+    if (error) throw error;
+}
+
+export async function updateApplicationNotes(id: string, notes: string): Promise<void> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { error } = await supabase.from("job_applications").update({ notes }).eq("id", id);
+    if (error) throw error;
+}
+
+export async function deleteApplication(id: string): Promise<void> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { error } = await supabase.from("job_applications").delete().eq("id", id);
     if (error) throw error;
 }
 
@@ -249,32 +365,20 @@ export async function deleteJobPosting(id: string): Promise<void> {
 // ──────────────────────────────────────────────
 export async function getSubscribers(): Promise<NewsletterSubscriber[]> {
     if (!supabase) throw new Error("Supabase not configured");
-    const { data, error } = await supabase
-        .from("newsletter_subscribers")
-        .select("*")
-        .order("created_at", { ascending: false });
+    const { data, error } = await supabase.from("newsletter_subscribers").select("*").order("created_at", { ascending: false });
     if (error) throw error;
     return data ?? [];
 }
 
 export async function deleteSubscriber(id: string): Promise<void> {
     if (!supabase) throw new Error("Supabase not configured");
-    const { error } = await supabase
-        .from("newsletter_subscribers")
-        .delete()
-        .eq("id", id);
+    const { error } = await supabase.from("newsletter_subscribers").delete().eq("id", id);
     if (error) throw error;
 }
 
-export async function updateSubscriberStatus(
-    id: string,
-    status: string
-): Promise<void> {
+export async function updateSubscriberStatus(id: string, status: string): Promise<void> {
     if (!supabase) throw new Error("Supabase not configured");
-    const { error } = await supabase
-        .from("newsletter_subscribers")
-        .update({ status })
-        .eq("id", id);
+    const { error } = await supabase.from("newsletter_subscribers").update({ status }).eq("id", id);
     if (error) throw error;
 }
 
@@ -283,33 +387,21 @@ export async function updateSubscriberStatus(
 // ──────────────────────────────────────────────
 export async function getCampaigns(): Promise<NewsletterCampaign[]> {
     if (!supabase) throw new Error("Supabase not configured");
-    const { data, error } = await supabase
-        .from("newsletter_campaigns")
-        .select("*")
-        .order("created_at", { ascending: false });
+    const { data, error } = await supabase.from("newsletter_campaigns").select("*").order("created_at", { ascending: false });
     if (error) throw error;
     return data ?? [];
 }
 
-export async function createCampaign(
-    campaign: Omit<NewsletterCampaign, "id" | "opens" | "clicks" | "created_at">
-): Promise<NewsletterCampaign> {
+export async function createCampaign(campaign: Omit<NewsletterCampaign, "id" | "opens" | "clicks" | "created_at">): Promise<NewsletterCampaign> {
     if (!supabase) throw new Error("Supabase not configured");
-    const { data, error } = await supabase
-        .from("newsletter_campaigns")
-        .insert([campaign])
-        .select()
-        .single();
+    const { data, error } = await supabase.from("newsletter_campaigns").insert([campaign]).select().single();
     if (error) throw error;
     return data;
 }
 
 export async function deleteCampaign(id: string): Promise<void> {
     if (!supabase) throw new Error("Supabase not configured");
-    const { error } = await supabase
-        .from("newsletter_campaigns")
-        .delete()
-        .eq("id", id);
+    const { error } = await supabase.from("newsletter_campaigns").delete().eq("id", id);
     if (error) throw error;
 }
 
@@ -321,32 +413,99 @@ export async function getSiteSettings(): Promise<Record<string, string>> {
     const { data, error } = await supabase.from("site_settings").select("*");
     if (error) throw error;
     const map: Record<string, string> = {};
-    (data ?? []).forEach((row: SiteSetting) => {
-        map[row.key] = row.value;
-    });
+    (data ?? []).forEach((row: SiteSetting) => { map[row.key] = row.value; });
     return map;
 }
 
-export async function setSiteSetting(
-    key: string,
-    value: string
-): Promise<void> {
+export async function setSiteSetting(key: string, value: string): Promise<void> {
     if (!supabase) throw new Error("Supabase not configured");
-    const { error } = await supabase
-        .from("site_settings")
-        .upsert({ key, value, updated_at: new Date().toISOString() });
+    const { error } = await supabase.from("site_settings").upsert({ key, value, updated_at: new Date().toISOString() });
     if (error) throw error;
 }
 
 // ──────────────────────────────────────────────
-// Utility
+// Blog Posts
 // ──────────────────────────────────────────────
-function formatTimeAgo(isoString: string): string {
-    const diff = Date.now() - new Date(isoString).getTime();
-    const mins = Math.floor(diff / 60000);
-    if (mins < 60) return `${mins} minute${mins !== 1 ? "s" : ""} ago`;
-    const hrs = Math.floor(mins / 60);
-    if (hrs < 24) return `${hrs} hour${hrs !== 1 ? "s" : ""} ago`;
-    const days = Math.floor(hrs / 24);
-    return `${days} day${days !== 1 ? "s" : ""} ago`;
+export async function getBlogPosts(publishedOnly = false): Promise<BlogPost[]> {
+    if (!supabase) throw new Error("Supabase not configured");
+    let q = supabase.from("blog_posts").select("*").order("created_at", { ascending: false });
+    if (publishedOnly) q = q.eq("status", "Published");
+    const { data, error } = await q;
+    if (error) throw error;
+    return data ?? [];
+}
+
+export async function getBlogPost(id: string): Promise<BlogPost | null> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { data, error } = await supabase.from("blog_posts").select("*").eq("id", id).single();
+    if (error) throw error;
+    return data;
+}
+
+export async function createBlogPost(post: Omit<BlogPost, "id" | "created_at" | "updated_at">): Promise<BlogPost> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { data, error } = await supabase.from("blog_posts").insert([post]).select().single();
+    if (error) throw error;
+    return data;
+}
+
+export async function updateBlogPost(id: string, updates: Partial<BlogPost>): Promise<void> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { error } = await supabase.from("blog_posts").update(updates).eq("id", id);
+    if (error) throw error;
+}
+
+export async function deleteBlogPost(id: string): Promise<void> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { error } = await supabase.from("blog_posts").delete().eq("id", id);
+    if (error) throw error;
+}
+
+// ──────────────────────────────────────────────
+// Activity Log
+// ──────────────────────────────────────────────
+export async function getActivityLog(limit = 100): Promise<ActivityLogEntry[]> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { data, error } = await supabase.from("activity_log").select("*").order("created_at", { ascending: false }).limit(limit);
+    if (error) throw error;
+    return data ?? [];
+}
+
+export async function logActivity(action: string, entityType: string, entityId?: string, details?: string): Promise<void> {
+    if (!supabase) return;
+    const { data: { user } } = await supabase.auth.getUser();
+    await supabase.from("activity_log").insert([{ action, entity_type: entityType, entity_id: entityId, details, user_email: user?.email }]);
+}
+
+// ──────────────────────────────────────────────
+// Admin Roles
+// ──────────────────────────────────────────────
+export async function getCurrentUserRole(): Promise<string> {
+    if (!supabase) return "admin";
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return "viewer";
+    const { data } = await supabase.from("admin_roles").select("role").eq("user_id", user.id).single();
+    return data?.role ?? "admin";
+}
+
+// ──────────────────────────────────────────────
+// Trial Requests
+// ──────────────────────────────────────────────
+export async function getTrialRequests(): Promise<TrialRequest[]> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { data, error } = await supabase.from("trial_requests").select("*").order("created_at", { ascending: false });
+    if (error) throw error;
+    return data ?? [];
+}
+
+export async function updateTrialStatus(id: string, status: string): Promise<void> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { error } = await supabase.from("trial_requests").update({ status }).eq("id", id);
+    if (error) throw error;
+}
+
+export async function deleteTrial(id: string): Promise<void> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { error } = await supabase.from("trial_requests").delete().eq("id", id);
+    if (error) throw error;
 }

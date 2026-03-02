@@ -72,7 +72,7 @@ const Login = () => {
                   value={credentials.email}
                   onChange={handleChange}
                   className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-                  placeholder="admin@inspecq.com"
+                  placeholder="mail@domain.com"
                 />
               </div>
             </div>
