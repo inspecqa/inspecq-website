@@ -47,13 +47,16 @@ import AdminDashboard from "./pages/admin/Dashboard";
 import AdminCareers from "./pages/admin/Careers";
 import AdminNewsletter from "./pages/admin/Newsletter";
 import AdminForms from "./pages/admin/Forms";
+import AdminSettings from "./pages/admin/Settings";
+import AdminJobForm from "./pages/admin/JobForm";
+import AdminNewsletterCompose from "./pages/admin/NewsletterCompose";
 import ProtectedRoute from "./components/admin/ProtectedRoute";
 
 ReactGA.initialize("G-9TZBKJLD0P");
 
 function BestPracticeDetailWrapper() {
   const { slug } = useParams<{ slug: string }>();
-  return <BestPracticeDetailPage slug={slug!} onNavigate={() => {}} />;
+  return <BestPracticeDetailPage slug={slug!} onNavigate={() => { }} />;
 }
 
 function BestPracticesWrapper() {
@@ -71,18 +74,97 @@ function BestPracticesWrapper() {
 function App() {
   const location = useLocation();
 
-  // Full-site maintenance mode
+  // All hooks must run unconditionally — before any early returns
+  useEffect(() => {
+    if (!SITE_CONFIG.MAINTENANCE_MODE) {
+      ReactGA.send({
+        hitType: "pageview",
+        page: location.pathname + location.search,
+      });
+    }
+  }, [location]);
+
+  // Full-site maintenance mode — return AFTER hooks
   if (SITE_CONFIG.MAINTENANCE_MODE) {
     return <Maintenance />;
   }
 
-  //useEffect আপডেট
-  useEffect(() => {
-    ReactGA.send({
-      hitType: "pageview",
-      page: location.pathname + location.search,
-    });
-  }, [location]);
+  // Check if we're on an admin route
+  const isAdminRoute = location.pathname.startsWith("/admin");
+
+  // Admin routes render standalone — no public Header/Footer
+  if (isAdminRoute) {
+    return (
+      <Routes>
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route
+          path="/admin/dashboard"
+          element={
+            <ProtectedRoute>
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/careers"
+          element={
+            <ProtectedRoute>
+              <AdminCareers />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/careers/new"
+          element={
+            <ProtectedRoute>
+              <AdminJobForm />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/careers/:id/edit"
+          element={
+            <ProtectedRoute>
+              <AdminJobForm />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/newsletter"
+          element={
+            <ProtectedRoute>
+              <AdminNewsletter />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/newsletter/compose"
+          element={
+            <ProtectedRoute>
+              <AdminNewsletterCompose />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/forms"
+          element={
+            <ProtectedRoute>
+              <AdminForms />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/settings"
+          element={
+            <ProtectedRoute>
+              <AdminSettings />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/admin/*" element={<AdminLogin />} />
+      </Routes>
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -148,49 +230,13 @@ function App() {
           <Route path="/500" element={<ServerError500 />} />
           <Route path="/maintenance" element={<Maintenance />} />
 
-          {/* Admin Routes */}
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route
-            path="/admin/dashboard"
-            element={
-              <ProtectedRoute>
-                <AdminDashboard />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/admin/careers"
-            element={
-              <ProtectedRoute>
-                <AdminCareers />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/admin/newsletter"
-            element={
-              <ProtectedRoute>
-                <AdminNewsletter />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/admin/forms"
-            element={
-              <ProtectedRoute>
-                <AdminForms />
-              </ProtectedRoute>
-            }
-          />
-
-          {/* Catch-all 404 (keeps working even after admin routes in v6) */}
+          {/* Catch-all 404 */}
           <Route path="*" element={<NotFound404 />} />
         </Routes>
       </main>
 
       <Footer />
       <BackToTop />
-      {/* এখানে কুকি ব্যানারটি যোগ করুন */}
       <CookieConsent />
     </div>
   );

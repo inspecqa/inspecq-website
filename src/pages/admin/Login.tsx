@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Lock, User, Eye, EyeOff } from "lucide-react";
+import { Lock, Mail, Eye, EyeOff, CheckCircle } from "lucide-react";
+import { supabase } from "../../lib/supabaseClient";
 
 const Login = () => {
-  const [credentials, setCredentials] = useState({
-    username: "",
-    password: "",
-  });
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -17,24 +15,27 @@ const Login = () => {
     setLoading(true);
     setError("");
 
-    // Simple authentication (in production, use proper authentication)
-    if (
-      credentials.username === "admin" &&
-      credentials.password === "inspecq2025"
-    ) {
-      localStorage.setItem("adminAuth", "true");
-      navigate("/admin/dashboard");
+    if (!supabase) {
+      setError("Authentication service unavailable. Check Supabase configuration.");
+      setLoading(false);
+      return;
+    }
+
+    const { error: authError } = await supabase.auth.signInWithPassword({
+      email: credentials.email,
+      password: credentials.password,
+    });
+
+    if (authError) {
+      setError("Invalid email or password. Please try again.");
     } else {
-      setError("Invalid credentials");
+      navigate("/admin/dashboard");
     }
     setLoading(false);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCredentials({
-      ...credentials,
-      [e.target.name]: e.target.value,
-    });
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
 
   return (
@@ -42,47 +43,43 @@ const Login = () => {
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
           <div className="bg-teal-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
-            <Lock className="h-8 w-8 text-white" />
+            <CheckCircle className="h-8 w-8 text-white" />
           </div>
           <h2 className="text-3xl font-bold text-gray-900 mb-2">Admin Login</h2>
-          <p className="text-gray-600">Sign in to access the admin panel</p>
+          <p className="text-gray-600">Sign in to access the InspecQ admin panel</p>
         </div>
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           {error && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md">
+            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md text-sm">
               {error}
             </div>
           )}
 
           <div className="space-y-4">
+            {/* Email */}
             <div>
-              <label
-                htmlFor="username"
-                className="block text-sm font-medium text-gray-700 mb-2"
-              >
-                Username
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                Email Address
               </label>
               <div className="relative">
-                <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
                 <input
-                  id="username"
-                  name="username"
-                  type="text"
+                  id="email"
+                  name="email"
+                  type="email"
                   required
-                  value={credentials.username}
+                  value={credentials.email}
                   onChange={handleChange}
                   className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-                  placeholder="Enter username"
+                  placeholder="admin@inspecq.com"
                 />
               </div>
             </div>
 
+            {/* Password */}
             <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-gray-700 mb-2"
-              >
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
                 Password
               </label>
               <div className="relative">
@@ -95,18 +92,14 @@ const Login = () => {
                   value={credentials.password}
                   onChange={handleChange}
                   className="pl-10 pr-10 w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-                  placeholder="Enter password"
+                  placeholder="Enter your password"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
                 >
-                  {showPassword ? (
-                    <EyeOff className="h-5 w-5" />
-                  ) : (
-                    <Eye className="h-5 w-5" />
-                  )}
+                  {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                 </button>
               </div>
             </div>
@@ -119,11 +112,6 @@ const Login = () => {
           >
             {loading ? "Signing in..." : "Sign In"}
           </button>
-
-          <div className="text-center text-sm text-gray-500">
-            <p>Demo credentials:</p>
-            <p>Username: admin | Password: inspecq2025</p>
-          </div>
         </form>
       </div>
     </div>
