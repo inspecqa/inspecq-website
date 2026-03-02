@@ -1,11 +1,11 @@
-import { CheckCircle, Users, Award, Target, Clock } from "lucide-react";
+import { CheckCircle, Users, Award, Clock } from "lucide-react";
 import aboutUsBg from "../assets/about-us-bg.svg";
 
 const stats = [
   {
     icon: Users,
     value: "10+",
-    label: "Expert QA Engineers",
+    label: "Skilled QA Experts",
     color: "text-teal-300",
   },
   {
@@ -17,14 +17,8 @@ const stats = [
   {
     icon: Clock,
     value: "24/7",
-    label: "Dedicated Support",
+    label: "Support Across Time Zones",
     color: "text-purple-300",
-  },
-  {
-    icon: Target,
-    value: "100%",
-    label: "Quality Commitment",
-    color: "text-orange-300",
   },
 ];
 
@@ -73,7 +67,7 @@ const AboutUs = () => {
 
           <p className="mt-4 text-sm sm:text-base md:text-lg text-white/90">
             Founded by experienced QA professionals, InspecQ helps teams ship
-            reliable, high-quality products with confidence—through hands-on
+            reliable, high-quality products with confidence through hands-on
             manual testing, automation, API testing, and performance testing.
           </p>
 
@@ -131,7 +125,7 @@ const AboutUs = () => {
             <div className="h-5 sm:h-6 md:h-8" />
 
             {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
               {stats.map((stat, i) => (
                 <div
                   key={i}

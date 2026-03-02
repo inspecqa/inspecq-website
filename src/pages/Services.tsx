@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import SEO from "../components/SEO";
 import pricingHeaderBg from "../assets/pricing-header-bg.svg";
 import consultationBg from "../assets/consultation-bg.svg";
 import consultationIllustration from "../assets/consultation-illustration.svg";
@@ -118,6 +119,11 @@ const Services = () => {
 
   return (
     <>
+      <SEO
+        title="QA Testing Services"
+        description="Explore InspecQ's comprehensive software testing services: functional testing, test automation, API, performance, mobile, and security testing."
+        canonical="/services"
+      />
       {/* Hero Section */}
       <section className="relative pt-24 pb-16 sm:pt-28 sm:pb-20 lg:pt-32 lg:pb-24 overflow-hidden">
         <img
@@ -128,7 +134,7 @@ const Services = () => {
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <p className="h1 text-teal-900">Comprehensive Testing Services</p>
+            <h1 className="h1 text-teal-900">Comprehensive Testing Services</h1>
             <p className="body-regular text-gray-600 mt-6 max-w-3xl mx-auto">
               Accelerate releases without compromising quality. From{" "}
               <span className="text-teal-900 font-medium">
@@ -236,9 +242,9 @@ const Services = () => {
               <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-700 flex items-center justify-center shadow-lg shadow-teal-200/40">
                 <span className="text-2xl font-bold text-white">10+</span>
               </div>
-              <p className="h4 text-slate-900 mb-2">Years of QA Expertise</p>
+              <p className="h4 text-slate-900 mb-2">Years of Combined Expertise</p>
               <p className="text-slate-600 xs-regular">
-                Hands-on experience across SaaS, fintech, and enterprise
+                Deep hands-on experience across SaaS, fintech, and enterprise
                 systems.
               </p>
             </div>
@@ -255,11 +261,12 @@ const Services = () => {
 
             <div className="text-center">
               <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-700 flex items-center justify-center shadow-lg shadow-teal-200/40">
-                <span className="text-2xl font-bold text-white">High</span>
+                <span className="text-2xl font-bold text-white">7</span>
               </div>
-              <p className="h4 text-slate-900 mb-2">Defect Detection Rate</p>
+              <p className="h4 text-slate-900 mb-2">Service Types Covered</p>
               <p className="text-slate-600 xs-regular">
-                A structured approach that uncovers critical issues early.
+                From functional to security — complete QA coverage under one
+                roof.
               </p>
             </div>
           </div>
@@ -280,11 +287,11 @@ const Services = () => {
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center px-6 sm:px-10 lg:px-14 py-12 lg:py-16">
               {/* Left copy */}
               <div className="text-white">
-                <h1 className="text-3xl md:text-4xl font-semibold leading-tight">
+                <h2 className="text-3xl md:text-4xl font-semibold leading-tight">
                   30-Minute Free QA
                   <br />
                   Consultation for your product.
-                </h1>
+                </h2>
 
                 <p className="body-regular mt-6 text-white/90 text-base sm:text-lg max-w-2xl">
                   Share your product, stack, and release goals. We'll review
@@ -293,7 +300,7 @@ const Services = () => {
                 </p>
 
                 <a
-                  href="https://calendly.com/mail-inspecq/30min"
+                  href="https://inspecq.setmore.com/services/4c63bef3-c31c-4c49-b3e9-916c27fde40a"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-text mt-10 inline-flex items-center rounded-full bg-white border border-buttonBorder text-slate-900 px-6 sm:px-8 py-3 sm:py-4 text-base font-medium shadow-md hover:shadow-lg transition"

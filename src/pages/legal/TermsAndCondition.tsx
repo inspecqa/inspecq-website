@@ -1,8 +1,14 @@
 import React from "react";
+import SEO from "../../components/SEO";
 
 const TermsOfService: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-teal-50 via-white to-white relative overflow-hidden">
+      <SEO
+        title="Terms & Conditions"
+        description="Review InspecQ's Terms & Conditions which govern the use of our QA testing services, including scope of work, payment, confidentiality, and intellectual property."
+        canonical="/terms-and-conditions"
+      />
       {/* Decorative background pattern */}
       <div className="absolute inset-0 bg-[url('/src/assets/pattern-light.svg')] opacity-[0.12] pointer-events-none" />
 
@@ -13,9 +19,9 @@ const TermsOfService: React.FC = () => {
             Terms &amp; Conditions
           </div>
 
-          <p className="h1 font-bold text-teal-900 mb-1 sm:mb-2 mt-1 sm:mt-2 text-2xl sm:text-3xl lg:text-4xl">
+          <h1 className="h1 font-bold text-teal-900 mb-1 sm:mb-2 mt-1 sm:mt-2 text-2xl sm:text-3xl lg:text-4xl">
             InspecQ Terms &amp; Conditions
-          </p>
+          </h1>
 
           <p className="text-xs sm:text-sm text-gray-500 mb-3 sm:mb-4">
             Last updated: November 2025
@@ -47,7 +53,7 @@ const TermsOfService: React.FC = () => {
                 <li>Performance Testing</li>
                 <li>Mobile App Testing</li>
                 <li>Security Testing</li>
-                <li>QA Consulting &amp; Audits</li> 
+                <li>QA Consulting &amp; Audits</li>
               </ul>
               <p className="mt-2">
                 Any additional or custom services will be agreed in writing,

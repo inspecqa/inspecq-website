@@ -1,4 +1,5 @@
 import { ArrowRight, FileDown } from "lucide-react";
+import SEO from "../components/SEO";
 
 const caseStudies = [
   {
@@ -42,6 +43,11 @@ const caseStudies = [
 const CaseStudies = () => {
   return (
     <section className="py-20 bg-white relative overflow-hidden">
+      <SEO
+        title="Case Studies"
+        description="See how InspecQ helped fintech, e-commerce, and SaaS teams improve CI/CD cycles, reduce latency, and achieve API stability through expert QA."
+        canonical="/case-studies"
+      />
       {/* Background */}
       <div className="absolute inset-0 z-0">
         <img

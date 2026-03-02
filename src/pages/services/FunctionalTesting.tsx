@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import SEO from "../../components/SEO";
 import SmoothScrollLink from "../../components/SmoothScrollLink";
 import consultationIllustration from "../../assets/consultation-illustration.svg";
 import consultationBg from "../../assets/consultation-bg.svg";
@@ -33,31 +34,31 @@ const BENEFITS: {
   title: string;
   description: string;
 }[] = [
-  {
-    icon: ShieldCheck,
-    title: "Comprehensive Coverage",
-    description:
-      "We cover every feature, flow, and edge case to guarantee functional consistency across your entire system.",
-  },
-  {
-    icon: Users,
-    title: "User-Centric Approach",
-    description:
-      "We test like real users to validate every journey, not just every click.",
-  },
-  {
-    icon: BadgeCheck,
-    title: "Quality Assurance",
-    description:
-      "Catch and fix issues early to protect your cost, performance, and user trust.",
-  },
-  {
-    icon: BrainCircuit,
-    title: "Business Logic Validation",
-    description:
-      "We verify that your workflows align perfectly with business rules, ensuring accurate data and smooth operations.",
-  },
-];
+    {
+      icon: ShieldCheck,
+      title: "Comprehensive Coverage",
+      description:
+        "We cover every feature, flow, and edge case to guarantee functional consistency across your entire system.",
+    },
+    {
+      icon: Users,
+      title: "User-Centric Approach",
+      description:
+        "We test like real users to validate every journey, not just every click.",
+    },
+    {
+      icon: BadgeCheck,
+      title: "Quality Assurance",
+      description:
+        "Catch and fix issues early to protect your cost, performance, and user trust.",
+    },
+    {
+      icon: BrainCircuit,
+      title: "Business Logic Validation",
+      description:
+        "We verify that your workflows align perfectly with business rules, ensuring accurate data and smooth operations.",
+    },
+  ];
 
 const PROCESS_STEPS: {
   icon: LucideIcon;
@@ -65,35 +66,35 @@ const PROCESS_STEPS: {
   title: string;
   description: string;
 }[] = [
-  {
-    icon: FileSearch,
-    step: "1",
-    title: "Requirements Analysis",
-    description:
-      "We collaborate with your team to understand product goals, user journeys, and edge cases.",
-  },
-  {
-    icon: ClipboardList,
-    step: "2",
-    title: "Test Planning",
-    description:
-      "We design a clear roadmap detailing coverage areas, priorities, and automation scope.",
-  },
-  {
-    icon: PlayCircle,
-    step: "3",
-    title: "Test Execution",
-    description:
-      "Our QA engineers run manual and automated test suites across browsers, devices, and integrations, ensuring flawless performance.",
-  },
-  {
-    icon: BarChart3,
-    step: "4",
-    title: "Reporting & Analysis",
-    description:
-      "Receive detailed bug reports and actionable insights that help your team fix issues faster and make data-driven improvements.",
-  },
-];
+    {
+      icon: FileSearch,
+      step: "1",
+      title: "Requirements Analysis",
+      description:
+        "We collaborate with your team to understand product goals, user journeys, and edge cases.",
+    },
+    {
+      icon: ClipboardList,
+      step: "2",
+      title: "Test Planning",
+      description:
+        "We design a clear roadmap detailing coverage areas, priorities, and automation scope.",
+    },
+    {
+      icon: PlayCircle,
+      step: "3",
+      title: "Test Execution",
+      description:
+        "Our QA engineers run manual and automated test suites across browsers, devices, and integrations, ensuring flawless performance.",
+    },
+    {
+      icon: BarChart3,
+      step: "4",
+      title: "Reporting & Analysis",
+      description:
+        "Receive detailed bug reports and actionable insights that help your team fix issues faster and make data-driven improvements.",
+    },
+  ];
 
 const TESTING_TYPES: {
   icon: LucideIcon;
@@ -101,50 +102,50 @@ const TESTING_TYPES: {
   description: string;
   features: string[];
 }[] = [
-  {
-    icon: Activity,
-    title: "Smoke & Sanity Testing",
-    description:
-      "Rapid health checks to ensure your application is stable and ready for deep testing",
-    features: [
-      "Build verification",
-      "Critical path validation",
-      "Fail-fast execution",
-    ],
-  },
-  {
-    icon: Puzzle,
-    title: "Integration Testing",
-    description:
-      "We ensure seamless communication between modules, APIs, and services.",
-    features: ["API testing", "Database integration", "Third-party services"],
-  },
-  {
-    icon: AppWindow,
-    title: "System Testing",
-    description:
-      "Simulate full user journeys to guarantee your app performs as expected in real conditions.",
-    features: ["User workflows", "Business scenarios", "Cross-browser testing"],
-  },
-  {
-    icon: RotateCcw,
-    title: "Regression Testing",
-    description:
-      "We re-test existing functionalities to ensure new updates haven't introduced bugs.",
-    features: ["Automated test suites", "Impact analysis", "Version stability"],
-  },
-  {
-    icon: UserCheck,
-    title: "User Acceptance Testing",
-    description:
-      "Empower stakeholders to validate the product before launch and sign off with confidence.",
-    features: [
-      "Stakeholder involvement",
-      "Real-world scenarios",
-      "Sign-off criteria",
-    ],
-  },
-];
+    {
+      icon: Activity,
+      title: "Smoke & Sanity Testing",
+      description:
+        "Rapid health checks to ensure your application is stable and ready for deep testing",
+      features: [
+        "Build verification",
+        "Critical path validation",
+        "Fail-fast execution",
+      ],
+    },
+    {
+      icon: Puzzle,
+      title: "Integration Testing",
+      description:
+        "We ensure seamless communication between modules, APIs, and services.",
+      features: ["API testing", "Database integration", "Third-party services"],
+    },
+    {
+      icon: AppWindow,
+      title: "System Testing",
+      description:
+        "Simulate full user journeys to guarantee your app performs as expected in real conditions.",
+      features: ["User workflows", "Business scenarios", "Cross-browser testing"],
+    },
+    {
+      icon: RotateCcw,
+      title: "Regression Testing",
+      description:
+        "We re-test existing functionalities to ensure new updates haven't introduced bugs.",
+      features: ["Automated test suites", "Impact analysis", "Version stability"],
+    },
+    {
+      icon: UserCheck,
+      title: "User Acceptance Testing",
+      description:
+        "Empower stakeholders to validate the product before launch and sign off with confidence.",
+      features: [
+        "Stakeholder involvement",
+        "Real-world scenarios",
+        "Sign-off criteria",
+      ],
+    },
+  ];
 
 /* -------------------- Reusable Components -------------------- */
 
@@ -223,6 +224,11 @@ const TestingTypeCard = ({
 const FunctionalTesting = () => {
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Functional Testing Services"
+        description="InspecQ delivers end-to-end functional testing — covering smoke tests, integration, regression, system, and UAT — to ensure your software works flawlessly."
+        canonical="/services/functional-testing"
+      />
       {/* Hero Section */}
       <section className="relative py-20 sm:py-24 lg:py-32 overflow-visible">
         <BackgroundImage src={serviceBg} />
@@ -367,16 +373,14 @@ const FunctionalTesting = () => {
 
                   {/* Divider */}
                   <div
-                    className={`h-px mb-4 ${
-                      isPrimary ? "bg-white/30" : "bg-gray-200"
-                    }`}
+                    className={`h-px mb-4 ${isPrimary ? "bg-white/30" : "bg-gray-200"
+                      }`}
                   />
 
                   {/* Title + Description */}
                   <h6
-                    className={`text-base sm:text-lg font-semibold ${
-                      isPrimary ? "text-white" : "text-gray-900"
-                    }`}
+                    className={`text-base sm:text-lg font-semibold ${isPrimary ? "text-white" : "text-gray-900"
+                      }`}
                   >
                     {step.title}
                   </h6>
@@ -420,7 +424,7 @@ const FunctionalTesting = () => {
                 </p>
 
                 <a
-                  href="https://calendly.com/contact-inspecq/30min"
+                  href="https://inspecq.setmore.com/services/4c63bef3-c31c-4c49-b3e9-916c27fde40a"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-text mt-8 sm:mt-10 inline-flex items-center rounded-full bg-white border border-buttonBorder text-slate-900 px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-medium shadow-md hover:shadow-lg transition"

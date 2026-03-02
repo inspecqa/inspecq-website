@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import type { LucideIcon } from "lucide-react";
+import SEO from "../../components/SEO";
 
 import consultationIllustration from "../../assets/consultation-illustration.svg";
 import consultationBg from "../../assets/consultation-bg.svg";
@@ -204,6 +205,11 @@ const ConsultingServiceCard = ({
 const QAConsultingAudits = () => {
   return (
     <div className="min-h-screen">
+      <SEO
+        title="QA Consulting & Audits"
+        description="InspecQ's QA consulting services help teams improve testing strategy, audit processes, select the right tools, and train engineers to ship reliably."
+        canonical="/services/qa-consulting-audits"
+      />
       {/* Hero Section */}
       <section className="relative py-20 sm:py-24 lg:py-32 overflow-visible">
         <BackgroundImage src={serviceBg} />
@@ -224,7 +230,7 @@ const QAConsultingAudits = () => {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center w-full sm:w-auto">
               <a
-                href="https://calendly.com/mail-inspecq/30min"
+                href="https://inspecq.setmore.com/services/4c63bef3-c31c-4c49-b3e9-916c27fde40a"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center w-full sm:w-auto rounded-full bg-teal-600 text-white px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-semibold shadow-sm hover:bg-teal-700 transition-colors"
@@ -443,7 +449,7 @@ const QAConsultingAudits = () => {
                 </p>
 
                 <a
-                  href="https://calendly.com/mail-inspecq/30min"
+                  href="https://inspecq.setmore.com/services/4c63bef3-c31c-4c49-b3e9-916c27fde40a"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-text mt-8 sm:mt-10 inline-flex items-center rounded-full bg-white border border-buttonBorder text-slate-900 px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-medium shadow-md hover:shadow-lg transition"

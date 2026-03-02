@@ -1,3 +1,4 @@
+import SEO from '../components/SEO';
 import Hero from '../components/Hero';
 import Services from '../components/Services';
 import ToolsStack from '../components/ToolsStack';
@@ -11,6 +12,11 @@ import Consultation from '../components/Consultation';
 const Home = () => {
   return (
     <div>
+      <SEO
+        title="Software QA Testing Agency"
+        description="InspecQ is a modern QA testing agency offering functional, automation, API, performance, mobile, and security testing to help you ship quality software faster."
+        canonical="/"
+      />
       <Hero />
       <Services />
       <ToolsStack />
@@ -19,7 +25,7 @@ const Home = () => {
       {/* <WhyChooseUs /> */}
       {/* <Team /> */}
       <Contact />
-      <Consultation/>
+      <Consultation />
     </div>
   );
 };

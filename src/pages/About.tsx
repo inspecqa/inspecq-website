@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import SEO from "../components/SEO";
 import { Target, CheckCircle, ShieldCheck, Cpu, Users } from "lucide-react";
 
 import consultationIllustration from "../assets/consultation-illustration.svg";
@@ -104,6 +105,11 @@ const values = [
 const About: React.FC = () => {
   return (
     <>
+      <SEO
+        title="About Us"
+        description="Learn about InspecQ — a modern QA agency helping SaaS, fintech, and digital products ship reliably. Meet our team, mission, and values."
+        canonical="/about"
+      />
       {/* Hero Section */}
       <section
         aria-label="Our Story section"
@@ -119,9 +125,9 @@ const About: React.FC = () => {
           <div className="flex flex-col items-center justify-center text-center gap-10 sm:gap-8">
             {/* Text block */}
             <div className="max-w-3xl mt-8">
-              <p className="h1 text-teal-900 max-w-3xl mt-2">
+              <h1 className="h1 text-teal-900 max-w-3xl mt-2">
                 Built to Inspect. Powered by Quality.
-              </p>
+              </h1>
 
               <p className="body-regular text-gray-600 mt-4 sm:mt-6">
                 InspecQ is a modern QA agency helping SaaS, fintech, and digital
@@ -134,12 +140,11 @@ const About: React.FC = () => {
 
             {/* Stats strip */}
             <div className="w-full max-w-5xl mt-4">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 rounded-3xl border border-teal-200 bg-white/85 p-6 md:p-8 shadow-sm backdrop-blur-sm md:divide-x md:divide-gray-200">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 rounded-3xl border border-teal-200 bg-white/85 p-6 md:p-8 shadow-sm backdrop-blur-sm sm:divide-x sm:divide-gray-200">
                 {[
                   { stat: "10+", label: "Skilled QA Experts" },
                   { stat: "20,000+", label: "Hours of Testing" },
                   { stat: "24/7", label: "Support Across Time Zones" },
-                  { stat: "99%", label: "Client Satisfaction" },
                 ].map((item) => (
                   <StatItem
                     key={item.label}
@@ -198,7 +203,7 @@ const About: React.FC = () => {
       <section className="py-16 md:py-20 bg-teal-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p className="h2 text-black-900 mb-6">
-            Why we started{" "}
+            Why We Started{" "}
             <span className="relative inline-block px-1">
               <span className="absolute inset-0 bg-teal-500/20 rounded-md blur-sm" />
               <span className="relative text-teal-700 font-semibold tracking-tight">
@@ -336,11 +341,11 @@ const About: React.FC = () => {
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center px-6 sm:px-10 lg:px-14 py-12 lg:py-16">
               {/* Left copy */}
               <div className="text-white">
-                <h1 className="text-3xl md:text-4xl font-semibold leading-tight">
+                <h2 className="text-3xl md:text-4xl font-semibold leading-tight">
                   30-Minute Free QA
                   <br />
                   Consultation for your product.
-                </h1>
+                </h2>
 
                 <p className="body-regular mt-6 text-white/90 text-base sm:text-lg max-w-2xl">
                   Share your product, stack, and release goals. We'll review
@@ -349,7 +354,7 @@ const About: React.FC = () => {
                 </p>
 
                 <a
-                  href="https://calendly.com/mail-inspecq/30min"
+                  href="https://inspecq.setmore.com/services/4c63bef3-c31c-4c49-b3e9-916c27fde40a"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-text mt-10 inline-flex items-center rounded-full bg-white border border-buttonBorder text-slate-900 px-6 sm:px-8 py-3 sm:py-4 text-base font-medium shadow-md hover:shadow-lg transition"

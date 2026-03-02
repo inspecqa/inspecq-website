@@ -1,8 +1,14 @@
 import React from "react";
+import SEO from "../../components/SEO";
 
 const PrivacyPolicy: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-teal-50 via-white to-white relative overflow-hidden">
+      <SEO
+        title="Privacy Policy"
+        description="Read InspecQ's Privacy Policy to understand how we collect, use, and protect your personal data when you use our website or services."
+        canonical="/privacy-policy"
+      />
       {/* Decorative background pattern */}
       <div className="absolute inset-0 bg-[url('/src/assets/pattern-light.svg')] opacity-[0.12] pointer-events-none" />
 
@@ -13,9 +19,9 @@ const PrivacyPolicy: React.FC = () => {
             Privacy &amp; Data
           </div>
 
-          <p className="h1 font-bold text-teal-900 mb-1 sm:mb-2 mt-1 sm:mt-2 text-2xl sm:text-3xl lg:text-4xl">
+          <h1 className="h1 font-bold text-teal-900 mb-1 sm:mb-2 mt-1 sm:mt-2 text-2xl sm:text-3xl lg:text-4xl">
             InspecQ Privacy Policy
-          </p>
+          </h1>
 
           <p className="text-xs sm:text-sm text-gray-500 mb-3 sm:mb-4">
             {/* তারিখ আপডেট করা হয়েছে */}

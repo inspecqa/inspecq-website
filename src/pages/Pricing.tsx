@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import SEO from "../components/SEO";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
@@ -173,7 +174,7 @@ const ALL_INCLUDED = [
     desc: "Fast start with best-practice templates.",
   },
   {
-    title: "Test Artefacts",
+    title: "Test Artifacts",
     desc: "Test plans, cases, and detailed QA reports.",
   },
   {
@@ -228,6 +229,11 @@ const PricingPage: React.FC = () => {
 
   return (
     <div id="pricing-page">
+      <SEO
+        title="Pricing"
+        description="Flexible QA testing pricing plans for every stage — Starter, Professional, and Enterprise. Start a 7-day free trial, no credit card required."
+        canonical="/pricing"
+      />
       <section
         aria-label="Pricing Hero Section"
         className="relative overflow-hidden pt-24 pb-16 sm:pt-28 sm:pb-20 lg:pt-32 lg:pb-24"
@@ -251,9 +257,9 @@ const PricingPage: React.FC = () => {
             </div>
 
             <div className="max-w-3xl mt-2 sm:mt-4">
-              <p className="h1 text-teal-900 mt-2 sm:mt-4">
+              <h1 className="h1 text-teal-900 mt-2 sm:mt-4">
                 Flexible QA Pricing for Every Stage
-              </p>
+              </h1>
               <p className="body-regular text-gray-600 mt-2 sm:mt-6">
                 Get the expertise of a senior QA team at rates that fit your
                 budget. Scale up or down anytime.
@@ -270,7 +276,7 @@ const PricingPage: React.FC = () => {
               </Link>
 
               <a
-                href="https://calendly.com/mail-inspecq/30min"
+                href="https://inspecq.setmore.com/services/4c63bef3-c31c-4c49-b3e9-916c27fde40a"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-white text-teal-900 w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-4 rounded-xl font-semibold text-sm sm:text-base transition-colors duration-200 flex items-center justify-center space-x-2"
@@ -297,11 +303,10 @@ const PricingPage: React.FC = () => {
 
             <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mt-8">
               <span
-                className={`text-sm ${
-                  billing === "monthly"
-                    ? "text-gray-900 font-semibold"
-                    : "text-gray-500"
-                }`}
+                className={`text-sm ${billing === "monthly"
+                  ? "text-gray-900 font-semibold"
+                  : "text-gray-500"
+                  }`}
               >
                 Monthly
               </span>
@@ -316,17 +321,15 @@ const PricingPage: React.FC = () => {
                 className="relative inline-flex h-9 w-16 items-center rounded-full bg-gray-200 transition focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
               >
                 <span
-                  className={`inline-block h-7 w-7 transform rounded-full bg-teal-900 shadow transition ${
-                    billing === "yearly" ? "translate-x-8" : "translate-x-1"
-                  }`}
+                  className={`inline-block h-7 w-7 transform rounded-full bg-teal-900 shadow transition ${billing === "yearly" ? "translate-x-8" : "translate-x-1"
+                    }`}
                 />
               </button>
               <span
-                className={`text-sm ${
-                  billing === "yearly"
-                    ? "text-gray-900 font-semibold"
-                    : "text-gray-500"
-                }`}
+                className={`text-sm ${billing === "yearly"
+                  ? "text-gray-900 font-semibold"
+                  : "text-gray-500"
+                  }`}
               >
                 Yearly
               </span>
@@ -346,19 +349,18 @@ const PricingPage: React.FC = () => {
               return (
                 <div
                   key={plan.id}
-                  className={`relative rounded-3xl transition-all duration-300 border-2 h-full flex flex-col ${
-                    isPopular
-                      ? "hover:shadow-xl border-teal-100"
-                      : isEnterprise
+                  className={`relative rounded-3xl transition-all duration-300 border-2 h-full flex flex-col ${isPopular
+                    ? "hover:shadow-xl border-teal-100"
+                    : isEnterprise
                       ? "bg-slate-50 border-slate-200 hover:shadow-lg hover:border-slate-300"
                       : "bg-white border-gray-200 hover:shadow-lg"
-                  }`}
+                    }`}
                   style={
                     isPopular
                       ? {
-                          background:
-                            "linear-gradient(180deg, #F0FDFA 0%, #FFFFFF 100%)",
-                        }
+                        background:
+                          "linear-gradient(180deg, #F0FDFA 0%, #FFFFFF 100%)",
+                      }
                       : undefined
                   }
                 >
@@ -374,11 +376,10 @@ const PricingPage: React.FC = () => {
                     {/* Header */}
                     <div className="flex items-center gap-3">
                       <div
-                        className={`w-12 h-12 rounded-2xl flex items-center justify-center border ${
-                          isPopular
-                            ? "bg-white border-teal-100 shadow-sm"
-                            : "bg-white border-gray-100"
-                        }`}
+                        className={`w-12 h-12 rounded-2xl flex items-center justify-center border ${isPopular
+                          ? "bg-white border-teal-100 shadow-sm"
+                          : "bg-white border-gray-100"
+                          }`}
                       >
                         <Icon className="w-6 h-6 text-teal-600" />
                       </div>
@@ -407,11 +408,10 @@ const PricingPage: React.FC = () => {
                     {/* CTA */}
                     <a
                       href={plan.ctaLink}
-                      className={`w-full py-4 px-6 rounded-xl font-bold text-sm sm:text-base transition-all duration-200 flex items-center justify-center gap-2 mb-8 ${
-                        isPopular
-                          ? "bg-teal-600 text-white hover:bg-teal-700 shadow-md hover:shadow-lg"
-                          : "bg-slate-900 text-white hover:bg-slate-800"
-                      }`}
+                      className={`w-full py-4 px-6 rounded-xl font-bold text-sm sm:text-base transition-all duration-200 flex items-center justify-center gap-2 mb-8 ${isPopular
+                        ? "bg-teal-600 text-white hover:bg-teal-700 shadow-md hover:shadow-lg"
+                        : "bg-slate-900 text-white hover:bg-slate-800"
+                        }`}
                     >
                       {plan.cta}
                     </a>
@@ -654,7 +654,7 @@ const PricingPage: React.FC = () => {
 
                 <div className="flex flex-wrap gap-4">
                   <a
-                    href="https://calendly.com/mail-inspecq/30min"
+                    href="https://inspecq.setmore.com/services/4c63bef3-c31c-4c49-b3e9-916c27fde40a"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center rounded-full bg-white text-teal-900 px-8 py-4 text-base font-bold shadow-lg hover:bg-teal-50 transition transform hover:-translate-y-1"

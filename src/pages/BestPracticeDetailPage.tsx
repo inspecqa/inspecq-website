@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import SEO from "../components/SEO";
 import ReactMarkdown from "react-markdown";
 import { bestPractices } from "../data/best-practices";
 import {
@@ -192,6 +193,11 @@ export function BestPracticeDetailPage({
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+      <SEO
+        title={`${practice.title} | QA Best Practices`}
+        description={practice.excerpt ?? `Learn best practices for ${practice.title} from InspecQ's expert QA library.`}
+        canonical={`/best-practices/${practice.slug}`}
+      />
       {/* Header */}
       <section className="bg-gradient-to-br from-teal-600 to-teal-700 text-white py-12">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">

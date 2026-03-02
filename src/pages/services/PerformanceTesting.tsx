@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import type { ComponentType } from "react";
+import SEO from "../../components/SEO";
 
 import SmoothScrollLink from "../../components/SmoothScrollLink";
 
@@ -39,31 +40,31 @@ const BENEFITS: {
   title: string;
   description: string;
 }[] = [
-  {
-    icon: Zap,
-    title: "Optimal Performance",
-    description:
-      "Validate how your system performs under normal, peak, and extreme load conditions.",
-  },
-  {
-    icon: Users,
-    title: "User Experience",
-    description:
-      "Ensure every user interaction feels smooth, responsive, and frustration-free.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Scalability Planning",
-    description:
-      "Discover your system’s true capacity and plan for sustainable growth.",
-  },
-  {
-    icon: Activity,
-    title: "Issue Prevention",
-    description:
-      "Detect and eliminate bottlenecks before they cause downtime or slowdowns.",
-  },
-];
+    {
+      icon: Zap,
+      title: "Optimal Performance",
+      description:
+        "Validate how your system performs under normal, peak, and extreme load conditions.",
+    },
+    {
+      icon: Users,
+      title: "User Experience",
+      description:
+        "Ensure every user interaction feels smooth, responsive, and frustration-free.",
+    },
+    {
+      icon: TrendingUp,
+      title: "Scalability Planning",
+      description:
+        "Discover your system’s true capacity and plan for sustainable growth.",
+    },
+    {
+      icon: Activity,
+      title: "Issue Prevention",
+      description:
+        "Detect and eliminate bottlenecks before they cause downtime or slowdowns.",
+    },
+  ];
 
 const TESTING_TYPES: {
   icon: ComponentType<any>;
@@ -71,53 +72,53 @@ const TESTING_TYPES: {
   description: string;
   features: string[];
 }[] = [
-  {
-    icon: Users,
-    title: "Load Testing",
-    description:
-      "Measure how your application behaves under expected user traffic.",
-    features: [
-      "Simulate real-world user load",
-      "Response time analysis",
-      "Throughput measurement",
-      "Monitor resource utilization",
-    ],
-  },
-  {
-    icon: Activity,
-    title: "Stress Testing",
-    description:
-      "Push your system to its limits to ensure it can recover gracefully.",
-    features: [
-      "Simulate peak and beyond-peak loads",
-      "System stability testing",
-      "Recovery testing",
-      "Error handling validation",
-    ],
-  },
-  {
-    icon: BarChart3,
-    title: "Volume Testing",
-    description: "Check performance when handling large data sets.",
-    features: [
-      "Database performance",
-      "Data processing speed",
-      "Storage capacity testing",
-      "Memory usage analysis",
-    ],
-  },
-  {
-    icon: TrendingUp,
-    title: "Spike Testing",
-    description: "Assess how your system handles sudden traffic surges.",
-    features: [
-      "Traffic spike simulation",
-      "Auto-scaling validation",
-      "Performance degradation analysis",
-      "Recovery time measurement",
-    ],
-  },
-];
+    {
+      icon: Users,
+      title: "Load Testing",
+      description:
+        "Measure how your application behaves under expected user traffic.",
+      features: [
+        "Simulate real-world user load",
+        "Response time analysis",
+        "Throughput measurement",
+        "Monitor resource utilization",
+      ],
+    },
+    {
+      icon: Activity,
+      title: "Stress Testing",
+      description:
+        "Push your system to its limits to ensure it can recover gracefully.",
+      features: [
+        "Simulate peak and beyond-peak loads",
+        "System stability testing",
+        "Recovery testing",
+        "Error handling validation",
+      ],
+    },
+    {
+      icon: BarChart3,
+      title: "Volume Testing",
+      description: "Check performance when handling large data sets.",
+      features: [
+        "Database performance",
+        "Data processing speed",
+        "Storage capacity testing",
+        "Memory usage analysis",
+      ],
+    },
+    {
+      icon: TrendingUp,
+      title: "Spike Testing",
+      description: "Assess how your system handles sudden traffic surges.",
+      features: [
+        "Traffic spike simulation",
+        "Auto-scaling validation",
+        "Performance degradation analysis",
+        "Recovery time measurement",
+      ],
+    },
+  ];
 
 const TOOLS: {
   icon: ComponentType<any>;
@@ -125,48 +126,48 @@ const TOOLS: {
   description: string;
   capabilities: string[];
 }[] = [
-  {
-    icon: SiApachejmeter,
-    name: "JMeter",
-    description: "Open-source performance testing tool.",
-    capabilities: ["Web applications", "APIs", "Databases", "FTP servers"],
-  },
-  {
-    icon: FaLocust,
-    name: "Locust",
-    description:
-      "Python-based open-source load testing framework for custom user scenarios.",
-    capabilities: [
-      "Human-readable Python scripts",
-      "Distributed and scalable load simulation",
-      "Custom user behavior modeling",
-      "Excellent for microservice and API testing",
-    ],
-  },
-  {
-    icon: SiK6,
-    name: "k6",
-    description: "Modern, developer-friendly load testing tool.",
-    capabilities: [
-      "JavaScript scripting",
-      "CI/CD integration",
-      "Cloud execution",
-      "APM and monitoring integrations",
-    ],
-  },
-  {
-    icon: SiBlazemeter,
-    name: "BlazeMeter",
-    description:
-      "Cloud-based performance testing platform built on top of JMeter and Taurus.",
-    capabilities: [
-      "Massive cloud load testing",
-      "CI/CD tool integrations",
-      "Comprehensive performance dashboards",
-      "Collaborative team reporting",
-    ],
-  },
-];
+    {
+      icon: SiApachejmeter,
+      name: "JMeter",
+      description: "Open-source performance testing tool.",
+      capabilities: ["Web applications", "APIs", "Databases", "FTP servers"],
+    },
+    {
+      icon: FaLocust,
+      name: "Locust",
+      description:
+        "Python-based open-source load testing framework for custom user scenarios.",
+      capabilities: [
+        "Human-readable Python scripts",
+        "Distributed and scalable load simulation",
+        "Custom user behavior modeling",
+        "Excellent for microservice and API testing",
+      ],
+    },
+    {
+      icon: SiK6,
+      name: "k6",
+      description: "Modern, developer-friendly load testing tool.",
+      capabilities: [
+        "JavaScript scripting",
+        "CI/CD integration",
+        "Cloud execution",
+        "APM and monitoring integrations",
+      ],
+    },
+    {
+      icon: SiBlazemeter,
+      name: "BlazeMeter",
+      description:
+        "Cloud-based performance testing platform built on top of JMeter and Taurus.",
+      capabilities: [
+        "Massive cloud load testing",
+        "CI/CD tool integrations",
+        "Comprehensive performance dashboards",
+        "Collaborative team reporting",
+      ],
+    },
+  ];
 
 const METRICS: {
   icon: ComponentType<any>;
@@ -174,92 +175,92 @@ const METRICS: {
   description: string;
   target: string;
 }[] = [
-  {
-    icon: Timer,
-    name: "Response Time",
-    description: "Time to complete a request.",
-    target: "< 2 seconds",
-  },
-  {
-    icon: Activity,
-    name: "Throughput",
-    description: "Requests handled per second.",
-    target: "Sized to SLA",
-  },
-  {
-    icon: Zap,
-    name: "Latency (p95)",
-    description: "95th percentile response time on key flows.",
-    target: "< 2s",
-  },
-  {
-    icon: AlertTriangle,
-    name: "Error Rate",
-    description: "Percentage of failed requests.",
-    target: "< 1%",
-  },
-  {
-    icon: Cpu,
-    name: "CPU Usage",
-    description: "Server CPU utilization.",
-    target: "< 80%",
-  },
-  {
-    icon: Server,
-    name: "Memory Usage",
-    description: "RAM consumption.",
-    target: "< 85%",
-  },
-  {
-    icon: Database,
-    name: "DB Query Time",
-    description: "p95 query execution time.",
-    target: "< 200 ms",
-  },
-  {
-    icon: Users,
-    name: "Concurrent Users",
-    description: "Simultaneous active users.",
-    target: "10,000+",
-  },
-];
+    {
+      icon: Timer,
+      name: "Response Time",
+      description: "Time to complete a request.",
+      target: "< 2 seconds",
+    },
+    {
+      icon: Activity,
+      name: "Throughput",
+      description: "Requests handled per second.",
+      target: "Sized to SLA",
+    },
+    {
+      icon: Zap,
+      name: "Latency (p95)",
+      description: "95th percentile response time on key flows.",
+      target: "< 2s",
+    },
+    {
+      icon: AlertTriangle,
+      name: "Error Rate",
+      description: "Percentage of failed requests.",
+      target: "< 1%",
+    },
+    {
+      icon: Cpu,
+      name: "CPU Usage",
+      description: "Server CPU utilization.",
+      target: "< 80%",
+    },
+    {
+      icon: Server,
+      name: "Memory Usage",
+      description: "RAM consumption.",
+      target: "< 85%",
+    },
+    {
+      icon: Database,
+      name: "DB Query Time",
+      description: "p95 query execution time.",
+      target: "< 200 ms",
+    },
+    {
+      icon: Users,
+      name: "Concurrent Users",
+      description: "Simultaneous active users.",
+      target: "10,000+",
+    },
+  ];
 
 const STEPS: {
   icon: ComponentType<any>;
   title: string;
   description: string;
 }[] = [
-  {
-    icon: Target,
-    title: "Define & Instrument",
-    description:
-      "Clarify performance goals, SLAs, and set up monitoring visibility.",
-  },
-  {
-    icon: ClipboardList,
-    title: "Design & Prepare",
-    description:
-      "Build realistic test data, environments, and success criteria.",
-  },
-  {
-    icon: Code2,
-    title: "Script & Baseline",
-    description:
-      "Develop, parameterize, and validate scripts for accurate results.",
-  },
-  {
-    icon: Gauge,
-    title: "Execute & Observe",
-    description:
-      "Run load, stress, and spike tests with real-time observability.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Analyze & Optimize",
-    description:
-      "Identify bottlenecks, implement fixes, and validate improvements.",
-  },
-];
+    {
+      icon: Target,
+      title: "Define & Instrument",
+      description:
+        "Clarify performance goals, SLAs, and set up monitoring visibility.",
+    },
+    {
+      icon: ClipboardList,
+      title: "Design & Prepare",
+      description:
+        "Build realistic test data, environments, and success criteria.",
+    },
+    {
+      icon: Code2,
+      title: "Script & Baseline",
+      description:
+        "Develop, parameterize, and validate scripts for accurate results.",
+    },
+    {
+      icon: Gauge,
+      title: "Execute & Observe",
+      description:
+        "Run load, stress, and spike tests with real-time observability.",
+    },
+    {
+      icon: TrendingUp,
+      title: "Analyze & Optimize",
+      description:
+        "Identify bottlenecks, implement fixes, and validate improvements.",
+    },
+  ];
 
 /* -------------------- Reusable Components -------------------- */
 
@@ -344,6 +345,11 @@ const TestingTypeCard = ({
 const PerformanceTesting = () => {
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Performance Testing Services"
+        description="InspecQ's performance testing team runs load, stress, spike, and volume tests using JMeter, k6, Locust, and BlazeMeter to ensure your app scales under pressure."
+        canonical="/services/performance-testing"
+      />
       {/* Hero Section */}
       <section className="relative py-20 sm:py-24 lg:py-32 overflow-visible">
         <BackgroundImage src={serviceHeroBg} />
@@ -718,15 +724,13 @@ const PerformanceTesting = () => {
 
                   {/* Divider */}
                   <div
-                    className={`h-px mb-4 ${
-                      isPrimary ? "bg-white/30" : "bg-gray-200"
-                    }`}
+                    className={`h-px mb-4 ${isPrimary ? "bg-white/30" : "bg-gray-200"
+                      }`}
                   />
 
                   <h6
-                    className={`text-base sm:text-lg font-semibold ${
-                      isPrimary ? "text-white" : "text-gray-900"
-                    }`}
+                    className={`text-base sm:text-lg font-semibold ${isPrimary ? "text-white" : "text-gray-900"
+                      }`}
                   >
                     {step.title}
                   </h6>
@@ -770,7 +774,7 @@ const PerformanceTesting = () => {
                 </p>
 
                 <a
-                  href="https://calendly.com/mail-inspecq/30min"
+                  href="https://inspecq.setmore.com/services/4c63bef3-c31c-4c49-b3e9-916c27fde40a"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-text mt-8 sm:mt-10 inline-flex items-center rounded-full bg-white border border-buttonBorder text-slate-900 px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-medium shadow-md hover:shadow-lg transition"

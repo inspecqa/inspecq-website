@@ -1,6 +1,13 @@
+import SEO from "../../components/SEO";
+
 const FreeTrialTerms = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-teal-50 via-white to-white relative overflow-hidden">
+      <SEO
+        title="Free Trial Terms & Conditions"
+        description="Read the terms of InspecQ's 7-day free QA trial — what's included, confidentiality, access requirements, and your obligations."
+        canonical="/free-trial-terms"
+      />
       {/* Decorative background pattern */}
       <div className="absolute inset-0 bg-[url('/src/assets/pattern-light.svg')] opacity-[0.12] pointer-events-none" />
 
@@ -11,9 +18,9 @@ const FreeTrialTerms = () => {
             7-Day Trial&apos;s Terms &amp; Conditions
           </div>
 
-          <p className="h1 font-bold text-teal-900 mb-3 sm:mb-4 mt-1 sm:mt-2 text-2xl sm:text-3xl lg:text-4xl">
+          <h1 className="h1 font-bold text-teal-900 mb-3 sm:mb-4 mt-1 sm:mt-2 text-2xl sm:text-3xl lg:text-4xl">
             InspecQ Free Trial Terms
-          </p>
+          </h1>
 
           <p className="body-md text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
             Please review these terms to understand what’s included in your

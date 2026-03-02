@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import type { ComponentType } from "react";
+import SEO from "../../components/SEO";
 import { BiSupport } from "react-icons/bi";
 import { SiSelenium, SiAppium } from "react-icons/si";
 import { TbBrandCypress } from "react-icons/tb";
@@ -246,6 +247,11 @@ const FrameworkCard = ({
 function AutomationTesting() {
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Test Automation Services"
+        description="InspecQ builds scalable test automation frameworks using Selenium, Cypress, Playwright, and Appium for web, API, and mobile — integrated into your CI/CD pipeline."
+        canonical="/services/test-automation"
+      />
       {/* Hero Section */}
       <section className="relative py-20 sm:py-24 lg:py-32 overflow-visible">
         <BackgroundImage src={serviceHBg} />
@@ -509,7 +515,7 @@ function AutomationTesting() {
                 </p>
 
                 <a
-                  href="https://calendly.com/mail-inspecq/30min"
+                  href="https://inspecq.setmore.com/services/4c63bef3-c31c-4c49-b3e9-916c27fde40a"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-text mt-8 sm:mt-10 inline-flex items-center rounded-full bg-white border border-buttonBorder text-slate-900 px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base md:text-lg font-medium shadow-md hover:shadow-lg transition"

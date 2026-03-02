@@ -365,7 +365,7 @@ const Footer = () => {
               <li className="flex items-start gap-3">
                 <CalendarCheck className="h-5 w-5 text-slate-400 mt-0.5" />
                 <a
-                  href="https://calendly.com/mail-inspecq/30min"
+                  href="https://inspecq.setmore.com/services/4c63bef3-c31c-4c49-b3e9-916c27fde40a"
                   target="_blank"
                   rel="noreferrer"
                   className="body-regular hover:text-white transition-colors"
@@ -381,7 +381,7 @@ const Footer = () => {
         <hr className="mt-10 md:mt-12 border-slate-800" />
         <div className="py-4 mt-2 flex flex-col md:flex-row items-center justify-center text-sm">
           <p className="xs-regular text-slate-200">
-            © 2025 InspecQ | All Rights Reserved
+            © 2026 InspecQ | All Rights Reserved
           </p>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import SEO from "../components/SEO";
 import { Link } from "react-router-dom";
 import {
   Users,
@@ -151,6 +152,11 @@ const Careers = () => {
 
   return (
     <div className="pt-16">
+      <SEO
+        title="Careers"
+        description="Join the InspecQ team. Explore open positions in QA engineering, automation, and client success. Build your career in software quality assurance."
+        canonical="/careers"
+      />
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-br from-slate-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -276,11 +282,10 @@ const Careers = () => {
               <button
                 key={dept.id}
                 onClick={() => setSelectedDepartment(dept.id)}
-                className={`px-6 py-3 rounded-full font-medium transition-colors duration-200 ${
-                  selectedDepartment === dept.id
-                    ? "bg-teal-600 text-white"
-                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                }`}
+                className={`px-6 py-3 rounded-full font-medium transition-colors duration-200 ${selectedDepartment === dept.id
+                  ? "bg-teal-600 text-white"
+                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  }`}
               >
                 {dept.name} ({dept.count})
               </button>

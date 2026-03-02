@@ -2,7 +2,7 @@ import consultationIllustration from "../assets/consultation-illustration.svg";
 import consultationBg from "../assets/consultation-bg.svg";
 
 const ConsultationCta = () => {
-  const calendlyUrl = "https://calendly.com/contact-inspecq/30min";
+  const calendlyUrl = "https://inspecq.setmore.com/services/4c63bef3-c31c-4c49-b3e9-916c27fde40a";
 
   return (
     <section className="py-16">
@@ -19,14 +19,15 @@ const ConsultationCta = () => {
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center px-6 sm:px-10 lg:px-14 py-12 lg:py-16">
             {/* Left copy */}
             <div className="text-white">
-              <h1 className="text-3xl md:text-4xl font-semibold leading-tight">
-                Book a 30-minute
-                <br /> consultation to build your testing strategy.
-              </h1>
+              <h2 className="text-3xl md:text-4xl font-semibold leading-tight">
+                Book a 30-Minute Free QA
+                <br /> Consultation for Your Product.
+              </h2>
 
               <p className="body-regular mt-6 text-white/90 text-lg max-w-2xl">
-                Book a 30-minute consultation to discuss your testing needs and
-                get expert recommendations.
+                Share your product, stack, and release goals. We'll review your
+                current QA approach and outline a practical testing plan you can
+                start using immediately.
               </p>
 
               <a

@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+import SEO from "../components/SEO";
 import { Link } from "react-router-dom";
 import { bestPractices, practiceCategories } from "../data/best-practices.ts";
 import consultationIllustration from "../assets/consultation-illustration.svg";
@@ -179,6 +180,11 @@ export function BestPracticesPage({ onNavigate }: BestPracticesPageProps) {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="QA Best Practices Library"
+        description="Browse InspecQ's expert-curated library of QA best practices covering test automation, API testing, performance, mobile, CI/CD, and more."
+        canonical="/best-practices"
+      />
       {/* Hero */}
       <section className="relative py-28 md:py-36 overflow-visible">
         <BackgroundImage src="/src/assets/service/service-hero-bg.svg" />
@@ -405,7 +411,7 @@ export function BestPracticesPage({ onNavigate }: BestPracticesPageProps) {
                 </p>
 
                 <a
-                  href="https://calendly.com/mail-inspecq/30min"
+                  href="https://inspecq.setmore.com/services/4c63bef3-c31c-4c49-b3e9-916c27fde40a"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-text mt-10 inline-flex items-center rounded-full bg-white border border-buttonBorder text-slate-900 px-6 sm:px-8 py-3 sm:py-4 text-base font-medium shadow-md hover:shadow-lg transition"

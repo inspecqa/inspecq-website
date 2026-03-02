@@ -1,4 +1,5 @@
 import React from "react";
+import SEO from "../components/SEO";
 import { Link } from "react-router-dom";
 import {
   Download,
@@ -169,6 +170,11 @@ const Resources = () => {
 
   return (
     <div className="pt-16">
+      <SEO
+        title="QA Resources & Tools"
+        description="Access free QA resources, testing templates, eBooks, video courses, and tools from InspecQ — all designed to improve your software testing process."
+        canonical="/resources"
+      />
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-br from-slate-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -335,11 +341,10 @@ const Resources = () => {
               >
                 <div className="flex items-center justify-between mb-4">
                   <span
-                    className={`px-3 py-1 rounded-full text-sm font-medium ${
-                      webinar.status === "upcoming"
-                        ? "bg-teal-100 text-teal-800"
-                        : "bg-blue-100 text-blue-800"
-                    }`}
+                    className={`px-3 py-1 rounded-full text-sm font-medium ${webinar.status === "upcoming"
+                      ? "bg-teal-100 text-teal-800"
+                      : "bg-blue-100 text-blue-800"
+                      }`}
                   >
                     {webinar.status === "upcoming" ? "Upcoming" : "Recorded"}
                   </span>
@@ -369,11 +374,10 @@ const Resources = () => {
                 </div>
 
                 <button
-                  className={`w-full px-6 py-3 rounded-md font-semibold transition-colors duration-200 flex items-center justify-center space-x-2 ${
-                    webinar.status === "upcoming"
-                      ? "bg-teal-600 text-white hover:bg-teal-700"
-                      : "bg-blue-600 text-white hover:bg-blue-700"
-                  }`}
+                  className={`w-full px-6 py-3 rounded-md font-semibold transition-colors duration-200 flex items-center justify-center space-x-2 ${webinar.status === "upcoming"
+                    ? "bg-teal-600 text-white hover:bg-teal-700"
+                    : "bg-blue-600 text-white hover:bg-blue-700"
+                    }`}
                 >
                   <Video className="h-5 w-5" />
                   <span>

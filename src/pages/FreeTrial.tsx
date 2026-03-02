@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
+import SEO from "../components/SEO";
 import { Link, useNavigate } from "react-router-dom";
 import { useSmoothScroll } from "../hooks/useSmoothScroll";
 import {
@@ -39,7 +40,7 @@ const FEATURES = [
     icon: CheckCircle,
     title: "Expert-Led QA Guidance",
     description:
-      "Get hands on guidance from our experts to assess and elevate your testing process.",
+      "Get hands-on guidance from our experts to assess and elevate your testing process.",
   },
   {
     icon: Users,
@@ -337,20 +338,20 @@ const FreeTrial: React.FC = () => {
 
     try {
       // Optional: send welcome email via Netlify function
-     try {
-       await fetch("/api/sendTrialEmail", {
-         method: "POST",
-         headers: { "Content-Type": "application/json" },
-         body: JSON.stringify({
-           name: formData.name,
-           email: formData.email,
-           calendlyLink:
-             "https://calendly.com/mail-inspecq/inspecq-free-trial-kickoff-call",
-         }),
-       });
-     } catch (err) {
-       console.error("Error sending trial email:", err);
-     }
+      try {
+        await fetch("/api/sendTrialEmail", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            calendlyLink:
+              "https://inspecq.setmore.com/services/7783a65f-1ac3-4416-af5e-4c60832584e5",
+          }),
+        });
+      } catch (err) {
+        console.error("Error sending trial email:", err);
+      }
 
 
       // Insert into Supabase
@@ -395,6 +396,11 @@ const FreeTrial: React.FC = () => {
 
   return (
     <>
+      <SEO
+        title="Start Your Free 7-Day Trial"
+        description="Try InspecQ free for 7 days — no credit card, no contract. Get expert QA support and see the quality difference before you commit."
+        canonical="/free-trial"
+      />
       {/* Success Modal */}
       <Modal
         open={showSuccess}
@@ -419,13 +425,13 @@ const FreeTrial: React.FC = () => {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center justify-center text-center gap-6 sm:gap-8">
             <div className="max-w-xl mt-2 sm:mt-4">
-              <p className="h1 text-teal-900">
+              <h1 className="h1 text-teal-900">
                 Start Your 7-Day Free Trial Today
-              </p>
+              </h1>
               <p className="body-regular text-gray-600 mt-4 text-sm sm:text-base">
-                Kickstart your QA journey with InspecQ. Enjoy a 7-day free trial
-                with no payment details needed. Discover the quality difference
-                before you commit.
+                Start delivering better software in 7 days — no payment details
+                needed, no contract. See the quality difference before you
+                commit.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8 w-full">
                 <button
@@ -447,7 +453,7 @@ const FreeTrial: React.FC = () => {
                   className="px-6 sm:px-8 py-3 sm:py-4 rounded-xl btn-text border border-buttonBorder text-black-500 bg-white transition-colors duration-200 flex items-center justify-center space-x-2 w-full sm:w-auto"
                   aria-label="Send your query"
                 >
-                  <span>Send Your Query</span>
+                  <span>Contact Us</span>
                   <MessageCircle className="h-5 w-5" />
                 </button>
               </div>
@@ -527,34 +533,30 @@ const FreeTrial: React.FC = () => {
                 return (
                   <div
                     key={s.step}
-                    className={`w-full p-5 sm:p-6 rounded-2xl border transition-all duration-300 ${
-                      isHighlight
-                        ? "bg-teal-500 text-white border-transparent"
-                        : "bg-white text-gray-900 border-gray-100 hover:shadow-md"
-                    }`}
+                    className={`w-full p-5 sm:p-6 rounded-2xl border transition-all duration-300 ${isHighlight
+                      ? "bg-teal-500 text-white border-transparent"
+                      : "bg-white text-gray-900 border-gray-100 hover:shadow-md"
+                      }`}
                   >
                     <div className="flex flex-col gap-5 sm:gap-6">
                       <div
-                        className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ${
-                          isHighlight
-                            ? "bg-white text-teal-500"
-                            : "bg-teal-500 text-white"
-                        }`}
+                        className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ${isHighlight
+                          ? "bg-white text-teal-500"
+                          : "bg-teal-500 text-white"
+                          }`}
                       >
                         {s.step}
                       </div>
                       <div>
                         <h6
-                          className={`text-base sm:text-lg font-semibold mb-2 ${
-                            isHighlight ? "text-white" : "text-gray-900"
-                          }`}
+                          className={`text-base sm:text-lg font-semibold mb-2 ${isHighlight ? "text-white" : "text-gray-900"
+                            }`}
                         >
                           {s.title}
                         </h6>
                         <p
-                          className={`text-sm leading-relaxed ${
-                            isHighlight ? "text-teal-50" : "text-gray-600"
-                          }`}
+                          className={`text-sm leading-relaxed ${isHighlight ? "text-teal-50" : "text-gray-600"
+                            }`}
                         >
                           {s.description}
                         </p>
@@ -632,9 +634,8 @@ const FreeTrial: React.FC = () => {
                     aria-describedby={errors.name ? "err-name" : undefined}
                     autoComplete="name"
                     placeholder="Your Name"
-                    className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors text-sm sm:text-base ${
-                      errors.name ? "border-rose-400" : "border-gray-200"
-                    }`}
+                    className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors text-sm sm:text-base ${errors.name ? "border-rose-400" : "border-gray-200"
+                      }`}
                     required
                   />
                   {errors.name && (
@@ -669,9 +670,8 @@ const FreeTrial: React.FC = () => {
                     aria-describedby={errors.email ? "err-email" : undefined}
                     autoComplete="email"
                     placeholder="mail@company.com"
-                    className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors text-sm sm:text-base ${
-                      errors.email ? "border-rose-400" : "border-gray-200"
-                    }`}
+                    className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors text-sm sm:text-base ${errors.email ? "border-rose-400" : "border-gray-200"
+                      }`}
                     required
                   />
                   {errors.email && (
@@ -711,9 +711,8 @@ const FreeTrial: React.FC = () => {
                     }
                     autoComplete="organization"
                     placeholder="Your company"
-                    className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors text-sm sm:text-base ${
-                      errors.company ? "border-rose-400" : "border-gray-200"
-                    }`}
+                    className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors text-sm sm:text-base ${errors.company ? "border-rose-400" : "border-gray-200"
+                      }`}
                     required
                   />
                   {errors.company && (
@@ -744,9 +743,8 @@ const FreeTrial: React.FC = () => {
                     aria-describedby={
                       errors.teamSize ? "err-teamSize" : undefined
                     }
-                    className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors text-sm sm:text-base ${
-                      errors.teamSize ? "border-rose-400" : "border-gray-200"
-                    }`}
+                    className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors text-sm sm:text-base ${errors.teamSize ? "border-rose-400" : "border-gray-200"
+                      }`}
                   >
                     <option value="">Select team size</option>
                     <option value="1-5">1–5 people</option>
@@ -785,9 +783,8 @@ const FreeTrial: React.FC = () => {
                   aria-describedby={
                     errors.testingFocus ? "err-testingFocus" : undefined
                   }
-                  className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors text-sm sm:text-base ${
-                    errors.testingFocus ? "border-rose-400" : "border-gray-200"
-                  }`}
+                  className={`w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-colors text-sm sm:text-base ${errors.testingFocus ? "border-rose-400" : "border-gray-200"
+                    }`}
                 >
                   <option value="" disabled className="text-slate-400">
                     Select Testing Focus
@@ -882,11 +879,10 @@ const FreeTrial: React.FC = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting || !agreeToTerms}
-                  className={`w-full px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-base flex items-center justify-center gap-2 transition-colors duration-200 ${
-                    isSubmitting || !agreeToTerms
-                      ? "bg-teal-600/60 text-white cursor-not-allowed"
-                      : "bg-teal-600 text-white hover:bg-teal-700"
-                  }`}
+                  className={`w-full px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-base flex items-center justify-center gap-2 transition-colors duration-200 ${isSubmitting || !agreeToTerms
+                    ? "bg-teal-600/60 text-white cursor-not-allowed"
+                    : "bg-teal-600 text-white hover:bg-teal-700"
+                    }`}
                 >
                   <span>
                     {isSubmitting ? "Submitting..." : "Submit Trial Request"}

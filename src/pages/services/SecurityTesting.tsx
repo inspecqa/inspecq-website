@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import SEO from "../../components/SEO";
 import SmoothScrollLink from "../../components/SmoothScrollLink";
 import type { ComponentType } from "react";
 import consultationIllustration from "../../assets/consultation-illustration.svg";
@@ -200,6 +201,11 @@ const SecurityTesting = () => {
 
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Security Testing Services"
+        description="InspecQ offers penetration testing, API and infrastructure security audits, and compliance advisory (SOC 2, ISO 27001, HIPAA) to protect your software."
+        canonical="/services/security-testing"
+      />
       {/* Hero Section */}
       <section className="relative py-20 sm:py-24 lg:py-32 overflow-visible">
         <BackgroundImage src={serviceHBg} />
@@ -254,7 +260,7 @@ const SecurityTesting = () => {
               ))}
             </ul>
           </div>
-          
+
           {/* Illustration */}
           <div className="relative max-w-xl w-full mx-auto">
             <img
@@ -384,7 +390,7 @@ const SecurityTesting = () => {
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center px-6 sm:px-10 lg:px-14 py-12 lg:py-16">
               {/* Left copy */}
               <div className="text-white">
-                <h1>Not sure where your security gaps are?</h1>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold leading-tight text-white">Not sure where your security gaps are?</h2>
 
                 <p className="body-regular mt-6 text-white/90 text-lg max-w-2xl">
                   Book a free 30-minute discovery call with our experts to
@@ -393,7 +399,7 @@ const SecurityTesting = () => {
                 </p>
 
                 <a
-                  href="https://calendly.com/mail-inspecq/30min"
+                  href="https://inspecq.setmore.com/services/4c63bef3-c31c-4c49-b3e9-916c27fde40a"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-text mt-10 inline-flex items-center rounded-full bg-white border border-buttonBorder text-slate-900 px-6 sm:px-8 py-3 sm:py-4 text-base font-medium shadow-md hover:shadow-lg transition"

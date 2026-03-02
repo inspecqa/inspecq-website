@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import SEO from "../components/SEO";
 import consultationIllustration from "../assets/consultation-illustration.svg";
 import consultationBg from "../assets/consultation-bg.svg";
 import solutionBg from "../assets/solution-bg.svg";
@@ -178,6 +179,11 @@ const COMPANY_SIZE = [
 const Solutions = () => {
   return (
     <>
+      <SEO
+        title="QA Solutions by Industry"
+        description="Explore InspecQ's tailored QA testing solutions for e-commerce, healthcare, fintech, enterprise software, mobile, and SaaS companies."
+        canonical="/solutions"
+      />
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-24 pb-16 sm:pt-28 sm:pb-20 lg:pt-32 lg:pb-24">
         <img
@@ -189,9 +195,9 @@ const Solutions = () => {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center justify-center text-center gap-8">
             <div className="max-w-3xl">
-              <p className="h1 text-teal-900 mt-4">
+              <h1 className="h1 text-teal-900 mt-4">
                 Tailored Testing Solutions for Every Industry
-              </p>
+              </h1>
               <p className="body-regular text-gray-600 mt-4 sm:mt-6">
                 We understand that every industry has unique challenges. Our
                 specialized testing solutions are designed to meet the specific
@@ -416,7 +422,7 @@ const Solutions = () => {
                 </p>
 
                 <a
-                  href="https://calendly.com/mail-inspecq/30min"
+                  href="https://inspecq.setmore.com/services/4c63bef3-c31c-4c49-b3e9-916c27fde40a"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-text mt-8 sm:mt-10 inline-flex items-center rounded-full bg-white border border-buttonBorder text-slate-900 px-6 sm:px-8 py-3 sm:py-4 text-base font-medium shadow-md hover:shadow-lg transition"

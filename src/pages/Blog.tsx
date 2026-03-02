@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from "react";
+import SEO from "../components/SEO";
 import { Link } from "react-router-dom";
 import {
   Calendar,
@@ -179,6 +180,11 @@ const Blog = () => {
 
   return (
     <div className="pt-16">
+      <SEO
+        title="QA Blog"
+        description="Practical QA insights, test automation strategies, mobile testing best practices, and expert guides from the InspecQ team."
+        canonical="/blog"
+      />
       {/* Hero */}
       <section className="py-20 bg-gradient-to-br from-slate-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -210,7 +216,7 @@ const Blog = () => {
         </div>
       </section>
 
-      {/* Featured */}
+      {/* Featured Resources */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
@@ -285,11 +291,10 @@ const Blog = () => {
               <button
                 key={category.id}
                 onClick={() => setSelectedCategory(category.id)}
-                className={`px-6 py-3 rounded-full font-medium transition-colors duration-200 ${
-                  selectedCategory === category.id
-                    ? "bg-teal-600 text-white shadow-sm"
-                    : "bg-white text-gray-700 hover:bg-gray-100"
-                }`}
+                className={`px-6 py-3 rounded-full font-medium transition-colors duration-200 ${selectedCategory === category.id
+                  ? "bg-teal-600 text-white shadow-sm"
+                  : "bg-white text-gray-700 hover:bg-gray-100"
+                  }`}
                 aria-pressed={selectedCategory === category.id}
               >
                 {category.name} ({category.count})

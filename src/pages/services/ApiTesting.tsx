@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import SEO from "../../components/SEO";
 import consultationBg from "../../assets/consultation-bg.svg";
 import consultationIllustration from "../../assets/consultation-illustration.svg";
 import serviceBg from "../../assets/service/service-hero-bg.svg";
@@ -227,6 +228,11 @@ const BackgroundImage = ({
 const ApiTesting = () => {
   return (
     <div className="min-h-screen">
+      <SEO
+        title="API Testing Services"
+        description="InspecQ provides expert API testing for REST, GraphQL, SOAP, and microservices — covering functional, performance, security, and contract testing."
+        canonical="/services/api-testing"
+      />
       {/* Hero Section */}
       <section className="relative py-20 sm:py-24 lg:py-32 overflow-visible">
         <BackgroundImage src={serviceBg} />
@@ -512,7 +518,7 @@ const ApiTesting = () => {
                 </p>
 
                 <a
-                  href="https://calendly.com/mail-inspecq/30min"
+                  href="https://inspecq.setmore.com/services/4c63bef3-c31c-4c49-b3e9-916c27fde40a"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-text mt-8 sm:mt-10 inline-flex items-center rounded-full bg-white border border-buttonBorder text-slate-900 px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-medium shadow-md hover:shadow-lg transition"

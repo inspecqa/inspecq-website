@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import SEO from "../components/SEO";
 import {
   Mail,
   CalendarCheck,
@@ -303,12 +304,17 @@ const Contact: React.FC = () => {
         "Schedule a 30-minute strategy session with our QA specialists.",
       action: "Book Now",
       color: "bg-teal-500",
-      href: "https://calendly.com/inspecq/30min",
+      href: "https://inspecq.setmore.com/services/4c63bef3-c31c-4c49-b3e9-916c27fde40a",
     },
   ] as const;
 
   return (
     <>
+      <SEO
+        title="Contact Us"
+        description="Get in touch with InspecQ. Send a query or book a free 30-minute QA consultation with our experts. We respond within 24 hours."
+        canonical="/contact"
+      />
       {/* Success Modal */}
       <Modal
         open={showSuccess}
@@ -334,11 +340,11 @@ const Contact: React.FC = () => {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center justify-center text-center gap-6 sm:gap-8">
             <div className="max-w-3xl mt-8">
-              <p className="h1 text-teal-900">Ready for bug-free releases?</p>
+              <h1 className="h1 text-teal-900">Ready for bug-free releases?</h1>
               <p className="body-regular text-gray-600 mt-4 text-sm sm:text-base">
-                Let’s design your QA strategy together. Book a free 30-min
-                consultation or send us your query. We’ll get back within 24
-                hours.
+                Tell us what you're building, We'll help you ship it right.
+                Book a free 30-min chat or drop us a message, and we'll get
+                back to you within 24 hours.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8 w-full">
                 {/* Go to Free Trial page */}
@@ -382,7 +388,7 @@ const Contact: React.FC = () => {
               Talk to a Real QA Expert Today
             </p>
             <p className="body-md mt-4 text-gray-700 text-sm sm:text-base">
-              Direct communication, no delays — connect with our team in just a
+              For direct communication, connect with our team in just a
               click.
             </p>
           </div>
@@ -494,9 +500,8 @@ const Contact: React.FC = () => {
                       placeholder="Enter your full name"
                       aria-invalid={!!errors.name}
                       aria-describedby={errors.name ? "err-name" : undefined}
-                      className={`mt-2 w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded-lg text-sm sm:text-base focus:ring-2 focus:ring-teal-500 focus:border-teal-500 ${
-                        errors.name ? "border-rose-400" : "border-gray-200"
-                      }`}
+                      className={`mt-2 w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded-lg text-sm sm:text-base focus:ring-2 focus:ring-teal-500 focus:border-teal-500 ${errors.name ? "border-rose-400" : "border-gray-200"
+                        }`}
                     />
                     {errors.name && (
                       <p
@@ -523,9 +528,8 @@ const Contact: React.FC = () => {
                       placeholder="you@company.com"
                       aria-invalid={!!errors.email}
                       aria-describedby={errors.email ? "err-email" : undefined}
-                      className={`mt-2 w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded-lg text-sm sm:text-base focus:ring-2 focus:ring-teal-500 focus:border-teal-500 ${
-                        errors.email ? "border-rose-400" : "border-gray-200"
-                      }`}
+                      className={`mt-2 w-full px-3 sm:px-4 py-2.5 sm:py-3 border rounded-lg text-sm sm:text-base focus:ring-2 focus:ring-teal-500 focus:border-teal-500 ${errors.email ? "border-rose-400" : "border-gray-200"
+                        }`}
                     />
                     {errors.email && (
                       <p

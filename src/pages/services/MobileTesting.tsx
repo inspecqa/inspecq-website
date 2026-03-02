@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import type { ComponentType } from "react";
+import SEO from "../../components/SEO";
 import SmoothScrollLink from "../../components/SmoothScrollLink";
 
 import consultationIllustration from "../../assets/consultation-illustration.svg";
@@ -26,31 +27,31 @@ const BENEFITS: {
   title: string;
   description: string;
 }[] = [
-  {
-    icon: Globe,
-    title: "Cross-Platform Coverage",
-    description:
-      "Test across iOS, Android, and hybrid platforms to ensure universal compatibility.",
-  },
-  {
-    icon: Monitor,
-    title: "Device Fragmentation",
-    description:
-      "Test on real devices with different screen sizes, OS versions, and hardware profiles.",
-  },
-  {
-    icon: Zap,
-    title: "Performance Optimization",
-    description:
-      "Optimize battery usage, memory consumption, and app responsiveness.",
-  },
-  {
-    icon: CheckCircle,
-    title: "App Store Approval",
-    description:
-      "Ensure your app meets all store guidelines and approval requirements.",
-  },
-];
+    {
+      icon: Globe,
+      title: "Cross-Platform Coverage",
+      description:
+        "Test across iOS, Android, and hybrid platforms to ensure universal compatibility.",
+    },
+    {
+      icon: Monitor,
+      title: "Device Fragmentation",
+      description:
+        "Test on real devices with different screen sizes, OS versions, and hardware profiles.",
+    },
+    {
+      icon: Zap,
+      title: "Performance Optimization",
+      description:
+        "Optimize battery usage, memory consumption, and app responsiveness.",
+    },
+    {
+      icon: CheckCircle,
+      title: "App Store Approval",
+      description:
+        "Ensure your app meets all store guidelines and approval requirements.",
+    },
+  ];
 
 const TESTING_TYPES: {
   icon: ComponentType<any>;
@@ -58,55 +59,55 @@ const TESTING_TYPES: {
   description: string;
   features: string[];
 }[] = [
-  {
-    icon: CheckCircle,
-    title: "Functional Testing",
-    description:
-      "Validate every feature and workflow to ensure your app works exactly as intended on any device.",
-    features: [
-      "User interface testing",
-      "Navigation testing",
-      "Input validation",
-      "Feature functionality",
-    ],
-  },
-  {
-    icon: Smartphone,
-    title: "Compatibility Testing",
-    description:
-      "Verify your app performs seamlessly across devices, screen sizes, and OS versions.",
-    features: [
-      "Device compatibility",
-      "OS version testing",
-      "Screen resolution testing",
-      "Hardware compatibility",
-    ],
-  },
-  {
-    icon: Zap,
-    title: "Performance Testing",
-    description:
-      "Identify and eliminate performance bottlenecks before your users feel them.",
-    features: [
-      "Load time optimization",
-      "Memory usage testing",
-      "Battery consumption",
-      "Network performance",
-    ],
-  },
-  {
-    icon: Monitor,
-    title: "Usability Testing",
-    description:
-      "Ensure your app feels intuitive, accessible, and enjoyable for every user.",
-    features: [
-      "User experience testing",
-      "Accessibility compliance",
-      "Gesture testing",
-      "Orientation testing",
-    ],
-  },
-];
+    {
+      icon: CheckCircle,
+      title: "Functional Testing",
+      description:
+        "Validate every feature and workflow to ensure your app works exactly as intended on any device.",
+      features: [
+        "User interface testing",
+        "Navigation testing",
+        "Input validation",
+        "Feature functionality",
+      ],
+    },
+    {
+      icon: Smartphone,
+      title: "Compatibility Testing",
+      description:
+        "Verify your app performs seamlessly across devices, screen sizes, and OS versions.",
+      features: [
+        "Device compatibility",
+        "OS version testing",
+        "Screen resolution testing",
+        "Hardware compatibility",
+      ],
+    },
+    {
+      icon: Zap,
+      title: "Performance Testing",
+      description:
+        "Identify and eliminate performance bottlenecks before your users feel them.",
+      features: [
+        "Load time optimization",
+        "Memory usage testing",
+        "Battery consumption",
+        "Network performance",
+      ],
+    },
+    {
+      icon: Monitor,
+      title: "Usability Testing",
+      description:
+        "Ensure your app feels intuitive, accessible, and enjoyable for every user.",
+      features: [
+        "User experience testing",
+        "Accessibility compliance",
+        "Gesture testing",
+        "Orientation testing",
+      ],
+    },
+  ];
 
 const PLATFORMS: {
   name: string;
@@ -115,59 +116,59 @@ const PLATFORMS: {
   features: string[];
   devices: string[];
 }[] = [
-  {
-    name: "iOS Testing",
-    icon: Tablet,
-    description:
-      "Guarantee your iPhone and iPad apps meet Apple’s quality benchmarks.",
-    features: [
-      "iPhone compatibility",
-      "iPad optimization",
-      "iOS version testing",
-      "App Store guidelines",
-    ],
-    devices: [
-      "iPhone 15 Pro",
-      "iPhone 14",
-      "iPhone SE",
-      "iPad Pro",
-      "iPad Air",
-      "iPad Mini",
-    ],
-  },
-  {
-    name: "Android Testing",
-    icon: Smartphone,
-    description:
-      "Ensure consistent experiences across the diverse Android ecosystem.",
-    features: [
-      "Multiple manufacturers",
-      "Android version testing",
-      "Google Play compliance",
-      "Custom ROM testing",
-    ],
-    devices: [
-      "Samsung Galaxy",
-      "Google Pixel",
-      "OnePlus",
-      "Xiaomi",
-      "Huawei",
-      "LG",
-    ],
-  },
-  {
-    name: "Hybrid App Testing",
-    icon: Globe,
-    description: "Validate cross-platform apps for both speed and consistency.",
-    features: [
-      "Cross-platform validation",
-      "Native feature testing",
-      "Performance optimization",
-      "Platform-specific UI",
-    ],
-    devices: ["iOS & Android", "Web views", "Native modules", "Platform APIs"],
-  },
-];
+    {
+      name: "iOS Testing",
+      icon: Tablet,
+      description:
+        "Guarantee your iPhone and iPad apps meet Apple’s quality benchmarks.",
+      features: [
+        "iPhone compatibility",
+        "iPad optimization",
+        "iOS version testing",
+        "App Store guidelines",
+      ],
+      devices: [
+        "iPhone 15 Pro",
+        "iPhone 14",
+        "iPhone SE",
+        "iPad Pro",
+        "iPad Air",
+        "iPad Mini",
+      ],
+    },
+    {
+      name: "Android Testing",
+      icon: Smartphone,
+      description:
+        "Ensure consistent experiences across the diverse Android ecosystem.",
+      features: [
+        "Multiple manufacturers",
+        "Android version testing",
+        "Google Play compliance",
+        "Custom ROM testing",
+      ],
+      devices: [
+        "Samsung Galaxy",
+        "Google Pixel",
+        "OnePlus",
+        "Xiaomi",
+        "Huawei",
+        "LG",
+      ],
+    },
+    {
+      name: "Hybrid App Testing",
+      icon: Globe,
+      description: "Validate cross-platform apps for both speed and consistency.",
+      features: [
+        "Cross-platform validation",
+        "Native feature testing",
+        "Performance optimization",
+        "Platform-specific UI",
+      ],
+      devices: ["iOS & Android", "Web views", "Native modules", "Platform APIs"],
+    },
+  ];
 
 const PROCESS_STEPS: {
   icon: ComponentType<any>;
@@ -175,34 +176,34 @@ const PROCESS_STEPS: {
   title: string;
   description: string;
 }[] = [
-  {
-    icon: Target,
-    step: "1",
-    title: "Device Strategy",
-    description:
-      "Define test devices and coverage based on your target users and markets.",
-  },
-  {
-    icon: Target,
-    step: "2",
-    title: "Test Planning",
-    description: "Design test cases for real-world usage and edge scenarios.",
-  },
-  {
-    icon: Target,
-    step: "3",
-    title: "Execution",
-    description:
-      "Run manual and automated tests on real devices for maximum accuracy.",
-  },
-  {
-    icon: Target,
-    step: "4",
-    title: "Reporting",
-    description:
-      "Deliver actionable reports with clear fixes and recommendations.",
-  },
-];
+    {
+      icon: Target,
+      step: "1",
+      title: "Device Strategy",
+      description:
+        "Define test devices and coverage based on your target users and markets.",
+    },
+    {
+      icon: Target,
+      step: "2",
+      title: "Test Planning",
+      description: "Design test cases for real-world usage and edge scenarios.",
+    },
+    {
+      icon: Target,
+      step: "3",
+      title: "Execution",
+      description:
+        "Run manual and automated tests on real devices for maximum accuracy.",
+    },
+    {
+      icon: Target,
+      step: "4",
+      title: "Reporting",
+      description:
+        "Deliver actionable reports with clear fixes and recommendations.",
+    },
+  ];
 
 /* -------------------- Reusable Components -------------------- */
 
@@ -281,6 +282,11 @@ const TestingTypeCard = ({
 const MobileTesting = () => {
   return (
     <div className="min-h-screen">
+      <SEO
+        title="Mobile App Testing Services"
+        description="InspecQ delivers comprehensive mobile testing for iOS, Android, and hybrid apps — covering functional, compatibility, performance, and usability testing."
+        canonical="/services/mobile-testing"
+      />
       {/* Hero Section */}
       <section className="relative py-20 sm:py-24 lg:py-32 overflow-visible">
         <BackgroundImage src={serviceHeroBg} />
@@ -503,15 +509,13 @@ const MobileTesting = () => {
 
                   {/* Divider */}
                   <div
-                    className={`h-px mb-4 ${
-                      isPrimary ? "bg-white/30" : "bg-gray-200"
-                    }`}
+                    className={`h-px mb-4 ${isPrimary ? "bg-white/30" : "bg-gray-200"
+                      }`}
                   />
 
                   <h6
-                    className={`text-base sm:text-lg font-semibold ${
-                      isPrimary ? "text-white" : "text-gray-900"
-                    }`}
+                    className={`text-base sm:text-lg font-semibold ${isPrimary ? "text-white" : "text-gray-900"
+                      }`}
                   >
                     {step.title}
                   </h6>
@@ -556,7 +560,7 @@ const MobileTesting = () => {
                 </p>
 
                 <a
-                  href="https://calendly.com/mail-inspecq/30min"
+                  href="https://inspecq.setmore.com/services/4c63bef3-c31c-4c49-b3e9-916c27fde40a"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-text mt-8 sm:mt-10 inline-flex items-center rounded-full bg-white border border-buttonBorder text-slate-900 px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-medium shadow-md hover:shadow-lg transition"

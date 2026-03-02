@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  
   <url>
     <loc>https://inspecq.com/</loc>
     <lastmod>2026-01-01</lastmod>
@@ -124,7 +123,7 @@
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://inspecq.com/legal/terms-and-service</loc>
+    <loc>https://inspecq.com/legal/terms-and-conditions</loc>
     <lastmod>2026-01-01</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>

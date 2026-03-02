@@ -15,9 +15,9 @@ const Hero = () => {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="flex flex-col items-center text-center w-full">
           {/* Heading */}
-          <p className="h1 text-teal-900 max-w-3xl mt-8">
+          <h1 className="h1 text-teal-900 max-w-3xl mt-8">
             Ship Bug-Free Software Faster with QA Experts
-          </p>
+          </h1>
 
           {/* Subheading */}
           <p className="body-regular mt-3 max-w-2xl text-gray-700">
@@ -36,7 +36,7 @@ const Hero = () => {
             </Link>
 
             <a
-              href="https://calendly.com/contact-inspecq/30min"
+              href="https://inspecq.setmore.com/services/4c63bef3-c31c-4c49-b3e9-916c27fde40a"
               className="inline-flex items-center justify-center px-6 py-3 rounded-full border others-buttonBorder bg-white text-gray-700 hover:bg-gray-50 transition-colors btn-text"
             >
               <span className="whitespace-nowrap">Book Free QA Session</span>
