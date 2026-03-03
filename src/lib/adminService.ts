@@ -708,6 +708,13 @@ export async function getProposals(leadId?: string): Promise<Proposal[]> {
     return data ?? [];
 }
 
+export async function getProposal(id: string): Promise<Proposal | null> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { data, error } = await supabase.from("proposals").select("*, leads(name, email, company)").eq("id", id).single();
+    if (error) throw error;
+    return data;
+}
+
 export async function createProposal(p: Omit<Proposal, "id" | "tracking_token" | "created_at" | "leads">): Promise<Proposal> {
     if (!supabase) throw new Error("Supabase not configured");
     const { data, error } = await supabase.from("proposals").insert([p]).select().single();

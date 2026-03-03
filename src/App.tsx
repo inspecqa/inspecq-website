@@ -60,6 +60,7 @@ import AdminLeadForm from "./pages/admin/LeadForm";
 import AdminLeadDetail from "./pages/admin/LeadDetail";
 import AdminProposalsList from "./pages/admin/ProposalsList";
 import AdminProposalComposer from "./pages/admin/ProposalComposer";
+import AdminProposalDetail from "./pages/admin/ProposalDetail";
 import AdminTemplatesList from "./pages/admin/TemplatesList";
 import AdminTemplateEditor from "./pages/admin/TemplateEditor";
 import AdminColdCampaignsList from "./pages/admin/ColdCampaignsList";
@@ -158,6 +159,14 @@ function App() {
           element={
             <ProtectedRoute>
               <AdminProposalComposer />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/proposals/:id"
+          element={
+            <ProtectedRoute>
+              <AdminProposalDetail />
             </ProtectedRoute>
           }
         />
