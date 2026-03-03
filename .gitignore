@@ -23,6 +23,23 @@ dist-ssr
 *.sln
 *.sw?
 .env
-# Local Netlify folder
+.env.*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Temporary files
+.temp/
+.tmp/
+
+# Local Netlify/Vercel folders
 .netlify
 .vercel
+
+# Data exports and database scripts
+*.csv
+*.sql
+
+# Testing
+coverage/

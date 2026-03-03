@@ -142,7 +142,7 @@ export interface RecentActivity {
     action: string;
     details: string;
     time: string;
-    type: "form" | "application" | "newsletter" | "job" | "trial" | "blog";
+    type: string;
 }
 
 export interface ChartPoint {
@@ -193,25 +193,26 @@ export function downloadCSV(rows: Record<string, unknown>[], filename: string) {
 export async function getDashboardStats(): Promise<DashboardStats> {
     if (!supabase) throw new Error("Supabase not configured");
 
-    const [jobsRes, formsRes, subsRes, trialsRes, blogRes, recentFormsRes, recentSubsRes] =
+    const [jobsRes, formsRes, subsRes, trialsRes, blogRes, recentActivityRes] =
         await Promise.all([
             supabase.from("job_postings").select("*", { count: "exact", head: true }),
             supabase.from("contact_submissions").select("*", { count: "exact", head: true }),
             supabase.from("newsletter_subscribers").select("*", { count: "exact", head: true }).eq("status", "Active"),
             supabase.from("trial_requests").select("*", { count: "exact", head: true }),
             supabase.from("blog_posts").select("*", { count: "exact", head: true }).eq("status", "Published"),
-            supabase.from("contact_submissions").select("full_name, email, source_page, type, created_at").order("created_at", { ascending: false }).limit(3),
-            supabase.from("newsletter_subscribers").select("email, created_at").order("created_at", { ascending: false }).limit(2),
+            supabase.from("activity_log").select("*").order("created_at", { ascending: false }).limit(6),
         ]);
 
     const openPositions = (await supabase.from("job_postings").select("*", { count: "exact", head: true }).eq("status", "Active")).count ?? 0;
 
     const activity: RecentActivity[] = [];
-    (recentFormsRes.data ?? []).forEach((r) => {
-        activity.push({ action: `New ${r.type ?? "form"} submission`, details: `${r.source_page ?? "Website"} — ${r.email}`, time: formatTimeAgo(r.created_at), type: "form" });
-    });
-    (recentSubsRes.data ?? []).forEach((r) => {
-        activity.push({ action: "Newsletter subscriber added", details: r.email, time: formatTimeAgo(r.created_at), type: "newsletter" });
+    (recentActivityRes.data ?? []).forEach((r) => {
+        activity.push({
+            action: r.action,
+            details: r.details || '',
+            time: formatTimeAgo(r.created_at),
+            type: r.entity_type
+        });
     });
 
     return {
@@ -508,4 +509,383 @@ export async function deleteTrial(id: string): Promise<void> {
     if (!supabase) throw new Error("Supabase not configured");
     const { error } = await supabase.from("trial_requests").delete().eq("id", id);
     if (error) throw error;
+}
+
+// ──────────────────────────────────────────────
+// Lead Tracking — Types
+// ──────────────────────────────────────────────
+export type LeadStatus = "New" | "Contacted" | "Proposal Sent" | "Negotiating" | "Won" | "Lost";
+export type LeadPriority = "High" | "Medium" | "Low";
+export type LeadChannel = "Facebook" | "LinkedIn" | "Referral" | "Website" | "Cold Email" | "Event" | "Other";
+export type LeadIndustry = "SaaS" | "Ecommerce" | "Fintech" | "Healthcare" | "General" | "Other";
+export type ProposalStatus = "Draft" | "Sent" | "Opened" | "Clicked" | "Replied" | "Accepted" | "Declined" | "Expired";
+
+export interface Lead {
+    id: string;
+    name: string;
+    email: string;
+    company?: string;
+    phone?: string;
+    source: string;
+    channel: LeadChannel;
+    referrer?: string;
+    industry: LeadIndustry;
+    status: LeadStatus;
+    priority: LeadPriority;
+    assigned_to?: string;
+    notes?: string;
+    follow_up_at?: string;
+    tags?: string[];
+    created_at: string;
+    updated_at: string;
+}
+
+export interface ProposalTemplate {
+    id: string;
+    name: string;
+    category: string;
+    subject: string;
+    body: string;
+    is_default: boolean;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface Proposal {
+    id: string;
+    lead_id: string;
+    template_id?: string;
+    subject: string;
+    body: string;
+    status: ProposalStatus;
+    tracking_token: string;
+    sent_at?: string;
+    opened_at?: string;
+    clicked_at?: string;
+    created_at: string;
+    leads?: { name: string; email: string; company?: string };
+}
+
+export interface EmailEvent {
+    id: string;
+    proposal_id: string;
+    event_type: string;
+    ip_address?: string;
+    user_agent?: string;
+    metadata?: Record<string, unknown>;
+    created_at: string;
+}
+
+// ──────────────────────────────────────────────
+// Leads CRUD
+// ──────────────────────────────────────────────
+export async function getLeads(): Promise<Lead[]> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { data, error } = await supabase.from("leads").select("*").order("created_at", { ascending: false });
+    if (error) throw error;
+    return data ?? [];
+}
+
+export async function getLead(id: string): Promise<Lead | null> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { data, error } = await supabase.from("leads").select("*").eq("id", id).single();
+    if (error) throw error;
+    return data;
+}
+
+export async function createLead(lead: Omit<Lead, "id" | "created_at" | "updated_at">): Promise<Lead> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { data, error } = await supabase.from("leads").insert([lead]).select().single();
+    if (error) throw error;
+    return data;
+}
+
+export async function updateLead(id: string, updates: Partial<Lead>): Promise<void> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { error } = await supabase.from("leads").update(updates).eq("id", id);
+    if (error) throw error;
+}
+
+export async function deleteLead(id: string): Promise<void> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { error } = await supabase.from("leads").delete().eq("id", id);
+    if (error) throw error;
+}
+
+export async function bulkDeleteLeads(ids: string[]): Promise<void> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { error } = await supabase.from("leads").delete().in("id", ids);
+    if (error) throw error;
+}
+
+export async function importLeadsFromForms(): Promise<number> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { data: forms } = await supabase.from("contact_submissions").select("*");
+    const { data: existing } = await supabase.from("leads").select("email");
+    const existingEmails = new Set((existing ?? []).map((l: { email: string }) => l.email.toLowerCase()));
+    const toInsert = (forms ?? [])
+        .filter((f: { email: string }) => !existingEmails.has(f.email.toLowerCase()))
+        .map((f: { full_name?: string; email: string; company_name?: string }) => ({
+            name: f.full_name ?? "Unknown", email: f.email, company: f.company_name,
+            source: "contact_form", channel: "Website" as LeadChannel,
+            industry: "General" as LeadIndustry, status: "New" as LeadStatus,
+            priority: "Warm" as LeadPriority,
+        }));
+    if (!toInsert.length) return 0;
+    const { data, error } = await supabase.from("leads").insert(toInsert).select();
+    if (error) throw error;
+    return (data ?? []).length;
+}
+
+export async function importLeadsFromTrials(): Promise<number> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { data: trials } = await supabase.from("trial_requests").select("*");
+    const { data: existing } = await supabase.from("leads").select("email");
+    const existingEmails = new Set((existing ?? []).map((l: { email: string }) => l.email.toLowerCase()));
+    const toInsert = (trials ?? [])
+        .filter((t: { email: string }) => !existingEmails.has(t.email.toLowerCase()))
+        .map((t: { full_name?: string; name?: string; email: string; company_name?: string; company?: string }) => ({
+            name: t.full_name ?? t.name ?? "Unknown", email: t.email,
+            company: t.company_name ?? t.company, source: "trial",
+            channel: "Website" as LeadChannel, industry: "General" as LeadIndustry,
+            status: "New" as LeadStatus, priority: "High" as LeadPriority,
+        }));
+    if (!toInsert.length) return 0;
+    const { data, error } = await supabase.from("leads").insert(toInsert).select();
+    if (error) throw error;
+    return (data ?? []).length;
+}
+
+// ──────────────────────────────────────────────
+// Proposal Templates CRUD
+// ──────────────────────────────────────────────
+export async function getTemplates(): Promise<ProposalTemplate[]> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { data, error } = await supabase.from("proposal_templates").select("*").order("is_default", { ascending: false });
+    if (error) throw error;
+    return data ?? [];
+}
+
+export async function getTemplate(id: string): Promise<ProposalTemplate | null> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { data, error } = await supabase.from("proposal_templates").select("*").eq("id", id).single();
+    if (error) throw error;
+    return data;
+}
+
+export async function createTemplate(t: Omit<ProposalTemplate, "id" | "created_at" | "updated_at">): Promise<ProposalTemplate> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { data, error } = await supabase.from("proposal_templates").insert([t]).select().single();
+    if (error) throw error;
+    return data;
+}
+
+export async function updateTemplate(id: string, updates: Partial<ProposalTemplate>): Promise<void> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { error } = await supabase.from("proposal_templates").update(updates).eq("id", id);
+    if (error) throw error;
+}
+
+export async function deleteTemplate(id: string): Promise<void> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { error } = await supabase.from("proposal_templates").delete().eq("id", id);
+    if (error) throw error;
+}
+
+export function renderTemplate(body: string, vars: Record<string, string>): string {
+    return body.replace(/\{\{(\w+)\}\}/g, (_, key) => vars[key] ?? `{{${key}}}`);
+}
+
+// ──────────────────────────────────────────────
+// Proposals CRUD
+// ──────────────────────────────────────────────
+export async function getProposals(leadId?: string): Promise<Proposal[]> {
+    if (!supabase) throw new Error("Supabase not configured");
+    let q = supabase.from("proposals").select("*, leads(name, email, company)").order("created_at", { ascending: false });
+    if (leadId) q = q.eq("lead_id", leadId);
+    const { data, error } = await q;
+    if (error) throw error;
+    return data ?? [];
+}
+
+export async function createProposal(p: Omit<Proposal, "id" | "tracking_token" | "created_at" | "leads">): Promise<Proposal> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { data, error } = await supabase.from("proposals").insert([p]).select().single();
+    if (error) throw error;
+
+    try {
+        const { data: lead } = await supabase.from("leads").select("email, status").eq("id", p.lead_id).single();
+        if (lead?.email) {
+            await fetch('/api/send-proposal', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    proposal_id: data.id,
+                    to_email: lead.email,
+                    subject: data.subject,
+                    body: data.body,
+                    tracking_token: data.tracking_token
+                })
+            });
+        }
+
+        // Auto-advance the lead status if it's currently New or Contacted
+        if (lead && (lead.status === "New" || lead.status === "Contacted")) {
+            await supabase.from("leads").update({ status: "Proposal Sent", updated_at: new Date().toISOString() }).eq("id", p.lead_id);
+        }
+    } catch (err) {
+        console.error("Error calling send-proposal endpoint or updating lead", err);
+    }
+
+    return data;
+}
+
+export async function updateProposalStatus(id: string, status: ProposalStatus): Promise<void> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const updates: Record<string, unknown> = { status };
+    if (status === "Sent") updates.sent_at = new Date().toISOString();
+    if (status === "Opened") updates.opened_at = new Date().toISOString();
+    if (status === "Clicked") updates.clicked_at = new Date().toISOString();
+    const { error } = await supabase.from("proposals").update(updates).eq("id", id);
+    if (error) throw error;
+}
+
+export async function deleteProposal(id: string): Promise<void> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { error } = await supabase.from("proposals").delete().eq("id", id);
+    if (error) throw error;
+}
+
+export async function getEmailEvents(proposalId: string): Promise<EmailEvent[]> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { data, error } = await supabase.from("email_events").select("*").eq("proposal_id", proposalId).order("created_at", { ascending: false });
+    if (error) throw error;
+    return data ?? [];
+}
+
+// ──────────────────────────────────────────────
+// Cold Email Campaigns — Types
+// ──────────────────────────────────────────────
+export interface ColdEmailTemplate {
+    id: string;
+    name: string;
+    subject: string;
+    body: string;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface ColdEmailCampaign {
+    id: string;
+    name: string;
+    template_id?: string;
+    status: "Draft" | "Sending" | "Completed";
+    sent_count: number;
+    open_count: number;
+    click_count: number;
+    target_filters?: Record<string, any>;
+    created_at: string;
+    updated_at: string;
+    cold_email_templates?: { name: string; subject: string };
+}
+
+export interface ColdEmail {
+    id: string;
+    campaign_id: string;
+    lead_id: string;
+    subject: string;
+    body: string;
+    status: "Sent" | "Opened" | "Clicked" | "Bounced";
+    tracking_token: string;
+    sent_at: string;
+    opened_at?: string;
+    clicked_at?: string;
+    leads?: { name: string; email: string; company?: string };
+}
+
+// ──────────────────────────────────────────────
+// Cold Email Templates CRUD
+// ──────────────────────────────────────────────
+export async function getColdTemplates(): Promise<ColdEmailTemplate[]> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { data, error } = await supabase.from("cold_email_templates").select("*").order("created_at", { ascending: false });
+    if (error) throw error;
+    return data ?? [];
+}
+
+export async function getColdTemplate(id: string): Promise<ColdEmailTemplate | null> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { data, error } = await supabase.from("cold_email_templates").select("*").eq("id", id).single();
+    if (error) throw error;
+    return data;
+}
+
+export async function createColdTemplate(t: Omit<ColdEmailTemplate, "id" | "created_at" | "updated_at">): Promise<ColdEmailTemplate> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { data, error } = await supabase.from("cold_email_templates").insert([t]).select().single();
+    if (error) throw error;
+    return data;
+}
+
+export async function updateColdTemplate(id: string, updates: Partial<ColdEmailTemplate>): Promise<void> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { error } = await supabase.from("cold_email_templates").update(updates).eq("id", id);
+    if (error) throw error;
+}
+
+export async function deleteColdTemplate(id: string): Promise<void> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { error } = await supabase.from("cold_email_templates").delete().eq("id", id);
+    if (error) throw error;
+}
+
+// ──────────────────────────────────────────────
+// Cold Email Campaigns CRUD
+// ──────────────────────────────────────────────
+export async function getColdCampaigns(): Promise<ColdEmailCampaign[]> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { data, error } = await supabase.from("cold_email_campaigns")
+        .select("*, cold_email_templates(name, subject)")
+        .order("created_at", { ascending: false });
+    if (error) throw error;
+    return data ?? [];
+}
+
+export async function getColdCampaign(id: string): Promise<ColdEmailCampaign | null> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { data, error } = await supabase.from("cold_email_campaigns")
+        .select("*, cold_email_templates(*)")
+        .eq("id", id)
+        .single();
+    if (error) throw error;
+    return data;
+}
+
+export async function createColdCampaign(c: Omit<ColdEmailCampaign, "id" | "status" | "sent_count" | "open_count" | "click_count" | "created_at" | "updated_at" | "cold_email_templates">): Promise<ColdEmailCampaign> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { data, error } = await supabase.from("cold_email_campaigns").insert([c]).select().single();
+    if (error) throw error;
+    return data;
+}
+
+export async function updateColdCampaign(id: string, updates: Partial<ColdEmailCampaign>): Promise<void> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { error } = await supabase.from("cold_email_campaigns").update(updates).eq("id", id);
+    if (error) throw error;
+}
+
+export async function deleteColdCampaign(id: string): Promise<void> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { error } = await supabase.from("cold_email_campaigns").delete().eq("id", id);
+    if (error) throw error;
+}
+
+export async function getColdEmails(campaignId: string): Promise<ColdEmail[]> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { data, error } = await supabase.from("cold_emails")
+        .select("*, leads(name, email, company)")
+        .eq("campaign_id", campaignId)
+        .order("sent_at", { ascending: false });
+    if (error) throw error;
+    return data ?? [];
 }

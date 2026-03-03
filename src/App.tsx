@@ -55,6 +55,17 @@ import AdminTrials from "./pages/admin/Trials";
 import AdminBlogList from "./pages/admin/BlogList";
 import AdminBlogEditor from "./pages/admin/BlogEditor";
 import AdminActivityLog from "./pages/admin/ActivityLog";
+import AdminLeadsList from "./pages/admin/LeadsList";
+import AdminLeadForm from "./pages/admin/LeadForm";
+import AdminLeadDetail from "./pages/admin/LeadDetail";
+import AdminProposalsList from "./pages/admin/ProposalsList";
+import AdminProposalComposer from "./pages/admin/ProposalComposer";
+import AdminTemplatesList from "./pages/admin/TemplatesList";
+import AdminTemplateEditor from "./pages/admin/TemplateEditor";
+import AdminColdCampaignsList from "./pages/admin/ColdCampaignsList";
+import AdminColdCampaignComposer from "./pages/admin/ColdCampaignComposer";
+import AdminColdTemplatesList from "./pages/admin/ColdTemplatesList";
+import AdminColdTemplateEditor from "./pages/admin/ColdTemplateEditor";
 import ProtectedRoute from "./components/admin/ProtectedRoute";
 
 ReactGA.initialize("G-9TZBKJLD0P");
@@ -107,6 +118,112 @@ function App() {
           element={
             <ProtectedRoute>
               <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/leads"
+          element={
+            <ProtectedRoute>
+              <AdminLeadsList />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/leads/new"
+          element={
+            <ProtectedRoute>
+              <AdminLeadForm />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/leads/:id"
+          element={
+            <ProtectedRoute>
+              <AdminLeadDetail />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/proposals"
+          element={
+            <ProtectedRoute>
+              <AdminProposalsList />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/proposals/new"
+          element={
+            <ProtectedRoute>
+              <AdminProposalComposer />
+            </ProtectedRoute>
+          }
+        />
+        {/* Cold Email Routes */}
+        <Route
+          path="/admin/cold-emails"
+          element={
+            <ProtectedRoute>
+              <AdminColdCampaignsList />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/cold-emails/new"
+          element={
+            <ProtectedRoute>
+              <AdminColdCampaignComposer />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/cold-emails/templates"
+          element={
+            <ProtectedRoute>
+              <AdminColdTemplatesList />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/cold-emails/templates/new"
+          element={
+            <ProtectedRoute>
+              <AdminColdTemplateEditor />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/cold-emails/templates/:id/edit"
+          element={
+            <ProtectedRoute>
+              <AdminColdTemplateEditor />
+            </ProtectedRoute>
+          }
+        />
+        {/* Standard Templates */}
+        <Route
+          path="/admin/templates"
+          element={
+            <ProtectedRoute>
+              <AdminTemplatesList />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/templates/new"
+          element={
+            <ProtectedRoute>
+              <AdminTemplateEditor />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/templates/:id/edit"
+          element={
+            <ProtectedRoute>
+              <AdminTemplateEditor />
             </ProtectedRoute>
           }
         />

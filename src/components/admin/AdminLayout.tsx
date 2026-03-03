@@ -1,8 +1,8 @@
 import React from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import {
-  LayoutDashboard, Users, Mail, Settings, LogOut, CheckCircle,
-  Menu, X, FileText, Briefcase, BookOpen, Activity, FlaskConical,
+  LayoutDashboard, Users, Mail, Settings, LogOut,
+  Menu, X, FileText, Briefcase, BookOpen, Activity, FlaskConical, Target, Send, LayoutTemplate, Megaphone
 } from "lucide-react";
 import { supabase } from "../../lib/supabaseClient";
 import inspecqLogo from "../../assets/logo.png"
@@ -21,6 +21,10 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
 
   const navigation = [
     { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard, exact: true },
+    { name: "Leads CRM", href: "/admin/leads", icon: Target },
+    { name: "Proposals", href: "/admin/proposals", icon: Send },
+    { name: "Cold Campaigns", href: "/admin/cold-emails", icon: Megaphone },
+    { name: "Templates", href: "/admin/templates", icon: LayoutTemplate },
     { name: "Forms", href: "/admin/forms", icon: FileText },
     { name: "Trials", href: "/admin/trials", icon: FlaskConical },
     { name: "Careers", href: "/admin/careers", icon: Users },

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  Users, Mail, FileText, TrendingUp,
-  MessageSquare, RefreshCw, AlertCircle, Briefcase, BookOpen, FlaskConical,
+  Users, Mail, FileText, TrendingUp, Target, Send, Calendar,
+  MessageSquare, RefreshCw, AlertCircle, FlaskConical,
 } from "lucide-react";
 import {
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area,
@@ -10,25 +10,29 @@ import {
 import AdminLayout from "../../components/admin/AdminLayout";
 import {
   getDashboardStats, getFormSubmissionsChart, getSubscriberGrowthChart,
-  DashboardStats, ChartPoint,
+  DashboardStats, ChartPoint, getLeads, getProposals, Lead, Proposal
 } from "../../lib/adminService";
 
 const Dashboard = () => {
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [formChart, setFormChart] = useState<ChartPoint[]>([]);
   const [subChart, setSubChart] = useState<ChartPoint[]>([]);
+  const [leads, setLeads] = useState<Lead[]>([]);
+  const [proposals, setProposals] = useState<Proposal[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   const fetchAll = async () => {
     setLoading(true); setError(null);
     try {
-      const [s, fc, sc] = await Promise.all([
+      const [s, fc, sc, leadsData, propsData] = await Promise.all([
         getDashboardStats(),
         getFormSubmissionsChart(),
         getSubscriberGrowthChart(),
+        getLeads(),
+        getProposals()
       ]);
-      setStats(s); setFormChart(fc); setSubChart(sc);
+      setStats(s); setFormChart(fc); setSubChart(sc); setLeads(leadsData); setProposals(propsData);
     } catch { setError("Failed to load dashboard data. Check your Supabase connection."); }
     finally { setLoading(false); }
   };
@@ -38,21 +42,25 @@ const Dashboard = () => {
   // Trim chart labels to last 14 points for readability
   const trim = (data: ChartPoint[]) => data.slice(-14).map(p => ({ ...p, date: p.date.slice(5) }));
 
+  const activeLeadsCount = leads.filter(l => l.status !== "Won" && l.status !== "Lost").length;
+  const overdueFollowups = leads.filter(l => l.follow_up_at && new Date(l.follow_up_at) < new Date() && l.status !== "Won" && l.status !== "Lost");
+
   const statCards = stats ? [
+    { title: "Active Leads", value: activeLeadsCount, change: "Pipeline", icon: Target, color: "bg-indigo-500", to: "/admin/leads" },
+    { title: "Proposals Sent", value: proposals.length, change: "All time", icon: Send, color: "bg-blue-500", to: "/admin/proposals" },
     { title: "Form Submissions", value: stats.formSubmissions, change: "All time", icon: FileText, color: "bg-green-500", to: "/admin/forms" },
     { title: "Newsletter Subscribers", value: stats.newsletterSubscribers, change: "Active", icon: Mail, color: "bg-teal-500", to: "/admin/newsletter" },
-    { title: "Open Positions", value: stats.openPositions, change: `of ${stats.jobPostings} total`, icon: Users, color: "bg-blue-500", to: "/admin/careers" },
     { title: "Trial Requests", value: stats.trialRequests, change: "All time", icon: FlaskConical, color: "bg-purple-500", to: "/admin/trials" },
-    { title: "Published Posts", value: stats.blogPosts, change: "On live site", icon: BookOpen, color: "bg-orange-500", to: "/admin/blog" },
+    { title: "Open Positions", value: stats.openPositions, change: `of ${stats.jobPostings} total`, icon: Users, color: "bg-blue-500", to: "/admin/careers" },
   ] : [];
 
   const quickActions = [
-    { to: "/admin/careers/new", icon: Users, label: "Add Job", color: "bg-teal-50 border-teal-200 text-teal-900", iconColor: "text-teal-600" },
+    { to: "/admin/leads/new", icon: Target, label: "Add Lead", color: "bg-indigo-50 border-indigo-200 text-indigo-900", iconColor: "text-indigo-600" },
+    { to: "/admin/proposals/new", icon: Send, label: "New Proposal", color: "bg-blue-50 border-blue-200 text-blue-900", iconColor: "text-blue-600" },
     { to: "/admin/forms", icon: MessageSquare, label: "View Forms", color: "bg-green-50 border-green-200 text-green-900", iconColor: "text-green-600" },
-    { to: "/admin/newsletter/compose", icon: Mail, label: "Send Newsletter", color: "bg-blue-50 border-blue-200 text-blue-900", iconColor: "text-blue-600" },
-    { to: "/admin/blog/new", icon: BookOpen, label: "New Blog Post", color: "bg-orange-50 border-orange-200 text-orange-900", iconColor: "text-orange-600" },
+    { to: "/admin/newsletter/compose", icon: Mail, label: "Send Newsletter", color: "bg-teal-50 border-teal-200 text-teal-900", iconColor: "text-teal-600" },
     { to: "/admin/trials", icon: FlaskConical, label: "Trial Requests", color: "bg-purple-50 border-purple-200 text-purple-900", iconColor: "text-purple-600" },
-    { to: "/admin/applications", icon: Briefcase, label: "Applications", color: "bg-pink-50 border-pink-200 text-pink-900", iconColor: "text-pink-600" },
+    { to: "/admin/careers/new", icon: Users, label: "Add Job", color: "bg-cyan-50 border-cyan-200 text-cyan-900", iconColor: "text-cyan-600" },
   ];
 
   return (
@@ -85,6 +93,65 @@ const Dashboard = () => {
                 <p className="text-xs text-teal-600 font-medium">{s.change}</p>
               </Link>
             ))}
+        </div>
+
+        {/* CRM Pipeline & Follow-ups */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Pipeline */}
+          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 col-span-2">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-base font-semibold text-gray-900">CRM Pipeline</h2>
+              <Link to="/admin/leads" className="text-sm text-teal-600 hover:underline">View CRM →</Link>
+            </div>
+            {loading ? <div className="h-32 bg-gray-100 rounded animate-pulse" /> : (
+              <div className="flex gap-2 h-16 w-full rounded-lg overflow-hidden bg-gray-100 p-1">
+                {["New", "Contacted", "Proposal Sent", "Negotiating"].map(status => {
+                  const count = leads.filter(l => l.status === status).length;
+                  const total = activeLeadsCount || 1;
+                  const percent = Math.max(10, (count / total) * 100);
+
+                  let bgColor = "bg-gray-400";
+                  if (status === "New") bgColor = "bg-blue-400";
+                  if (status === "Contacted") bgColor = "bg-indigo-400";
+                  if (status === "Proposal Sent") bgColor = "bg-teal-400";
+                  if (status === "Negotiating") bgColor = "bg-orange-400";
+
+                  return (
+                    <div key={status} style={{ width: `${percent}%` }} className={`${bgColor} h-full rounded flex items-center justify-center relative group transition-all`}>
+                      <div className="text-xs font-bold text-white px-2 truncate flex flex-col items-center">
+                        <span>{count}</span>
+                        <span className="hidden sm:inline opacity-80 font-normal leading-tight">{status}</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+
+          {/* Overdue Follow-ups */}
+          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 bg-red-50/30">
+            <h2 className="text-base font-semibold text-gray-900 mb-4 flex items-center">
+              <AlertCircle className="h-4 w-4 text-red-500 mr-2" /> Action Needed
+            </h2>
+            {loading ? <div className="h-32 bg-gray-100 rounded animate-pulse" /> : overdueFollowups.length === 0 ? (
+              <div className="flex flex-col items-center justify-center h-24 text-gray-400">
+                <Calendar className="h-6 w-6 mb-2 opacity-30" />
+                <p className="text-sm">You're all caught up!</p>
+              </div>
+            ) : (
+              <div className="space-y-3 max-h-48 overflow-y-auto">
+                {overdueFollowups.slice(0, 5).map(l => (
+                  <Link key={l.id} to={`/admin/leads/${l.id}`} className="block bg-white border border-red-100 rounded-lg p-3 shadow-sm hover:border-red-300 transition group">
+                    <p className="text-sm font-semibold text-gray-900 group-hover:text-teal-700">{l.name} {l.company ? `(${l.company})` : ""}</p>
+                    <p className="text-xs text-red-600 mt-1 flex items-center">
+                      <Calendar className="h-3 w-3 mr-1" /> Overdue since {new Date(l.follow_up_at!).toLocaleDateString()}
+                    </p>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Analytics Charts */}
@@ -146,7 +213,7 @@ const Dashboard = () => {
                 <div className="space-y-3">
                   {stats.recentActivity.map((a, i) => (
                     <div key={i} className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                      <div className={`w-2 h-2 rounded-full mt-2 shrink-0 ${a.type === "form" ? "bg-green-500" : a.type === "newsletter" ? "bg-blue-500" : a.type === "job" ? "bg-teal-500" : "bg-purple-500"}`} />
+                      <div className={`w-2 h-2 rounded-full mt-2 shrink-0 ${a.type === "submission" ? "bg-green-500" : a.type === "subscriber" ? "bg-blue-500" : a.type === "job" ? "bg-teal-500" : a.type === "trial" ? "bg-pink-500" : a.type === "proposal" ? "bg-indigo-500" : "bg-purple-500"}`} />
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium text-gray-900">{a.action}</p>
                         <p className="text-xs text-gray-500 truncate">{a.details}</p>
