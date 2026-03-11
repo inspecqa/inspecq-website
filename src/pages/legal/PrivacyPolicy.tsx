@@ -24,14 +24,18 @@ const PrivacyPolicy: React.FC = () => {
           </h1>
 
           <p className="text-xs sm:text-sm text-gray-500 mb-3 sm:mb-4">
-            {/* তারিখ আপডেট করা হয়েছে */}
-            Last updated: January 2026
+            Last updated: March 2026
           </p>
 
           <p className="body-md text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
-            This Privacy Policy explains how we collect, use, and protect your
-            personal information when you visit our website, contact us, or use
-            InspecQ&apos;s services.
+            InspecQ LLC (&quot;InspecQ&quot;, &quot;we&quot;, &quot;us&quot;, or
+            &quot;our&quot;) respects your privacy and is committed to
+            protecting your personal data. This Privacy Policy outlines how we
+            collect, use, process, and protect your personal information when
+            you visit our website (www.inspecq.com), contact us, or use our
+            software quality assurance services. This policy applies to
+            individuals (&quot;you&quot;) acting in a B2B capacity as
+            representatives of existing or prospective clients.
           </p>
         </div>
 
@@ -48,31 +52,43 @@ const PrivacyPolicy: React.FC = () => {
                 a) Information You Provide Directly
               </h3>
               <p className="mt-1.5">
-                We may collect personal and business information that you
-                voluntarily share with us, such as:
+                We collect personal information that you voluntarily provide
+                when interacting with us, including:
               </p>
               <ul className="list-disc ml-5 sm:ml-6 mt-2 space-y-1.5">
-                <li>Name and contact details (email, phone)</li>
-                <li>Company name, role, and project details</li>
                 <li>
-                  Information submitted via contact, free trial, or &quot;Book a
-                  Call&quot; forms
+                  <strong>Contact Information:</strong> Name, email address,
+                  phone number, and company name.
                 </li>
-                <li>Attachments, documents, or files you share for analysis</li>
+                <li>
+                  <strong>Inquiry Details:</strong> Information submitted via
+                  our &quot;Book a Call&quot;, free trial, or general contact
+                  forms.
+                </li>
+                <li>
+                  <strong>Project Information:</strong> Documents, test
+                  requirements, links to applications, or files you share for
+                  analysis in connection with a project or bid.
+                </li>
               </ul>
 
               <h3 className="mt-4 text-sm sm:text-base font-semibold text-gray-800">
                 b) Automatically Collected Information
               </h3>
               <p className="mt-1.5">
-                When you visit our website, certain information may be collected
-                automatically, such as:
+                When you visit our website, we automatically collect certain
+                technical data using cookies and similar tracking technologies:
               </p>
               <ul className="list-disc ml-5 sm:ml-6 mt-2 space-y-1.5">
-                <li>IP address and approximate location</li>
-                <li>Browser type, version, and device information</li>
-                <li>Pages visited, time spent, and referring URLs</li>
-                <li>Basic analytics and cookie-based data</li>
+                <li>
+                  <strong>Device &amp; Usage Data:</strong> IP address, browser
+                  type, operating system, referring URLs, pages visited, and
+                  time spent on the site.
+                </li>
+                <li>
+                  <strong>Analytics:</strong> Aggregated, sanitized metrics
+                  regarding website traffic and user behavior.
+                </li>
               </ul>
 
               <h3 className="mt-4 text-sm sm:text-base font-semibold text-gray-800">
@@ -92,20 +108,39 @@ const PrivacyPolicy: React.FC = () => {
               <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
                 2. How We Use Your Information
               </h2>
-              <p className="mt-1.5">We use the information we collect to:</p>
+              <p className="mt-1.5">
+                We use the collected information for the following business
+                purposes:
+              </p>
               <ul className="list-disc ml-5 sm:ml-6 mt-2 space-y-1.5">
-                <li>Communicate with you and respond to inquiries</li>
-                <li>Provide, operate, and improve our QA services</li>
-                <li>Prepare proposals, scopes of work, and project plans</li>
-                <li>Issue invoices and manage contracts</li>
-                <li>Maintain internal records and project history</li>
                 <li>
-                  Improve our website experience, content, and service offerings
+                  <strong>Service Delivery:</strong> To provide, operate, and
+                  maintain our QA services, including preparing proposals and
+                  Statements of Work (SOWs).
+                </li>
+                <li>
+                  <strong>Communication:</strong> To respond to your inquiries,
+                  schedule consultations, and provide customer support.
+                </li>
+                <li>
+                  <strong>Administrative Tasks:</strong> To issue invoices,
+                  manage contracts, and maintain internal business records.
+                </li>
+                <li>
+                  <strong>Website Improvement:</strong> To understand how users
+                  interact with our site and improve functionality and user
+                  experience.
+                </li>
+                <li>
+                  <strong>Marketing:</strong> To send you relevant updates or
+                  marketing materials, strictly provided you have opted in or
+                  have an existing business relationship with us. You may opt
+                  out at any time.
                 </li>
               </ul>
-              <p className="mt-2">
-                We do not sell or rent your personal information to third
-                parties.
+              <p className="mt-2 font-semibold">
+                We do not sell, rent, or trade your personal information to
+                third parties.
               </p>
             </div>
 
@@ -114,83 +149,189 @@ const PrivacyPolicy: React.FC = () => {
             {/* 3. Legal Basis for Processing */}
             <div>
               <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
-                3. Legal Basis for Processing
+                3. Legal Basis for Processing (GDPR/UK GDPR Compliance)
               </h2>
               <p className="mt-1.5">
-                Depending on your location, we may process your personal data
-                under one or more of the following legal bases:
+                If you are located in the European Economic Area (EEA) or the
+                United Kingdom, our legal basis for collecting and using the
+                personal information described above depends on the specific
+                context:
               </p>
               <ul className="list-disc ml-5 sm:ml-6 mt-2 space-y-1.5">
-                <li>Your consent</li>
-                <li>Performance of a contract or pre-contractual steps</li>
                 <li>
-                  Legitimate business interests (e.g., improving services)
+                  <strong>Performance of a Contract:</strong> Processing is
+                  necessary to fulfill a contract with you or take
+                  pre-contractual steps at your request.
                 </li>
-                <li>Compliance with legal obligations</li>
+                <li>
+                  <strong>Legitimate Interests:</strong> Processing is necessary
+                  for our legitimate business interests (e.g., improving our
+                  services or B2B direct marketing) and is not overridden by
+                  your data protection rights.
+                </li>
+                <li>
+                  <strong>Consent:</strong> Where you have given explicit
+                  consent for us to process your data for a specific purpose.
+                </li>
+                <li>
+                  <strong>Legal Obligation:</strong> Processing is necessary to
+                  comply with the law (e.g., tax and accounting regulations).
+                </li>
               </ul>
             </div>
 
             <div className="h-px bg-gradient-to-r from-transparent via-teal-200 to-transparent" />
 
-            {/* 4. Data Storage & Security */}
+            {/* 4. Privacy Rights */}
             <div>
               <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
-                4. Data Storage &amp; Security
+                4. Privacy Rights (CCPA/CPRA &amp; GDPR)
               </h2>
               <p className="mt-1.5">
-                We store data using secure third-party tools and platforms such
-                as:
+                Depending on your location, you may have specific rights
+                regarding your personal data:
               </p>
               <ul className="list-disc ml-5 sm:ml-6 mt-2 space-y-1.5">
-                <li>Cloud databases (e.g., Supabase)</li>
-                <li>Google Workspace (e.g., Gmail, Google Sheets)</li>
-                <li>Project management and collaboration tools</li>
+                <li>
+                  <strong>Right to Access:</strong> You can request a copy of
+                  the personal data we hold about you.
+                </li>
+                <li>
+                  <strong>Right to Rectification:</strong> You can request that
+                  we correct any inaccurate or incomplete data.
+                </li>
+                <li>
+                  <strong>
+                    Right to Erasure (&quot;Right to be Forgotten&quot;):
+                  </strong>{" "}
+                  You can request the deletion of your personal data under
+                  certain conditions.
+                </li>
+                <li>
+                  <strong>Right to Restrict or Object to Processing:</strong>{" "}
+                  You can object to our processing of your data, particularly
+                  for direct marketing purposes.
+                </li>
+                <li>
+                  <strong>Right to Data Portability:</strong> You can request
+                  the transfer of your data to another organization.
+                </li>
+                <li>
+                  <strong>California Privacy Rights (CCPA/CPRA):</strong>{" "}
+                  California residents have the right to know what personal
+                  information is collected, the right to request deletion, the
+                  right to opt-out of the &quot;sale&quot; or
+                  &quot;sharing&quot; of personal information (Note: We do not
+                  sell personal data), and the right to non-discrimination for
+                  exercising these rights.
+                </li>
               </ul>
+              <p className="mt-2 text-sm sm:text-base text-gray-700">
+                To exercise any of these rights, please contact us at{" "}
+                <a
+                  href="mailto:contact@inspecq.com"
+                  className="text-teal-600 font-semibold hover:underline"
+                >
+                  contact@inspecq.com
+                </a>
+                . We will respond to your request within the timeframe required
+                by applicable law (typically 30 days).
+              </p>
+            </div>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-teal-200 to-transparent" />
+
+            {/* 5. Sharing Your Information */}
+            <div>
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
+                5. Sharing Your Information
+              </h2>
+              <p className="mt-1.5">
+                We only share your information with trusted third parties in the
+                following limited circumstances:
+              </p>
+              <ul className="list-disc ml-5 sm:ml-6 mt-2 space-y-1.5">
+                <li>
+                  <strong>Service Providers:</strong> We share data with
+                  third-party vendors who provide services on our behalf (e.g.,
+                  Google Workspace for email/cloud storage, CRM systems like
+                  HubSpot, and billing/invoicing platforms). These providers are
+                  contractually obligated to protect your data.
+                </li>
+                <li>
+                  <strong>Legal Compliance:</strong> If required by law,
+                  subpoena, or court order, or to protect the safety, rights, or
+                  property of InspecQ.
+                </li>
+                <li>
+                  <strong>Business Transfers:</strong> In the event of a merger,
+                  acquisition, reorganization, or sale of all or a portion of
+                  our assets, user data may be transferred as a business asset.
+                </li>
+              </ul>
+            </div>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-teal-200 to-transparent" />
+
+            {/* 6. Data Storage & Security */}
+            <div>
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
+                6. Data Storage &amp; Security
+              </h2>
+              <p className="mt-1.5">
+                We implement industry-standard technical and organizational
+                security measures designed to protect the security of any
+                personal information we process. We store data using secure
+                third-party tools and platforms such as cloud databases (e.g.,
+                Supabase) and Google Workspace.
+              </p>
               <p className="mt-2">
-                We implement reasonable technical and organizational measures to
-                protect your data. However, no method of transmission or storage
-                over the internet is 100% secure, and we cannot guarantee
-                absolute security.
+                However, please also remember that we cannot guarantee that the
+                internet itself is 100% secure. Although we will do our best to
+                protect your personal information, transmission of personal
+                information to and from our intended destinations is at your own
+                risk.
               </p>
             </div>
 
             <div className="h-px bg-gradient-to-r from-transparent via-teal-200 to-transparent" />
 
-            {/* 5. Sharing of Information */}
+            {/* 7. Data Retention */}
             <div>
               <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
-                5. Sharing of Information
-              </h2>
-              <p className="mt-1.5">We may share your information with:</p>
-              <ul className="list-disc ml-5 sm:ml-6 mt-2 space-y-1.5">
-                <li>
-                  InspecQ team members directly involved in your project or
-                  request
-                </li>
-                <li>
-                  Trusted third-party service providers used for operations
-                  (e.g., hosting, email, analytics, scheduling)
-                </li>
-              </ul>
-              <p className="mt-2">
-                These third parties are only given access to the information
-                necessary to perform their services and are expected to protect
-                it.
-              </p>
-            </div>
-
-            <div className="h-px bg-gradient-to-r from-transparent via-teal-200 to-transparent" />
-
-            {/* 6. Cookies & Tracking Technologies (MAJOR UPDATE HERE) */}
-            <div>
-              <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
-                6. Cookies &amp; Tracking Technologies
+                7. Data Retention
               </h2>
               <p className="mt-1.5">
-                We use cookies and similar tracking technologies to track the
-                activity on Our Service and store certain information. Tracking
-                technologies used are beacons, tags, and scripts to collect and
-                track information and to improve and analyze Our Service.
+                We retain your personal information only for as long as is
+                necessary for the purposes set out in this Privacy Policy.
+              </p>
+              <ul className="list-disc ml-5 sm:ml-6 mt-2 space-y-1.5">
+                <li>
+                  <strong>General Inquiries:</strong> Data related to inquiries
+                  that do not lead to a contract is generally deleted within two
+                  (2) years.
+                </li>
+                <li>
+                  <strong>Client Data:</strong> Data related to active clients
+                  is retained for the duration of the business relationship and
+                  up to seven (7) years thereafter to satisfy legal, tax, and
+                  accounting requirements.
+                </li>
+              </ul>
+            </div>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-teal-200 to-transparent" />
+
+            {/* 8. Cookies & Tracking Technologies */}
+            <div>
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
+                8. Cookies &amp; Tracking Technologies
+              </h2>
+              <p className="mt-1.5">
+                Our website uses cookies (small text files placed on your
+                device) to enhance your browsing experience. Types of cookies
+                used may include essential session cookies, preference cookies,
+                and analytics cookies.
               </p>
 
               <div className="mt-4 space-y-4">
@@ -224,17 +365,15 @@ const PrivacyPolicy: React.FC = () => {
                     We use Google Analytics to monitor and analyze the use of
                     our Service. Google Analytics is a web analytics service
                     offered by Google that tracks and reports website traffic.
-                    Google uses the data collected to track and monitor the use
-                    of our Service. This data is shared with other Google
-                    services. Google may use the collected data to contextualize
-                    and personalize the ads of its own advertising network.
                   </p>
                 </div>
               </div>
 
               <p className="mt-4 bg-teal-50 p-4 rounded-lg border border-teal-100 text-sm">
-                <strong>Your Choice:</strong> You can opt-out of having made
-                your activity on the Service available to Google Analytics by
+                <strong>Your Choice:</strong> You can set your browser to refuse
+                all or some browser cookies, or to alert you when websites set
+                or access cookies. You can also opt-out of having made your
+                activity on the Service available to Google Analytics by
                 installing the Google Analytics opt-out browser add-on or by
                 declining cookies through our{" "}
                 <span className="font-semibold">Cookie Consent Banner</span>.
@@ -243,61 +382,19 @@ const PrivacyPolicy: React.FC = () => {
 
             <div className="h-px bg-gradient-to-r from-transparent via-teal-200 to-transparent" />
 
-            {/* 7. Data Retention */}
+            {/* 9. International Data Transfers */}
             <div>
               <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
-                7. Data Retention
+                9. International Data Transfers
               </h2>
               <p className="mt-1.5">
-                We retain your personal data only for as long as necessary to:
-              </p>
-              <ul className="list-disc ml-5 sm:ml-6 mt-2 space-y-1.5">
-                <li>Deliver and support our services</li>
-                <li>Comply with legal and accounting obligations</li>
-                <li>Maintain project history and records</li>
-              </ul>
-              <p className="mt-2">
-                You may request deletion of your data, subject to any legal
-                obligations to retain certain records.
-              </p>
-            </div>
-
-            <div className="h-px bg-gradient-to-r from-transparent via-teal-200 to-transparent" />
-
-            {/* 8. Your Rights */}
-            <div>
-              <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
-                8. Your Rights
-              </h2>
-              <p className="mt-1.5">
-                Depending on your jurisdiction, you may have rights to:
-              </p>
-              <ul className="list-disc ml-5 sm:ml-6 mt-2 space-y-1.5">
-                <li>Access the personal data we hold about you</li>
-                <li>Request correction of inaccurate or incomplete data</li>
-                <li>Request deletion of your data, where applicable</li>
-                <li>Restrict or object to certain types of processing</li>
-                <li>Request a copy of your data (data portability)</li>
-                <li>Withdraw consent where processing is based on consent</li>
-              </ul>
-              <p className="mt-2">
-                To exercise any of these rights, please contact us using the
-                details below.
-              </p>
-            </div>
-
-            <div className="h-px bg-gradient-to-r from-transparent via-teal-200 to-transparent" />
-
-            {/* 9. Third-Party Links */}
-            <div>
-              <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
-                9. Third-Party Links
-              </h2>
-              <p className="mt-1.5">
-                Our website may contain links to third-party websites. We are
-                not responsible for the content or privacy practices of those
-                sites. We encourage you to review the privacy policies of any
-                external sites you visit.
+                InspecQ operates from multiple locations. If you access our
+                website or services from outside our primary operating
+                jurisdictions, please be aware that your information may be
+                transferred to, stored, and processed in our facilities and by
+                third parties with whom we share it. We rely on recognized legal
+                mechanisms, such as Standard Contractual Clauses (SCCs), to
+                legally transfer data across borders.
               </p>
             </div>
 
@@ -309,10 +406,12 @@ const PrivacyPolicy: React.FC = () => {
                 10. Children&apos;s Privacy
               </h2>
               <p className="mt-1.5">
-                Our website and services are not intended for children under the
-                age of 16, and we do not knowingly collect personal information
-                from children. If you believe a child has provided us with
-                personal data, please contact us so we can delete it.
+                Our website and services are intended exclusively for a general
+                B2B audience. We do not knowingly solicit data from or market to
+                children under 16 years of age. If we learn that personal
+                information from users less than 16 years of age has been
+                collected, we will deactivate the account and take reasonable
+                measures to promptly delete such data from our records.
               </p>
             </div>
 
@@ -324,10 +423,11 @@ const PrivacyPolicy: React.FC = () => {
                 11. Changes to This Privacy Policy
               </h2>
               <p className="mt-1.5">
-                We may update this Privacy Policy from time to time. When we do,
-                we will revise the &quot;Last updated&quot; date at the top of
-                the page. We encourage you to review this page periodically for
-                any changes.
+                We may update this Privacy Policy from time to time. The updated
+                version will be indicated by an updated &quot;Last updated&quot;
+                date at the top of the policy. We encourage you to review this
+                Privacy Policy frequently to be informed of how we are
+                protecting your information.
               </p>
             </div>
 
@@ -340,14 +440,12 @@ const PrivacyPolicy: React.FC = () => {
               </h2>
               <p className="mt-1.5">
                 If you have any questions, concerns, or requests regarding this
-                Privacy Policy or how we handle your data, please contact us at{" "}
+                Privacy Policy or how we handle your data, you may email us at:{" "}
                 <a
                   href="mailto:contact@inspecq.com"
-                  className="text-teal-600 font-semibold hover:underline"
-                >
-                  contact@inspecq.com
+                  className="text-teal-600 font-semibold"
+                > contact@inspecq.com
                 </a>
-                .
               </p>
             </div>
           </section>

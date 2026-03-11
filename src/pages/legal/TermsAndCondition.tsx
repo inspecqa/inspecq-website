@@ -24,13 +24,17 @@ const TermsOfService: React.FC = () => {
           </h1>
 
           <p className="text-xs sm:text-sm text-gray-500 mb-3 sm:mb-4">
-            Last updated: November 2025
+            Last updated: March 2026
           </p>
 
           <p className="body-md text-gray-600 max-w-2xl mx-auto text-sm sm:text-base">
-            These Terms &amp; Conditions govern your use of InspecQ&apos;s
-            website, services, and any related materials. By working with us or
-            using our site, you agree to these terms.
+            These Terms &amp; Conditions ("Terms") govern your use of the
+            website located at www.inspecq.com (the "Site") and the software
+            quality assurance services ("Services") provided by InspecQ
+            ("InspecQ", "we", "us", or "our"). By accessing the Site or engaging
+            our Services, you ("Client", "you") agree to be bound by these
+            Terms. If you do not agree to these Terms, please do not use our
+            Site or Services.
           </p>
         </div>
 
@@ -43,8 +47,8 @@ const TermsOfService: React.FC = () => {
                 1. Services Provided
               </h2>
               <p className="mt-1.5">
-                InspecQ provides software quality assurance services, which may
-                include:
+                InspecQ provides professional software quality assurance
+                services, including but not limited to:
               </p>
               <ul className="list-disc ml-5 sm:ml-6 mt-2 space-y-1.5">
                 <li>Manual Testing</li>
@@ -56,8 +60,9 @@ const TermsOfService: React.FC = () => {
                 <li>QA Consulting &amp; Audits</li>
               </ul>
               <p className="mt-2">
-                Any additional or custom services will be agreed in writing,
-                such as via email or a signed agreement.
+                Any specific services to be provided will be detailed in a
+                mutually agreed-upon Statement of Work (&quot;SOW&quot;) or
+                order form.
               </p>
             </div>
 
@@ -69,18 +74,20 @@ const TermsOfService: React.FC = () => {
                 2. Engagement &amp; Scope of Work
               </h2>
               <p className="mt-1.5">
-                Before starting any project, both parties will agree on a Scope
-                of Work (&quot;SOW&quot;) outlining:
+                Before commencing any project, InspecQ and the Client will
+                execute an (&quot;SOW&quot;) outlining:
               </p>
               <ul className="list-disc ml-5 sm:ml-6 mt-2 space-y-1.5">
                 <li>Deliverables and testing scope</li>
                 <li>Timelines and milestones</li>
-                <li>Pricing and payment terms</li>
+                <li>Pricing, payment terms, and billing frequency</li>
                 <li>Responsibilities and communication expectations</li>
               </ul>
               <p className="mt-2">
-                Work begins only after confirmation via email or signed
-                agreement.
+                Work will commence only upon execution of an SOW or explicit
+                written confirmation via email. In the event of a conflict
+                between these Terms and an SOW, the SOW shall prevail for that
+                specific engagement.
               </p>
             </div>
 
@@ -92,23 +99,27 @@ const TermsOfService: React.FC = () => {
                 3. Client Responsibilities
               </h2>
               <p className="mt-1.5">
-                To allow us to deliver quality work, you agree to:
+                The Client acknowledges that the timely and successful delivery
+                of Services depends on the Client’s cooperation. The Client
+                agrees to:
               </p>
               <ul className="list-disc ml-5 sm:ml-6 mt-2 space-y-1.5">
                 <li>
-                  Provide required access to environments, builds, APIs, test
-                  data, and documentation.
+                  Provide timely access to necessary software environments,
+                  builds, APIs, test data, and documentation.
                 </li>
                 <li>
-                  Share clear requirements, acceptance criteria, and priorities.
+                  Share clear requirements, acceptance criteria, and project
+                  priorities.
                 </li>
                 <li>
-                  Respond within reasonable timeframes to questions and feedback
-                  requests.
+                  Review deliverables and respond to queries within reasonable
+                  timeframes.
                 </li>
                 <li>
-                  Ensure all provided data and credentials are lawful and do not
-                  infringe third-party rights.
+                  Ensure all provided data, credentials, and software do not
+                  infringe upon any third-party intellectual property rights or
+                  violate applicable laws.
                 </li>
               </ul>
             </div>
@@ -120,20 +131,25 @@ const TermsOfService: React.FC = () => {
               <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
                 4. Payment Terms
               </h2>
-              <p className="mt-1.5">
-                Payment terms, currency, and billing frequency will be defined
-                in the SOW or invoice. Unless otherwise agreed:
-              </p>
+              <p className="mt-1.5">Unless otherwise specified in an SOW:</p>
               <ul className="list-disc ml-5 sm:ml-6 mt-2 space-y-1.5">
-                <li>Invoices are due within the agreed payment window.</li>
                 <li>
-                  Late or unpaid invoices may result in work being paused until
-                  payment is received.
+                  Invoices are due and payable within thirty (30) days of the
+                  invoice date (Net-30).
                 </li>
                 <li>
-                  For recurring or monthly services, plans may renew
-                  automatically unless cancelled according to the agreed notice
-                  period.
+                  Any undisputed amount not paid when due shall accrue interest
+                  at a rate of 1.5% per month, or the maximum rate permitted by
+                  law, whichever is lower.
+                </li>
+                <li>
+                  InspecQ reserves the right to suspend Services immediately if
+                  an invoice remains unpaid past its due date.
+                </li>
+                <li>
+                  For recurring or monthly retainer services, plans may renew
+                  automatically unless canceled according to the notice period
+                  agreed upon in the SOW.
                 </li>
               </ul>
             </div>
@@ -143,14 +159,19 @@ const TermsOfService: React.FC = () => {
             {/* 5. Confidentiality */}
             <div>
               <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
-                5. Confidentiality
+                5. Confidentiality &amp; Non-Disclosure
               </h2>
               <p className="mt-1.5">
-                Both parties agree to keep confidential all non-public business,
-                technical, and product information shared during the engagement.
-                Confidential information will not be disclosed to any third
-                party except as needed for project delivery and only under
-                appropriate confidentiality obligations.
+                Both parties agree to treat all non-public business, technical,
+                financial, and product information (including source code and
+                trade secrets) shared during the engagement as highly
+                confidential (&quot;Confidential Information&quot;).
+                Confidential Information will not be disclosed to any third
+                party except as strictly necessary for project delivery and
+                under binding confidentiality obligations. <br /> These
+                obligations survive the termination of the engagement. If a
+                separate NDA is executed between the parties, the terms of that
+                NDA shall govern the exchange of Confidential Information.
               </p>
             </div>
 
@@ -161,62 +182,95 @@ const TermsOfService: React.FC = () => {
               <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
                 6. Intellectual Property
               </h2>
-              <p className="mt-1.5">Upon full payment of fees:</p>
+              <p className="mt-1.5">
+                Upon full payment of all undisputed fees:
+              </p>
               <ul className="list-disc ml-5 sm:ml-6 mt-2 space-y-1.5">
                 <li>
-                  You own the specific test artefacts created for your project
-                  (e.g., test cases, test reports, bug reports), unless
-                  otherwise agreed.
+                  Client Ownership: The Client retains all right, title, and
+                  interest in and to the specific testing deliverables created
+                  exclusively for the Client (e.g., custom test cases, final
+                  test reports, logged bugs).
                 </li>
                 <li>
-                  InspecQ retains ownership of its internal frameworks, scripts,
-                  utilities, templates, and methodologies used to deliver the
-                  services. These may be reused across clients.
+                  InspecQ Ownership: InspecQ retains all right, title, and
+                  interest in and to its pre-existing tools, internal
+                  frameworks, automation scripts, utilities, templates, and
+                  methodologies (the "Background Technology") used to deliver
+                  the Services. InspecQ grants the Client a limited,
+                  non-exclusive license to use any Background Technology solely
+                  to the extent incorporated into the final deliverables.
                 </li>
               </ul>
             </div>
 
             <div className="h-px bg-gradient-to-r from-transparent via-teal-200 to-transparent" />
 
-            {/* 7. Non-Disclosure Agreement */}
+            {/* 7. Non-Solicitation */}
             <div>
               <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
-                7. Non-Disclosure Agreement (NDA)
+                7. Non-Solicitation
               </h2>
               <p className="mt-1.5">
-                If required, both parties may sign a separate NDA. Whether or
-                not a standalone NDA exists, the confidentiality obligations in
-                these Terms &amp; Conditions remain in force.
+                During the term of any active SOW and for a period of twelve
+                (12) months following its termination or expiration, the Client
+                agrees not to directly or indirectly solicit, recruit, or hire
+                any InspecQ employee or contractor who performed Services for
+                the Client, without InspecQ’s prior written consent.
               </p>
             </div>
 
             <div className="h-px bg-gradient-to-r from-transparent via-teal-200 to-transparent" />
 
-            {/* 8. Limitation of Liability */}
+            {/* 8. Disclaimer of Warranties */}
             <div>
               <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
-                8. Limitation of Liability
+                8. Disclaimer of Warranties
               </h2>
               <p className="mt-1.5">
-                To the maximum extent permitted by law, InspecQ will not be
-                liable for:
+                <strong>
+                  INSPECQ PROVIDES QUALITY ASSURANCE AND TESTING SERVICES ONLY.
+                  WE DO NOT GUARANTEE THAT THE CLIENT’S SOFTWARE, PRODUCTS, OR
+                  SYSTEMS WILL BE 100% ERROR-FREE, SECURE, OR UNINTERRUPTED.
+                </strong>
+                <br />
+                THE SERVICES ARE PROVIDED ON AN "AS IS" AND "AS AVAILABLE"
+                BASIS. INSPECQ EXPRESSLY DISCLAIMS ALL WARRANTIES OF ANY KIND,
+                EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO IMPLIED
+                WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE,
+                AND NON-INFRINGEMENT.
+              </p>
+            </div>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-teal-200 to-transparent" />
+
+            {/* 9. Limitation of Liability */}
+            <div>
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
+                9. Limitation of Liability
+              </h2>
+              <p className="mt-1.5">
+                TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW:
               </p>
               <ul className="list-disc ml-5 sm:ml-6 mt-2 space-y-1.5">
-                <li>Indirect, incidental, or consequential damages.</li>
                 <li>
-                  Losses resulting from incorrect, incomplete, or outdated
-                  information provided by the client.
+                  <strong>NO CONSEQUENTIAL DAMAGES:</strong> IN NO EVENT SHALL
+                  INSPECQ BE LIABLE TO THE CLIENT FOR ANY INDIRECT, INCIDENTAL,
+                  CONSEQUENTIAL, SPECIAL, PUNITIVE, OR EXEMPLARY DAMAGES,
+                  INCLUDING BUT NOT LIMITED TO LOSS OF PROFITS, LOSS OF REVENUE,
+                  LOSS OF DATA, OR BUSINESS INTERRUPTION, EVEN IF ADVISED OF THE
+                  POSSIBILITY OF SUCH DAMAGES.
                 </li>
                 <li>
-                  Issues arising from third-party tools, hosting providers, or
-                  services outside InspecQ&apos;s control.
+                  <strong>LIABILITY CAP:</strong> INSPECQ’S TOTAL CUMULATIVE
+                  LIABILITY FOR ALL CLAIMS ARISING OUT OF OR RELATED TO THESE
+                  TERMS OR ANY SOW, WHETHER IN CONTRACT, TORT (INCLUDING
+                  NEGLIGENCE), OR OTHERWISE, SHALL NOT EXCEED THE TOTAL AMOUNT
+                  ACTUALLY PAID BY THE CLIENT TO INSPECQ FOR THE SPECIFIC
+                  SERVICES GIVING RISE TO THE CLAIM DURING THE SIX (6) MONTHS
+                  IMMEDIATELY PRECEDING THE EVENT GIVING RISE TO THE LIABILITY.
                 </li>
               </ul>
-              <p className="mt-2">
-                In any case, InspecQ&apos;s total liability is limited to the
-                amount paid by you for the services under the current
-                engagement.
-              </p>
             </div>
 
             <div className="h-px bg-gradient-to-r from-transparent via-teal-200 to-transparent" />
@@ -224,50 +278,70 @@ const TermsOfService: React.FC = () => {
             {/* 9. Termination */}
             <div>
               <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
-                9. Termination
+                10. Termination
               </h2>
               <p className="mt-1.5">
-                Either party may terminate the engagement with written notice as
-                defined in the SOW or agreement. Upon termination, you agree to
-                pay for all work completed up to the effective termination date.
+                Either party may terminate a project engagement with written
+                notice as defined in the applicable SOW. Upon termination, the
+                Client remains obligated to pay InspecQ for all Services
+                performed and expenses incurred up to the effective date of
+                termination.
               </p>
             </div>
 
             <div className="h-px bg-gradient-to-r from-transparent via-teal-200 to-transparent" />
 
-            {/* 10. Use of Client Logo & Case Studies */}
+            {/* 11. Promotional Use */}
             <div>
               <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
-                10. Use of Client Logo &amp; Case Studies
+                11. Promotional Use
               </h2>
               <p className="mt-1.5">
-                With your explicit permission, InspecQ may reference the
-                collaboration in anonymized case studies or display your logo on
-                our website or marketing materials. You may decline or withdraw
-                this permission at any time.
+                Unless otherwise stated in an SOW or NDA, InspecQ may use the
+                Client's name and logo on the Site and in marketing materials to
+                reference the fact that the Client is a customer. The Client may
+                withdraw this permission at any time by sending physical or
+                electronic notice to InspecQ.
               </p>
             </div>
 
             <div className="h-px bg-gradient-to-r from-transparent via-teal-200 to-transparent" />
 
-            {/* 11. Governing Law */}
+            {/* 12. Governing Law */}
             <div>
               <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
-                11. Governing Law
+                12. Governing Law
               </h2>
               <p className="mt-1.5">
-                These Terms &amp; Conditions are governed by the laws of the
-                jurisdiction where InspecQ operates, unless superseded by a
-                separate written agreement.
+                These Terms and any dispute arising out of or related to them
+                shall be governed by and construed in accordance with the laws
+                of the State of Bangladesh, without giving effect to its
+                conflict of laws principles.
               </p>
             </div>
 
             <div className="h-px bg-gradient-to-r from-transparent via-teal-200 to-transparent" />
 
-            {/* 12. Contact */}
+            {/* 13. Changes to These Terms */}
             <div>
               <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
-                12. Contact
+                13. Changes to These Terms
+              </h2>
+              <p className="mt-1.5">
+                We reserve the right to modify these Terms at any time. We will
+                indicate that changes have been made by updating the "Last
+                updated" date at the top of this document. Your continued use of
+                the Site or Services after any changes constitutes your
+                acceptance of the new Terms.
+              </p>
+            </div>
+
+            <div className="h-px bg-gradient-to-r from-transparent via-teal-200 to-transparent" />
+
+            {/* 14. Contact */}
+            <div>
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
+                14. Contact
               </h2>
               <p className="mt-1.5">
                 For any questions about these Terms &amp; Conditions, please
