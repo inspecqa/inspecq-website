@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { supabase } from "../../lib/supabaseClient";
-import { Clock, Calendar as CalendarIcon, Info, CheckCircle, Loader2, ChevronLeft, ChevronRight, User, Hash, Mail, FileText, Briefcase } from "lucide-react";
+import { Clock, Calendar as CalendarIcon, Info, CheckCircle, Loader2, ChevronLeft, ChevronRight, User, Hash, Mail, FileText, Briefcase, Globe, ChevronDown } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { format as formatTZ, toZonedTime } from "date-fns-tz";
 import logo from "../../assets/logo.png";
@@ -33,7 +33,20 @@ export default function BookAppointment() {
   const [slotsRaw, setSlotsRaw] = useState<Slot[]>([]);
   const [selectedSlot, setSelectedSlot] = useState<Slot | null>(null);
   const [loadingSlots, setLoadingSlots] = useState(false);
-  const [userTimezone] = useState(Intl.DateTimeFormat().resolvedOptions().timeZone);
+  const [userTimezone, setUserTimezone] = useState(Intl.DateTimeFormat().resolvedOptions().timeZone);
+
+  // Memoize the expensive timezone list generation (400+ records) to prevent lag on every keypress or state update
+  const timezoneOptions = useMemo(() => {
+    const list: string[] = (Intl as any).supportedValuesOf ? (Intl as any).supportedValuesOf('timeZone') : [userTimezone];
+    const initialDate = new Date();
+    return list.map(tz => {
+      let timeStr = "";
+      try {
+        timeStr = new Intl.DateTimeFormat('en-US', { timeZone: tz, hour: 'numeric', minute: '2-digit', hour12: true }).format(initialDate);
+      } catch (e) {}
+      return { value: tz, label: `${tz.replace(/_/g, ' ')} (${timeStr.toLowerCase()})` };
+    });
+  }, [userTimezone]);
 
   const [formData, setFormData] = useState({ name: "", email: "", company: "", phone: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -421,11 +434,35 @@ export default function BookAppointment() {
               ) : (
                 /* CALENDAR STEP */
                 <div className="animate-in fade-in duration-300 flex-1 flex flex-col border-[0px] border-red-500">
-                  <div className="flexItems-center justify-between mb-8 pb-4 border-b border-gray-100">
+                  <div className="flex sm:items-center justify-between mb-8 pb-4 border-b border-gray-100 sm:flex-row flex-col gap-4">
                     <h2 className="text-2xl font-bold text-slate-900">Select Date & Time</h2>
-                    {/* <div className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 rounded-lg text-xs font-medium text-slate-600 mt-2">
-                       {userTimezone.replace("_", " ")}
-                    </div> */}
+                    
+                    <div className="flex flex-col">
+                      <label className="text-sm font-bold text-slate-900 mb-1 ml-3">Time Zone</label>
+                      <div className="relative inline-flex items-center w-full sm:w-auto">
+                        <div className="absolute left-3 text-slate-800 pointer-events-none text-lg">
+                          🌍
+                        </div>
+                        <select
+                          value={userTimezone}
+                          onChange={(e) => {
+                            setUserTimezone(e.target.value);
+                            setSelectedSlot(null); // Reset slot since time boundaries change
+                            setSelectedDate(null); // Reset date to ensure slots refresh correctly
+                          }}
+                          className="appearance-none bg-transparent hover:bg-slate-50 rounded-lg text-base text-slate-700 py-1.5 pl-10 pr-6 focus:ring-0 focus:outline-none transition-colors cursor-pointer w-full text-ellipsis max-w-[280px]"
+                        >
+                          {timezoneOptions.map(tz => (
+                            <option key={tz.value} value={tz.value}>
+                              {tz.label}
+                            </option>
+                          ))}
+                        </select>
+                        <div className="absolute right-0 text-slate-800 pointer-events-none pr-1">
+                          <ChevronDown className="w-4 h-4 text-slate-900" />
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-10">
