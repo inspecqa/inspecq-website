@@ -21,20 +21,20 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // Initialize Supabase client
     const supabaseUrl = process.env.VITE_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL || '';
     const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_KEY || '';
-    
+
     console.log('[sendNewsLetterWelcome] Supabase config check:', {
       hasUrl: !!supabaseUrl,
       hasKey: !!supabaseKey,
       urlPrefix: supabaseUrl?.substring(0, 20)
     });
-    
+
     // Get subscriber's unsubscribe token
     let unsubscribeToken = '';
-    
+
     if (supabaseUrl && supabaseKey) {
       try {
         const supabase = createClient(supabaseUrl, supabaseKey);
-        
+
         const { data: subscriber, error: fetchError } = await supabase
           .from('newsletter_subscribers')
           .select('unsubscribe_token')
@@ -54,7 +54,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     const baseUrl = process.env.BASE_URL || process.env.NEXT_PUBLIC_BASE_URL || 'https://www.inspecq.com';
-    const unsubscribeUrl = unsubscribeToken 
+    const unsubscribeUrl = unsubscribeToken
       ? `${baseUrl}/api/newsletterUnsubscribe?token=${unsubscribeToken}`
       : '#';
 
@@ -89,7 +89,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       to: email,
       replyTo: from,
       subject: 'You\'re In! Welcome to the InspecQ community',
-      
+
       // Add compliance headers for one-click unsubscribe
       ...(unsubscribeToken && {
         headers: {
@@ -97,7 +97,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click'
         }
       }),
-      
+
       text: `Hello,
 
 Thank you for subscribing to the InspecQ newsletter. We are thrilled to have you with us.
@@ -358,7 +358,7 @@ To unsubscribe: ${unsubscribeUrl}`,
               <!-- COPYRIGHT & UNSUBSCRIBE -->
               <tr>
                 <td align="center" style="padding: 0px 40px 20px 40px; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 13px; color: #999999; line-height: 20px;" >
-                  <p style="margin: 0 0 12px 0; font-size: 11px; color: #aaa;">© 2025 InspecQ. All rights reserved.</p>
+                  <p style="margin: 0 0 12px 0; font-size: 11px; color: #aaa;">© 2026 InspecQ. All rights reserved.</p>
                   <p style="margin: 0; font-size: 12px;">No longer want to receive these emails? <a href="${unsubscribeUrl}" style="color: #008080; text-decoration: none; font-weight: 600;">Unsubscribe</a></p>
                 </td>
               </tr>
@@ -377,9 +377,9 @@ To unsubscribe: ${unsubscribeUrl}`,
     return res.status(200).json({ ok: true, info });
   } catch (err: any) {
     console.error('[sendNewsLetterWelcome] error:', err && err.message ? err.message : err);
-    return res.status(500).json({ 
-      error: 'Failed to send welcome email', 
-      details: err && err.message ? err.message : String(err) 
+    return res.status(500).json({
+      error: 'Failed to send welcome email',
+      details: err && err.message ? err.message : String(err)
     });
   }
 }

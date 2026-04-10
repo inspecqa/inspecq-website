@@ -5,7 +5,7 @@ import ReactMarkdown from "react-markdown";
 import { format as formatTZ, toZonedTime } from "date-fns-tz";
 import logo from "../../assets/logo.png";
 import { Link, useSearchParams } from "react-router-dom";
-
+import SEO from "../../components/SEO";
 interface ServiceType {
   id: string;
   name: string;
@@ -190,6 +190,7 @@ export default function BookAppointment() {
   if (success) {
     return (
       <div className="min-h-screen bg-[#F8FAFC] flex flex-col items-center justify-center p-6">
+        <SEO title="Booking Confirmed" description="Your appointment has been successfully booked." noIndex={true} />
         <div className="bg-white p-10 rounded-2xl shadow-xl max-w-lg w-full text-center border border-gray-100 relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-2 bg-teal-600"></div>
           <div className="w-20 h-20 bg-teal-50 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -212,6 +213,7 @@ export default function BookAppointment() {
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] flex flex-col">
+      <SEO title="Book Appointment" description="Schedule your QA consultation or service appointment with our expert team." canonical="/book" />
       {/* Standalone Header */}
       <header className="bg-white border-b border-gray-100 shadow-sm px-6 py-4 flex items-center justify-between z-10 w-full">
         <Link to="/" className="flex items-center outline-none">

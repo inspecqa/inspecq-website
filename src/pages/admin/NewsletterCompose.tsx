@@ -315,7 +315,7 @@ const NewsletterCompose = () => {
                                         {form.body || <span className="text-gray-400 italic">Your email body will appear here…</span>}
                                     </div>
                                     <div className="mt-8 pt-6 border-t border-gray-200 text-center text-xs text-gray-400">
-                                        <p>© 2025 InspecQ. All rights reserved.</p>
+                                        <p>© 2026 InspecQ. All rights reserved.</p>
                                         <p className="mt-1">
                                             <a href="#" className="text-teal-600 hover:underline">Unsubscribe</a>
                                         </p>

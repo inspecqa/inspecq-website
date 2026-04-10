@@ -550,11 +550,8 @@ const PerformanceTesting = () => {
               Report & Monitoring Stack
             </h2>
             <p className="body-regular text-gray-600 max-w-3xl mx-auto text-sm sm:text-base">
-              We pair every load test with deep observability insights —
-              explaining{" "}
-              <span className="font-semibold text-slate-800">why</span> issues
-              happen, not just{" "}
-              <span className="font-semibold text-slate-800">where</span>.
+              We pair every load test with deep observability insights - explaining{" "}
+              <span className="font-semibold text-slate-800">why</span> issues happen, not just <span className="font-semibold text-slate-800">where</span>.
             </p>
           </div>
 

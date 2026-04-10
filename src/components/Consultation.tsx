@@ -2,7 +2,7 @@ import consultationIllustration from "../assets/consultation-illustration.svg";
 import consultationBg from "../assets/consultation-bg.svg";
 
 const ConsultationCta = () => {
-  const calendlyUrl = "/book";
+  const calenderUrl = "/book";
 
   return (
     <section className="py-16">
@@ -31,7 +31,7 @@ const ConsultationCta = () => {
               </p>
 
               <a
-                href={calendlyUrl}
+                href={calenderUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-text mt-10 inline-flex items-center rounded-full bg-white border border-buttonBorder text-slate-900 px-6 sm:px-8 py-3 sm:py-4 text-base font-medium shadow-md hover:shadow-lg transition"

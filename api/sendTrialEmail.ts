@@ -330,7 +330,7 @@ The InspecQ Team`,
               <tr>
                 <td align="center" style="padding: 0px 40px 20px 40px; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 13px; color: #999999; line-height: 20px;" >
                   <p style="margin: 0 0 8px 0;">You are receiving this email because you requested a 7-day QA trial with <strong style="color: #008080;">InspecQ</strong>.</p>
-                  <p style="margin: 0; font-size: 11px; color: #aaa;">© 2025 InspecQ. All rights reserved.</p>
+                  <p style="margin: 0; font-size: 11px; color: #aaa;">© 2026 InspecQ. All rights reserved.</p>
                 </td>
               </tr>
             </table>

@@ -145,9 +145,8 @@ export default function MobileNavDrawer({
             <button
               type="button"
               onClick={() => handleNav("/")}
-              className={`block w-full text-left text-body-md px-3 py-3 rounded-lg hover:bg-white/10 transition-colors ${
-                isActive("/") ? "bg-white/10" : ""
-              }`}
+              className={`block w-full text-left text-body-md px-3 py-3 rounded-lg hover:bg-white/10 transition-colors ${isActive("/") ? "bg-white/10" : ""
+                }`}
             >
               Home
             </button>
@@ -157,17 +156,15 @@ export default function MobileNavDrawer({
               <button
                 type="button"
                 onClick={() => setServicesOpen(!servicesOpen)}
-                className={`w-full flex items-center justify-between px-3 py-3 rounded-lg hover:bg-white/10 transition-colors ${
-                  location.pathname.startsWith("/services") ? "bg-white/10" : ""
-                }`}
+                className={`w-full flex items-center justify-between px-3 py-3 rounded-lg hover:bg-white/10 transition-colors ${location.pathname.startsWith("/services") ? "bg-white/10" : ""
+                  }`}
                 aria-expanded={servicesOpen}
                 aria-controls="mobile-services"
               >
                 <span>Services</span>
                 <ChevronDown
-                  className={`h-5 w-5 transition-transform duration-200 ${
-                    servicesOpen ? "rotate-180" : ""
-                  }`}
+                  className={`h-5 w-5 transition-transform duration-200 ${servicesOpen ? "rotate-180" : ""
+                    }`}
                 />
               </button>
 
@@ -176,10 +173,9 @@ export default function MobileNavDrawer({
                 className={`
                   overflow-hidden transition-[max-height,opacity,transform]
                   duration-300
-                  ${
-                    servicesOpen
-                      ? "max-h-96 opacity-100 translate-y-0"
-                      : "max-h-0 opacity-0 -translate-y-1"
+                  ${servicesOpen
+                    ? "max-h-96 opacity-100 translate-y-0"
+                    : "max-h-0 opacity-0 -translate-y-1"
                   }
                 `}
               >
@@ -189,9 +185,8 @@ export default function MobileNavDrawer({
                       key={s.path}
                       type="button"
                       onClick={() => handleNav(s.path)}
-                      className={`block w-full text-left px-3 py-2 rounded-md text-white/90 hover:bg-white/10 transition-colors ${
-                        isActive(s.path) ? "bg-white/10" : ""
-                      }`}
+                      className={`block w-full text-left px-3 py-2 rounded-md text-white/90 hover:bg-white/10 transition-colors ${isActive(s.path) ? "bg-white/10" : ""
+                        }`}
                     >
                       {s.name}
                     </button>
@@ -203,9 +198,8 @@ export default function MobileNavDrawer({
             <button
               type="button"
               onClick={() => handleNav("/solutions")}
-              className={`block w-full text-left px-3 py-3 rounded-lg hover:bg-white/10 transition-colors ${
-                isActive("/solutions") ? "bg-white/10" : ""
-              }`}
+              className={`block w-full text-left px-3 py-3 rounded-lg hover:bg-white/10 transition-colors ${isActive("/solutions") ? "bg-white/10" : ""
+                }`}
             >
               Solutions
             </button>
@@ -213,9 +207,8 @@ export default function MobileNavDrawer({
             <button
               type="button"
               onClick={() => handleNav("/about")}
-              className={`block w-full text-left px-3 py-3 rounded-lg hover:bg-white/10 transition-colors ${
-                isActive("/about") ? "bg-white/10" : ""
-              }`}
+              className={`block w-full text-left px-3 py-3 rounded-lg hover:bg-white/10 transition-colors ${isActive("/about") ? "bg-white/10" : ""
+                }`}
             >
               About Us
             </button>
@@ -223,9 +216,8 @@ export default function MobileNavDrawer({
             <button
               type="button"
               onClick={() => handleNav("/pricing")}
-              className={`block w-full text-left px-3 py-3 rounded-lg hover:bg-white/10 transition-colors ${
-                isActive("/pricing") ? "bg-white/10" : ""
-              }`}
+              className={`block w-full text-left px-3 py-3 rounded-lg hover:bg-white/10 transition-colors ${isActive("/pricing") ? "bg-white/10" : ""
+                }`}
             >
               Pricing
             </button>
@@ -233,9 +225,8 @@ export default function MobileNavDrawer({
             <button
               type="button"
               onClick={() => handleNav("/contact")}
-              className={`block w-full text-left px-3 py-3 rounded-lg hover:bg-white/10 transition-colors ${
-                isActive("/contact") ? "bg-white/10" : ""
-              }`}
+              className={`block w-full text-left px-3 py-3 rounded-lg hover:bg-white/10 transition-colors ${isActive("/contact") ? "bg-white/10" : ""
+                }`}
             >
               Contact
             </button>
@@ -255,7 +246,7 @@ export default function MobileNavDrawer({
             {/* Footer */}
             <div className="flex flex-col items-center justify-center gap-4 px-1 py-8 text-sm text-white/80 pb-2">
               <p className="xs-regular text-white">
-                © 2025 InspecQ | All Rights Reserved
+                © 2026 InspecQ | All Rights Reserved
               </p>
 
               <div className="flex items-center justify-center gap-6">
