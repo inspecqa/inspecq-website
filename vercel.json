@@ -12,7 +12,7 @@
     }
   ],
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/$1.ts" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/api/appointments/:path", "destination": "/api/appointments/:path.ts" },
+    { "source": "/api/(.*)", "destination": "/api/$1.ts" }
   ]
 }
