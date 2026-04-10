@@ -174,10 +174,36 @@ function buildConfirmationHtml(params: {
   .container { max-width: 600px; margin: 0 auto; }
 </style>
 </head><body>
-<div style="background: linear-gradient(135deg, #e5fff4 0%, #b8f0e8 100%); padding: 50px 40px 30px; text-align: center;">
-  <h1 style="color: #008081; font-size: 32px; margin: 0 0 10px;">Appointment Confirmed ✓</h1>
-  <p style="color: #2d5f5d; font-size: 16px; margin: 0;">Your ${serviceName} is all set.</p>
-</div>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+ <!-- HERO SECTION WITH LOGO -->
+    <tr>
+        <td align="center" style="padding: 0px 10px 0px 10px; background: linear-gradient(135deg, #e5fff4 0%, #b8f0e8 100%);">
+            <table border="0" cellpadding="0" cellspacing="0" width="600" >
+                <tr>
+                    <td align="center" style="padding: 50px 40px 30px 40px;">
+                        <!-- Logo and Brand -->
+                        <table border="0" cellpadding="0" cellspacing="0" style="margin: 0 auto 30px auto;">
+                            <tr>
+                                <td align="center" valign="middle" style="padding-right: 16px;">
+                                    <a href="https://inspecq.com" target="_blank">
+                                        <img alt="InspecQ" src="https://tzmp2b268dae69si.public.blob.vercel-storage.com/Logo%40300x.png" width="60" height="60" style="display: block; font-family: 'Lato', Helvetica, Arial, sans-serif;" border="0">
+                                    </a>
+                                </td>
+                                <td align="left" valign="middle">
+                                    <!-- Company Name & Tagline -->
+                                    <div style="color: #008080; font-size: 24px; font-weight: 700; letter-spacing: 0.03em; margin-bottom: 4px; font-family: 'Lato', Helvetica, Arial, sans-serif;">InspecQ</div>
+                                    <div style="color: #008080; font-size: 13px; font-weight: 500; font-family: 'Lato', Helvetica, Arial, sans-serif;">Built to Inspect. Powered by Quality.</div>
+                                </td>
+                            </tr>
+                        </table>
+                        <h1 style="font-size: 32px; font-weight: 700; margin: 0 0 10px 0; color: #008081; font-family: 'Lato', Helvetica, Arial, sans-serif; line-height: 1.2;">Appointment Confirmed ✓</h1>
+                        <p style="margin: 0; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 16px; color: #2d5f5d; font-weight: 400;">Your ${serviceName} is all set.</p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
 <div style="background: #fff; padding: 40px; margin: 0 auto; max-width: 600px; box-shadow: 0 4px 12px rgba(0,128,129,0.08);">
   <p style="font-size: 18px; color: #333;">Hello <strong style="color: #008081;">${clientName}</strong>,</p>
   <p style="font-size: 16px; color: #666; line-height: 26px;">We're looking forward to meeting with you. Here are your appointment details:</p>
@@ -198,9 +224,56 @@ function buildConfirmationHtml(params: {
     <a href="${cancelUrl}" style="color: #ef4444; text-decoration: none; font-weight: 600;">Cancel</a>
   </p>
 </div>
-<div style="text-align: center; padding: 30px 40px; max-width: 600px; margin: 0 auto;">
-  <p style="color: #666; font-size: 14px; margin: 0 0 8px;">Best regards,<br><strong style="color: #008081;">The InspecQ Team</strong></p>
-  <p style="color: #aaa; font-size: 11px; margin: 16px 0 0;">© ${new Date().getFullYear()} InspecQ. All rights reserved.</p>
-</div>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <!-- FOOTER -->
+    <tr>
+        <td bgcolor="#f8fffe" align="center" style="padding: 20px 10px 20px 10px;">
+            <table border="0" cellpadding="0" cellspacing="0" width="600" >
+              <tr>
+                <td align="center" style="padding: 0px 40px 15px 40px; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 16px; color: #666666; line-height: 24px;" >
+                  <p style="margin: 0;">We look forward to contributing to your product's success.</p>
+                </td>
+              </tr>
+              <tr>
+                <td align="center" style="padding: 0px 40px 20px 40px; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 16px; color: #333333; line-height: 24px; font-weight: 700;" >
+                  <p style="margin: 0;">Best Regards,<br><span style="color: #008081;">The InspecQ Team</span></p>
+                </td>
+              </tr>
+              
+              <!-- SOCIAL LINKS -->
+              <tr>
+                <td align="center" style="padding: 20px 40px; border-top: 1px solid #e0e0e0;">
+                  <table cellpadding="0" cellspacing="0" border="0" align="center">
+                    <tr>
+                      <td style="padding: 0 10px;">
+                        <a href="https://www.inspecq.com" style="color: #008080; text-decoration: none; font-weight: 500; font-size: 14px; font-family: 'Lato', Helvetica, Arial, sans-serif;">Website</a>
+                      </td>
+                      <td style="color: #cbd5e1;">|</td>
+                      <td style="padding: 0 10px;">
+                        <a href="https://www.linkedin.com/company/qainspec/" style="color: #008080; text-decoration: none; font-weight: 500; font-size: 14px; font-family: 'Lato', Helvetica, Arial, sans-serif;">LinkedIn</a>
+                      </td>
+                      <td style="color: #cbd5e1;">|</td>
+                      <td style="padding: 0 10px;">
+                        <a href="https://www.facebook.com/qainspec" style="color: #008080; text-decoration: none; font-weight: 500; font-size: 14px; font-family: 'Lato', Helvetica, Arial, sans-serif;">Facebook</a>
+                      </td>
+                      <td style="color: #cbd5e1;">|</td>
+                      <td style="padding: 0 10px;">
+                        <a href="https://x.com/qainspec" style="color: #008080; text-decoration: none; font-weight: 500; font-size: 14px; font-family: 'Lato', Helvetica, Arial, sans-serif;">Twitter</a>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              
+              <!-- ADDRESS & COPYRIGHT -->
+              <tr>
+                <td align="center" style="padding: 0px 40px 20px 40px; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 13px; color: #999999; line-height: 20px;" >
+                  <p style="margin: 0; font-size: 11px; color: #aaa;">© ${new Date().getFullYear()} InspecQ. All rights reserved.</p>
+                </td>
+              </tr>
+            </table>
+        </td>
+    </tr>
+</table>
 </body></html>`;
 }

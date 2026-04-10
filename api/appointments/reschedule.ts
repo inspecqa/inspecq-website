@@ -144,9 +144,34 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         subject: `Rescheduled: ${svc.name} with InspecQ`,
         text: `Hi ${appointment.client_name},\n\nYour ${svc.name} has been rescheduled.\n\nNew Date: ${formattedDate}\nNew Time: ${formattedTime}\nDuration: ${svc.duration_minutes} minutes\n\nReschedule again: ${baseUrl}/appointment/reschedule/${appointment.reschedule_token}\nCancel: ${baseUrl}/appointment/cancel/${appointment.cancel_token}\n\nBest regards,\nThe InspecQ Team`,
         html: `<!DOCTYPE html><html><head><meta charset="utf-8"></head><body style="font-family: 'Lato', Helvetica, Arial, sans-serif; background: #f8fffe; margin: 0; padding: 0;">
-<div style="background: linear-gradient(135deg, #eff6ff 0%, #bfdbfe 100%); padding: 40px; text-align: center;">
-  <h1 style="color: #1d4ed8; font-size: 28px; margin: 0;">Appointment Rescheduled</h1>
-</div>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+ <!-- HERO SECTION WITH LOGO -->
+    <tr>
+        <td align="center" style="padding: 0px 10px 0px 10px; background: linear-gradient(135deg, #eff6ff 0%, #bfdbfe 100%);">
+            <table border="0" cellpadding="0" cellspacing="0" width="600" >
+                <tr>
+                    <td align="center" style="padding: 50px 40px 30px 40px;">
+                        <!-- Logo and Brand -->
+                        <table border="0" cellpadding="0" cellspacing="0" style="margin: 0 auto 30px auto;">
+                            <tr>
+                                <td align="center" valign="middle" style="padding-right: 16px;">
+                                    <a href="https://inspecq.com" target="_blank">
+                                        <img alt="InspecQ" src="https://tzmp2b268dae69si.public.blob.vercel-storage.com/Logo%40300x.png" width="60" height="60" style="display: block; font-family: 'Lato', Helvetica, Arial, sans-serif;" border="0">
+                                    </a>
+                                </td>
+                                <td align="left" valign="middle">
+                                    <div style="color: #1d4ed8; font-size: 24px; font-weight: 700; letter-spacing: 0.03em; margin-bottom: 4px; font-family: 'Lato', Helvetica, Arial, sans-serif;">InspecQ</div>
+                                    <div style="color: #1d4ed8; font-size: 13px; font-weight: 500; font-family: 'Lato', Helvetica, Arial, sans-serif;">Built to Inspect. Powered by Quality.</div>
+                                </td>
+                            </tr>
+                        </table>
+                        <h1 style="font-size: 28px; font-weight: 700; margin: 0; color: #1d4ed8; font-family: 'Lato', Helvetica, Arial, sans-serif; line-height: 1.2;">Appointment Rescheduled</h1>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
 <div style="background: #fff; padding: 40px; max-width: 600px; margin: 0 auto;">
   <p style="font-size: 16px; color: #333;">Hello <strong>${appointment.client_name}</strong>,</p>
   <p style="font-size: 15px; color: #666; line-height: 24px;">Your <strong>${svc.name}</strong> has been rescheduled to a new time:</p>
@@ -158,7 +183,57 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   <p style="font-size: 14px; color: #999; margin: 24px 0 8px;">Need to change again?</p>
   <p><a href="${baseUrl}/appointment/reschedule/${appointment.reschedule_token}" style="color: #0d9488; font-weight: 600;">Reschedule</a> <span style="color: #ccc; margin: 0 8px;">|</span> <a href="${baseUrl}/appointment/cancel/${appointment.cancel_token}" style="color: #ef4444; font-weight: 600;">Cancel</a></p>
 </div>
-<div style="text-align: center; padding: 20px;"><p style="color: #aaa; font-size: 11px;">© ${new Date().getFullYear()} InspecQ. All rights reserved.</p></div>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <!-- FOOTER -->
+    <tr>
+        <td bgcolor="#f8fffe" align="center" style="padding: 20px 10px 20px 10px;">
+            <table border="0" cellpadding="0" cellspacing="0" width="600" >
+              <tr>
+                <td align="center" style="padding: 0px 40px 15px 40px; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 16px; color: #666666; line-height: 24px;" >
+                  <p style="margin: 0;">We look forward to contributing to your product's success.</p>
+                </td>
+              </tr>
+              <tr>
+                <td align="center" style="padding: 0px 40px 20px 40px; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 16px; color: #333333; line-height: 24px; font-weight: 700;" >
+                  <p style="margin: 0;">Best Regards,<br><span style="color: #008081;">The InspecQ Team</span></p>
+                </td>
+              </tr>
+              
+              <!-- SOCIAL LINKS -->
+              <tr>
+                <td align="center" style="padding: 20px 40px; border-top: 1px solid #e0e0e0;">
+                  <table cellpadding="0" cellspacing="0" border="0" align="center">
+                    <tr>
+                      <td style="padding: 0 10px;">
+                        <a href="https://www.inspecq.com" style="color: #008080; text-decoration: none; font-weight: 500; font-size: 14px; font-family: 'Lato', Helvetica, Arial, sans-serif;">Website</a>
+                      </td>
+                      <td style="color: #cbd5e1;">|</td>
+                      <td style="padding: 0 10px;">
+                        <a href="https://www.linkedin.com/company/qainspec/" style="color: #008080; text-decoration: none; font-weight: 500; font-size: 14px; font-family: 'Lato', Helvetica, Arial, sans-serif;">LinkedIn</a>
+                      </td>
+                      <td style="color: #cbd5e1;">|</td>
+                      <td style="padding: 0 10px;">
+                        <a href="https://www.facebook.com/qainspec" style="color: #008080; text-decoration: none; font-weight: 500; font-size: 14px; font-family: 'Lato', Helvetica, Arial, sans-serif;">Facebook</a>
+                      </td>
+                      <td style="color: #cbd5e1;">|</td>
+                      <td style="padding: 0 10px;">
+                        <a href="https://x.com/qainspec" style="color: #008080; text-decoration: none; font-weight: 500; font-size: 14px; font-family: 'Lato', Helvetica, Arial, sans-serif;">Twitter</a>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              
+              <!-- ADDRESS & COPYRIGHT -->
+              <tr>
+                <td align="center" style="padding: 0px 40px 20px 40px; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 13px; color: #999999; line-height: 20px;" >
+                  <p style="margin: 0; font-size: 11px; color: #aaa;">© ${new Date().getFullYear()} InspecQ. All rights reserved.</p>
+                </td>
+              </tr>
+            </table>
+        </td>
+    </tr>
+</table>
 </body></html>`,
         ...(icsContent ? { attachments: [{ filename: 'appointment.ics', content: icsContent, contentType: 'text/calendar' }] } : {}),
       });
