@@ -104,11 +104,12 @@ export default function CancelAppointment() {
         <p className="text-center text-gray-600 mb-6">Are you sure you want to cancel your <strong className="text-gray-900">{appointment?.service_types?.name}</strong>?</p>
         
         <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700 mb-2">Reason for cancellation (optional)</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">Reason for cancellation</label>
           <textarea
             rows={3}
             value={reason}
             onChange={(e) => setReason(e.target.value)}
+            required
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 resize-none"
             placeholder="Let us know why you're cancelling..."
           ></textarea>
