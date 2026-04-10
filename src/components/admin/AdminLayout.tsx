@@ -1,8 +1,8 @@
 import React from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import {
-  LayoutDashboard, Users, Mail, Settings, LogOut,
-  Menu, X, FileText, Briefcase, BookOpen, Activity, FlaskConical, Target, Send, LayoutTemplate, Megaphone
+  LayoutDashboard, Users, Mail, Settings, LogOut, FolderTree,
+  Menu, X, FileText, Briefcase, BookOpen, Activity, FlaskConical, Target, Send, LayoutTemplate, Megaphone, Calendar, Clock, BarChart3
 } from "lucide-react";
 import { supabase } from "../../lib/supabaseClient";
 import inspecqLogo from "../../assets/logo.png"
@@ -21,7 +21,9 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
 
   const navigation = [
     { name: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard, exact: true },
+    { name: "Directory", href: "/admin/directory", icon: FolderTree },
     { name: "Leads CRM", href: "/admin/leads", icon: Target },
+    { name: "Scorecard Leads", href: "/admin/scorecard-leads", icon: BarChart3 },
     { name: "Proposals", href: "/admin/proposals", icon: Send },
     { name: "Cold Campaigns", href: "/admin/cold-emails", icon: Megaphone },
     { name: "Templates", href: "/admin/templates", icon: LayoutTemplate },
@@ -33,6 +35,12 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
     { name: "Blog", href: "/admin/blog", icon: BookOpen },
     { name: "Activity", href: "/admin/activity", icon: Activity },
     { name: "Settings", href: "/admin/settings", icon: Settings },
+  ];
+
+  const schedulingNav = [
+    { name: "Appointments", href: "/admin/scheduling", icon: Calendar, exact: true },
+    { name: "Services", href: "/admin/scheduling/services", icon: LayoutTemplate },
+    { name: "Availability", href: "/admin/scheduling/availability", icon: Clock },
   ];
 
   const isActive = (item: typeof navigation[0]) => {
@@ -60,6 +68,21 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
         <nav className="mt-4 px-3 flex-1 overflow-y-auto">
           <ul className="space-y-1">
             {navigation.map(item => (
+              <li key={item.name}>
+                <Link to={item.href} onClick={() => setSidebarOpen(false)}
+                  className={`flex items-center space-x-3 px-3 py-2.5 rounded-lg transition-colors duration-150 text-sm ${isActive(item) ? "bg-teal-50 text-teal-700 font-semibold border-r-2 border-teal-600" : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"}`}>
+                  <item.icon className="h-4 w-4 shrink-0" />
+                  <span>{item.name}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-8 mb-4 px-3 text-xs font-semibold text-gray-400 uppercase tracking-wider">
+            Scheduling
+          </div>
+          <ul className="space-y-1">
+            {schedulingNav.map(item => (
               <li key={item.name}>
                 <Link to={item.href} onClick={() => setSidebarOpen(false)}
                   className={`flex items-center space-x-3 px-3 py-2.5 rounded-lg transition-colors duration-150 text-sm ${isActive(item) ? "bg-teal-50 text-teal-700 font-semibold border-r-2 border-teal-600" : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"}`}>

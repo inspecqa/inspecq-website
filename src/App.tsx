@@ -26,6 +26,7 @@ import Careers from "./pages/Careers";
 import Blog from "./pages/Blog";
 import Resources from "./pages/Resources";
 import Pricing from "./pages/Pricing";
+import QAScorecard from "./pages/tools/QAScorecard";
 import QAConsultingAudits from "./pages/services/QAConsultingAudits";
 import { BestPracticesPage } from "./pages/BestPracticesPage";
 import { BestPracticeDetailPage } from "./pages/BestPracticeDetailPage";
@@ -58,6 +59,7 @@ import AdminActivityLog from "./pages/admin/ActivityLog";
 import AdminLeadsList from "./pages/admin/LeadsList";
 import AdminLeadForm from "./pages/admin/LeadForm";
 import AdminLeadDetail from "./pages/admin/LeadDetail";
+import ScorecardLeads from "./pages/admin/ScorecardLeads";
 import AdminProposalsList from "./pages/admin/ProposalsList";
 import AdminProposalComposer from "./pages/admin/ProposalComposer";
 import AdminProposalDetail from "./pages/admin/ProposalDetail";
@@ -67,7 +69,15 @@ import AdminColdCampaignsList from "./pages/admin/ColdCampaignsList";
 import AdminColdCampaignComposer from "./pages/admin/ColdCampaignComposer";
 import AdminColdTemplatesList from "./pages/admin/ColdTemplatesList";
 import AdminColdTemplateEditor from "./pages/admin/ColdTemplateEditor";
+import AdminDirectory from "./pages/admin/Directory";
+import SchedulingDashboard from "./pages/admin/Scheduling";
+import SchedulingServices from "./pages/admin/SchedulingServices";
+import SchedulingAvailability from "./pages/admin/SchedulingAvailability";
 import ProtectedRoute from "./components/admin/ProtectedRoute";
+
+import BookAppointment from "./pages/appointment/BookAppointment";
+import CancelAppointment from "./pages/appointment/CancelAppointment";
+import RescheduleAppointment from "./pages/appointment/RescheduleAppointment";
 
 ReactGA.initialize("G-9TZBKJLD0P");
 
@@ -106,8 +116,22 @@ function App() {
     return <Maintenance />;
   }
 
-  // Check if we're on an admin route
+  // Check if we're on a standalone route (no public Header/Footer)
   const isAdminRoute = location.pathname.startsWith("/admin");
+  const isBookingRoute =
+    location.pathname === "/book" ||
+    location.pathname.startsWith("/appointment/");
+
+  // Booking routes render standalone — own branded layout
+  if (isBookingRoute) {
+    return (
+      <Routes>
+        <Route path="/book" element={<BookAppointment />} />
+        <Route path="/appointment/reschedule/:token" element={<RescheduleAppointment />} />
+        <Route path="/appointment/cancel/:token" element={<CancelAppointment />} />
+      </Routes>
+    );
+  }
 
   // Admin routes render standalone — no public Header/Footer
   if (isAdminRoute) {
@@ -119,6 +143,14 @@ function App() {
           element={
             <ProtectedRoute>
               <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/directory"
+          element={
+            <ProtectedRoute>
+              <AdminDirectory />
             </ProtectedRoute>
           }
         />
@@ -143,6 +175,14 @@ function App() {
           element={
             <ProtectedRoute>
               <AdminLeadDetail />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/scorecard-leads"
+          element={
+            <ProtectedRoute>
+              <ScorecardLeads />
             </ProtectedRoute>
           }
         />
@@ -316,14 +356,29 @@ function App() {
           path="/admin/activity"
           element={<ProtectedRoute><AdminActivityLog /></ProtectedRoute>}
         />
+        <Route
+          path="/admin/scheduling"
+          element={<ProtectedRoute><SchedulingDashboard /></ProtectedRoute>}
+        />
+        <Route
+          path="/admin/scheduling/services"
+          element={<ProtectedRoute><SchedulingServices /></ProtectedRoute>}
+        />
+        <Route
+          path="/admin/scheduling/availability"
+          element={<ProtectedRoute><SchedulingAvailability /></ProtectedRoute>}
+        />
         <Route path="/admin/*" element={<AdminLogin />} />
       </Routes>
     );
   }
 
+  // Check if we want to hide the header
+  const isScorecardRoute = location.pathname.startsWith("/tools/qa-scorecard");
+
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
+      {!isScorecardRoute && <Header />}
 
       <main className="flex-1">
         <Routes>
@@ -365,6 +420,10 @@ function App() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/pricing" element={<Pricing />} />
+
+          {/* Tools */}
+          <Route path="/tools/qa-scorecard" element={<QAScorecard />} />
+
 
           {/* Best Practices */}
           <Route path="/best-practices" element={<BestPracticesWrapper />} />
