@@ -25,7 +25,7 @@ export const questions: Question[] = [
     cat: "Test coverage",
     text: "How much of your core user journeys are covered by automated tests?",
     opts: [
-      ["None — we rely entirely on manual testing", 0],
+      ["None - we rely entirely on manual testing", 0],
       ["Some critical paths have tests, but coverage is sparse", 1],
       ["Most happy paths are covered, edge cases are not", 2],
       ["Comprehensive coverage including edge cases and error states", 3],
@@ -35,7 +35,7 @@ export const questions: Question[] = [
     cat: "Test coverage",
     text: "Do you have a documented list of what needs to be tested before each release?",
     opts: [
-      ["No formal list — testers use their own judgment", 0],
+      ["No formal list - testers use their own judgment", 0],
       ["An informal checklist exists but it's not always followed", 1],
       ["A defined checklist exists and is used consistently", 2],
       ["A living test plan tied to product requirements and updated per sprint", 3],
@@ -45,7 +45,7 @@ export const questions: Question[] = [
     cat: "Test coverage",
     text: "How is API testing handled in your product?",
     opts: [
-      ["It's not tested separately — we rely on UI tests", 0],
+      ["It's not tested separately - we rely on UI tests", 0],
       ["Some manual Postman/curl checks on major endpoints", 1],
       ["Automated API tests exist for core endpoints", 2],
       ["Comprehensive API test suite with contract testing and edge cases", 3],
@@ -65,7 +65,7 @@ export const questions: Question[] = [
     cat: "Automation",
     text: "What percentage of your regression tests are automated?",
     opts: [
-      ["0% — all regression is manual", 0],
+      ["0% - all regression is manual", 0],
       ["Less than 25%", 1],
       ["25–75%", 2],
       ["More than 75%", 3],
@@ -75,8 +75,8 @@ export const questions: Question[] = [
     cat: "Automation",
     text: "How reliable are your automated tests? (flakiness rate)",
     opts: [
-      ["Very unreliable — tests fail randomly and are often ignored", 0],
-      ["Somewhat flaky — we accept some false failures", 1],
+      ["Very unreliable - tests fail randomly and are often ignored", 0],
+      ["Somewhat flaky - we accept some false failures", 1],
       ["Mostly reliable — occasional flakiness is investigated", 2],
       ["Highly reliable — flaky tests are blocked from merging", 3],
     ],
@@ -115,7 +115,7 @@ export const questions: Question[] = [
     cat: "Process",
     text: "How are bugs tracked and prioritized?",
     opts: [
-      ["Informally — Slack messages or sticky notes", 0],
+      ["Informally - Slack messages or sticky notes", 0],
       ["Basic ticketing (Jira/Linear) but no severity framework", 1],
       ["Structured bug reports with severity/priority classification", 2],
       ["Full triage process with SLA targets for each severity level", 3],
@@ -145,7 +145,7 @@ export const questions: Question[] = [
     cat: "Security & compliance",
     text: "How is security testing conducted for your product?",
     opts: [
-      ["Not done — we rely on the developer not writing vulnerabilities", 0],
+      ["Not done - we rely on the developer not writing vulnerabilities", 0],
       ["Occasional manual checks or third-party pen tests", 1],
       ["Automated SAST/DAST scanning in the pipeline", 2],
       ["Regular pen testing plus automated scanning plus security test cases", 3],
@@ -195,7 +195,7 @@ export const questions: Question[] = [
     cat: "Team & culture",
     text: "Does your team have a dedicated QA engineer or QA function?",
     opts: [
-      ["No — developers self-test their own code", 0],
+      ["No - developers self-test their own code", 0],
       ["Shared responsibility — everyone does some QA", 1],
       ["One QA engineer for the whole team", 2],
       ["A dedicated QA function with clear ownership and processes", 3],
@@ -205,7 +205,7 @@ export const questions: Question[] = [
     cat: "Team & culture",
     text: "How is QA knowledge shared and documented in your team?",
     opts: [
-      ["It's not — knowledge lives in people's heads", 0],
+      ["It's not - knowledge lives in people's heads", 0],
       ["Some notes exist but aren't maintained", 1],
       ["A QA wiki or runbook exists and is updated occasionally", 2],
       ["Comprehensive, living documentation maintained as part of sprints", 3],
