@@ -381,7 +381,7 @@ export default function BookAppointment() {
                            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                              <User className="w-4 h-4" />
                            </div>
-                          <input required type="text" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all outline-none text-slate-900 font-medium placeholder:font-normal placeholder:text-slate-400" placeholder="Jane Doe" />
+                          <input required type="text" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all outline-none text-slate-900 font-medium placeholder:font-normal placeholder:text-slate-400" placeholder="Your Name" />
                         </div>
                       </div>
                       <div className="relative">
@@ -390,7 +390,7 @@ export default function BookAppointment() {
                            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                              <Mail className="w-4 h-4" />
                            </div>
-                          <input required type="email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all outline-none text-slate-900 font-medium placeholder:font-normal placeholder:text-slate-400" placeholder="jane@company.com" />
+                          <input required type="email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all outline-none text-slate-900 font-medium placeholder:font-normal placeholder:text-slate-400" placeholder="mail@domain.com" />
                         </div>
                       </div>
                     </div>
@@ -401,7 +401,7 @@ export default function BookAppointment() {
                            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                              <Briefcase className="w-4 h-4" />
                            </div>
-                          <input type="text" value={formData.company} onChange={e => setFormData({...formData, company: e.target.value})} className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all outline-none text-slate-900 font-medium placeholder:font-normal placeholder:text-slate-400" placeholder="Acme Corp (Optional)" />
+                          <input type="text" value={formData.company} onChange={e => setFormData({...formData, company: e.target.value})} className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all outline-none text-slate-900 font-medium placeholder:font-normal placeholder:text-slate-400" placeholder="Your Company" />
                         </div>
                       </div>
                       <div className="relative">
@@ -410,7 +410,7 @@ export default function BookAppointment() {
                            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                              <Hash className="w-4 h-4" />
                            </div>
-                          <input type="tel" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all outline-none text-slate-900 font-medium placeholder:font-normal placeholder:text-slate-400" placeholder="+1 (555) 000-0000" />
+                          <input type="tel" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-all outline-none text-slate-900 font-medium placeholder:font-normal placeholder:text-slate-400" placeholder="Your Phone Number" />
                         </div>
                       </div>
                     </div>
