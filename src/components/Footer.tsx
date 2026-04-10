@@ -385,7 +385,7 @@ const Footer = () => {
           </p>
 
           <div className="flex items-center gap-4 mt-2 md:mt-0">
-    <a href="/legal/privacy-policy" className="xs-regular text-slate-500 hover:text-slate-300 transition-colors">
+    <a href="/legal/terms-and-conditions" className="xs-regular text-slate-500 hover:text-slate-300 transition-colors">
       Terms & Conditions
     </a>
     <span className="text-slate-700">·</span>
