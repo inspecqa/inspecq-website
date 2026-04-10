@@ -276,7 +276,7 @@ const PricingPage: React.FC = () => {
               </Link>
 
               <a
-                href="https://inspecq.setmore.com/services/4c63bef3-c31c-4c49-b3e9-916c27fde40a"
+                href="/book?service=30-minutes-meeting"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-white text-teal-900 w-full sm:w-auto px-6 py-3 sm:px-8 sm:py-4 rounded-xl font-semibold text-sm sm:text-base transition-colors duration-200 flex items-center justify-center space-x-2"
@@ -654,7 +654,7 @@ const PricingPage: React.FC = () => {
 
                 <div className="flex flex-wrap gap-4">
                   <a
-                    href="https://inspecq.setmore.com/services/4c63bef3-c31c-4c49-b3e9-916c27fde40a"
+                    href="/book?service=30-minutes-meeting"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center rounded-full bg-white text-teal-900 px-8 py-4 text-base font-bold shadow-lg hover:bg-teal-50 transition transform hover:-translate-y-1"

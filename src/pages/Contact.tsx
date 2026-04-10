@@ -304,7 +304,7 @@ const Contact: React.FC = () => {
         "Schedule a 30-minute strategy session with our QA specialists.",
       action: "Book Now",
       color: "bg-teal-500",
-      href: "https://inspecq.setmore.com/services/4c63bef3-c31c-4c49-b3e9-916c27fde40a",
+      href: "/book",
     },
   ] as const;
 

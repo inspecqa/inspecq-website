@@ -346,7 +346,7 @@ const FreeTrial: React.FC = () => {
             name: formData.name,
             email: formData.email,
             calendlyLink:
-              "https://inspecq.setmore.com/services/7783a65f-1ac3-4416-af5e-4c60832584e5",
+              "/book",
           }),
         });
       } catch (err) {

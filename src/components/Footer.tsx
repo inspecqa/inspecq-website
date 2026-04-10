@@ -10,22 +10,23 @@ import { supabase } from "../lib/supabaseClient";
 const services = [
   { name: "Functional Testing", path: "/services/functional-testing" },
   { name: "Test Automation", path: "/services/test-automation" },
+  { name: "API Testing", path: "/services/api-testing" },
   { name: "Performance Testing", path: "/services/performance-testing" },
   { name: "Mobile Testing", path: "/services/mobile-testing" },
-  { name: "API Testing", path: "/services/api-testing" },
   { name: "Security Testing", path: "/services/security-testing" },
   { name: "QA Consulting & Audits", path: "/services/qa-consulting-audits" },
 ];
 
 const company = [
   { name: "About", path: "/about" },
-  { name: "Solutions", path: "/solutions" },
   { name: "Pricing", path: "/pricing" },
+  { name: "Solutions", path: "/solutions" },
+  // { name: "Case Studies", path: "/case-studies" },
+  // { name: "Blog", path: "/blog" },
 ];
 
-const quicklinks = [
-  { name: "Terms & Conditions", path: "/legal/terms-and-conditions" },
-  { name: "Privacy Policy", path: "/legal/privacy-policy" },
+const tools = [
+  { name: "QA Scorecard", path: "/tools/qa-scorecard" },
 ];
 
 const Footer = () => {
@@ -194,10 +195,9 @@ const Footer = () => {
               <img src={footerLogo} alt="InspecQ" className="h-9 w-auto mb-2" />
             </Link>
 
-            <p className="mt-4 body-regular text-white max-w-md leading-relaxed">
+            <p className="mt-2 body-regular text-white max-w-md leading-relaxed">
               Built to Inspect. Powered by Quality. <br />
-              We&apos;re a QA agency bringing industry expertise to deliver
-              exceptional software testing services.
+              We help teams to ship products with confidence.
             </p>
 
             <div className="mt-6 flex items-center gap-4">
@@ -330,11 +330,11 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Quick Links */}
+          {/* Tools */}
           <div>
-            <h5>Quick Links</h5>
+            <h5>Tools</h5>
             <ul className="space-y-3 mt-4">
-              {quicklinks.map((q) => (
+              {tools.map((q) => (
                 <li key={q.name}>
                   <Link
                     to={q.path}
@@ -365,7 +365,7 @@ const Footer = () => {
               <li className="flex items-start gap-3">
                 <CalendarCheck className="h-5 w-5 text-slate-400 mt-0.5" />
                 <a
-                  href="https://inspecq.setmore.com/services/4c63bef3-c31c-4c49-b3e9-916c27fde40a"
+                  href="/book?service=30-minutes-meeting"
                   target="_blank"
                   rel="noreferrer"
                   className="body-regular hover:text-white transition-colors"
@@ -379,10 +379,20 @@ const Footer = () => {
 
         {/* Bottom bar */}
         <hr className="mt-10 md:mt-12 border-slate-800" />
-        <div className="py-4 mt-2 flex flex-col md:flex-row items-center justify-center text-sm">
+        <div className="py-4 mt-2 flex flex-col md:flex-row items-center justify-between text-sm">
           <p className="xs-regular text-slate-200">
             © 2026 InspecQ | All Rights Reserved
           </p>
+
+          <div className="flex items-center gap-4 mt-2 md:mt-0">
+    <a href="/legal/privacy-policy" className="xs-regular text-slate-500 hover:text-slate-300 transition-colors">
+      Terms & Conditions
+    </a>
+    <span className="text-slate-700">·</span>
+    <a href="/legal/privacy-policy" className="xs-regular text-slate-500 hover:text-slate-300 transition-colors">
+      Privacy Policy
+    </a>
+  </div>
         </div>
       </div>
     </footer>

@@ -515,7 +515,7 @@ function AutomationTesting() {
                 </p>
 
                 <a
-                  href="https://inspecq.setmore.com/services/4c63bef3-c31c-4c49-b3e9-916c27fde40a"
+                  href="/book?service=30-minutes-meeting"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-text mt-8 sm:mt-10 inline-flex items-center rounded-full bg-white border border-buttonBorder text-slate-900 px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base md:text-lg font-medium shadow-md hover:shadow-lg transition"

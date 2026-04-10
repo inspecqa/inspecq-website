@@ -36,7 +36,7 @@ const Hero = () => {
             </Link>
 
             <a
-              href="https://inspecq.setmore.com/services/4c63bef3-c31c-4c49-b3e9-916c27fde40a"
+              href="/book?service=30-minutes-meeting"
               className="inline-flex items-center justify-center px-6 py-3 rounded-full border others-buttonBorder bg-white text-gray-700 hover:bg-gray-50 transition-colors btn-text"
             >
               <span className="whitespace-nowrap">Book Free QA Session</span>

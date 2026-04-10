@@ -896,3 +896,244 @@ export async function getColdEmails(campaignId: string): Promise<ColdEmail[]> {
     if (error) throw error;
     return data ?? [];
 }
+
+// ──────────────────────────────────────────────
+// Scheduling — Types
+// ──────────────────────────────────────────────
+export interface ServiceType {
+    id: string;
+    name: string;
+    description?: string;
+    duration_minutes: number;
+    color: string;
+    is_active: boolean;
+    sort_order: number;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface AvailabilityRule {
+    id: string;
+    service_type_id?: string;
+    day_of_week: number;
+    start_time: string;
+    end_time: string;
+    is_active: boolean;
+    created_at: string;
+}
+
+export interface AvailabilityOverride {
+    id: string;
+    override_date: string;
+    is_blocked: boolean;
+    start_time?: string;
+    end_time?: string;
+    reason?: string;
+    created_at: string;
+}
+
+export interface Appointment {
+    id: string;
+    service_type_id: string;
+    client_name: string;
+    client_email: string;
+    client_company?: string;
+    client_phone?: string;
+    client_message?: string;
+    start_time: string;
+    end_time: string;
+    client_timezone: string;
+    status: string;
+    reschedule_token: string;
+    cancel_token: string;
+    cancellation_reason?: string;
+    lead_id?: string;
+    created_at: string;
+    updated_at: string;
+    service_types?: ServiceType;
+}
+
+export interface SchedulingSettings {
+    id: string;
+    buffer_minutes: number;
+    max_advance_days: number;
+    min_advance_hours: number;
+    admin_timezone: string;
+    auto_confirm: boolean;
+    notification_prefs: Record<string, boolean>;
+    updated_at: string;
+}
+
+// ──────────────────────────────────────────────
+// Service Types CRUD
+// ──────────────────────────────────────────────
+export async function getServiceTypes(activeOnly = false): Promise<ServiceType[]> {
+    if (!supabase) throw new Error("Supabase not configured");
+    let q = supabase.from("service_types").select("*").order("sort_order", { ascending: true });
+    if (activeOnly) q = q.eq("is_active", true);
+    const { data, error } = await q;
+    if (error) throw error;
+    return data ?? [];
+}
+
+export async function getServiceType(id: string): Promise<ServiceType | null> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { data, error } = await supabase.from("service_types").select("*").eq("id", id).single();
+    if (error) throw error;
+    return data;
+}
+
+export async function createServiceType(svc: Omit<ServiceType, "id" | "created_at" | "updated_at">): Promise<ServiceType> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { data, error } = await supabase.from("service_types").insert([svc]).select().single();
+    if (error) throw error;
+    return data;
+}
+
+export async function updateServiceType(id: string, updates: Partial<ServiceType>): Promise<void> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { error } = await supabase.from("service_types").update(updates).eq("id", id);
+    if (error) throw error;
+}
+
+export async function deleteServiceType(id: string): Promise<void> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { error } = await supabase.from("service_types").delete().eq("id", id);
+    if (error) throw error;
+}
+
+// ──────────────────────────────────────────────
+// Availability Rules CRUD
+// ──────────────────────────────────────────────
+export async function getAvailabilityRules(): Promise<AvailabilityRule[]> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { data, error } = await supabase.from("availability_rules").select("*").order("day_of_week", { ascending: true });
+    if (error) throw error;
+    return data ?? [];
+}
+
+export async function upsertAvailabilityRules(rules: Omit<AvailabilityRule, "id" | "created_at">[]): Promise<void> {
+    if (!supabase) throw new Error("Supabase not configured");
+    // Delete all existing rules and replace
+    await supabase.from("availability_rules").delete().neq("id", "00000000-0000-0000-0000-000000000000");
+    if (rules.length > 0) {
+        const { error } = await supabase.from("availability_rules").insert(rules);
+        if (error) throw error;
+    }
+}
+
+// ──────────────────────────────────────────────
+// Availability Overrides CRUD
+// ──────────────────────────────────────────────
+export async function getAvailabilityOverrides(): Promise<AvailabilityOverride[]> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { data, error } = await supabase.from("availability_overrides").select("*").order("override_date", { ascending: true });
+    if (error) throw error;
+    return data ?? [];
+}
+
+export async function createAvailabilityOverride(override: Omit<AvailabilityOverride, "id" | "created_at">): Promise<AvailabilityOverride> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { data, error } = await supabase.from("availability_overrides").insert([override]).select().single();
+    if (error) throw error;
+    return data;
+}
+
+export async function deleteAvailabilityOverride(id: string): Promise<void> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { error } = await supabase.from("availability_overrides").delete().eq("id", id);
+    if (error) throw error;
+}
+
+// ──────────────────────────────────────────────
+// Appointments CRUD
+// ──────────────────────────────────────────────
+export async function getAppointments(filters?: {
+    status?: string;
+    startDate?: string;
+    endDate?: string;
+    serviceTypeId?: string;
+}): Promise<Appointment[]> {
+    if (!supabase) throw new Error("Supabase not configured");
+    let q = supabase.from("appointments").select("*, service_types(*)").order("start_time", { ascending: false });
+    if (filters?.status) q = q.eq("status", filters.status);
+    if (filters?.startDate) q = q.gte("start_time", filters.startDate);
+    if (filters?.endDate) q = q.lte("start_time", filters.endDate);
+    if (filters?.serviceTypeId) q = q.eq("service_type_id", filters.serviceTypeId);
+    const { data, error } = await q;
+    if (error) throw error;
+    return data ?? [];
+}
+
+export async function getAppointment(id: string): Promise<Appointment | null> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { data, error } = await supabase.from("appointments").select("*, service_types(*)").eq("id", id).single();
+    if (error) throw error;
+    return data;
+}
+
+export async function updateAppointmentStatus(id: string, status: string, cancellationReason?: string): Promise<void> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const updates: Record<string, unknown> = { status };
+    if (cancellationReason) updates.cancellation_reason = cancellationReason;
+    const { error } = await supabase.from("appointments").update(updates).eq("id", id);
+    if (error) throw error;
+}
+
+export async function deleteAppointment(id: string): Promise<void> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { error } = await supabase.from("appointments").delete().eq("id", id);
+    if (error) throw error;
+}
+
+export async function getAppointmentsByDateRange(start: string, end: string): Promise<Appointment[]> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { data, error } = await supabase.from("appointments")
+        .select("*, service_types(*)")
+        .gte("start_time", start)
+        .lte("start_time", end)
+        .order("start_time", { ascending: true });
+    if (error) throw error;
+    return data ?? [];
+}
+
+// ──────────────────────────────────────────────
+// Scheduling Settings
+// ──────────────────────────────────────────────
+export async function getSchedulingSettings(): Promise<SchedulingSettings | null> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { data, error } = await supabase.from("scheduling_settings").select("*").limit(1).single();
+    if (error) throw error;
+    return data;
+}
+
+export async function updateSchedulingSettings(updates: Partial<SchedulingSettings>): Promise<void> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { data: existing } = await supabase.from("scheduling_settings").select("id").limit(1).single();
+    if (existing) {
+        const { error } = await supabase.from("scheduling_settings").update(updates).eq("id", existing.id);
+        if (error) throw error;
+    }
+}
+
+// ──────────────────────────────────────────────
+// Scheduling Analytics
+// ──────────────────────────────────────────────
+export async function getAppointmentStats(): Promise<{
+    total: number;
+    confirmed: number;
+    completed: number;
+    cancelled: number;
+    noShow: number;
+}> {
+    if (!supabase) throw new Error("Supabase not configured");
+    const { data } = await supabase.from("appointments").select("status");
+    const all = data ?? [];
+    return {
+        total: all.length,
+        confirmed: all.filter(a => a.status === "confirmed").length,
+        completed: all.filter(a => a.status === "completed").length,
+        cancelled: all.filter(a => a.status === "cancelled").length,
+        noShow: all.filter(a => a.status === "no_show").length,
+    };
+}

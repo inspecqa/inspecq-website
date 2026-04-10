@@ -41,7 +41,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     const safeName = typeof name === 'string' && name.trim().length ? name.trim() : 'there';
-    const kickoffLink = calendlyLink || 'https://inspecq.setmore.com/services/7783a65f-1ac3-4416-af5e-4c60832584e5';
+    const kickoffLink = calendlyLink || 'https://www.inspecq.com/book?service=Free%20Trial%20Kickoff%20Call';
 
     const mailOptions = {
       from: `"InspecQ" <${from}>`,

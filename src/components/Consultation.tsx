@@ -2,7 +2,7 @@ import consultationIllustration from "../assets/consultation-illustration.svg";
 import consultationBg from "../assets/consultation-bg.svg";
 
 const ConsultationCta = () => {
-  const calendlyUrl = "https://inspecq.setmore.com/services/4c63bef3-c31c-4c49-b3e9-916c27fde40a";
+  const calendlyUrl = "/book";
 
   return (
     <section className="py-16">
